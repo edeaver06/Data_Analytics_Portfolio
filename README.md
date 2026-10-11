@@ -1,7 +1,7 @@
 # Evan Deaver - Data Analyst Portfolio
 
 ### About
-Hi, I'm Evan! I am a Data Analyst based in Austin, Texas. However. I spend much of my time on my ranch in Pringle, SD. I enjoy nature and animals and "the simple life" but, I've also have a passion for data since I was a teen.  I have experience with data pipelines, predictive modeling, e-commerce and business intelligence. I also dabble in app development, automation and machine learning.
+Hi, I'm Evan! I am a Data Analyst based in Austin, Texas. However. I spend much of my time on my ranch in Pringle, SD. I enjoy nature and animals and "the simple life" but, I've had a passion for data since I was a teen. I  I have experience with data pipelines, predictive modeling, e-commerce and business intelligence. I also dabble in app development, automation and machine learning.
 
 This repository attempts to showcase some of my analytics skills. I've created some samples of my Python, R, SQL, and Tableau for you to consider. It is a work in progress. 
 
