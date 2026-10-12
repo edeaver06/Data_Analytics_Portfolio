@@ -1,6 +1,6 @@
 """Polished versions of the Steam Pulse analysis figures -> analysis/figures/polished/ (originals untouched).
-Numbers come from results.json / best_score_results.json; per-game distributions (f2p hist, sentiment scatter)
-are re-read read-only from data/steam_pulse.duckdb with the same filters as src/steam_analysis.py and
+Numbers come from results.json / best_score_results.json / history_results.json; per-game distributions (f2p hist,
+sentiment scatter) are re-read from the committed parquet extract in app/data/ with the same filters as src/steam_analysis.py and
 cross-checked against results.json (mismatches are printed, never "fixed").
 Usage: ../.venv/bin/python polish_figures.py   (from analysis/)"""
 import json, sys, pathlib
@@ -20,7 +20,7 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "ax
                      "axes.titleweight": "bold", "axes.titlesize": 13, "axes.titlelocation": "left",
                      "figure.dpi": 150, "axes.grid": True, "grid.alpha": .25, "figure.facecolor": "white", "axes.facecolor": "white"})
 snap = R["coverage"]["last_snapshot"]
-SRC = f"Source: Steam Web API concurrent players (single snapshot {snap}), SteamSpy reviews & prices, Steam store details. Steam Pulse / Evan Deaver."
+SRC = "Source: Steam Web API, SteamSpy; analysis by Evan Deaver"
 def note(fig, extra=""): fig.text(0.01, 0.01, (extra + "\n" if extra else "") + SRC, fontsize=7, color=GREY, ha="left", va="bottom")
 def sub(ax, t): ax.text(0, 1.02, t, transform=ax.transAxes, fontsize=9, color="#444")
 def fmt(n): return f"{n/1e6:.1f}M" if n >= 1e6 else f"{n/1e3:.1f}K" if n >= 1e3 else f"{n:.0f}"
@@ -28,11 +28,17 @@ MISMATCH = []
 def check(label, got, want, tol=1e-6):
     if abs(float(got) - float(want)) > tol * max(1, abs(float(want))): MISMATCH.append(f"{label}: data={got} vs results.json={want}")
 
-# ---------- per-game data (read-only, same filters as steam_analysis.main) ----------
+# ---------- per-game data: committed parquet extract (app/data), not the live DB ----------
 g = x = None
 try:
-    import steam_analysis as sa
-    c = sa.connect(); g = c.sql("select * from a_game where player_count is not null").df()
+    P = A.parent / "app" / "data"
+    dim = pd.read_parquet(P / "dim_game.parquet"); si = pd.read_parquet(P / "score_inputs.parquet")
+    fct = pd.read_parquet(P / "fct_daily_players.parquet")
+    lp = fct.sort_values("snapshot_date_utc").groupby("appid").tail(1)[["appid", "last_players"]]
+    g = dim.merge(si, on="appid", how="left").merge(lp, on="appid", how="left").rename(columns={"last_players": "player_count"})
+    g = g[g.player_count.notna()].copy()
+    g["f2p_steamspy"] = g.is_free.astype("boolean").fillna(g.price_usd.eq(0)).astype(bool)  # same rule as sql/00_views.sql a_game
+    g["pos_share"] = (g.positive / (g.positive + g.negative)).where((g.positive + g.negative) > 0)
     x = g.dropna(subset=["pos_share"]); x = x[(x.positive + x.negative) >= 100]
     f2p = {r["segment"]: r for r in R["f2p"]}
     for seg, m in [("free", g.f2p_steamspy), ("paid", ~g.f2p_steamspy)]:
@@ -41,7 +47,7 @@ try:
     rho = stats.spearmanr(x.pos_share, x.player_count)[0]
     check("sentiment n", len(x), R["sentiment_spearman"]["n"]); check("sentiment rho", rho, R["sentiment_spearman"]["rho"], 1e-4)
 except Exception as e:
-    MISMATCH.append(f"could not load per-game data from duckdb ({e}); f2p/sentiment drawn from summary only")
+    MISMATCH.append(f"could not load per-game data from the parquet extract ({e}); f2p/sentiment drawn from summary only")
 
 # ---------- 1. category_gap (lead) ----------
 cat = pd.DataFrame(B["categories"]); ndet = B["n_with_category_flags"]
@@ -145,8 +151,8 @@ sub(ax, f"Median concurrent players by genre, {R['coverage']['games_with_store_d
 ax.legend(handles=[Patch(color=BLUE, label="n >= 15"), Patch(color=GREY, label="n < 15 (noisy)"), Patch(color=VERM, label=f"Highest median ({gen.iloc[-1].genre}, n={gen.iloc[-1].n})")], frameon=False, loc="lower right")
 fig.tight_layout(rect=(0, .05, 1, 1)); note(fig); fig.savefig(OUT / "genre_median_ccu.png"); plt.close(fig)
 
-if g is not None and "genres" in g:
-    rpg = g[g.genres.apply(lambda v: isinstance(v, (list, np.ndarray)) and "RPG" in list(v))].player_count.median()
+if g is not None and "genres_any" in g:
+    rpg = g[g.genres_any.apply(lambda v: isinstance(v, (list, np.ndarray)) and "RPG" in list(v))].player_count.median()
     check("RPG median ccu (duckdb)", rpg, gen.set_index("genre").med_ccu["RPG"])
 print("RPG median CCU:", gen.set_index("genre").med_ccu["RPG"], "| genre title:", ax.get_title(loc="left"))
 

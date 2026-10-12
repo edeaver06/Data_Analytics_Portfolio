@@ -14,7 +14,7 @@ I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) movin
 | <img src="projects/nfl-closing-line/images/03_strategy_win_rates.png" width="240"> | [**Can You Beat the NFL Closing Line?**](#nfl-closing-line) | No popular angle beats the 52.38% breakeven at -110 in a statistically defensible way. Closing spreads are unbiased (slope 1.04). |
 | <img src="projects/markets-vs-polls/images/01_brier_by_horizon.png" width="240"> | [**Markets vs Polls: Who Called It Better?**](#markets-vs-polls) | 1 day out: Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls). This is one election, so it isn't evidence that markets beat polls in general. |
 | <img src="projects/google-fiber-fcr/images/wifi_tech_share_by_market.png" width="240"> | [**Google Fiber: Repeat Calls & First-Contact Resolution**](#google-fiber-fcr) | Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls. |
-| <img src="projects/steam-pulse/images/hero_concentration.png" width="240"> | [**Steam Pulse** *(in progress)*](#steam-pulse) | Across the 1,000 most-owned Steam games there were 6.57M concurrent players, and 10 games held 41% of them. |
+| <img src="projects/steam-pulse/images/hero_concentration.png" width="240"> | [**Steam Pulse** *(in progress)*](#steam-pulse) | Across 1,029 tracked Steam games there were 6.22M concurrent players, and 10 games held 40.1% of them. |
 | <img src="projects/operational-risk-briefing/images/revised_drivers_no_leakage.png" width="240"> | [**Audit Risk Model: A Target-Leakage Case Study**](#operational-risk-briefing) | My model's 97.8% accuracy was invalid (the label was built from its top feature). Rebuilt on 7 raw inputs vs a 60.6% baseline, the conclusions reverse. |
 
 ## Table of Contents
@@ -96,7 +96,7 @@ I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) movin
 
 **Technology:** Python, DuckDB, dbt, Streamlit, Tableau.
 
-**Results (first snapshots):** 6.57M concurrent players, with 10 games holding 41% of them. Retention, momentum and price-elasticity analyses are blocked on purpose until enough history exists.
+**Results:** 6.22M concurrent players across 1,029 tracked games, with 10 games holding 40.1% of them (latest snapshot, 2026-10-12). In the 2012–2026 history backfill, players drop 44% after the first month and then level off.
 
 <a id="operational-risk-briefing"></a>
 ### Audit Risk Model: A Target-Leakage Case Study

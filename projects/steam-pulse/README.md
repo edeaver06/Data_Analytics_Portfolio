@@ -5,7 +5,7 @@
 
 **Why:** to build a growing history that answers one question: *what keeps a game alive?*
 
-**Key result so far:** attention is extremely concentrated. Across the 1,000 most-owned games there were 6.57M concurrent players, and **10 games held 41%** of them. In the 2012–2026 history backfill, players drop 44% after the first month and then level off ([analysis](analysis/README.md)).
+**Key result so far:** attention is extremely concentrated. Across 1,029 tracked games there were 6.22M concurrent players, and **10 games held 40.1%** of them. In the 2012–2026 history backfill, players drop 44% after the first month and then level off ([analysis](analysis/README.md)).
 
 ![Top 15 games by concurrent players](images/hero_concentration.png)
 
@@ -35,9 +35,9 @@ Then open http://localhost:8501. Pages: Overview, Launch decay curves, Free-to-p
 | `tests/` | pytest checks for the HTTP client, the loader and score parity |
 | `data/` | *Not in git.* Raw snapshots and `steam_pulse.duckdb`, created when you run the pipeline |
 
-## What the first snapshots show (12 Oct 2026, 08:53 CST)
-- **Attention is extremely concentrated.** Across the 1,000 most-owned games there were 6.57M concurrent players, and **10 games held 41%** of them. Counter-Strike 2 alone had 1.23M, more than the next 3 games combined.
-- **"Game" on Steam isn't always a game.** Wallpaper Engine ranks #4 with 112k concurrent users, and the store labels it `app_type = game`. `dim_game.genres_any` and `tags` are there so analyses can exclude software (rule: `analysis/README.md`).
+## What the snapshots show (12 Oct 2026)
+- **Attention is extremely concentrated.** Across 1,029 tracked games there were 6.22M concurrent players, and **10 games held 40.1%** of them (latest snapshot, 2026-10-12 09:29 CST). Counter-Strike 2 alone had 1.16M, more than the next 3 games combined.
+- **"Game" on Steam isn't always a game.** Wallpaper Engine ranks #6 with 104k concurrent users, and the store labels it `app_type = game`. `dim_game.genres_any` and `tags` are there so analyses can exclude software (rule: `analysis/README.md`).
 - **Steam Deck readiness is mixed.** Of the first 200 games checked, 74 are Verified, 86 Playable, 39 Unsupported and 1 Unknown. Coverage grows by 200 per run.
 - **Few games were on sale at the time.** 41 of 322 priced games with store details had a discount. Price changes will be tracked over time in `snap_game_price`.
 - **Top composite scores** (8 software apps excluded, 991 games scored): Terraria, Stardew Valley, Left 4 Dead 2, The Binding of Isaac: Rebirth and Garry's Mod.

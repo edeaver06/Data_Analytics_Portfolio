@@ -58,6 +58,9 @@ Each component is a percentile rank, and the score is the weighted mean. Games w
   - **Split-screen co-op is not a gap on full coverage.** 75 games (7.6%), 1.05× the median, +0.01 lift. It looked like a gap at 444 games (2.5×) and not at 148 (0.75×). It's sample-dependent, so drop it as a headline.
   - Online co-op is 31% of supply and 2.3× engaged; RPG is 26% and 1.7×; Early Access is 3% and 1.4× but scores below the median (−0.08).
   - Ignore categories with n<10.
+  - Settings and accessibility categories (Adjustable Text Size, HDR available (49 games, 7.8×), Adjustable Difficulty (109 games, 4.8×)) are left out of the headline. They mostly reflect big-budget studios that ship these options, not demand for a type of game.[^ats]
+
+[^ats]: Adjustable Text Size: 52 games (5.3% of supply), median CCU 7,486 = 15.8× the overall median, score lift +0.10 (`best_score_results.json`).
 
 ## Data coverage
 | source | apps | span | grain |

@@ -3,6 +3,9 @@ Usage: .venv/bin/python scripts/make_viz.py"""
 import sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
+import os
+# Render from the committed parquet extract (app/data), never the live DB.
+os.environ["STEAM_PULSE_DB"] = str(ROOT / "data" / "__render_from_extract__.duckdb")
 sys.path.insert(0, str(ROOT / "app"))
 import numpy as np, pandas as pd, matplotlib
 matplotlib.use("Agg")
@@ -18,7 +21,7 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "ax
 
 dim, fct, snaps, src_label = load(); g = add_score(enrich(dim, fct))
 snap = pd.to_datetime(snaps.snapshot_ts.iloc[-1]).strftime("%Y-%m-%d %H:%M UTC")
-SRC = f"Source: Steam Web API concurrent players (snapshot {snap}), SteamSpy owner estimates & prices, Steam store details. Steam Pulse / Evan Deaver."
+SRC = "Source: Steam Web API, SteamSpy; analysis by Evan Deaver"
 def note(fig, extra=""):
     fig.text(0.01, 0.01, (extra + "\n" if extra else "") + SRC, fontsize=7, color=GREY, ha="left", va="bottom")
 def fmt(n): return f"{n/1e6:.2f}M" if n >= 1e6 else f"{n/1e3:.0f}K" if n >= 1e3 else f"{n:.0f}"
