@@ -1,5 +1,7 @@
 # Evan Deaver: Data Analyst Portfolio
 
+[![CI](https://github.com/edeaver06/Data_Analytics_Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/edeaver06/Data_Analytics_Portfolio/actions/workflows/ci.yml)
+
 ## Overview
 I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish dashboards, check models and data for flaws, and do data QA on AI model outputs.
 
