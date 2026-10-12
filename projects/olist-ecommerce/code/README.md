@@ -5,7 +5,7 @@ Everything technical lives here. For the recruiter summary see the [project page
 ## How to run
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt   # pins + notebook tooling (requirements.txt alone runs src/ and tests)
 python src/download_data.py   # pulls the 9 CSVs (~120 MB) and verifies row counts
 python src/run_pipeline.py    # builds data/olist.duckdb, writes data/outputs/*.csv + headline_metrics.json
 python src/make_figures.py    # writes ../images/ (README/STORY charts) and figures/
@@ -31,7 +31,7 @@ To deploy on Streamlit Community Cloud, set the main file to `projects/olist-eco
 | `src/` | Python: data download, pipeline runner, chart builder and notebook builder |
 | `notebooks/` | Story notebook showing each mart next to its chart |
 | `figures/` | Extra charts plus one interactive HTML chart (README/STORY charts are in `../images/`) |
-| `tests/` | 70 pytest checks: data integrity, pandas/SQL parity, and pinned README numbers |
+| `tests/` | pytest checks: data integrity, pandas/SQL parity, and pinned README numbers. Without the real CSVs, integrity and parity run on a tiny SYNTHETIC fixture (`tests/fixtures/`) and the README-number checks skip |
 
 ## Details
 ### Context

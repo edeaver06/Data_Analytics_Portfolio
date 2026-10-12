@@ -1,0 +1,15 @@
+geolocation_zip_code_prefix,geolocation_lat,geolocation_lng,geolocation_city,geolocation_state
+20000,-23.5000,-46.6000,synth_town_0,SP
+20000,-23.4900,-46.6000,synth_town_0,SP
+20001,-23.6000,-46.5000,synth_town_1,RJ
+20001,-23.5900,-46.5000,synth_town_1,RJ
+20002,-23.7000,-46.4000,synth_town_2,MG
+20002,-23.6900,-46.4000,synth_town_2,MG
+20003,-23.8000,-46.3000,synth_town_3,BA
+20003,-23.7900,-46.3000,synth_town_3,BA
+20004,-23.9000,-46.2000,synth_town_4,SP
+20004,-23.8900,-46.2000,synth_town_4,SP
+10000,-22.0000,-45.0000,synth_city_0,SP
+11111,-22.0000,-45.0000,synth_city_1,RJ
+12222,-22.0000,-45.0000,synth_city_2,MG
+13333,-22.0000,-45.0000,synth_city_3,BA

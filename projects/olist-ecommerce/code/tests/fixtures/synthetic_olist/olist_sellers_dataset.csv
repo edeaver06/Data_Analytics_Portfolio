@@ -1,0 +1,5 @@
+seller_id,seller_zip_code_prefix,seller_city,seller_state
+syn_seller_00,10000,synth_city_0,SP
+syn_seller_01,11111,synth_city_1,RJ
+syn_seller_02,12222,synth_city_2,MG
+syn_seller_03,13333,synth_city_3,BA

@@ -37,6 +37,12 @@ EXPECTED = {
 }
 
 
+@pytest.fixture(scope="module", autouse=True)
+def _real_only(using_real_data):
+    if not using_real_data:
+        pytest.skip("README numbers need the real Olist CSVs in data/raw")
+
+
 @pytest.fixture(scope="module")
 def m(con):
     return headline_metrics(con)
