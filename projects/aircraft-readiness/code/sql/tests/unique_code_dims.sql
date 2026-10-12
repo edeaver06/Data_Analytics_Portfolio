@@ -1,0 +1,1 @@
+SELECT code_key FROM mart.dim_sdr_code GROUP BY 1 HAVING count(*)>1 UNION ALL SELECT precaution_code FROM mart.dim_precaution GROUP BY 1 HAVING count(*)>1 UNION ALL SELECT stage_code FROM mart.dim_stage GROUP BY 1 HAVING count(*)>1

@@ -1,0 +1,1351 @@
+date,market,problem_category,first_calls,repeat_calls
+2022-01-01,market_1,Account Management & Billing,30,10
+2022-01-01,market_1,Construction,0,0
+2022-01-01,market_1,Scheduling,7,1
+2022-01-01,market_1,Technical Troubleshooting,97,19
+2022-01-01,market_1,Wi-Fi & Internet,166,48
+2022-01-01,market_2,Account Management & Billing,2,0
+2022-01-01,market_2,Construction,0,0
+2022-01-01,market_2,Scheduling,0,0
+2022-01-01,market_2,Technical Troubleshooting,21,8
+2022-01-01,market_2,Wi-Fi & Internet,20,5
+2022-01-01,market_3,Account Management & Billing,2,2
+2022-01-01,market_3,Construction,1,0
+2022-01-01,market_3,Scheduling,2,3
+2022-01-01,market_3,Technical Troubleshooting,7,1
+2022-01-01,market_3,Wi-Fi & Internet,31,8
+2022-01-02,market_1,Account Management & Billing,39,12
+2022-01-02,market_1,Construction,1,0
+2022-01-02,market_1,Scheduling,7,4
+2022-01-02,market_1,Technical Troubleshooting,111,28
+2022-01-02,market_1,Wi-Fi & Internet,141,52
+2022-01-02,market_2,Account Management & Billing,4,1
+2022-01-02,market_2,Construction,0,0
+2022-01-02,market_2,Scheduling,0,0
+2022-01-02,market_2,Technical Troubleshooting,12,7
+2022-01-02,market_2,Wi-Fi & Internet,22,5
+2022-01-02,market_3,Account Management & Billing,11,1
+2022-01-02,market_3,Construction,0,0
+2022-01-02,market_3,Scheduling,2,0
+2022-01-02,market_3,Technical Troubleshooting,14,2
+2022-01-02,market_3,Wi-Fi & Internet,32,10
+2022-01-03,market_1,Account Management & Billing,55,24
+2022-01-03,market_1,Construction,6,1
+2022-01-03,market_1,Scheduling,18,5
+2022-01-03,market_1,Technical Troubleshooting,395,79
+2022-01-03,market_1,Wi-Fi & Internet,259,81
+2022-01-03,market_2,Account Management & Billing,12,1
+2022-01-03,market_2,Construction,1,0
+2022-01-03,market_2,Scheduling,5,0
+2022-01-03,market_2,Technical Troubleshooting,66,21
+2022-01-03,market_2,Wi-Fi & Internet,32,8
+2022-01-03,market_3,Account Management & Billing,15,3
+2022-01-03,market_3,Construction,1,0
+2022-01-03,market_3,Scheduling,10,5
+2022-01-03,market_3,Technical Troubleshooting,46,6
+2022-01-03,market_3,Wi-Fi & Internet,62,31
+2022-01-04,market_1,Account Management & Billing,44,17
+2022-01-04,market_1,Construction,4,2
+2022-01-04,market_1,Scheduling,15,9
+2022-01-04,market_1,Technical Troubleshooting,343,68
+2022-01-04,market_1,Wi-Fi & Internet,207,93
+2022-01-04,market_2,Account Management & Billing,8,2
+2022-01-04,market_2,Construction,0,1
+2022-01-04,market_2,Scheduling,0,0
+2022-01-04,market_2,Technical Troubleshooting,48,16
+2022-01-04,market_2,Wi-Fi & Internet,33,4
+2022-01-04,market_3,Account Management & Billing,7,4
+2022-01-04,market_3,Construction,1,0
+2022-01-04,market_3,Scheduling,8,7
+2022-01-04,market_3,Technical Troubleshooting,28,4
+2022-01-04,market_3,Wi-Fi & Internet,60,27
+2022-01-05,market_1,Account Management & Billing,52,16
+2022-01-05,market_1,Construction,4,0
+2022-01-05,market_1,Scheduling,17,6
+2022-01-05,market_1,Technical Troubleshooting,280,39
+2022-01-05,market_1,Wi-Fi & Internet,210,90
+2022-01-05,market_2,Account Management & Billing,11,2
+2022-01-05,market_2,Construction,1,0
+2022-01-05,market_2,Scheduling,0,0
+2022-01-05,market_2,Technical Troubleshooting,39,4
+2022-01-05,market_2,Wi-Fi & Internet,29,5
+2022-01-05,market_3,Account Management & Billing,12,5
+2022-01-05,market_3,Construction,1,0
+2022-01-05,market_3,Scheduling,25,6
+2022-01-05,market_3,Technical Troubleshooting,32,2
+2022-01-05,market_3,Wi-Fi & Internet,131,37
+2022-01-06,market_1,Account Management & Billing,43,15
+2022-01-06,market_1,Construction,0,1
+2022-01-06,market_1,Scheduling,11,5
+2022-01-06,market_1,Technical Troubleshooting,242,36
+2022-01-06,market_1,Wi-Fi & Internet,214,94
+2022-01-06,market_2,Account Management & Billing,8,1
+2022-01-06,market_2,Construction,1,0
+2022-01-06,market_2,Scheduling,0,0
+2022-01-06,market_2,Technical Troubleshooting,29,5
+2022-01-06,market_2,Wi-Fi & Internet,22,2
+2022-01-06,market_3,Account Management & Billing,26,6
+2022-01-06,market_3,Construction,2,1
+2022-01-06,market_3,Scheduling,14,8
+2022-01-06,market_3,Technical Troubleshooting,33,15
+2022-01-06,market_3,Wi-Fi & Internet,344,48
+2022-01-07,market_1,Account Management & Billing,45,19
+2022-01-07,market_1,Construction,7,1
+2022-01-07,market_1,Scheduling,13,4
+2022-01-07,market_1,Technical Troubleshooting,228,46
+2022-01-07,market_1,Wi-Fi & Internet,214,90
+2022-01-07,market_2,Account Management & Billing,5,1
+2022-01-07,market_2,Construction,0,0
+2022-01-07,market_2,Scheduling,1,0
+2022-01-07,market_2,Technical Troubleshooting,29,4
+2022-01-07,market_2,Wi-Fi & Internet,31,9
+2022-01-07,market_3,Account Management & Billing,13,4
+2022-01-07,market_3,Construction,0,1
+2022-01-07,market_3,Scheduling,9,8
+2022-01-07,market_3,Technical Troubleshooting,31,1
+2022-01-07,market_3,Wi-Fi & Internet,75,43
+2022-01-08,market_1,Account Management & Billing,41,9
+2022-01-08,market_1,Construction,1,0
+2022-01-08,market_1,Scheduling,9,8
+2022-01-08,market_1,Technical Troubleshooting,112,35
+2022-01-08,market_1,Wi-Fi & Internet,164,59
+2022-01-08,market_2,Account Management & Billing,1,5
+2022-01-08,market_2,Construction,0,0
+2022-01-08,market_2,Scheduling,0,0
+2022-01-08,market_2,Technical Troubleshooting,20,0
+2022-01-08,market_2,Wi-Fi & Internet,21,7
+2022-01-08,market_3,Account Management & Billing,5,3
+2022-01-08,market_3,Construction,0,1
+2022-01-08,market_3,Scheduling,7,6
+2022-01-08,market_3,Technical Troubleshooting,16,0
+2022-01-08,market_3,Wi-Fi & Internet,36,26
+2022-01-09,market_1,Account Management & Billing,34,7
+2022-01-09,market_1,Construction,2,0
+2022-01-09,market_1,Scheduling,5,2
+2022-01-09,market_1,Technical Troubleshooting,107,30
+2022-01-09,market_1,Wi-Fi & Internet,165,60
+2022-01-09,market_2,Account Management & Billing,5,0
+2022-01-09,market_2,Construction,0,0
+2022-01-09,market_2,Scheduling,1,1
+2022-01-09,market_2,Technical Troubleshooting,6,1
+2022-01-09,market_2,Wi-Fi & Internet,13,2
+2022-01-09,market_3,Account Management & Billing,4,3
+2022-01-09,market_3,Construction,0,1
+2022-01-09,market_3,Scheduling,2,4
+2022-01-09,market_3,Technical Troubleshooting,11,5
+2022-01-09,market_3,Wi-Fi & Internet,36,30
+2022-01-10,market_1,Account Management & Billing,44,11
+2022-01-10,market_1,Construction,1,0
+2022-01-10,market_1,Scheduling,14,1
+2022-01-10,market_1,Technical Troubleshooting,240,43
+2022-01-10,market_1,Wi-Fi & Internet,223,74
+2022-01-10,market_2,Account Management & Billing,8,0
+2022-01-10,market_2,Construction,0,0
+2022-01-10,market_2,Scheduling,7,1
+2022-01-10,market_2,Technical Troubleshooting,37,2
+2022-01-10,market_2,Wi-Fi & Internet,26,7
+2022-01-10,market_3,Account Management & Billing,4,3
+2022-01-10,market_3,Construction,1,0
+2022-01-10,market_3,Scheduling,12,12
+2022-01-10,market_3,Technical Troubleshooting,21,3
+2022-01-10,market_3,Wi-Fi & Internet,66,42
+2022-01-11,market_1,Account Management & Billing,28,13
+2022-01-11,market_1,Construction,2,1
+2022-01-11,market_1,Scheduling,14,7
+2022-01-11,market_1,Technical Troubleshooting,261,55
+2022-01-11,market_1,Wi-Fi & Internet,263,83
+2022-01-11,market_2,Account Management & Billing,4,1
+2022-01-11,market_2,Construction,0,0
+2022-01-11,market_2,Scheduling,0,0
+2022-01-11,market_2,Technical Troubleshooting,22,3
+2022-01-11,market_2,Wi-Fi & Internet,33,5
+2022-01-11,market_3,Account Management & Billing,3,6
+2022-01-11,market_3,Construction,0,0
+2022-01-11,market_3,Scheduling,7,5
+2022-01-11,market_3,Technical Troubleshooting,24,5
+2022-01-11,market_3,Wi-Fi & Internet,64,36
+2022-01-12,market_1,Account Management & Billing,49,8
+2022-01-12,market_1,Construction,2,1
+2022-01-12,market_1,Scheduling,19,8
+2022-01-12,market_1,Technical Troubleshooting,280,59
+2022-01-12,market_1,Wi-Fi & Internet,288,79
+2022-01-12,market_2,Account Management & Billing,6,1
+2022-01-12,market_2,Construction,0,0
+2022-01-12,market_2,Scheduling,1,0
+2022-01-12,market_2,Technical Troubleshooting,29,6
+2022-01-12,market_2,Wi-Fi & Internet,27,4
+2022-01-12,market_3,Account Management & Billing,11,4
+2022-01-12,market_3,Construction,0,1
+2022-01-12,market_3,Scheduling,11,7
+2022-01-12,market_3,Technical Troubleshooting,50,5
+2022-01-12,market_3,Wi-Fi & Internet,54,28
+2022-01-13,market_1,Account Management & Billing,32,15
+2022-01-13,market_1,Construction,4,3
+2022-01-13,market_1,Scheduling,19,12
+2022-01-13,market_1,Technical Troubleshooting,299,39
+2022-01-13,market_1,Wi-Fi & Internet,246,64
+2022-01-13,market_2,Account Management & Billing,4,1
+2022-01-13,market_2,Construction,0,0
+2022-01-13,market_2,Scheduling,1,0
+2022-01-13,market_2,Technical Troubleshooting,31,1
+2022-01-13,market_2,Wi-Fi & Internet,22,8
+2022-01-13,market_3,Account Management & Billing,9,4
+2022-01-13,market_3,Construction,2,0
+2022-01-13,market_3,Scheduling,24,6
+2022-01-13,market_3,Technical Troubleshooting,74,11
+2022-01-13,market_3,Wi-Fi & Internet,190,37
+2022-01-14,market_1,Account Management & Billing,25,5
+2022-01-14,market_1,Construction,5,0
+2022-01-14,market_1,Scheduling,17,6
+2022-01-14,market_1,Technical Troubleshooting,219,45
+2022-01-14,market_1,Wi-Fi & Internet,250,49
+2022-01-14,market_2,Account Management & Billing,5,2
+2022-01-14,market_2,Construction,1,0
+2022-01-14,market_2,Scheduling,0,0
+2022-01-14,market_2,Technical Troubleshooting,28,2
+2022-01-14,market_2,Wi-Fi & Internet,34,1
+2022-01-14,market_3,Account Management & Billing,11,0
+2022-01-14,market_3,Construction,1,1
+2022-01-14,market_3,Scheduling,23,6
+2022-01-14,market_3,Technical Troubleshooting,34,5
+2022-01-14,market_3,Wi-Fi & Internet,197,30
+2022-01-15,market_1,Account Management & Billing,32,8
+2022-01-15,market_1,Construction,3,1
+2022-01-15,market_1,Scheduling,7,4
+2022-01-15,market_1,Technical Troubleshooting,146,44
+2022-01-15,market_1,Wi-Fi & Internet,215,53
+2022-01-15,market_2,Account Management & Billing,2,0
+2022-01-15,market_2,Construction,0,0
+2022-01-15,market_2,Scheduling,0,0
+2022-01-15,market_2,Technical Troubleshooting,15,1
+2022-01-15,market_2,Wi-Fi & Internet,22,6
+2022-01-15,market_3,Account Management & Billing,2,1
+2022-01-15,market_3,Construction,0,0
+2022-01-15,market_3,Scheduling,4,2
+2022-01-15,market_3,Technical Troubleshooting,20,4
+2022-01-15,market_3,Wi-Fi & Internet,44,13
+2022-01-16,market_1,Account Management & Billing,24,8
+2022-01-16,market_1,Construction,2,1
+2022-01-16,market_1,Scheduling,7,4
+2022-01-16,market_1,Technical Troubleshooting,120,32
+2022-01-16,market_1,Wi-Fi & Internet,118,42
+2022-01-16,market_2,Account Management & Billing,3,0
+2022-01-16,market_2,Construction,0,0
+2022-01-16,market_2,Scheduling,1,0
+2022-01-16,market_2,Technical Troubleshooting,9,1
+2022-01-16,market_2,Wi-Fi & Internet,11,2
+2022-01-16,market_3,Account Management & Billing,5,0
+2022-01-16,market_3,Construction,0,0
+2022-01-16,market_3,Scheduling,7,1
+2022-01-16,market_3,Technical Troubleshooting,17,5
+2022-01-16,market_3,Wi-Fi & Internet,34,15
+2022-01-17,market_1,Account Management & Billing,40,5
+2022-01-17,market_1,Construction,2,4
+2022-01-17,market_1,Scheduling,12,5
+2022-01-17,market_1,Technical Troubleshooting,224,60
+2022-01-17,market_1,Wi-Fi & Internet,193,82
+2022-01-17,market_2,Account Management & Billing,6,0
+2022-01-17,market_2,Construction,0,0
+2022-01-17,market_2,Scheduling,3,0
+2022-01-17,market_2,Technical Troubleshooting,26,2
+2022-01-17,market_2,Wi-Fi & Internet,25,7
+2022-01-17,market_3,Account Management & Billing,9,0
+2022-01-17,market_3,Construction,1,0
+2022-01-17,market_3,Scheduling,5,6
+2022-01-17,market_3,Technical Troubleshooting,40,10
+2022-01-17,market_3,Wi-Fi & Internet,58,23
+2022-01-18,market_1,Account Management & Billing,31,13
+2022-01-18,market_1,Construction,2,4
+2022-01-18,market_1,Scheduling,15,9
+2022-01-18,market_1,Technical Troubleshooting,288,66
+2022-01-18,market_1,Wi-Fi & Internet,249,88
+2022-01-18,market_2,Account Management & Billing,5,0
+2022-01-18,market_2,Construction,0,0
+2022-01-18,market_2,Scheduling,2,0
+2022-01-18,market_2,Technical Troubleshooting,26,4
+2022-01-18,market_2,Wi-Fi & Internet,39,3
+2022-01-18,market_3,Account Management & Billing,3,2
+2022-01-18,market_3,Construction,0,0
+2022-01-18,market_3,Scheduling,14,0
+2022-01-18,market_3,Technical Troubleshooting,30,7
+2022-01-18,market_3,Wi-Fi & Internet,68,23
+2022-01-19,market_1,Account Management & Billing,25,9
+2022-01-19,market_1,Construction,2,3
+2022-01-19,market_1,Scheduling,18,5
+2022-01-19,market_1,Technical Troubleshooting,310,56
+2022-01-19,market_1,Wi-Fi & Internet,229,79
+2022-01-19,market_2,Account Management & Billing,2,0
+2022-01-19,market_2,Construction,0,0
+2022-01-19,market_2,Scheduling,0,0
+2022-01-19,market_2,Technical Troubleshooting,24,3
+2022-01-19,market_2,Wi-Fi & Internet,32,9
+2022-01-19,market_3,Account Management & Billing,3,2
+2022-01-19,market_3,Construction,0,0
+2022-01-19,market_3,Scheduling,4,2
+2022-01-19,market_3,Technical Troubleshooting,28,6
+2022-01-19,market_3,Wi-Fi & Internet,72,30
+2022-01-20,market_1,Account Management & Billing,22,12
+2022-01-20,market_1,Construction,1,2
+2022-01-20,market_1,Scheduling,11,10
+2022-01-20,market_1,Technical Troubleshooting,254,55
+2022-01-20,market_1,Wi-Fi & Internet,216,64
+2022-01-20,market_2,Account Management & Billing,5,0
+2022-01-20,market_2,Construction,0,0
+2022-01-20,market_2,Scheduling,1,0
+2022-01-20,market_2,Technical Troubleshooting,21,3
+2022-01-20,market_2,Wi-Fi & Internet,17,6
+2022-01-20,market_3,Account Management & Billing,5,0
+2022-01-20,market_3,Construction,0,0
+2022-01-20,market_3,Scheduling,10,8
+2022-01-20,market_3,Technical Troubleshooting,37,6
+2022-01-20,market_3,Wi-Fi & Internet,64,19
+2022-01-21,market_1,Account Management & Billing,29,15
+2022-01-21,market_1,Construction,5,3
+2022-01-21,market_1,Scheduling,11,11
+2022-01-21,market_1,Technical Troubleshooting,226,38
+2022-01-21,market_1,Wi-Fi & Internet,227,68
+2022-01-21,market_2,Account Management & Billing,1,0
+2022-01-21,market_2,Construction,1,0
+2022-01-21,market_2,Scheduling,2,0
+2022-01-21,market_2,Technical Troubleshooting,18,0
+2022-01-21,market_2,Wi-Fi & Internet,23,6
+2022-01-21,market_3,Account Management & Billing,6,1
+2022-01-21,market_3,Construction,0,0
+2022-01-21,market_3,Scheduling,14,6
+2022-01-21,market_3,Technical Troubleshooting,17,5
+2022-01-21,market_3,Wi-Fi & Internet,173,35
+2022-01-22,market_1,Account Management & Billing,53,6
+2022-01-22,market_1,Construction,4,1
+2022-01-22,market_1,Scheduling,6,7
+2022-01-22,market_1,Technical Troubleshooting,182,56
+2022-01-22,market_1,Wi-Fi & Internet,235,75
+2022-01-22,market_2,Account Management & Billing,3,0
+2022-01-22,market_2,Construction,0,0
+2022-01-22,market_2,Scheduling,0,0
+2022-01-22,market_2,Technical Troubleshooting,16,1
+2022-01-22,market_2,Wi-Fi & Internet,23,4
+2022-01-22,market_3,Account Management & Billing,8,37
+2022-01-22,market_3,Construction,0,0
+2022-01-22,market_3,Scheduling,7,4
+2022-01-22,market_3,Technical Troubleshooting,19,1
+2022-01-22,market_3,Wi-Fi & Internet,67,29
+2022-01-23,market_1,Account Management & Billing,20,8
+2022-01-23,market_1,Construction,1,0
+2022-01-23,market_1,Scheduling,5,5
+2022-01-23,market_1,Technical Troubleshooting,95,28
+2022-01-23,market_1,Wi-Fi & Internet,137,25
+2022-01-23,market_2,Account Management & Billing,1,0
+2022-01-23,market_2,Construction,0,0
+2022-01-23,market_2,Scheduling,0,0
+2022-01-23,market_2,Technical Troubleshooting,12,6
+2022-01-23,market_2,Wi-Fi & Internet,12,2
+2022-01-23,market_3,Account Management & Billing,6,38
+2022-01-23,market_3,Construction,0,0
+2022-01-23,market_3,Scheduling,1,2
+2022-01-23,market_3,Technical Troubleshooting,9,2
+2022-01-23,market_3,Wi-Fi & Internet,43,15
+2022-01-24,market_1,Account Management & Billing,26,6
+2022-01-24,market_1,Construction,4,1
+2022-01-24,market_1,Scheduling,22,13
+2022-01-24,market_1,Technical Troubleshooting,281,63
+2022-01-24,market_1,Wi-Fi & Internet,225,49
+2022-01-24,market_2,Account Management & Billing,1,0
+2022-01-24,market_2,Construction,1,0
+2022-01-24,market_2,Scheduling,1,0
+2022-01-24,market_2,Technical Troubleshooting,20,4
+2022-01-24,market_2,Wi-Fi & Internet,24,6
+2022-01-24,market_3,Account Management & Billing,8,42
+2022-01-24,market_3,Construction,0,1
+2022-01-24,market_3,Scheduling,12,10
+2022-01-24,market_3,Technical Troubleshooting,32,5
+2022-01-24,market_3,Wi-Fi & Internet,153,40
+2022-01-25,market_1,Account Management & Billing,24,11
+2022-01-25,market_1,Construction,2,0
+2022-01-25,market_1,Scheduling,18,13
+2022-01-25,market_1,Technical Troubleshooting,304,57
+2022-01-25,market_1,Wi-Fi & Internet,176,61
+2022-01-25,market_2,Account Management & Billing,4,0
+2022-01-25,market_2,Construction,0,0
+2022-01-25,market_2,Scheduling,1,0
+2022-01-25,market_2,Technical Troubleshooting,25,2
+2022-01-25,market_2,Wi-Fi & Internet,30,2
+2022-01-25,market_3,Account Management & Billing,6,45
+2022-01-25,market_3,Construction,2,0
+2022-01-25,market_3,Scheduling,9,6
+2022-01-25,market_3,Technical Troubleshooting,26,8
+2022-01-25,market_3,Wi-Fi & Internet,58,30
+2022-01-26,market_1,Account Management & Billing,16,7
+2022-01-26,market_1,Construction,1,1
+2022-01-26,market_1,Scheduling,21,14
+2022-01-26,market_1,Technical Troubleshooting,249,48
+2022-01-26,market_1,Wi-Fi & Internet,182,64
+2022-01-26,market_2,Account Management & Billing,2,1
+2022-01-26,market_2,Construction,0,0
+2022-01-26,market_2,Scheduling,3,0
+2022-01-26,market_2,Technical Troubleshooting,23,2
+2022-01-26,market_2,Wi-Fi & Internet,27,3
+2022-01-26,market_3,Account Management & Billing,16,42
+2022-01-26,market_3,Construction,1,0
+2022-01-26,market_3,Scheduling,12,1
+2022-01-26,market_3,Technical Troubleshooting,29,14
+2022-01-26,market_3,Wi-Fi & Internet,240,155
+2022-01-27,market_1,Account Management & Billing,23,7
+2022-01-27,market_1,Construction,1,0
+2022-01-27,market_1,Scheduling,17,4
+2022-01-27,market_1,Technical Troubleshooting,237,46
+2022-01-27,market_1,Wi-Fi & Internet,171,52
+2022-01-27,market_2,Account Management & Billing,3,0
+2022-01-27,market_2,Construction,0,0
+2022-01-27,market_2,Scheduling,0,0
+2022-01-27,market_2,Technical Troubleshooting,44,6
+2022-01-27,market_2,Wi-Fi & Internet,15,1
+2022-01-27,market_3,Account Management & Billing,13,38
+2022-01-27,market_3,Construction,0,0
+2022-01-27,market_3,Scheduling,10,5
+2022-01-27,market_3,Technical Troubleshooting,36,10
+2022-01-27,market_3,Wi-Fi & Internet,68,40
+2022-01-28,market_1,Account Management & Billing,32,12
+2022-01-28,market_1,Construction,5,2
+2022-01-28,market_1,Scheduling,11,7
+2022-01-28,market_1,Technical Troubleshooting,227,75
+2022-01-28,market_1,Wi-Fi & Internet,248,74
+2022-01-28,market_2,Account Management & Billing,3,0
+2022-01-28,market_2,Construction,1,1
+2022-01-28,market_2,Scheduling,0,0
+2022-01-28,market_2,Technical Troubleshooting,36,5
+2022-01-28,market_2,Wi-Fi & Internet,10,1
+2022-01-28,market_3,Account Management & Billing,14,40
+2022-01-28,market_3,Construction,3,0
+2022-01-28,market_3,Scheduling,17,7
+2022-01-28,market_3,Technical Troubleshooting,38,11
+2022-01-28,market_3,Wi-Fi & Internet,474,55
+2022-01-29,market_1,Account Management & Billing,23,7
+2022-01-29,market_1,Construction,0,0
+2022-01-29,market_1,Scheduling,7,11
+2022-01-29,market_1,Technical Troubleshooting,130,47
+2022-01-29,market_1,Wi-Fi & Internet,172,53
+2022-01-29,market_2,Account Management & Billing,1,0
+2022-01-29,market_2,Construction,0,0
+2022-01-29,market_2,Scheduling,0,1
+2022-01-29,market_2,Technical Troubleshooting,15,1
+2022-01-29,market_2,Wi-Fi & Internet,19,1
+2022-01-29,market_3,Account Management & Billing,12,38
+2022-01-29,market_3,Construction,0,0
+2022-01-29,market_3,Scheduling,3,1
+2022-01-29,market_3,Technical Troubleshooting,20,3
+2022-01-29,market_3,Wi-Fi & Internet,112,24
+2022-01-30,market_1,Account Management & Billing,19,5
+2022-01-30,market_1,Construction,0,0
+2022-01-30,market_1,Scheduling,9,8
+2022-01-30,market_1,Technical Troubleshooting,94,18
+2022-01-30,market_1,Wi-Fi & Internet,133,48
+2022-01-30,market_2,Account Management & Billing,1,0
+2022-01-30,market_2,Construction,0,1
+2022-01-30,market_2,Scheduling,0,0
+2022-01-30,market_2,Technical Troubleshooting,15,0
+2022-01-30,market_2,Wi-Fi & Internet,10,2
+2022-01-30,market_3,Account Management & Billing,8,34
+2022-01-30,market_3,Construction,0,0
+2022-01-30,market_3,Scheduling,4,5
+2022-01-30,market_3,Technical Troubleshooting,17,1
+2022-01-30,market_3,Wi-Fi & Internet,43,18
+2022-01-31,market_1,Account Management & Billing,18,6
+2022-01-31,market_1,Construction,3,1
+2022-01-31,market_1,Scheduling,22,10
+2022-01-31,market_1,Technical Troubleshooting,290,54
+2022-01-31,market_1,Wi-Fi & Internet,243,90
+2022-01-31,market_2,Account Management & Billing,1,1
+2022-01-31,market_2,Construction,2,0
+2022-01-31,market_2,Scheduling,1,0
+2022-01-31,market_2,Technical Troubleshooting,38,2
+2022-01-31,market_2,Wi-Fi & Internet,25,3
+2022-01-31,market_3,Account Management & Billing,13,28
+2022-01-31,market_3,Construction,3,0
+2022-01-31,market_3,Scheduling,9,8
+2022-01-31,market_3,Technical Troubleshooting,29,7
+2022-01-31,market_3,Wi-Fi & Internet,87,20
+2022-02-01,market_1,Account Management & Billing,16,8
+2022-02-01,market_1,Construction,1,0
+2022-02-01,market_1,Scheduling,15,7
+2022-02-01,market_1,Technical Troubleshooting,262,45
+2022-02-01,market_1,Wi-Fi & Internet,233,73
+2022-02-01,market_2,Account Management & Billing,2,2
+2022-02-01,market_2,Construction,0,0
+2022-02-01,market_2,Scheduling,1,0
+2022-02-01,market_2,Technical Troubleshooting,28,4
+2022-02-01,market_2,Wi-Fi & Internet,17,7
+2022-02-01,market_3,Account Management & Billing,14,26
+2022-02-01,market_3,Construction,1,0
+2022-02-01,market_3,Scheduling,10,4
+2022-02-01,market_3,Technical Troubleshooting,34,7
+2022-02-01,market_3,Wi-Fi & Internet,129,44
+2022-02-02,market_1,Account Management & Billing,28,7
+2022-02-02,market_1,Construction,2,0
+2022-02-02,market_1,Scheduling,12,6
+2022-02-02,market_1,Technical Troubleshooting,296,68
+2022-02-02,market_1,Wi-Fi & Internet,202,80
+2022-02-02,market_2,Account Management & Billing,4,2
+2022-02-02,market_2,Construction,0,0
+2022-02-02,market_2,Scheduling,1,0
+2022-02-02,market_2,Technical Troubleshooting,24,4
+2022-02-02,market_2,Wi-Fi & Internet,31,9
+2022-02-02,market_3,Account Management & Billing,7,24
+2022-02-02,market_3,Construction,0,1
+2022-02-02,market_3,Scheduling,10,7
+2022-02-02,market_3,Technical Troubleshooting,28,6
+2022-02-02,market_3,Wi-Fi & Internet,72,33
+2022-02-03,market_1,Account Management & Billing,25,4
+2022-02-03,market_1,Construction,2,1
+2022-02-03,market_1,Scheduling,12,7
+2022-02-03,market_1,Technical Troubleshooting,304,50
+2022-02-03,market_1,Wi-Fi & Internet,182,63
+2022-02-03,market_2,Account Management & Billing,3,0
+2022-02-03,market_2,Construction,0,1
+2022-02-03,market_2,Scheduling,1,0
+2022-02-03,market_2,Technical Troubleshooting,36,10
+2022-02-03,market_2,Wi-Fi & Internet,23,12
+2022-02-03,market_3,Account Management & Billing,7,27
+2022-02-03,market_3,Construction,0,0
+2022-02-03,market_3,Scheduling,12,2
+2022-02-03,market_3,Technical Troubleshooting,30,13
+2022-02-03,market_3,Wi-Fi & Internet,58,35
+2022-02-04,market_1,Account Management & Billing,24,9
+2022-02-04,market_1,Construction,3,1
+2022-02-04,market_1,Scheduling,16,10
+2022-02-04,market_1,Technical Troubleshooting,248,59
+2022-02-04,market_1,Wi-Fi & Internet,199,70
+2022-02-04,market_2,Account Management & Billing,7,0
+2022-02-04,market_2,Construction,0,0
+2022-02-04,market_2,Scheduling,0,0
+2022-02-04,market_2,Technical Troubleshooting,16,1
+2022-02-04,market_2,Wi-Fi & Internet,25,3
+2022-02-04,market_3,Account Management & Billing,8,26
+2022-02-04,market_3,Construction,1,0
+2022-02-04,market_3,Scheduling,12,7
+2022-02-04,market_3,Technical Troubleshooting,33,9
+2022-02-04,market_3,Wi-Fi & Internet,104,39
+2022-02-05,market_1,Account Management & Billing,11,12
+2022-02-05,market_1,Construction,0,1
+2022-02-05,market_1,Scheduling,9,4
+2022-02-05,market_1,Technical Troubleshooting,164,32
+2022-02-05,market_1,Wi-Fi & Internet,152,60
+2022-02-05,market_2,Account Management & Billing,1,1
+2022-02-05,market_2,Construction,0,0
+2022-02-05,market_2,Scheduling,0,0
+2022-02-05,market_2,Technical Troubleshooting,11,1
+2022-02-05,market_2,Wi-Fi & Internet,19,2
+2022-02-05,market_3,Account Management & Billing,8,25
+2022-02-05,market_3,Construction,0,1
+2022-02-05,market_3,Scheduling,7,2
+2022-02-05,market_3,Technical Troubleshooting,18,15
+2022-02-05,market_3,Wi-Fi & Internet,89,18
+2022-02-06,market_1,Account Management & Billing,23,4
+2022-02-06,market_1,Construction,1,1
+2022-02-06,market_1,Scheduling,4,1
+2022-02-06,market_1,Technical Troubleshooting,120,34
+2022-02-06,market_1,Wi-Fi & Internet,97,25
+2022-02-06,market_2,Account Management & Billing,0,1
+2022-02-06,market_2,Construction,0,1
+2022-02-06,market_2,Scheduling,0,0
+2022-02-06,market_2,Technical Troubleshooting,4,3
+2022-02-06,market_2,Wi-Fi & Internet,11,5
+2022-02-06,market_3,Account Management & Billing,2,35
+2022-02-06,market_3,Construction,2,0
+2022-02-06,market_3,Scheduling,5,6
+2022-02-06,market_3,Technical Troubleshooting,20,10
+2022-02-06,market_3,Wi-Fi & Internet,39,15
+2022-02-07,market_1,Account Management & Billing,24,20
+2022-02-07,market_1,Construction,2,1
+2022-02-07,market_1,Scheduling,26,17
+2022-02-07,market_1,Technical Troubleshooting,303,66
+2022-02-07,market_1,Wi-Fi & Internet,208,80
+2022-02-07,market_2,Account Management & Billing,3,0
+2022-02-07,market_2,Construction,1,1
+2022-02-07,market_2,Scheduling,1,0
+2022-02-07,market_2,Technical Troubleshooting,19,1
+2022-02-07,market_2,Wi-Fi & Internet,33,3
+2022-02-07,market_3,Account Management & Billing,11,38
+2022-02-07,market_3,Construction,1,0
+2022-02-07,market_3,Scheduling,19,15
+2022-02-07,market_3,Technical Troubleshooting,30,10
+2022-02-07,market_3,Wi-Fi & Internet,200,38
+2022-02-08,market_1,Account Management & Billing,31,8
+2022-02-08,market_1,Construction,6,0
+2022-02-08,market_1,Scheduling,24,9
+2022-02-08,market_1,Technical Troubleshooting,217,51
+2022-02-08,market_1,Wi-Fi & Internet,190,49
+2022-02-08,market_2,Account Management & Billing,4,0
+2022-02-08,market_2,Construction,0,0
+2022-02-08,market_2,Scheduling,1,0
+2022-02-08,market_2,Technical Troubleshooting,17,3
+2022-02-08,market_2,Wi-Fi & Internet,24,1
+2022-02-08,market_3,Account Management & Billing,10,39
+2022-02-08,market_3,Construction,2,0
+2022-02-08,market_3,Scheduling,10,14
+2022-02-08,market_3,Technical Troubleshooting,27,19
+2022-02-08,market_3,Wi-Fi & Internet,68,31
+2022-02-09,market_1,Account Management & Billing,24,7
+2022-02-09,market_1,Construction,2,0
+2022-02-09,market_1,Scheduling,19,3
+2022-02-09,market_1,Technical Troubleshooting,254,54
+2022-02-09,market_1,Wi-Fi & Internet,199,57
+2022-02-09,market_2,Account Management & Billing,1,0
+2022-02-09,market_2,Construction,2,0
+2022-02-09,market_2,Scheduling,0,0
+2022-02-09,market_2,Technical Troubleshooting,15,1
+2022-02-09,market_2,Wi-Fi & Internet,27,3
+2022-02-09,market_3,Account Management & Billing,10,40
+2022-02-09,market_3,Construction,2,0
+2022-02-09,market_3,Scheduling,11,8
+2022-02-09,market_3,Technical Troubleshooting,27,7
+2022-02-09,market_3,Wi-Fi & Internet,70,42
+2022-02-10,market_1,Account Management & Billing,31,14
+2022-02-10,market_1,Construction,1,1
+2022-02-10,market_1,Scheduling,21,5
+2022-02-10,market_1,Technical Troubleshooting,258,51
+2022-02-10,market_1,Wi-Fi & Internet,155,66
+2022-02-10,market_2,Account Management & Billing,5,1
+2022-02-10,market_2,Construction,0,0
+2022-02-10,market_2,Scheduling,1,2
+2022-02-10,market_2,Technical Troubleshooting,19,5
+2022-02-10,market_2,Wi-Fi & Internet,13,0
+2022-02-10,market_3,Account Management & Billing,15,36
+2022-02-10,market_3,Construction,5,0
+2022-02-10,market_3,Scheduling,8,9
+2022-02-10,market_3,Technical Troubleshooting,38,19
+2022-02-10,market_3,Wi-Fi & Internet,182,47
+2022-02-11,market_1,Account Management & Billing,37,3
+2022-02-11,market_1,Construction,5,1
+2022-02-11,market_1,Scheduling,24,9
+2022-02-11,market_1,Technical Troubleshooting,197,48
+2022-02-11,market_1,Wi-Fi & Internet,173,54
+2022-02-11,market_2,Account Management & Billing,2,0
+2022-02-11,market_2,Construction,0,0
+2022-02-11,market_2,Scheduling,1,0
+2022-02-11,market_2,Technical Troubleshooting,17,1
+2022-02-11,market_2,Wi-Fi & Internet,18,5
+2022-02-11,market_3,Account Management & Billing,18,37
+2022-02-11,market_3,Construction,3,1
+2022-02-11,market_3,Scheduling,13,16
+2022-02-11,market_3,Technical Troubleshooting,22,15
+2022-02-11,market_3,Wi-Fi & Internet,136,60
+2022-02-12,market_1,Account Management & Billing,17,12
+2022-02-12,market_1,Construction,0,0
+2022-02-12,market_1,Scheduling,9,8
+2022-02-12,market_1,Technical Troubleshooting,171,38
+2022-02-12,market_1,Wi-Fi & Internet,178,43
+2022-02-12,market_2,Account Management & Billing,2,0
+2022-02-12,market_2,Construction,0,0
+2022-02-12,market_2,Scheduling,1,0
+2022-02-12,market_2,Technical Troubleshooting,11,2
+2022-02-12,market_2,Wi-Fi & Internet,16,3
+2022-02-12,market_3,Account Management & Billing,11,40
+2022-02-12,market_3,Construction,4,1
+2022-02-12,market_3,Scheduling,9,10
+2022-02-12,market_3,Technical Troubleshooting,18,9
+2022-02-12,market_3,Wi-Fi & Internet,131,85
+2022-02-13,market_1,Account Management & Billing,26,1
+2022-02-13,market_1,Construction,1,0
+2022-02-13,market_1,Scheduling,1,4
+2022-02-13,market_1,Technical Troubleshooting,137,36
+2022-02-13,market_1,Wi-Fi & Internet,134,39
+2022-02-13,market_2,Account Management & Billing,3,0
+2022-02-13,market_2,Construction,0,0
+2022-02-13,market_2,Scheduling,0,0
+2022-02-13,market_2,Technical Troubleshooting,11,1
+2022-02-13,market_2,Wi-Fi & Internet,12,1
+2022-02-13,market_3,Account Management & Billing,17,29
+2022-02-13,market_3,Construction,1,2
+2022-02-13,market_3,Scheduling,10,6
+2022-02-13,market_3,Technical Troubleshooting,29,12
+2022-02-13,market_3,Wi-Fi & Internet,189,112
+2022-02-14,market_1,Account Management & Billing,29,6
+2022-02-14,market_1,Construction,2,1
+2022-02-14,market_1,Scheduling,21,7
+2022-02-14,market_1,Technical Troubleshooting,252,72
+2022-02-14,market_1,Wi-Fi & Internet,196,52
+2022-02-14,market_2,Account Management & Billing,4,0
+2022-02-14,market_2,Construction,0,0
+2022-02-14,market_2,Scheduling,1,0
+2022-02-14,market_2,Technical Troubleshooting,25,1
+2022-02-14,market_2,Wi-Fi & Internet,18,1
+2022-02-14,market_3,Account Management & Billing,9,29
+2022-02-14,market_3,Construction,7,1
+2022-02-14,market_3,Scheduling,21,6
+2022-02-14,market_3,Technical Troubleshooting,40,7
+2022-02-14,market_3,Wi-Fi & Internet,373,116
+2022-02-15,market_1,Account Management & Billing,15,10
+2022-02-15,market_1,Construction,0,0
+2022-02-15,market_1,Scheduling,16,10
+2022-02-15,market_1,Technical Troubleshooting,311,54
+2022-02-15,market_1,Wi-Fi & Internet,168,60
+2022-02-15,market_2,Account Management & Billing,1,0
+2022-02-15,market_2,Construction,0,0
+2022-02-15,market_2,Scheduling,2,0
+2022-02-15,market_2,Technical Troubleshooting,20,2
+2022-02-15,market_2,Wi-Fi & Internet,23,5
+2022-02-15,market_3,Account Management & Billing,8,30
+2022-02-15,market_3,Construction,0,1
+2022-02-15,market_3,Scheduling,18,7
+2022-02-15,market_3,Technical Troubleshooting,22,5
+2022-02-15,market_3,Wi-Fi & Internet,158,68
+2022-02-16,market_1,Account Management & Billing,26,5
+2022-02-16,market_1,Construction,3,0
+2022-02-16,market_1,Scheduling,18,8
+2022-02-16,market_1,Technical Troubleshooting,236,43
+2022-02-16,market_1,Wi-Fi & Internet,174,46
+2022-02-16,market_2,Account Management & Billing,3,1
+2022-02-16,market_2,Construction,1,0
+2022-02-16,market_2,Scheduling,2,0
+2022-02-16,market_2,Technical Troubleshooting,18,2
+2022-02-16,market_2,Wi-Fi & Internet,21,5
+2022-02-16,market_3,Account Management & Billing,8,29
+2022-02-16,market_3,Construction,0,1
+2022-02-16,market_3,Scheduling,15,15
+2022-02-16,market_3,Technical Troubleshooting,41,13
+2022-02-16,market_3,Wi-Fi & Internet,98,83
+2022-02-17,market_1,Account Management & Billing,15,5
+2022-02-17,market_1,Construction,3,2
+2022-02-17,market_1,Scheduling,9,6
+2022-02-17,market_1,Technical Troubleshooting,242,40
+2022-02-17,market_1,Wi-Fi & Internet,157,39
+2022-02-17,market_2,Account Management & Billing,4,2
+2022-02-17,market_2,Construction,0,0
+2022-02-17,market_2,Scheduling,1,1
+2022-02-17,market_2,Technical Troubleshooting,33,8
+2022-02-17,market_2,Wi-Fi & Internet,23,10
+2022-02-17,market_3,Account Management & Billing,10,23
+2022-02-17,market_3,Construction,5,2
+2022-02-17,market_3,Scheduling,9,10
+2022-02-17,market_3,Technical Troubleshooting,34,15
+2022-02-17,market_3,Wi-Fi & Internet,285,165
+2022-02-18,market_1,Account Management & Billing,20,7
+2022-02-18,market_1,Construction,2,1
+2022-02-18,market_1,Scheduling,18,4
+2022-02-18,market_1,Technical Troubleshooting,263,43
+2022-02-18,market_1,Wi-Fi & Internet,157,43
+2022-02-18,market_2,Account Management & Billing,3,0
+2022-02-18,market_2,Construction,0,0
+2022-02-18,market_2,Scheduling,1,0
+2022-02-18,market_2,Technical Troubleshooting,25,5
+2022-02-18,market_2,Wi-Fi & Internet,18,3
+2022-02-18,market_3,Account Management & Billing,5,27
+2022-02-18,market_3,Construction,3,1
+2022-02-18,market_3,Scheduling,9,7
+2022-02-18,market_3,Technical Troubleshooting,27,9
+2022-02-18,market_3,Wi-Fi & Internet,454,82
+2022-02-19,market_1,Account Management & Billing,24,9
+2022-02-19,market_1,Construction,0,1
+2022-02-19,market_1,Scheduling,8,7
+2022-02-19,market_1,Technical Troubleshooting,150,32
+2022-02-19,market_1,Wi-Fi & Internet,150,54
+2022-02-19,market_2,Account Management & Billing,3,0
+2022-02-19,market_2,Construction,0,0
+2022-02-19,market_2,Scheduling,0,0
+2022-02-19,market_2,Technical Troubleshooting,14,1
+2022-02-19,market_2,Wi-Fi & Internet,11,2
+2022-02-19,market_3,Account Management & Billing,11,23
+2022-02-19,market_3,Construction,0,0
+2022-02-19,market_3,Scheduling,7,12
+2022-02-19,market_3,Technical Troubleshooting,19,2
+2022-02-19,market_3,Wi-Fi & Internet,81,31
+2022-02-20,market_1,Account Management & Billing,12,5
+2022-02-20,market_1,Construction,2,1
+2022-02-20,market_1,Scheduling,9,12
+2022-02-20,market_1,Technical Troubleshooting,122,21
+2022-02-20,market_1,Wi-Fi & Internet,132,55
+2022-02-20,market_2,Account Management & Billing,1,0
+2022-02-20,market_2,Construction,0,0
+2022-02-20,market_2,Scheduling,0,0
+2022-02-20,market_2,Technical Troubleshooting,3,3
+2022-02-20,market_2,Wi-Fi & Internet,14,3
+2022-02-20,market_3,Account Management & Billing,5,28
+2022-02-20,market_3,Construction,0,0
+2022-02-20,market_3,Scheduling,6,12
+2022-02-20,market_3,Technical Troubleshooting,27,4
+2022-02-20,market_3,Wi-Fi & Internet,104,16
+2022-02-21,market_1,Account Management & Billing,18,8
+2022-02-21,market_1,Construction,5,0
+2022-02-21,market_1,Scheduling,23,8
+2022-02-21,market_1,Technical Troubleshooting,241,57
+2022-02-21,market_1,Wi-Fi & Internet,198,69
+2022-02-21,market_2,Account Management & Billing,1,0
+2022-02-21,market_2,Construction,1,0
+2022-02-21,market_2,Scheduling,0,0
+2022-02-21,market_2,Technical Troubleshooting,18,5
+2022-02-21,market_2,Wi-Fi & Internet,20,3
+2022-02-21,market_3,Account Management & Billing,4,36
+2022-02-21,market_3,Construction,0,0
+2022-02-21,market_3,Scheduling,14,11
+2022-02-21,market_3,Technical Troubleshooting,38,5
+2022-02-21,market_3,Wi-Fi & Internet,131,20
+2022-02-22,market_1,Account Management & Billing,45,5
+2022-02-22,market_1,Construction,9,3
+2022-02-22,market_1,Scheduling,15,10
+2022-02-22,market_1,Technical Troubleshooting,300,83
+2022-02-22,market_1,Wi-Fi & Internet,254,71
+2022-02-22,market_2,Account Management & Billing,5,2
+2022-02-22,market_2,Construction,1,0
+2022-02-22,market_2,Scheduling,0,0
+2022-02-22,market_2,Technical Troubleshooting,28,7
+2022-02-22,market_2,Wi-Fi & Internet,23,7
+2022-02-22,market_3,Account Management & Billing,14,32
+2022-02-22,market_3,Construction,2,2
+2022-02-22,market_3,Scheduling,9,3
+2022-02-22,market_3,Technical Troubleshooting,41,5
+2022-02-22,market_3,Wi-Fi & Internet,227,79
+2022-02-23,market_1,Account Management & Billing,24,5
+2022-02-23,market_1,Construction,1,0
+2022-02-23,market_1,Scheduling,15,10
+2022-02-23,market_1,Technical Troubleshooting,295,50
+2022-02-23,market_1,Wi-Fi & Internet,189,68
+2022-02-23,market_2,Account Management & Billing,1,0
+2022-02-23,market_2,Construction,0,0
+2022-02-23,market_2,Scheduling,0,2
+2022-02-23,market_2,Technical Troubleshooting,29,2
+2022-02-23,market_2,Wi-Fi & Internet,25,1
+2022-02-23,market_3,Account Management & Billing,8,30
+2022-02-23,market_3,Construction,3,0
+2022-02-23,market_3,Scheduling,14,3
+2022-02-23,market_3,Technical Troubleshooting,32,8
+2022-02-23,market_3,Wi-Fi & Internet,259,32
+2022-02-24,market_1,Account Management & Billing,13,7
+2022-02-24,market_1,Construction,2,0
+2022-02-24,market_1,Scheduling,8,8
+2022-02-24,market_1,Technical Troubleshooting,276,53
+2022-02-24,market_1,Wi-Fi & Internet,181,67
+2022-02-24,market_2,Account Management & Billing,0,2
+2022-02-24,market_2,Construction,0,0
+2022-02-24,market_2,Scheduling,1,1
+2022-02-24,market_2,Technical Troubleshooting,15,6
+2022-02-24,market_2,Wi-Fi & Internet,26,2
+2022-02-24,market_3,Account Management & Billing,4,33
+2022-02-24,market_3,Construction,3,0
+2022-02-24,market_3,Scheduling,11,8
+2022-02-24,market_3,Technical Troubleshooting,23,5
+2022-02-24,market_3,Wi-Fi & Internet,55,8
+2022-02-25,market_1,Account Management & Billing,18,6
+2022-02-25,market_1,Construction,3,0
+2022-02-25,market_1,Scheduling,14,10
+2022-02-25,market_1,Technical Troubleshooting,278,67
+2022-02-25,market_1,Wi-Fi & Internet,183,75
+2022-02-25,market_2,Account Management & Billing,3,0
+2022-02-25,market_2,Construction,0,0
+2022-02-25,market_2,Scheduling,0,0
+2022-02-25,market_2,Technical Troubleshooting,13,3
+2022-02-25,market_2,Wi-Fi & Internet,14,3
+2022-02-25,market_3,Account Management & Billing,7,32
+2022-02-25,market_3,Construction,1,0
+2022-02-25,market_3,Scheduling,8,7
+2022-02-25,market_3,Technical Troubleshooting,35,3
+2022-02-25,market_3,Wi-Fi & Internet,54,20
+2022-02-26,market_1,Account Management & Billing,18,7
+2022-02-26,market_1,Construction,1,1
+2022-02-26,market_1,Scheduling,13,11
+2022-02-26,market_1,Technical Troubleshooting,198,56
+2022-02-26,market_1,Wi-Fi & Internet,180,59
+2022-02-26,market_2,Account Management & Billing,1,1
+2022-02-26,market_2,Construction,0,0
+2022-02-26,market_2,Scheduling,0,0
+2022-02-26,market_2,Technical Troubleshooting,13,1
+2022-02-26,market_2,Wi-Fi & Internet,16,2
+2022-02-26,market_3,Account Management & Billing,7,30
+2022-02-26,market_3,Construction,0,0
+2022-02-26,market_3,Scheduling,7,2
+2022-02-26,market_3,Technical Troubleshooting,25,3
+2022-02-26,market_3,Wi-Fi & Internet,63,29
+2022-02-27,market_1,Account Management & Billing,17,1
+2022-02-27,market_1,Construction,5,1
+2022-02-27,market_1,Scheduling,7,5
+2022-02-27,market_1,Technical Troubleshooting,141,29
+2022-02-27,market_1,Wi-Fi & Internet,143,45
+2022-02-27,market_2,Account Management & Billing,0,0
+2022-02-27,market_2,Construction,0,0
+2022-02-27,market_2,Scheduling,0,0
+2022-02-27,market_2,Technical Troubleshooting,11,1
+2022-02-27,market_2,Wi-Fi & Internet,8,1
+2022-02-27,market_3,Account Management & Billing,9,23
+2022-02-27,market_3,Construction,0,0
+2022-02-27,market_3,Scheduling,6,0
+2022-02-27,market_3,Technical Troubleshooting,21,4
+2022-02-27,market_3,Wi-Fi & Internet,39,21
+2022-02-28,market_1,Account Management & Billing,35,9
+2022-02-28,market_1,Construction,6,3
+2022-02-28,market_1,Scheduling,29,16
+2022-02-28,market_1,Technical Troubleshooting,433,89
+2022-02-28,market_1,Wi-Fi & Internet,250,100
+2022-02-28,market_2,Account Management & Billing,5,0
+2022-02-28,market_2,Construction,0,0
+2022-02-28,market_2,Scheduling,0,0
+2022-02-28,market_2,Technical Troubleshooting,43,5
+2022-02-28,market_2,Wi-Fi & Internet,38,3
+2022-02-28,market_3,Account Management & Billing,22,13
+2022-02-28,market_3,Construction,0,0
+2022-02-28,market_3,Scheduling,3,2
+2022-02-28,market_3,Technical Troubleshooting,37,6
+2022-02-28,market_3,Wi-Fi & Internet,69,10
+2022-03-01,market_1,Account Management & Billing,19,9
+2022-03-01,market_1,Construction,3,1
+2022-03-01,market_1,Scheduling,25,8
+2022-03-01,market_1,Technical Troubleshooting,366,94
+2022-03-01,market_1,Wi-Fi & Internet,242,70
+2022-03-01,market_2,Account Management & Billing,1,0
+2022-03-01,market_2,Construction,0,0
+2022-03-01,market_2,Scheduling,0,0
+2022-03-01,market_2,Technical Troubleshooting,40,6
+2022-03-01,market_2,Wi-Fi & Internet,20,3
+2022-03-01,market_3,Account Management & Billing,5,12
+2022-03-01,market_3,Construction,1,0
+2022-03-01,market_3,Scheduling,14,12
+2022-03-01,market_3,Technical Troubleshooting,42,8
+2022-03-01,market_3,Wi-Fi & Internet,51,58
+2022-03-02,market_1,Account Management & Billing,16,9
+2022-03-02,market_1,Construction,1,3
+2022-03-02,market_1,Scheduling,22,10
+2022-03-02,market_1,Technical Troubleshooting,342,63
+2022-03-02,market_1,Wi-Fi & Internet,196,105
+2022-03-02,market_2,Account Management & Billing,1,0
+2022-03-02,market_2,Construction,0,0
+2022-03-02,market_2,Scheduling,3,1
+2022-03-02,market_2,Technical Troubleshooting,32,6
+2022-03-02,market_2,Wi-Fi & Internet,27,8
+2022-03-02,market_3,Account Management & Billing,7,10
+2022-03-02,market_3,Construction,0,0
+2022-03-02,market_3,Scheduling,16,8
+2022-03-02,market_3,Technical Troubleshooting,33,11
+2022-03-02,market_3,Wi-Fi & Internet,87,87
+2022-03-03,market_1,Account Management & Billing,32,12
+2022-03-03,market_1,Construction,2,4
+2022-03-03,market_1,Scheduling,15,9
+2022-03-03,market_1,Technical Troubleshooting,368,81
+2022-03-03,market_1,Wi-Fi & Internet,213,78
+2022-03-03,market_2,Account Management & Billing,4,0
+2022-03-03,market_2,Construction,0,0
+2022-03-03,market_2,Scheduling,0,0
+2022-03-03,market_2,Technical Troubleshooting,24,5
+2022-03-03,market_2,Wi-Fi & Internet,24,2
+2022-03-03,market_3,Account Management & Billing,10,9
+2022-03-03,market_3,Construction,1,0
+2022-03-03,market_3,Scheduling,10,9
+2022-03-03,market_3,Technical Troubleshooting,46,7
+2022-03-03,market_3,Wi-Fi & Internet,168,83
+2022-03-04,market_1,Account Management & Billing,18,6
+2022-03-04,market_1,Construction,5,2
+2022-03-04,market_1,Scheduling,15,3
+2022-03-04,market_1,Technical Troubleshooting,279,70
+2022-03-04,market_1,Wi-Fi & Internet,174,53
+2022-03-04,market_2,Account Management & Billing,1,0
+2022-03-04,market_2,Construction,0,0
+2022-03-04,market_2,Scheduling,4,2
+2022-03-04,market_2,Technical Troubleshooting,33,5
+2022-03-04,market_2,Wi-Fi & Internet,16,2
+2022-03-04,market_3,Account Management & Billing,17,5
+2022-03-04,market_3,Construction,2,0
+2022-03-04,market_3,Scheduling,14,19
+2022-03-04,market_3,Technical Troubleshooting,24,8
+2022-03-04,market_3,Wi-Fi & Internet,181,90
+2022-03-05,market_1,Account Management & Billing,31,5
+2022-03-05,market_1,Construction,2,2
+2022-03-05,market_1,Scheduling,19,4
+2022-03-05,market_1,Technical Troubleshooting,178,46
+2022-03-05,market_1,Wi-Fi & Internet,182,47
+2022-03-05,market_2,Account Management & Billing,1,0
+2022-03-05,market_2,Construction,0,0
+2022-03-05,market_2,Scheduling,0,0
+2022-03-05,market_2,Technical Troubleshooting,16,5
+2022-03-05,market_2,Wi-Fi & Internet,39,2
+2022-03-05,market_3,Account Management & Billing,4,1
+2022-03-05,market_3,Construction,0,0
+2022-03-05,market_3,Scheduling,3,2
+2022-03-05,market_3,Technical Troubleshooting,15,9
+2022-03-05,market_3,Wi-Fi & Internet,127,40
+2022-03-06,market_1,Account Management & Billing,20,7
+2022-03-06,market_1,Construction,6,0
+2022-03-06,market_1,Scheduling,5,1
+2022-03-06,market_1,Technical Troubleshooting,169,52
+2022-03-06,market_1,Wi-Fi & Internet,141,40
+2022-03-06,market_2,Account Management & Billing,0,0
+2022-03-06,market_2,Construction,0,0
+2022-03-06,market_2,Scheduling,0,0
+2022-03-06,market_2,Technical Troubleshooting,9,1
+2022-03-06,market_2,Wi-Fi & Internet,10,6
+2022-03-06,market_3,Account Management & Billing,3,1
+2022-03-06,market_3,Construction,0,0
+2022-03-06,market_3,Scheduling,5,10
+2022-03-06,market_3,Technical Troubleshooting,15,2
+2022-03-06,market_3,Wi-Fi & Internet,60,19
+2022-03-07,market_1,Account Management & Billing,16,10
+2022-03-07,market_1,Construction,6,1
+2022-03-07,market_1,Scheduling,18,8
+2022-03-07,market_1,Technical Troubleshooting,382,86
+2022-03-07,market_1,Wi-Fi & Internet,206,84
+2022-03-07,market_2,Account Management & Billing,2,1
+2022-03-07,market_2,Construction,0,0
+2022-03-07,market_2,Scheduling,2,0
+2022-03-07,market_2,Technical Troubleshooting,33,5
+2022-03-07,market_2,Wi-Fi & Internet,34,6
+2022-03-07,market_3,Account Management & Billing,7,4
+2022-03-07,market_3,Construction,0,0
+2022-03-07,market_3,Scheduling,15,22
+2022-03-07,market_3,Technical Troubleshooting,33,10
+2022-03-07,market_3,Wi-Fi & Internet,171,86
+2022-03-08,market_1,Account Management & Billing,25,7
+2022-03-08,market_1,Construction,3,1
+2022-03-08,market_1,Scheduling,17,8
+2022-03-08,market_1,Technical Troubleshooting,352,60
+2022-03-08,market_1,Wi-Fi & Internet,182,74
+2022-03-08,market_2,Account Management & Billing,3,0
+2022-03-08,market_2,Construction,0,0
+2022-03-08,market_2,Scheduling,0,0
+2022-03-08,market_2,Technical Troubleshooting,24,5
+2022-03-08,market_2,Wi-Fi & Internet,25,7
+2022-03-08,market_3,Account Management & Billing,6,4
+2022-03-08,market_3,Construction,0,1
+2022-03-08,market_3,Scheduling,18,22
+2022-03-08,market_3,Technical Troubleshooting,28,6
+2022-03-08,market_3,Wi-Fi & Internet,94,74
+2022-03-09,market_1,Account Management & Billing,21,8
+2022-03-09,market_1,Construction,1,1
+2022-03-09,market_1,Scheduling,15,11
+2022-03-09,market_1,Technical Troubleshooting,306,66
+2022-03-09,market_1,Wi-Fi & Internet,202,59
+2022-03-09,market_2,Account Management & Billing,5,0
+2022-03-09,market_2,Construction,0,0
+2022-03-09,market_2,Scheduling,2,0
+2022-03-09,market_2,Technical Troubleshooting,25,7
+2022-03-09,market_2,Wi-Fi & Internet,17,9
+2022-03-09,market_3,Account Management & Billing,4,4
+2022-03-09,market_3,Construction,0,0
+2022-03-09,market_3,Scheduling,13,34
+2022-03-09,market_3,Technical Troubleshooting,33,10
+2022-03-09,market_3,Wi-Fi & Internet,105,73
+2022-03-10,market_1,Account Management & Billing,27,15
+2022-03-10,market_1,Construction,4,0
+2022-03-10,market_1,Scheduling,10,5
+2022-03-10,market_1,Technical Troubleshooting,361,55
+2022-03-10,market_1,Wi-Fi & Internet,199,61
+2022-03-10,market_2,Account Management & Billing,2,1
+2022-03-10,market_2,Construction,0,0
+2022-03-10,market_2,Scheduling,1,0
+2022-03-10,market_2,Technical Troubleshooting,19,2
+2022-03-10,market_2,Wi-Fi & Internet,23,5
+2022-03-10,market_3,Account Management & Billing,6,2
+2022-03-10,market_3,Construction,0,0
+2022-03-10,market_3,Scheduling,14,27
+2022-03-10,market_3,Technical Troubleshooting,25,6
+2022-03-10,market_3,Wi-Fi & Internet,105,55
+2022-03-11,market_1,Account Management & Billing,20,13
+2022-03-11,market_1,Construction,3,1
+2022-03-11,market_1,Scheduling,14,11
+2022-03-11,market_1,Technical Troubleshooting,346,48
+2022-03-11,market_1,Wi-Fi & Internet,181,81
+2022-03-11,market_2,Account Management & Billing,4,0
+2022-03-11,market_2,Construction,1,0
+2022-03-11,market_2,Scheduling,0,0
+2022-03-11,market_2,Technical Troubleshooting,17,0
+2022-03-11,market_2,Wi-Fi & Internet,17,11
+2022-03-11,market_3,Account Management & Billing,3,6
+2022-03-11,market_3,Construction,0,2
+2022-03-11,market_3,Scheduling,16,20
+2022-03-11,market_3,Technical Troubleshooting,23,7
+2022-03-11,market_3,Wi-Fi & Internet,73,63
+2022-03-12,market_1,Account Management & Billing,15,8
+2022-03-12,market_1,Construction,1,3
+2022-03-12,market_1,Scheduling,11,9
+2022-03-12,market_1,Technical Troubleshooting,232,38
+2022-03-12,market_1,Wi-Fi & Internet,145,48
+2022-03-12,market_2,Account Management & Billing,2,2
+2022-03-12,market_2,Construction,0,0
+2022-03-12,market_2,Scheduling,1,0
+2022-03-12,market_2,Technical Troubleshooting,9,2
+2022-03-12,market_2,Wi-Fi & Internet,16,3
+2022-03-12,market_3,Account Management & Billing,5,2
+2022-03-12,market_3,Construction,0,1
+2022-03-12,market_3,Scheduling,11,14
+2022-03-12,market_3,Technical Troubleshooting,22,8
+2022-03-12,market_3,Wi-Fi & Internet,38,26
+2022-03-13,market_1,Account Management & Billing,36,6
+2022-03-13,market_1,Construction,2,3
+2022-03-13,market_1,Scheduling,3,7
+2022-03-13,market_1,Technical Troubleshooting,192,38
+2022-03-13,market_1,Wi-Fi & Internet,145,55
+2022-03-13,market_2,Account Management & Billing,0,0
+2022-03-13,market_2,Construction,0,0
+2022-03-13,market_2,Scheduling,0,0
+2022-03-13,market_2,Technical Troubleshooting,10,0
+2022-03-13,market_2,Wi-Fi & Internet,6,4
+2022-03-13,market_3,Account Management & Billing,4,0
+2022-03-13,market_3,Construction,1,0
+2022-03-13,market_3,Scheduling,8,10
+2022-03-13,market_3,Technical Troubleshooting,21,3
+2022-03-13,market_3,Wi-Fi & Internet,42,41
+2022-03-14,market_1,Account Management & Billing,23,13
+2022-03-14,market_1,Construction,5,1
+2022-03-14,market_1,Scheduling,28,12
+2022-03-14,market_1,Technical Troubleshooting,370,71
+2022-03-14,market_1,Wi-Fi & Internet,238,66
+2022-03-14,market_2,Account Management & Billing,5,0
+2022-03-14,market_2,Construction,0,0
+2022-03-14,market_2,Scheduling,0,0
+2022-03-14,market_2,Technical Troubleshooting,32,3
+2022-03-14,market_2,Wi-Fi & Internet,36,9
+2022-03-14,market_3,Account Management & Billing,5,2
+2022-03-14,market_3,Construction,2,0
+2022-03-14,market_3,Scheduling,13,15
+2022-03-14,market_3,Technical Troubleshooting,48,8
+2022-03-14,market_3,Wi-Fi & Internet,153,60
+2022-03-15,market_1,Account Management & Billing,24,10
+2022-03-15,market_1,Construction,4,3
+2022-03-15,market_1,Scheduling,26,13
+2022-03-15,market_1,Technical Troubleshooting,316,60
+2022-03-15,market_1,Wi-Fi & Internet,192,67
+2022-03-15,market_2,Account Management & Billing,5,0
+2022-03-15,market_2,Construction,0,0
+2022-03-15,market_2,Scheduling,4,0
+2022-03-15,market_2,Technical Troubleshooting,23,4
+2022-03-15,market_2,Wi-Fi & Internet,26,6
+2022-03-15,market_3,Account Management & Billing,10,0
+2022-03-15,market_3,Construction,0,0
+2022-03-15,market_3,Scheduling,25,15
+2022-03-15,market_3,Technical Troubleshooting,34,8
+2022-03-15,market_3,Wi-Fi & Internet,141,72
+2022-03-16,market_1,Account Management & Billing,40,6
+2022-03-16,market_1,Construction,45,2
+2022-03-16,market_1,Scheduling,28,15
+2022-03-16,market_1,Technical Troubleshooting,378,90
+2022-03-16,market_1,Wi-Fi & Internet,156,50
+2022-03-16,market_2,Account Management & Billing,5,0
+2022-03-16,market_2,Construction,0,1
+2022-03-16,market_2,Scheduling,0,1
+2022-03-16,market_2,Technical Troubleshooting,18,3
+2022-03-16,market_2,Wi-Fi & Internet,26,6
+2022-03-16,market_3,Account Management & Billing,11,2
+2022-03-16,market_3,Construction,0,0
+2022-03-16,market_3,Scheduling,14,14
+2022-03-16,market_3,Technical Troubleshooting,27,8
+2022-03-16,market_3,Wi-Fi & Internet,186,82
+2022-03-17,market_1,Account Management & Billing,32,5
+2022-03-17,market_1,Construction,3,0
+2022-03-17,market_1,Scheduling,24,8
+2022-03-17,market_1,Technical Troubleshooting,262,55
+2022-03-17,market_1,Wi-Fi & Internet,170,59
+2022-03-17,market_2,Account Management & Billing,3,0
+2022-03-17,market_2,Construction,0,0
+2022-03-17,market_2,Scheduling,0,0
+2022-03-17,market_2,Technical Troubleshooting,13,3
+2022-03-17,market_2,Wi-Fi & Internet,18,5
+2022-03-17,market_3,Account Management & Billing,4,2
+2022-03-17,market_3,Construction,0,0
+2022-03-17,market_3,Scheduling,12,11
+2022-03-17,market_3,Technical Troubleshooting,26,9
+2022-03-17,market_3,Wi-Fi & Internet,71,54
+2022-03-18,market_1,Account Management & Billing,18,11
+2022-03-18,market_1,Construction,1,0
+2022-03-18,market_1,Scheduling,19,11
+2022-03-18,market_1,Technical Troubleshooting,266,72
+2022-03-18,market_1,Wi-Fi & Internet,178,45
+2022-03-18,market_2,Account Management & Billing,4,1
+2022-03-18,market_2,Construction,0,0
+2022-03-18,market_2,Scheduling,1,2
+2022-03-18,market_2,Technical Troubleshooting,16,1
+2022-03-18,market_2,Wi-Fi & Internet,23,10
+2022-03-18,market_3,Account Management & Billing,3,1
+2022-03-18,market_3,Construction,0,0
+2022-03-18,market_3,Scheduling,14,6
+2022-03-18,market_3,Technical Troubleshooting,27,8
+2022-03-18,market_3,Wi-Fi & Internet,84,34
+2022-03-19,market_1,Account Management & Billing,15,9
+2022-03-19,market_1,Construction,0,1
+2022-03-19,market_1,Scheduling,18,9
+2022-03-19,market_1,Technical Troubleshooting,151,45
+2022-03-19,market_1,Wi-Fi & Internet,152,59
+2022-03-19,market_2,Account Management & Billing,5,0
+2022-03-19,market_2,Construction,0,0
+2022-03-19,market_2,Scheduling,2,0
+2022-03-19,market_2,Technical Troubleshooting,9,2
+2022-03-19,market_2,Wi-Fi & Internet,11,5
+2022-03-19,market_3,Account Management & Billing,0,1
+2022-03-19,market_3,Construction,0,0
+2022-03-19,market_3,Scheduling,4,0
+2022-03-19,market_3,Technical Troubleshooting,24,6
+2022-03-19,market_3,Wi-Fi & Internet,45,13
+2022-03-20,market_1,Account Management & Billing,24,6
+2022-03-20,market_1,Construction,0,1
+2022-03-20,market_1,Scheduling,9,6
+2022-03-20,market_1,Technical Troubleshooting,142,37
+2022-03-20,market_1,Wi-Fi & Internet,161,50
+2022-03-20,market_2,Account Management & Billing,1,0
+2022-03-20,market_2,Construction,0,0
+2022-03-20,market_2,Scheduling,0,0
+2022-03-20,market_2,Technical Troubleshooting,7,0
+2022-03-20,market_2,Wi-Fi & Internet,13,1
+2022-03-20,market_3,Account Management & Billing,6,1
+2022-03-20,market_3,Construction,1,0
+2022-03-20,market_3,Scheduling,5,2
+2022-03-20,market_3,Technical Troubleshooting,15,2
+2022-03-20,market_3,Wi-Fi & Internet,46,16
+2022-03-21,market_1,Account Management & Billing,28,19
+2022-03-21,market_1,Construction,5,2
+2022-03-21,market_1,Scheduling,26,9
+2022-03-21,market_1,Technical Troubleshooting,465,115
+2022-03-21,market_1,Wi-Fi & Internet,211,108
+2022-03-21,market_2,Account Management & Billing,5,2
+2022-03-21,market_2,Construction,1,1
+2022-03-21,market_2,Scheduling,2,3
+2022-03-21,market_2,Technical Troubleshooting,32,4
+2022-03-21,market_2,Wi-Fi & Internet,19,4
+2022-03-21,market_3,Account Management & Billing,4,1
+2022-03-21,market_3,Construction,0,0
+2022-03-21,market_3,Scheduling,12,4
+2022-03-21,market_3,Technical Troubleshooting,29,4
+2022-03-21,market_3,Wi-Fi & Internet,65,24
+2022-03-22,market_1,Account Management & Billing,28,14
+2022-03-22,market_1,Construction,4,0
+2022-03-22,market_1,Scheduling,14,4
+2022-03-22,market_1,Technical Troubleshooting,503,107
+2022-03-22,market_1,Wi-Fi & Internet,233,96
+2022-03-22,market_2,Account Management & Billing,2,1
+2022-03-22,market_2,Construction,0,0
+2022-03-22,market_2,Scheduling,0,0
+2022-03-22,market_2,Technical Troubleshooting,17,2
+2022-03-22,market_2,Wi-Fi & Internet,26,6
+2022-03-22,market_3,Account Management & Billing,5,1
+2022-03-22,market_3,Construction,0,1
+2022-03-22,market_3,Scheduling,13,19
+2022-03-22,market_3,Technical Troubleshooting,19,3
+2022-03-22,market_3,Wi-Fi & Internet,110,40
+2022-03-23,market_1,Account Management & Billing,24,20
+2022-03-23,market_1,Construction,8,2
+2022-03-23,market_1,Scheduling,9,6
+2022-03-23,market_1,Technical Troubleshooting,454,119
+2022-03-23,market_1,Wi-Fi & Internet,275,114
+2022-03-23,market_2,Account Management & Billing,3,1
+2022-03-23,market_2,Construction,0,0
+2022-03-23,market_2,Scheduling,1,0
+2022-03-23,market_2,Technical Troubleshooting,28,1
+2022-03-23,market_2,Wi-Fi & Internet,26,5
+2022-03-23,market_3,Account Management & Billing,5,21
+2022-03-23,market_3,Construction,1,0
+2022-03-23,market_3,Scheduling,18,12
+2022-03-23,market_3,Technical Troubleshooting,28,8
+2022-03-23,market_3,Wi-Fi & Internet,150,38
+2022-03-24,market_1,Account Management & Billing,34,9
+2022-03-24,market_1,Construction,4,0
+2022-03-24,market_1,Scheduling,11,5
+2022-03-24,market_1,Technical Troubleshooting,320,68
+2022-03-24,market_1,Wi-Fi & Internet,263,91
+2022-03-24,market_2,Account Management & Billing,2,0
+2022-03-24,market_2,Construction,1,0
+2022-03-24,market_2,Scheduling,2,2
+2022-03-24,market_2,Technical Troubleshooting,20,2
+2022-03-24,market_2,Wi-Fi & Internet,33,7
+2022-03-24,market_3,Account Management & Billing,18,23
+2022-03-24,market_3,Construction,1,0
+2022-03-24,market_3,Scheduling,12,16
+2022-03-24,market_3,Technical Troubleshooting,39,10
+2022-03-24,market_3,Wi-Fi & Internet,380,43
+2022-03-25,market_1,Account Management & Billing,32,17
+2022-03-25,market_1,Construction,2,2
+2022-03-25,market_1,Scheduling,17,19
+2022-03-25,market_1,Technical Troubleshooting,344,77
+2022-03-25,market_1,Wi-Fi & Internet,280,108
+2022-03-25,market_2,Account Management & Billing,3,2
+2022-03-25,market_2,Construction,1,0
+2022-03-25,market_2,Scheduling,0,2
+2022-03-25,market_2,Technical Troubleshooting,23,2
+2022-03-25,market_2,Wi-Fi & Internet,25,1
+2022-03-25,market_3,Account Management & Billing,18,24
+2022-03-25,market_3,Construction,1,1
+2022-03-25,market_3,Scheduling,16,11
+2022-03-25,market_3,Technical Troubleshooting,28,12
+2022-03-25,market_3,Wi-Fi & Internet,525,53
+2022-03-26,market_1,Account Management & Billing,48,11
+2022-03-26,market_1,Construction,1,1
+2022-03-26,market_1,Scheduling,15,6
+2022-03-26,market_1,Technical Troubleshooting,231,66
+2022-03-26,market_1,Wi-Fi & Internet,206,85
+2022-03-26,market_2,Account Management & Billing,3,3
+2022-03-26,market_2,Construction,1,0
+2022-03-26,market_2,Scheduling,1,0
+2022-03-26,market_2,Technical Troubleshooting,11,3
+2022-03-26,market_2,Wi-Fi & Internet,14,3
+2022-03-26,market_3,Account Management & Billing,11,22
+2022-03-26,market_3,Construction,0,0
+2022-03-26,market_3,Scheduling,10,12
+2022-03-26,market_3,Technical Troubleshooting,13,6
+2022-03-26,market_3,Wi-Fi & Internet,55,42
+2022-03-27,market_1,Account Management & Billing,22,8
+2022-03-27,market_1,Construction,2,2
+2022-03-27,market_1,Scheduling,5,2
+2022-03-27,market_1,Technical Troubleshooting,167,46
+2022-03-27,market_1,Wi-Fi & Internet,158,50
+2022-03-27,market_2,Account Management & Billing,3,0
+2022-03-27,market_2,Construction,0,0
+2022-03-27,market_2,Scheduling,0,0
+2022-03-27,market_2,Technical Troubleshooting,11,1
+2022-03-27,market_2,Wi-Fi & Internet,10,1
+2022-03-27,market_3,Account Management & Billing,5,18
+2022-03-27,market_3,Construction,0,0
+2022-03-27,market_3,Scheduling,5,9
+2022-03-27,market_3,Technical Troubleshooting,11,1
+2022-03-27,market_3,Wi-Fi & Internet,44,27
+2022-03-28,market_1,Account Management & Billing,35,9
+2022-03-28,market_1,Construction,5,1
+2022-03-28,market_1,Scheduling,31,12
+2022-03-28,market_1,Technical Troubleshooting,480,105
+2022-03-28,market_1,Wi-Fi & Internet,190,68
+2022-03-28,market_2,Account Management & Billing,6,1
+2022-03-28,market_2,Construction,0,0
+2022-03-28,market_2,Scheduling,2,0
+2022-03-28,market_2,Technical Troubleshooting,29,4
+2022-03-28,market_2,Wi-Fi & Internet,36,6
+2022-03-28,market_3,Account Management & Billing,12,14
+2022-03-28,market_3,Construction,0,0
+2022-03-28,market_3,Scheduling,24,12
+2022-03-28,market_3,Technical Troubleshooting,40,11
+2022-03-28,market_3,Wi-Fi & Internet,84,41
+2022-03-29,market_1,Account Management & Billing,38,11
+2022-03-29,market_1,Construction,3,0
+2022-03-29,market_1,Scheduling,28,4
+2022-03-29,market_1,Technical Troubleshooting,413,85
+2022-03-29,market_1,Wi-Fi & Internet,186,65
+2022-03-29,market_2,Account Management & Billing,6,0
+2022-03-29,market_2,Construction,0,0
+2022-03-29,market_2,Scheduling,1,1
+2022-03-29,market_2,Technical Troubleshooting,18,4
+2022-03-29,market_2,Wi-Fi & Internet,38,6
+2022-03-29,market_3,Account Management & Billing,7,11
+2022-03-29,market_3,Construction,0,1
+2022-03-29,market_3,Scheduling,13,6
+2022-03-29,market_3,Technical Troubleshooting,38,11
+2022-03-29,market_3,Wi-Fi & Internet,63,16
+2022-03-30,market_1,Account Management & Billing,46,13
+2022-03-30,market_1,Construction,3,0
+2022-03-30,market_1,Scheduling,22,7
+2022-03-30,market_1,Technical Troubleshooting,599,84
+2022-03-30,market_1,Wi-Fi & Internet,242,100
+2022-03-30,market_2,Account Management & Billing,3,1
+2022-03-30,market_2,Construction,0,0
+2022-03-30,market_2,Scheduling,0,0
+2022-03-30,market_2,Technical Troubleshooting,31,3
+2022-03-30,market_2,Wi-Fi & Internet,38,6
+2022-03-30,market_3,Account Management & Billing,4,10
+2022-03-30,market_3,Construction,2,0
+2022-03-30,market_3,Scheduling,14,9
+2022-03-30,market_3,Technical Troubleshooting,33,6
+2022-03-30,market_3,Wi-Fi & Internet,49,22
+2022-03-31,market_1,Account Management & Billing,33,14
+2022-03-31,market_1,Construction,3,0
+2022-03-31,market_1,Scheduling,15,9
+2022-03-31,market_1,Technical Troubleshooting,391,58
+2022-03-31,market_1,Wi-Fi & Internet,235,88
+2022-03-31,market_2,Account Management & Billing,1,1
+2022-03-31,market_2,Construction,0,0
+2022-03-31,market_2,Scheduling,1,1
+2022-03-31,market_2,Technical Troubleshooting,32,4
+2022-03-31,market_2,Wi-Fi & Internet,17,0
+2022-03-31,market_3,Account Management & Billing,11,8
+2022-03-31,market_3,Construction,1,0
+2022-03-31,market_3,Scheduling,22,4
+2022-03-31,market_3,Technical Troubleshooting,29,7
+2022-03-31,market_3,Wi-Fi & Internet,129,20

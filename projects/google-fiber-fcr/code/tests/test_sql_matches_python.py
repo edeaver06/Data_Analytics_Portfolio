@@ -1,9 +1,13 @@
 import sys
 from pathlib import Path
 import duckdb, pandas as pd
+import pytest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 import fcr
+
+pytestmark = pytest.mark.skipif(not all((fcr.RAW_DIR / f"{m}.csv").exists() for m in fcr.MARKETS),
+                                reason="raw market CSVs not present in data/raw")
 
 def _sql_results():
     import os; os.chdir(ROOT)

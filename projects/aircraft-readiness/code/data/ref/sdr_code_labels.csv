@@ -1,0 +1,24 @@
+code_type,code,label,label_basis
+stage,IN,Inspection / maintenance (on ground),inferred from narratives
+stage,TX,Taxi,inferred from narratives
+stage,TO,Takeoff,inferred from narratives
+stage,CL,Climb,inferred from narratives
+stage,CR,Cruise,inferred from narratives
+stage,DE,Descent,inferred from narratives
+stage,AP,Approach,inferred from narratives
+stage,LD,Landing,inferred from narratives
+stage,NR,Not reported,inferred
+stage,UK,Unknown,inferred
+precaution,K,None (no operational interruption),inferred from narratives (inspection findings)
+precaution,O,Other,inferred
+precaution,A,Unscheduled landing / return,inferred from narratives
+precaution,B,Emergency declared / diversion,inferred from narratives (unverified against FAA code list)
+precaution,C,Aborted takeoff,inferred from narratives
+precaution,D,Return to gate / flight cancelled,inferred from narratives
+precaution,E,Engine shutdown in flight,inferred from narratives
+precaution,F,Fire indication / extinguisher used,inferred from narratives (unverified)
+precaution,G,Oxygen masks used / cabin altitude event,inferred from narratives (unverified)
+precaution,H,Smoke or fumes,inferred from narratives (unverified)
+precaution,I,Unknown,unverified (2 reports; narratives inconclusive)
+precaution,J,Unknown,unverified (narratives mixed: system failures in climb)
+precaution,L,Unknown,unverified (narratives mostly gear/flap disagree with emergency declared)

@@ -1,7 +1,7 @@
 # Evan Deaver: Data Analyst Portfolio
 
 ## Overview
-I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish dashboards, check models for flaws such as target leakage, and do data QA on AI model outputs.
+I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish dashboards, check models and data for flaws, and do data QA on AI model outputs.
 
 **What's here:** six projects in [`projects/`](projects). Each one opens with a one-page summary (the question, the answer, key findings, what I built), a plain-English **Story**, and a `code/` folder with everything technical. Start with **Steam Pulse**: its [▶️ live app](https://steam-pulse-e.streamlit.app/) runs in your browser with no install.
 
@@ -15,7 +15,7 @@ I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) movin
 | **[Google Fiber: Why Do Customers Call Back?](projects/google-fiber-fcr)** | Two problem types drive 80.2% of repeat calls, and an "impossible" billing number points to a likely data problem. | Data analyst / BI (operations) | [Story](projects/google-fiber-fcr/STORY.md) · [Code](projects/google-fiber-fcr/code/README.md) |
 | **[Markets vs Polls: Who Called the 2024 Election Better?](projects/markets-vs-polls)** | 1 day out, Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls), in one election where polls missed 3.2 points one way. | Data analyst (APIs, forecasting) | [Story](projects/markets-vs-polls/STORY.md) · [Code](projects/markets-vs-polls/code/README.md) |
 | **[Can You Beat the NFL Closing Line?](projects/nfl-closing-line)** | Across 7,354 games, no popular betting angle beats the 52.38% breakeven in a statistically defensible way. | Data analyst (statistics) | [Story](projects/nfl-closing-line/STORY.md) · [Code](projects/nfl-closing-line/code/README.md) |
-| **[Audit Risk Model: A Target-Leakage Case Study](projects/operational-risk-briefing)** | My model's 97.8% accuracy came from target leakage; rebuilt honestly, the business advice reverses. | Data analyst (model validation, R) | [Story](projects/operational-risk-briefing/STORY.md) · [Code](projects/operational-risk-briefing/code/README.md) |
+| **[Aircraft Readiness: What Grounds Airplanes, and How Fast Is It Reported?](projects/aircraft-readiness)** | Of 34,350 FAA maintenance-difficulty reports, 2,521 disrupted a flight, mostly from air conditioning, landing gear and engines; 7.1% of in-flight problems came back within 30 days. | Data analyst / BI | [README](projects/aircraft-readiness/README.md) · [Story](projects/aircraft-readiness/STORY.md) · [Code](projects/aircraft-readiness/code/README.md) |
 
 ## Table of Contents
 - [Overview](#overview)

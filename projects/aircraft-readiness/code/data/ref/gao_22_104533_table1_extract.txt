@@ -1,0 +1,16 @@
+Table 1: Average Mission Capable Rates, by Percentage, for Selected Air Force and Navy Aircraft, Fiscal Years 2015–2021
+
+                                                                                         Fiscal Year
+                       Fiscal year 2021                                                                                                      Change from
+                       mission capable                                                                                                 fiscal year 2015 to
+                                   goal                 2015         2016         2017       2018       2019       2020           2021               2021
+ Air Force
+ B-1B                                       52           47.5         51.6        52.8       51.8        46.4       52.8          40.7                    -6.8
+ C-5M                                       75           68.1         69.1        60.9       62.8        63.2       60.5          57.5                  -10.6
+ F-22                                       75           67.0         60.2        49.0       51.7        50.6       52.0          50.3                  -16.7
+ KC-135                                    100           75.2         74.3        73.5       73.1        72.3       72.9          71.1                    -4.1
+ Navy
+ C-130T                                     75           43.0         45.1        43.7       22.7        35.7       34.6          32.4                  -10.7
+ KC-130T                                    75           53.2         52.5        46.3       23.4        32.6       19.6          36.5                  -16.7
+ F/A-18 E/F                                 75           54.9         55.1        51.9       48.3        48.9       53.0          51.0                    -3.9
+ P-8A                                       80           73.1         69.5        65.2       62.3        64.6       63.7          67.2                    -6.0

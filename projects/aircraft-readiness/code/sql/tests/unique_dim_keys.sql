@@ -1,0 +1,1 @@
+SELECT operator_key::VARCHAR FROM mart.dim_operator GROUP BY 1 HAVING count(*)>1 UNION ALL SELECT part_key::VARCHAR FROM mart.dim_part GROUP BY 1 HAVING count(*)>1 UNION ALL SELECT aircraft_key::VARCHAR FROM mart.dim_aircraft GROUP BY 1 HAVING count(*)>1

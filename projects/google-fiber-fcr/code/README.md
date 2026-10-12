@@ -17,6 +17,15 @@ duckdb < sql/fcr_metrics.sql
 python -c "import duckdb; [print(duckdb.sql(q)) for q in open('sql/fcr_metrics.sql').read().split(';') if q.strip() and 'SELECT' in q]"
 ```
 
+## Interactive dashboard
+A Streamlit app in `app/` walks through the findings: a plain-English overview first, then interactive pages. It reads only the small extract in `app/data/`.
+```bash
+pip install -r app/requirements.txt
+python app/make_extract.py   # refresh app/data after re-running the analysis
+streamlit run app/streamlit_app.py
+```
+To deploy on Streamlit Community Cloud, set the main file to `projects/google-fiber-fcr/code/app/streamlit_app.py`.
+
 ## What's in this folder (`code/`)
 | Folder | What it's for |
 |---|---|

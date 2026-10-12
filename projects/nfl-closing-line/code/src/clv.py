@@ -18,7 +18,11 @@ def connect(raw=RAW):
 
 def ml_prob(ml):
     ml = np.asarray(ml, float)
-    return np.where(ml < 0, -ml / (-ml + 100), 100 / (ml + 100))
+    out = np.full(ml.shape, np.nan)  # NaN where the moneyline is missing
+    fav, dog = ml < 0, ml >= 0  # masks: compute each formula only where it applies (no divide-by-zero)
+    out[fav] = -ml[fav] / (-ml[fav] + 100)
+    out[dog] = 100 / (ml[dog] + 100)
+    return out
 
 def efficiency(g):
     """OLS result ~ spread_line (efficient: intercept 0, slope 1); total likewise."""

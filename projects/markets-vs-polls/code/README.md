@@ -11,6 +11,15 @@ python -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 Notebook: `notebooks/markets_vs_polls.ipynb`. Charts are written to `../images/`.
 
+## Interactive dashboard
+A Streamlit app in `app/` walks through the findings: a plain-English overview first, then interactive pages. It reads only the small extract in `app/data/`.
+```bash
+pip install -r app/requirements.txt
+python app/make_extract.py   # refresh app/data after re-running the analysis
+streamlit run app/streamlit_app.py
+```
+To deploy on Streamlit Community Cloud, set the main file to `projects/markets-vs-polls/code/app/streamlit_app.py`.
+
 ## What's in this folder (`code/`)
 | Folder | What it's for |
 |---|---|

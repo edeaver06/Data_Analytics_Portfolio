@@ -3,8 +3,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import numpy as np, pandas as pd, pytest
 from forecast_scoring import brier, log_loss, poll_prob, paired_bootstrap, connect, matched_panel, ml_prob
 
+RAW = Path(__file__).resolve().parents[1] / "data/raw"
+RAW_FILES = ["polls_538_2024.csv", "mit_president_1976_2024.csv", "market_prices_daily.csv"]
+
+
 @pytest.fixture(scope="module")
-def con(): return connect()
+def con():
+    if not all((RAW / f).exists() for f in RAW_FILES):
+        pytest.skip("raw files not present in data/raw; run src/fetch_data.py")
+    return connect()
 
 def test_brier_basic(): assert brier([1, 0, .5], [1, 0, 1]) == pytest.approx(0.25 / 3)
 def test_log_loss_perfect_small(): assert log_loss([.999], [1]) < 0.01

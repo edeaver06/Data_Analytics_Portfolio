@@ -11,12 +11,9 @@ __pycache__/
 # Local databases / generated data
 *.duckdb
 *.duckdb.wal
-projects/olist-ecommerce/code/data/raw/
-projects/steam-pulse/data/
-projects/steam-pulse/logs/
-projects/steam-pulse/dbt/target/
-projects/steam-pulse/dbt/logs/
-projects/steam-pulse/dbt/dbt_packages/
+# Raw downloads never get staged (files tracked before this rule stay tracked until removed with git rm --cached).
+# Steam's data/, logs and dbt build folders are ignored in projects/steam-pulse/.gitignore.
+projects/*/code/data/raw/
 .user.yml
 **/data/clean/draft_charts/
 

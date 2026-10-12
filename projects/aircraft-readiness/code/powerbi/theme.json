@@ -1,0 +1,31 @@
+{
+  "name": "Aircraft Readiness (Okabe-Ito, colorblind-safe)",
+  "dataColors": ["#0072B2", "#E69F00", "#009E73", "#CC79A7", "#56B4E9", "#D55E00", "#F0E442", "#000000"],
+  "foreground": "#252423",
+  "foregroundNeutralSecondary": "#605E5C",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F3F2F1",
+  "tableAccent": "#0072B2",
+  "good": "#009E73",
+  "neutral": "#E69F00",
+  "bad": "#D55E00",
+  "maximum": "#0072B2",
+  "center": "#F3F2F1",
+  "minimum": "#56B4E9",
+  "textClasses": {
+    "title": {"fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#252423"},
+    "header": {"fontFace": "Segoe UI Semibold", "fontSize": 11, "color": "#252423"},
+    "label": {"fontFace": "Segoe UI", "fontSize": 10, "color": "#252423"},
+    "callout": {"fontFace": "Segoe UI Semibold", "fontSize": 24, "color": "#0072B2"}
+  },
+  "visualStyles": {
+    "*": {"*": {
+      "title": [{"show": true, "alignment": "left", "fontSize": 11}],
+      "border": [{"show": false}],
+      "background": [{"show": true, "color": {"solid": {"color": "#FFFFFF"}}}]
+    }},
+    "card": {"*": {"labels": [{"color": {"solid": {"color": "#0072B2"}}, "fontSize": 22}],
+                   "categoryLabels": [{"color": {"solid": {"color": "#605E5C"}}, "fontSize": 9}]}},
+    "slicer": {"*": {"header": [{"fontColor": {"solid": {"color": "#252423"}}}]}}
+  }
+}

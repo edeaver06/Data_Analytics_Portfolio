@@ -1,0 +1,9 @@
+aircraft,service,mc_goal_pct,fy2015,fy2016,fy2017,fy2018,fy2019,fy2020,fy2021,source
+B-1B,Air Force,52,47.5,51.6,52.8,51.8,46.4,52.8,40.7,GAO-22-104533 Table 1 (goal column = FY2021 goal; verified against report PDF 2026-10-12)
+C-5M,Air Force,75,68.1,69.1,60.9,62.8,63.2,60.5,57.5,GAO-22-104533 Table 1 (goal column = FY2021 goal; verified against report PDF 2026-10-12)
+F-22,Air Force,75,67.0,60.2,49.0,51.7,50.6,52.0,50.3,GAO-22-104533 Table 1 (goal column = FY2021 goal; verified against report PDF 2026-10-12)
+KC-135,Air Force,100,75.2,74.3,73.5,73.1,72.3,72.9,71.1,GAO-22-104533 Table 1 (goal column = FY2021 goal; verified against report PDF 2026-10-12)
+C-130T,Navy,75,43.0,45.1,43.7,22.7,35.7,34.6,32.4,GAO-22-104533 Table 1 (goal column = FY2021 goal; verified against report PDF 2026-10-12)
+KC-130T,Navy,75,53.2,52.5,46.3,23.4,32.6,19.6,36.5,GAO-22-104533 Table 1 (goal column = FY2021 goal; verified against report PDF 2026-10-12)
+F/A-18E/F,Navy,75,54.9,55.1,51.9,48.3,48.9,53.0,51.0,GAO-22-104533 Table 1 (goal column = FY2021 goal; verified against report PDF 2026-10-12)
+P-8A,Navy,80,73.1,69.5,65.2,62.3,64.6,63.7,67.2,GAO-22-104533 Table 1 (goal column = FY2021 goal; verified against report PDF 2026-10-12)

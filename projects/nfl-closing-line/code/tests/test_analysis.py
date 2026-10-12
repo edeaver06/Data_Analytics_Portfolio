@@ -4,8 +4,14 @@ import numpy as np, pandas as pd, pytest
 from clv import connect, ml_prob, BREAKEVEN
 from clv import test_strategies as run_tests
 
+RAW = Path(__file__).resolve().parents[1] / "data/raw/games.csv"
+
+
 @pytest.fixture(scope="module")
-def con(): return connect()
+def con():
+    if not RAW.exists():
+        pytest.skip("data/raw/games.csv not present; see code/README.md for the download")
+    return connect()
 
 def test_breakeven(): assert abs(BREAKEVEN - 0.5238) < 1e-4
 

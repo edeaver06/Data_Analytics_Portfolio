@@ -1,0 +1,14 @@
+code/.venv/
+__pycache__/
+.pytest_cache/
+# Large raw downloads (re-created by code/scripts/run.sh)
+code/data/raw/registry/
+code/data/raw/cmapss/
+code/data/raw/sdrs/
+code/data/*.duckdb
+code/data/*.duckdb.wal
+# Export CSVs duplicate the tracked parquet; rebuilt by code/src/build.py
+code/data/export/*.csv
+# Power BI / Tableau hand-off: CSVs are rebuilt by code/powerbi/build_powerbi.py
+code/powerbi/tableau/*.csv
+code/powerbi/data/

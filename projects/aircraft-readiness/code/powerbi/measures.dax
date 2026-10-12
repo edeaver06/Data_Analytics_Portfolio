@@ -1,0 +1,338 @@
+// =====================================================================================
+// Aircraft Readiness: DAX measures for Power BI Desktop
+// Create a blank table named _Measures (Enter data, one empty column, then hide the column) and
+// add each measure below to it. Display folders are shown in [brackets] in each header.
+//
+// Data status (see docs/schema.md):
+//   REAL         FAA Service Difficulty Reports (SDR), Jan 1 to Jun 29 2025, plus the FAA Registry
+//   REAL (GAO)   GAO-22-104533 Table 1 fleet mission-capable rates, checked against the report.
+//                Shown as "Real-world context" on page 4.
+//   APPROXIMATED Hours between reports, derived from real SDR hours. This is NOT a true MTBF.
+//   SIMULATION   NASA C-MAPSS engine run-to-failure. Public NASA simulation, not field data.
+//   SYNTHETIC    syn_* tables (is_synthetic = TRUE). Measures are prefixed "SIM ". Show them ONLY
+//                in the simulated section of page 4 "Simulated fleet (demo data)".
+// Unknown members: missing aircraft, operator and part map to key -1 '<UNKNOWN>'. Missing ATA
+// maps to 'UNK', and missing stage or precaution to '-1'. Every fact foreign key is non-null.
+// Only columns that exist in code/data/export are used. No fields are invented.
+// =====================================================================================
+
+
+// ---------- [1 Reports - real] ----------
+
+// Reports: count of FAA Service Difficulty Reports, one row per de-duplicated SDR.
+// Dates filter on the ACTIVE relationship dim_date[date_key] -> fct_discrepancy[difficulty_date_key].
+Reports = COUNTROWS ( fct_discrepancy )
+
+// Reports (by submission date): the same count, but dated by the FAA submission date.
+// Turns on the INACTIVE relationship dim_date[date_key] -> fct_discrepancy[submission_date_key].
+Reports (by Submission Date) =
+CALCULATE (
+    [Reports],
+    USERELATIONSHIP ( dim_date[date_key], fct_discrepancy[submission_date_key] )
+)
+
+// Aircraft reporting: distinct real tails with at least one SDR in context. Excludes the
+// '<UNKNOWN>' member (aircraft_key = -1).
+Aircraft Reporting =
+CALCULATE ( DISTINCTCOUNT ( fct_discrepancy[aircraft_key] ), dim_aircraft[aircraft_key] <> -1 )
+
+// Reports with unknown aircraft: SDRs with no N-number, mapped to aircraft_key = -1 '<UNKNOWN>'.
+Reports Unknown Aircraft = CALCULATE ( [Reports], dim_aircraft[aircraft_key] = -1 )
+
+// Reports with unknown operator: SDRs mapped to operator_key = -1 '<UNKNOWN>'.
+Reports Unknown Operator = CALCULATE ( [Reports], dim_operator[operator_key] = -1 )
+
+// Reports with unknown part: SDRs mapped to part_key = -1 '<UNKNOWN>'.
+Reports Unknown Part = CALCULATE ( [Reports], dim_part[part_key] = -1 )
+
+// Operational interruptions: SDRs whose precaution code has dim_precaution[is_operational_interruption]
+// = TRUE, i.e. any code except K (none) and O (other). Examples: unscheduled landing, aborted takeoff,
+// return to gate, engine shutdown. Labels are inferred from narratives. B, F, G and H are unverified,
+// and I, J and L are 'Unknown' (see dim_precaution[label_basis]).
+Operational Interruptions =
+CALCULATE ( [Reports], fct_discrepancy[is_operational_interruption] = TRUE () )
+
+// Operational interruption rate: operational interruptions / reports.
+Operational Interruption Rate % = DIVIDE ( [Operational Interruptions], [Reports] )
+
+// Interruptions with an unverified code label: operational interruptions whose precaution
+// label_basis contains "unverified" (B, F, G, H, I, J, L). Show it beside interruption visuals.
+Interruptions Unverified Code =
+CALCULATE ( [Operational Interruptions], CONTAINSSTRING ( dim_precaution[label_basis], "unverified" ) )
+
+// Share of operational interruptions that rely on an unverified code label.
+Interruptions Unverified Code % = DIVIDE ( [Interruptions Unverified Code], [Operational Interruptions] )
+
+// Footnote text for interruption visuals (put it in a card or as a dynamic subtitle).
+Unverified Code Footnote =
+"† " & FORMAT ( [Interruptions Unverified Code], "#,0" ) & " of "
+    & FORMAT ( [Operational Interruptions], "#,0" ) & " interruptions ("
+    & FORMAT ( [Interruptions Unverified Code %], "0.0%" )
+    & ") use precaution codes with unverified labels (B, F, G, H inferred; I, J, L unknown)."
+
+// Label flag for visuals: "Unverified" or "Inferred". Use it as a legend or for conditional
+// formatting on precaution-code visuals.
+Precaution Label Status =
+IF (
+    HASONEVALUE ( dim_precaution[precaution_code] ),
+    IF ( CONTAINSSTRING ( SELECTEDVALUE ( dim_precaution[label_basis] ), "unverified" ), "Unverified", "Inferred" )
+)
+
+// In-operation reports: SDRs that arose in operation (stage is not inspection).
+In-Operation Reports =
+CALCULATE ( [Reports], fct_discrepancy[is_in_operation] = TRUE () )
+
+// Operational repeats (30 days): in-operation SDRs with an earlier in-operation SDR on the same tail
+// and the same ATA chapter within the previous 30 days (is_repeat_30d).
+Operational Repeats 30d =
+CALCULATE ( [Reports], fct_discrepancy[is_repeat_30d] = TRUE () )
+
+// Operational repeat rate: operational repeats / in-operation reports.
+// Do not headline is_repeat_30d_any, which multi-day heavy checks inflate.
+Operational Repeat Rate % = DIVIDE ( [Operational Repeats 30d], [In-Operation Reports] )
+
+// Median report lag: median days from the difficulty date to FAA submission.
+Median Report Lag (days) = MEDIAN ( fct_discrepancy[report_lag_days] )
+
+// 90th percentile report lag, in days.
+P90 Report Lag (days) = PERCENTILEX.INC ( fct_discrepancy, fct_discrepancy[report_lag_days], 0.9 )
+
+// Share of reports submitted more than 3 days after the difficulty, a reporting backlog signal.
+Reports Lag > 3 Days % =
+DIVIDE ( CALCULATE ( [Reports], fct_discrepancy[report_lag_days] > 3 ), [Reports] )
+
+
+// ---------- [2 Trends - real] ----------
+
+// Reports, previous month: Reports shifted back one month along dim_date.
+// Requires dim_date to be marked as the date table on dim_date[date]; it is contiguous.
+Reports PM = CALCULATE ( [Reports], DATEADD ( dim_date[date], -1, MONTH ) )
+
+// Reports MoM %: month-over-month change in reports.
+Reports MoM % = DIVIDE ( [Reports] - [Reports PM], [Reports PM] )
+
+// Operational interruptions, previous month.
+Operational Interruptions PM =
+CALCULATE ( [Operational Interruptions], DATEADD ( dim_date[date], -1, MONTH ) )
+
+// Operational interruptions MoM %: month-over-month change in operational interruptions.
+Operational Interruptions MoM % =
+DIVIDE ( [Operational Interruptions] - [Operational Interruptions PM], [Operational Interruptions PM] )
+
+// Operational interruptions, 3-month rolling average, ending at the last date in context.
+Operational Interruptions 3M Avg =
+DIVIDE (
+    CALCULATE ( [Operational Interruptions], DATESINPERIOD ( dim_date[date], MAX ( dim_date[date] ), -3, MONTH ) ),
+    3
+)
+
+// Share of all reports: this ATA chapter, part or model's share of reports, ignoring the
+// ATA, part and aircraft filters. In part, operator or aircraft rankings, add a visual filter
+// that excludes '<UNKNOWN>' (key -1).
+Share of Reports % =
+DIVIDE ( [Reports], CALCULATE ( [Reports], REMOVEFILTERS ( dim_ata ), REMOVEFILTERS ( dim_part ), REMOVEFILTERS ( dim_aircraft ) ) )
+
+
+// ---------- [3 Reliability - APPROXIMATED from real data] ----------
+
+// Valid intervals: pairs of consecutive reporting days on the same tail where hours increase and
+// imply no more than 20 flight hours per day (fct_tail_interval[is_valid]).
+Valid Intervals =
+CALCULATE ( COUNTROWS ( fct_tail_interval ), fct_tail_interval[is_valid] = TRUE () )
+
+// Mean hours between reports (approx. MTBF): SUM(hours_between) / count of valid intervals.
+// This APPROXIMATES MTBF from real data. An SDR is a REPORTABLE difficulty, not every failure, so this
+// is mean time between REPORTED difficulties: an upper bound on true MTBF that also depends on
+// each operator's reporting habits. Label visuals "Mean hours between reports".
+Mean Hours Between Reports (approx MTBF) =
+DIVIDE (
+    CALCULATE ( SUM ( fct_tail_interval[hours_between] ), fct_tail_interval[is_valid] = TRUE () ),
+    [Valid Intervals]
+)
+
+// Median hours between reports, valid intervals only.
+Median Hours Between Reports =
+CALCULATE ( MEDIAN ( fct_tail_interval[hours_between] ), fct_tail_interval[is_valid] = TRUE () )
+
+// Mean cycles between reports: SUM(cycles_between) / valid intervals. Same caveat as above.
+Mean Cycles Between Reports =
+DIVIDE (
+    CALCULATE ( SUM ( fct_tail_interval[cycles_between] ), fct_tail_interval[is_valid] = TRUE () ),
+    [Valid Intervals]
+)
+
+// Hours per operational interruption (approx.): valid interval hours / valid intervals that end in an
+// operational interruption.
+Hours per Operational Interruption (approx) =
+DIVIDE (
+    CALCULATE ( SUM ( fct_tail_interval[hours_between] ), fct_tail_interval[is_valid] = TRUE () ),
+    CALCULATE (
+        COUNTROWS ( fct_tail_interval ),
+        fct_tail_interval[is_valid] = TRUE (),
+        fct_tail_interval[ends_in_interruption] = TRUE ()
+    )
+)
+
+// Model-level mean hours between reports, from the precomputed kpi_mtbr_by_model table (not
+// related to the model). Use it in a table with kpi_mtbr_by_model[make] and [model].
+Model Mean Hours Between Reports (kpi table) =
+DIVIDE (
+    SUMX ( kpi_mtbr_by_model, kpi_mtbr_by_model[mtbr_hours] * kpi_mtbr_by_model[intervals] ),
+    SUM ( kpi_mtbr_by_model[intervals] )
+)
+
+
+// ---------- [4 Engine - NASA C-MAPSS simulation] ----------
+
+// Engine mean cycles to failure: AVERAGE(fct_engine_run[cycles_to_failure]).
+// NASA C-MAPSS is a SIMULATION of turbofan run-to-failure, not field data.
+Engine Mean Cycles to Failure (C-MAPSS) = AVERAGE ( fct_engine_run[cycles_to_failure] )
+
+// Number of simulated engines.
+Engines (C-MAPSS) = COUNTROWS ( fct_engine_run )
+
+// Coefficient of variation of cycles to failure: STDEV / mean. A wide spread supports
+// condition-based maintenance.
+Engine Cycles CV (C-MAPSS) =
+DIVIDE ( STDEV.S ( fct_engine_run[cycles_to_failure] ), [Engine Mean Cycles to Failure (C-MAPSS)] )
+
+Engine Min Cycles (C-MAPSS) = MIN ( fct_engine_run[cycles_to_failure] )
+Engine Max Cycles (C-MAPSS) = MAX ( fct_engine_run[cycles_to_failure] )
+
+
+// ---------- [5 GAO benchmark - REAL, "Real-world context" on page 4] ----------
+// fct_mc_rate_benchmark: GAO-22-104533 Table 1, 8 fleets FY2015-21, checked against the report.
+// mc_goal_pct is the FY2021 goal. The table isn't related, so filter fiscal_year inside visuals.
+
+// GAO mission capable rate: average mc_rate_pct in context, as a fraction.
+GAO MC Rate % = AVERAGE ( fct_mc_rate_benchmark[mc_rate_pct] ) / 100
+
+// GAO mission capable goal (FY2021 goal), as a fraction.
+GAO MC Goal % = AVERAGE ( fct_mc_rate_benchmark[mc_goal_pct] ) / 100
+
+// MC rate minus goal, in percentage points.
+GAO Gap to Goal pts = AVERAGE ( fct_mc_rate_benchmark[gap_to_goal_pts] )
+
+// Fleet-year rows in context.
+GAO Fleets = COUNTROWS ( fct_mc_rate_benchmark )
+
+// Fleet-years in context that met their goal.
+GAO Fleets Meeting Goal =
+CALCULATE ( COUNTROWS ( fct_mc_rate_benchmark ), fct_mc_rate_benchmark[met_goal] = TRUE () )
+
+// FY2021 headline card text, for example "0 of 8 fleets met their MC goal in FY2021".
+GAO FY2021 Headline =
+VAR f = CALCULATE ( [GAO Fleets], fct_mc_rate_benchmark[fiscal_year] = 2021 )
+VAR m = CALCULATE ( [GAO Fleets Meeting Goal], fct_mc_rate_benchmark[fiscal_year] = 2021 ) + 0
+RETURN m & " of " & f & " fleets met their MC goal in FY2021"
+
+// B-1B (Ellsworth AFB) FY2021 MC rate, as a fraction.
+GAO B-1B MC Rate FY2021 % =
+CALCULATE ( [GAO MC Rate %], fct_mc_rate_benchmark[aircraft] = "B-1B", fct_mc_rate_benchmark[fiscal_year] = 2021 )
+
+
+// ---------- [6 SIM - SYNTHETIC demo fleet, simulated section of page 4 only] ----------
+// Tables: syn_dim_tail, syn_fct_status_daily, syn_fct_work_order, syn_fct_requisition,
+// syn_fct_backlog_daily (is_synthetic = TRUE). Not related to dim_aircraft or dim_date. Dated
+// through the calculated table 'Sim Date' (BUILD_GUIDE step 2).
+
+// SIM tail-days: simulated tail-days in context, one row per simulated tail per day.
+SIM Tail-Days = COUNTROWS ( syn_fct_status_daily )
+
+// SIM mission capable (MC) rate: MC tail-days / all tail-days. Standard USAF-style definition
+// (time in MC status / possessed time), applied to SYNTHETIC status data.
+SIM MC Rate % =
+DIVIDE ( CALCULATE ( [SIM Tail-Days], syn_fct_status_daily[is_mission_capable] = TRUE () ), [SIM Tail-Days] )
+
+// SIM not mission capable (NMC) rate: NMC tail-days / all tail-days (NMCM + NMCS; the data has no NMCB).
+SIM NMC Rate % =
+DIVIDE ( CALCULATE ( [SIM Tail-Days], syn_fct_status_daily[is_mission_capable] = FALSE () ), [SIM Tail-Days] )
+
+// SIM NMCM rate: tail-days NMC for maintenance (unscheduled repair or scheduled phase inspection) / all tail-days.
+SIM NMCM Rate % =
+DIVIDE ( CALCULATE ( [SIM Tail-Days], syn_fct_status_daily[status] = "NMCM" ), [SIM Tail-Days] )
+
+// SIM NMCS rate: tail-days NMC for supply (waiting on a simulated part) / all tail-days.
+SIM NMCS Rate % =
+DIVIDE ( CALCULATE ( [SIM Tail-Days], syn_fct_status_daily[status] = "NMCS" ), [SIM Tail-Days] )
+
+// SIM flight hours: sum of simulated flight hours.
+SIM Flight Hours = SUM ( syn_fct_status_daily[flight_hours] )
+
+// SIM work orders: all simulated work orders (unscheduled repairs + scheduled phase inspections).
+SIM Work Orders = COUNTROWS ( syn_fct_work_order )
+
+// SIM unscheduled work orders: work_type = "Unscheduled repair", i.e. simulated failures.
+SIM Unscheduled Work Orders =
+CALCULATE ( [SIM Work Orders], syn_fct_work_order[work_type] = "Unscheduled repair" )
+
+// SIM MTBF in flight hours: simulated flight hours / unscheduled work orders. This matches the
+// syn_kpi_fleet[mtbf_flight_hours] formula in src/synthetic.py. The synthetic tables are not
+// related, so the two parts are filtered independently (tail filters flow through syn_dim_tail).
+SIM MTBF (flight hours) = DIVIDE ( [SIM Flight Hours], [SIM Unscheduled Work Orders] )
+
+// SIM mean time to repair (MTTR): AVERAGE(repair_hours) over unscheduled repairs, from work order
+// open to close, including time awaiting parts (matches syn_kpi_fleet[mttr_hours]).
+SIM MTTR (hours) =
+CALCULATE ( AVERAGE ( syn_fct_work_order[repair_hours] ), syn_fct_work_order[work_type] = "Unscheduled repair" )
+
+// SIM phase inspection average hours: AVERAGE(repair_hours) for scheduled phase inspections.
+SIM Phase Inspection Avg Hours =
+CALCULATE ( AVERAGE ( syn_fct_work_order[repair_hours] ), syn_fct_work_order[work_type] = "Scheduled phase inspection" )
+
+// SIM hands-on repair days: average hands_on_days per work order (excludes waiting for parts).
+SIM Avg Hands-On Days = AVERAGE ( syn_fct_work_order[hands_on_days] )
+
+// SIM awaiting-parts days: average awaiting_parts_days per work order.
+SIM Avg Awaiting Parts Days = AVERAGE ( syn_fct_work_order[awaiting_parts_days] )
+
+// SIM requisitions: count of simulated parts requisitions.
+SIM Requisitions = COUNTROWS ( syn_fct_requisition )
+
+// SIM MICAP requisitions: priority starts with "MICAP" (a part that grounds an aircraft).
+SIM MICAP Requisitions =
+CALCULATE ( [SIM Requisitions], LEFT ( syn_fct_requisition[priority], 5 ) = "MICAP" )
+
+// SIM average backorder days, all requisitions. backorder_days = max(0, receipt - due); on-time = 0.
+SIM Avg Backorder Days = AVERAGE ( syn_fct_requisition[backorder_days] )
+
+// SIM average backorder days, late requisitions only (backorder_days > 0).
+SIM Avg Backorder Days (late only) =
+CALCULATE ( AVERAGE ( syn_fct_requisition[backorder_days] ), syn_fct_requisition[backorder_days] > 0 )
+
+// SIM late requisitions: share with backorder_days > 0, i.e. received after due_date.
+SIM Requisitions Late % =
+DIVIDE ( CALCULATE ( [SIM Requisitions], syn_fct_requisition[backorder_days] > 0 ), [SIM Requisitions] )
+
+// SIM mean parts lead time: AVERAGE(lead_time_days), from requisition to receipt.
+SIM Mean Lead Time (days) = AVERAGE ( syn_fct_requisition[lead_time_days] )
+
+// --- Backlog, from syn_fct_backlog_daily (one row per day; open = requisition_date <= D < receipt_date) ---
+
+// SIM open requisitions (backlog) on the LAST day in context, so a month or the year shows its closing backlog.
+SIM Open Requisitions (Backlog) =
+CALCULATE ( SUM ( syn_fct_backlog_daily[open_requisitions] ), LASTDATE ( 'Sim Date'[Date] ) )
+
+// SIM overdue requisitions on the last day in context: still open past due_date.
+SIM Overdue Requisitions =
+CALCULATE ( SUM ( syn_fct_backlog_daily[overdue_requisitions] ), LASTDATE ( 'Sim Date'[Date] ) )
+
+// SIM average open requisitions per day over the days in context (matches syn_kpi_fleet[avg_open_requisitions]).
+SIM Avg Open Requisitions per Day = AVERAGE ( syn_fct_backlog_daily[open_requisitions] )
+
+// SIM average overdue requisitions per day over the days in context.
+SIM Avg Overdue Requisitions per Day = AVERAGE ( syn_fct_backlog_daily[overdue_requisitions] )
+
+// SIM peak open requisitions on any day in context.
+SIM Peak Open Requisitions = MAX ( syn_fct_backlog_daily[open_requisitions] )
+
+// SIM backlog age: average age in days of open requisitions, weighted by each day's open count.
+// avg_age_days is 0 on days with nothing open, so an unweighted average would understate age.
+SIM Backlog Avg Age (days) =
+DIVIDE (
+    SUMX ( syn_fct_backlog_daily, syn_fct_backlog_daily[open_requisitions] * syn_fct_backlog_daily[avg_age_days] ),
+    SUM ( syn_fct_backlog_daily[open_requisitions] )
+)
+
+// Label measure for the banner card on synthetic visuals.
+SIM Data Label = "SIMULATED DATA: synthetic demo fleet (is_synthetic = TRUE)"

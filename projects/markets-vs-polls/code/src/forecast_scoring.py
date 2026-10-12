@@ -11,7 +11,10 @@ try:
     from clv import ml_prob  # noqa: F401  (reused: American odds -> implied probability)
 except Exception:  # keep this project runnable on its own
     def ml_prob(ml):
-        ml = np.asarray(ml, float); return np.where(ml < 0, -ml / (-ml + 100), 100 / (ml + 100))
+        ml = np.asarray(ml, float); out = np.full(ml.shape, np.nan)
+        fav, dog = ml < 0, ml >= 0  # masks avoid divide-by-zero in the unused branch
+        out[fav] = -ml[fav] / (-ml[fav] + 100); out[dog] = 100 / (ml[dog] + 100)
+        return out
 
 RAW = ROOT / "data/raw"
 HORIZONS = [28, 21, 14, 7, 1]
