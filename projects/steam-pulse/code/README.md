@@ -143,7 +143,7 @@ The dbt model reproduces it exactly. `tests/test_score_parity.py` checks this ag
 Not used: SteamDB (its terms forbid scraping), IsThereAnyDeal (needs an API key; it's the recommended source for 2020-26 price history), and Kaggle (needs an account). Full provenance: `analysis/data/backfill/SOURCES.md`.
 
 ### Tests
-`pytest` runs offline tests of loader idempotency and the rate-limit and refresh policy, plus a parity test of the score against `best_score.py`. The parity test is skipped when there's no local DB. `dbt build` runs schema tests (unique, not_null, relationships, accepted_values, unique key combinations) plus custom tests: non-negative players, owner ranges in order, review counts that add up, and scores within [0, 1].
+`pytest` runs offline tests of loader idempotency and the rate-limit and refresh policy, plus a parity test of the score against `best_score.py`. The parity test is skipped when there's no local DB; the analysis tests then run on a small SYNTHETIC DuckDB built in `analysis/tests/conftest.py`. `dbt build` runs schema tests (unique, not_null, relationships, accepted_values, unique key combinations) plus custom tests: non-negative players, owner ranges in order, review counts that add up, and scores within [0, 1].
 
 ### Known limits
 - The universe is the top ~1,000 most-owned games, so brand-new releases enter only if they reach that list. `first_seen` is measured within this universe.

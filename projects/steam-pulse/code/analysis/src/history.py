@@ -73,7 +73,10 @@ def stacked_did(price, players, pre=14, post=14, min_disc=10):
     depth = price.set_index(["appid", "date"]).discount
     dep = np.array([depth.get((a, e), np.nan) for a, e in ev.reindex(d.index).itertuples(index=False)])
     bins = pd.cut(dep, [9, 33, 50, 75, 100], labels=["10-33%", "34-50%", "51-75%", "76%+"])
-    by_depth = {str(k): {"n": int((bins == k).sum()), "pct": float(np.expm1(d.values[bins == k].mean()) * 100)} for k in bins.categories}
+    by_depth = {}
+    for k in bins.categories:  # empty depth bins report n=0 and pct=None instead of a NaN mean (RuntimeWarning)
+        sel = d.values[bins == k]
+        by_depth[str(k)] = {"n": int(sel.size), "pct": float(np.expm1(sel.mean()) * 100) if sel.size else None}
     pre_eff = P[P.rel.between(-7, -1)].groupby(["stack", "treated"]).lr.mean().unstack().dropna(); pd_ = pre_eff[True] - pre_eff[False]
     return es.reset_index(), {"n_events": int(len(d)), "n_games": int(ev.appid.nunique()), "did_days0_7_log": float(d.mean()),
         "did_pct": float(np.expm1(d.mean()) * 100), "ci95_pct": [float(np.expm1(np.percentile(boot, 2.5)) * 100), float(np.expm1(np.percentile(boot, 97.5)) * 100)],

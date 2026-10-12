@@ -116,7 +116,7 @@ def plot_retention(r):
 
 def plot_discount(h):
     d = h["discount_did"]["by_depth"]
-    s = pd.Series({k: v["pct"] for k, v in d.items()})
+    s = pd.Series({k: v["pct"] for k, v in d.items()}, dtype=float).dropna()  # skip empty depth bins
     fig, ax = plt.subplots()
     bars = ax.bar(s.index, s.values, color=BLUE)
     ax.bar_label(bars, labels=[f"+{v:.0f}%" for v in s.values], padding=3)

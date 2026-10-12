@@ -3,13 +3,16 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
 import steam_analysis as sa
 import pytest
 
-def _need_db():
+def _need_db():  # conftest swaps in a synthetic fixture DB when the real one is absent
     if not sa.DB.exists(): pytest.skip(f"{sa.DB} missing (clean checkout; run the pipeline first)")
 
-def test_coverage_and_views():
+def test_coverage_and_views(using_real_db):
     _need_db()
     c = sa.connect(); cov = sa.q(c, "10_coverage").iloc[0]
-    assert cov.games >= 1000 and cov.games_with_players >= 999 and cov.n_snapshots >= 1
+    assert cov.games > 0 and cov.games_with_players > 0 and cov.n_snapshots >= 1
+    assert cov.games_with_store_details <= cov.games and cov.n_days <= cov.n_snapshots
+    if using_real_db:  # thresholds for the real ~1,000-game universe
+        assert cov.games >= 1000 and cov.games_with_players >= 999
     assert c.sql("select count(*) from a_game").fetchone()[0] == c.sql("select count(distinct appid) from a_game").fetchone()[0]
     g = sa.q(c, "40_genre"); assert not g.genre.str.contains('"').any()
 
@@ -90,6 +93,9 @@ def test_stacked_did_on_planted_effect():  # synthetic fixture: +50% during sale
     es, r = hi.stacked_did(P, Q, pre=14, post=14)
     assert r["n_events"] == 4 and abs(r["pretrend_days_-7_-1_pct"]) < 1e-6
     assert 25 < r["did_pct"] < 50  # days 0-7 average: 7 of 8 days at +50%
+    # every sale here is a 50% discount, so the other depth bins are empty: n=0, pct=None, no NaN
+    assert r["by_depth"]["34-50%"]["n"] == 4 and r["by_depth"]["34-50%"]["pct"] is not None
+    assert all(v["pct"] is None for k, v in r["by_depth"].items() if v["n"] == 0)
 
 def test_launch_panel_excludes_pre_collection_games():
     sc = pd.DataFrame({"appid": [1, 1, 2, 2], "month": pd.to_datetime(["2012-07-01", "2012-08-01", "2018-03-01", "2018-04-01"]), "avg_players": [1, 1, 100, 50], "peak_players": [1, 1, 200, 80]})

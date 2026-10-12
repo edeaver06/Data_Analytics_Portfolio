@@ -7,7 +7,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "data" / "steam_pulse.duckdb"
-pytestmark = pytest.mark.skipif(not DB.exists(), reason="no local DuckDB (run ./scripts/snapshot.sh)")
+needs_db = pytest.mark.skipif(not DB.exists(), reason="no local DuckDB (run ./scripts/snapshot.sh)")
 
 
 def test_analysis_uses_dbt_seed_exclusion_list():
@@ -18,6 +18,7 @@ def test_analysis_uses_dbt_seed_exclusion_list():
     assert len(pd.read_csv(seed).appid) > 0
 
 
+@needs_db
 def test_mart_matches_best_score():
     pytest.importorskip("scipy")
     import duckdb
