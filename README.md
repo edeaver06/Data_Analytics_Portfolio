@@ -3,7 +3,7 @@
 ## Overview
 I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish dashboards, check models for flaws such as target leakage, and do data QA on AI model outputs.
 
-**What's here:** six self-contained projects in [`projects/`](projects), each opening with an overview (what, why, key result, chart), a "what's in this folder" table and how to run it. Start with the table below; [Steam Pulse](projects/steam-pulse#run-the-dashboard) includes an interactive Streamlit dashboard you can run locally in a few commands.
+**What's here:** six self-contained projects in [`projects/`](projects), each opening with an overview (what, why, key result, chart), a "what's in this folder" table and how to run it. Start with the table below; [Steam Pulse](projects/steam-pulse#run-the-app) includes an interactive Streamlit dashboard you can run locally in a few commands.
 
 📄 **Resume:** [PDF](https://github.com/edeaver06/Data_Analytics_Portfolio/raw/main/resume/evan-deaver-resume-public.pdf)
 
@@ -86,7 +86,7 @@ I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) movin
 
 <a id="steam-pulse"></a>
 ### Steam Pulse *(in progress)*
-**Code:** [`projects/steam-pulse`](projects/steam-pulse)
+**Code:** [`projects/steam-pulse`](projects/steam-pulse) · **📖 [Read the story (plain-English notebook)](projects/steam-pulse/notebooks/steam_pulse_story.ipynb)**
 
 **Goal:** Build a growing history of Steam games to answer one question: what keeps a game alive?
 

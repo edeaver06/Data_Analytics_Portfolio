@@ -1,8 +1,8 @@
-"""Polished versions of the Steam Pulse analysis figures -> analysis/figures/polished/ (originals untouched).
+"""Polished versions of the Steam Pulse analysis figures -> analysis/figures/polished/ (the drafts written by analysis/src are git-ignored).
 Numbers come from results.json / best_score_results.json / history_results.json; per-game distributions (f2p hist,
 sentiment scatter) are re-read from the committed parquet extract in app/data/ with the same filters as src/steam_analysis.py and
 cross-checked against results.json (mismatches are printed, never "fixed").
-Usage: ../.venv/bin/python polish_figures.py   (from analysis/)"""
+Usage: python scripts/polish_figures.py   (from projects/steam-pulse/)"""
 import json, sys, pathlib
 import numpy as np, pandas as pd, matplotlib
 matplotlib.use("Agg")
@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 
-A = pathlib.Path(__file__).resolve().parent
+A = pathlib.Path(__file__).resolve().parents[1] / "analysis"
 sys.path.insert(0, str(A / "src"))
 OUT = A / "figures" / "polished"; OUT.mkdir(parents=True, exist_ok=True)
 R = json.loads((A / "results.json").read_text()); B = json.loads((A / "best_score_results.json").read_text())

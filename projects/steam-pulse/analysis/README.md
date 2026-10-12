@@ -36,7 +36,7 @@ analysis/.venv/bin/python -m pytest analysis/tests                  # 15 tests; 
 | retention, momentum | 0 | pending ≥4 weeks of `fct_daily_players`; historical retention is in finding 1 |
 
 Each component is a percentile rank, and the score is the weighted mean. Games without SteamSpy review counts (the 30 new releases) aren't scored.
-- **Software exclusion** (default; `--include-software` turns it off): store genres ∩ {Utilities, Software, Design & Illustration, Animation & Modeling, Audio Production, Video Production, Photo Editing, Web Publishing, Game Development, Education} and no {Action, Adventure, RPG, Strategy, Simulation, Sports, Racing}. Casual is omitted because Wallpaper Engine is Casual + Utilities. The fallback list is `software_exclusions.csv`. 8 apps excluded: 431960, 365670, 629520, 431730, 1366800, 993090, 1840, 3132990.
+- **Software exclusion** (default; `--include-software` turns it off): store genres ∩ {Utilities, Software, Design & Illustration, Animation & Modeling, Audio Production, Video Production, Photo Editing, Web Publishing, Game Development, Education} and no {Action, Adventure, RPG, Strategy, Simulation, Sports, Racing}. Casual is omitted because Wallpaper Engine is Casual + Utilities. The fallback list is the dbt seed `../dbt/seeds/software_exclusions.csv` (one copy, used by both dbt and `best_score.py`). 8 apps excluded: 431960, 365670, 629520, 431730, 1366800, 993090, 1840, 3132990.
 - **Validation** (n=991):
   - Weight perturbation: Spearman median 0.96 (p5 0.84), top-20 overlap 80%.
   - Bootstrap: 100% of the top 20 retained.
@@ -53,7 +53,7 @@ Each component is a percentile rank, and the score is the weighted mean. Games w
   - Online co-op / full controller: Terraria, Stardew, L4D2
   - Strategy: Schedule I, Cookie Clicker, Balatro
 - **Price tiers:** median score is 0.55 under $10, 0.54 at $10–30, 0.48 at $30+ and 0.45 free.
-- **Category lift and demand/supply** (990 games with category flags, software excluded; `figures/category_gap.png`):
+- **Category lift and demand/supply** (990 games with category flags, software excluded; `figures/polished/category_gap.png`):
   - **Steam Input API** (31 games, 3% of supply, 9.7× median CCU, +0.13 lift) and **Save Anytime** (86 games, 5.9×, +0.09) are the clearest gaps.
   - **Split-screen co-op is not a gap on full coverage.** 75 games (7.6%), 1.05× the median, +0.01 lift. It looked like a gap at 444 games (2.5×) and not at 148 (0.75×). It's sample-dependent, so drop it as a headline.
   - Online co-op is 31% of supply and 2.3× engaged; RPG is 26% and 1.7×; Early Access is 3% and 1.4× but scores below the median (−0.08).
@@ -83,4 +83,4 @@ Each component is a percentile rank, and the score is the weighted mean. Games w
 - Everything here is correlation, not causation.
 
 ## Charts
-In `analysis/figures/` (polished versions in `analysis/figures/polished/`): `retention_curves.png`, `discount_event_study.png`, `sentiment_lead_lag.png`, `category_gap.png` (lead), `f2p_vs_paid.png`, `sentiment_vs_ccu.png`, `genre_median_ccu.png`, `age_xsec.png`.
+In `analysis/figures/polished/` (made by `scripts/polish_figures.py`; the rough drafts the analysis scripts write to `analysis/figures/` are git-ignored): `retention_curves.png`, `discount_event_study.png`, `sentiment_lead_lag.png`, `category_gap.png` (lead), `f2p_vs_paid.png`, `sentiment_vs_ccu.png`, `genre_median_ccu.png`, `age_xsec.png`.

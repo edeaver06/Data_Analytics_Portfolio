@@ -10,11 +10,12 @@ DB = ROOT / "data" / "steam_pulse.duckdb"
 pytestmark = pytest.mark.skipif(not DB.exists(), reason="no local DuckDB (run ./scripts/snapshot.sh)")
 
 
-def test_seed_matches_analysis_exclusion_list():
+def test_analysis_uses_dbt_seed_exclusion_list():
     import pandas as pd
-    a = pd.read_csv(ROOT / "analysis" / "software_exclusions.csv")
-    b = pd.read_csv(ROOT / "dbt" / "seeds" / "software_exclusions.csv")
-    assert sorted(a.appid) == sorted(b.appid)
+    seed = ROOT / "dbt" / "seeds" / "software_exclusions.csv"
+    src = (ROOT / "analysis" / "src" / "best_score.py").read_text()
+    assert '"dbt" / "seeds" / "software_exclusions.csv"' in src
+    assert len(pd.read_csv(seed).appid) > 0
 
 
 def test_mart_matches_best_score():

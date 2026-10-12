@@ -1,4 +1,4 @@
-"""Regenerate Steam Pulse static figures (images/) and Tableau CSVs (app/tableau/).
+"""Regenerate Steam Pulse static figures (images/) and Tableau CSV exports (app/tableau/, git-ignored; archived outside the repo).
 Usage: .venv/bin/python scripts/make_viz.py"""
 import sys
 from pathlib import Path

@@ -20,3 +20,15 @@ dbt/dbt_packages/
 .DS_Store
 *.duckdb
 *.duckdb.wal
+
+# analysis (merged from analysis/.gitignore)
+analysis/.venv/
+analysis/data/backfill/mendeley/
+analysis/data/backfill/steamcharts/
+analysis/data/backfill/reviews/
+analysis/data/backfill/*.log
+analysis/history_stdout.txt
+# rough draft charts; only analysis/figures/polished/ is committed
+analysis/figures/*.png
+# Tableau CSV exports from scripts/make_viz.py (archived outside the repo)
+app/tableau/

@@ -9,7 +9,7 @@ SOFTWARE_GENRES = {"Utilities", "Software", "Design & Illustration", "Animation 
                    "Video Production", "Photo Editing", "Web Publishing", "Game Development", "Education"}
 # 'Casual' deliberately omitted: Steam tags Wallpaper Engine Casual + Utilities, so including it would let it through.
 GAME_GENRES = {"Action", "Adventure", "RPG", "Strategy", "Simulation", "Sports", "Racing"}
-EXCL_CSV = sa.ROOT / "software_exclusions.csv"
+EXCL_CSV = sa.ROOT.parent / "dbt" / "seeds" / "software_exclusions.csv"  # single copy, shared with dbt
 
 def is_software(genres, appid, curated):
     if appid in curated: return True
