@@ -18,8 +18,9 @@ def connect(raw=RAW):
 
 def ml_prob(ml):
     ml = np.asarray(ml, float)
-    out = np.full(ml.shape, np.nan)  # NaN where the moneyline is missing
-    fav, dog = ml < 0, ml >= 0  # masks: compute each formula only where it applies (no divide-by-zero)
+    out = np.full(ml.shape, np.nan)  # NaN where the moneyline is missing or invalid
+    valid = np.abs(ml) >= 100  # American odds are <= -100 or >= +100; (-100, 100) is not a real price
+    fav, dog = valid & (ml < 0), valid & (ml > 0)  # masks: each formula only where it applies (no divide-by-zero)
     out[fav] = -ml[fav] / (-ml[fav] + 100)
     out[dog] = 100 / (ml[dog] + 100)
     return out

@@ -16,6 +16,12 @@ def con():
 def test_breakeven(): assert abs(BREAKEVEN - 0.5238) < 1e-4
 
 def test_ml_prob(): assert np.allclose(ml_prob([-110, 100, 200]), [110/210, 0.5, 1/3])
+def test_ml_prob_invalid_and_missing_are_nan():
+    import warnings
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")  # no divide-by-zero / invalid-value warnings
+        p = ml_prob([-100, 0, 50, -99, np.nan, -200])
+    assert p[0] == 0.5 and np.isnan(p[1:5]).all() and np.isclose(p[5], 2 / 3)
 
 def test_sql_cover_matches_pandas(con):
     raw = pd.read_csv(Path(__file__).resolve().parents[1] / "data/raw/games.csv").dropna(subset=["result","spread_line","total_line"])
