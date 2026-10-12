@@ -1,6 +1,11 @@
 # Audit Risk Model: A Target-Leakage Case Study
 
-**My April 2026 Random Forest predicted audit risk with 97.8% out-of-bag accuracy. That number was invalid: the label `Risk` is just `Audit_Risk > 1`, and `Audit_Risk` is computed from the model's top feature.**
+## Overview
+**What:** A correction of my own April 2026 audit-risk Random Forest, showing its 97.8% accuracy came from target leakage.
+
+**Why:** A model that looks near-perfect usually isn't, so this audits the published result, rebuilds the model honestly and corrects the business advice.
+
+**Key result:** **My April 2026 Random Forest predicted audit risk with 97.8% out-of-bag accuracy. That number was invalid: the label `Risk` is just `Audit_Risk > 1`, and `Audit_Risk` is computed from the model's top feature.**
 
 ![Drivers after removing leakage](images/revised_drivers_no_leakage.png)
 
@@ -19,14 +24,14 @@ Rscript tests/test_leakage.R                        # verifies the leak and the 
 cd notebooks && Rscript -e 'rmarkdown::render("target_leakage_case_study.Rmd", output_dir = "../reports")'
 ```
 
-## Repo layout
-```
-data/raw/   audit_data.csv (775 complete rows)
-notebooks/  target_leakage_case_study.Rmd (+ the original published chart it embeds)
-images/     original vs revised driver charts
-reports/    knitted HTML report
-tests/      leakage checks (R)
-```
+## What's in this folder
+| Folder | What it's for |
+|---|---|
+| `data/` | `raw/audit_data.csv`, the 776-record audit dataset |
+| `notebooks/` | R Markdown source of the case study (plus the original published chart it embeds) |
+| `reports/` | Knitted HTML report |
+| `images/` | Original vs revised driver charts |
+| `tests/` | R check proving the leak and the 60.6% baseline |
 
 ## Data
 `audit_data.csv`: an audit-risk dataset of 776 firm records (775 after dropping incomplete rows). Its source and license still need to be confirmed and cited before publishing.

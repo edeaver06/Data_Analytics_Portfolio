@@ -1,6 +1,6 @@
 # Tableau Public build guide: Steam Pulse
 
-All CSVs come from Code Builder's dbt marts (`marts.*`, read-only). Regenerate them with `.venv/bin/python scripts/make_viz.py`. Connect each CSV as its own data source
+All CSVs come from the dbt marts (`marts.*`, read-only). Regenerate them with `.venv/bin/python scripts/make_viz.py`. Connect each CSV as its own data source
 (Tableau Public can't connect live to DuckDB). Palette: Okabe-Ito (Free-to-play #E69F00, Paid #0072B2, accent #009E73, muted #8C8C8C).
 Every dashboard needs a footer text box: "Source: Steam Web API concurrent players (snapshot 2026-10-12 14:03 UTC), SteamSpy owner estimates (bucketed) & prices, Steam store details."
 
@@ -8,7 +8,7 @@ Every dashboard needs a footer text box: "Source: Steam Web API concurrent playe
 |---|---|
 | games.csv | 1 row per game (1,000) |
 | hero_top15.csv | top 15 games by concurrent players |
-| launch_decay.csv | months since launch x segment (All / Free-to-play / Paid): median share of launch-month peak, games (Data Analyst history, n=383) |
+| launch_decay.csv | months since launch x segment (All / Free-to-play / Paid): median share of launch-month peak, games (Analysis history, n=383) |
 | age_xsec_today.csv | today's cross-section: players per 1k owners by game age |
 | f2p_vs_paid.csv | 2 rows of pre-aggregated values |
 | sales_impact.csv | discount event study by depth: pct lift, n, plus all-sales lift and 95% CI (2019-20 data, association) |
@@ -41,11 +41,11 @@ Parameter **Game** (string list from game_name). Filter: `[game_name] = [Game]`.
 URL action "Open on Steam": `https://store.steampowered.com/app/<appid>`.
 
 ## Sheet 7: Game Finder (game_scores.csv, joined to games.csv and game_labels.csv on appid)
-Use **Data Analyst's composite score** as materialized in `marts.mart_game_scores` (a verified port of `analysis/src/best_score.py`). Don't recompute it in Tableau; use the `score` column. Software rows have no score; filter `excluded_reason` is null. Values match `analysis/best_score_results.json` (top 15 checked on each refresh).
+Use **the analysis layer's composite score** as materialized in `marts.mart_game_scores` (a verified port of `analysis/src/best_score.py`). Don't recompute it in Tableau; use the `score` column. Software rows have no score; filter `excluded_reason` is null. Values match `analysis/best_score_results.json` (top 15 checked on each refresh).
 - **Score breakdown:** the three weighted parts, `review_bayes_part` (0.45 x Bayesian review share percentile), `player_strength_part` (0.35 x log-CCU percentile) and `value_per_dollar_part` (0.20 x value-per-dollar percentile). They add up to `score`. Show them as a stacked bar per game (Measure Names as color: #0072B2 / #E69F00 / #009E73).
 - **Parameter Rank by** (string list): Composite score (default), Positive reviews, Concurrent players. Calculated field `Rank metric` = `CASE [Rank by] WHEN "Composite score" THEN [score] WHEN "Positive reviews" THEN [positive_review_share] ELSE [concurrent_players] END`, then `RANK(MAX([Rank metric]))`.
 - **Filters:** calculated fields `Genre` = `IF [kind]="genre" THEN [label] END` and `Category` = `IF [kind]="category" THEN [label] END` as multi-select filters (store details now cover nearly every game). Add a price range on `steamspy_price_usd` and a range on YEAR(`release_date`).
-- **Software:** already excluded from `game_scores.csv` by Data Analyst's rule (8 apps, including Wallpaper Engine and Blender). Add a caption saying so. The mart doesn't score software, so software rows appear only as unscored rows. Add an `app_type` filter (default "game"); it's now filled in for nearly every game. Note that Steam labels Wallpaper Engine `app_type="game"`.
+- **Software:** already excluded from `game_scores.csv` by the analysis layer's rule (8 apps, including Wallpaper Engine and Blender). Add a caption saying so. The mart doesn't score software, so software rows appear only as unscored rows. Add an `app_type` filter (default "game"); it's now filled in for nearly every game. Note that Steam labels Wallpaper Engine `app_type="game"`.
 - **Tags:** calculated field `Tag` = `IF [kind]="tag" THEN [label] END`, as a multi-select filter. Size by `tag_votes` if you add a tag cloud.
 - **Steam Deck:** a multi-select filter on `deck_status` in games.csv (Verified / Playable / Unsupported / Unknown).
 - **Coverage caption** (update the numbers on each refresh): "Tags cover ~300 games and Deck status ~200 of 1,000; both fill in every 6 hours."
@@ -60,4 +60,4 @@ Use **Data Analyst's composite score** as materialized in `marts.mart_game_score
 1. Overview: KPIs + Hero. 2. Retention & pricing: Sheets 3-5. 3. Finder: Sheets 6-8 with filter actions.
 
 ## F2P vs paid sheet note
-Use Steam store `is_free` (Data Analyst's definition) and read the Mann-Whitney p from `analysis/results.json`. If p >= 0.05, the title must say there's no clear player difference. Don't write "paid games are busier".
+Use Steam store `is_free` (the analysis layer's definition) and read the Mann-Whitney p from `analysis/results.json`. If p >= 0.05, the title must say there's no clear player difference. Don't write "paid games are busier".

@@ -1,4 +1,4 @@
-"""Regenerate Steam Pulse static figures (figures/polished/) and Tableau CSVs (tableau/).
+"""Regenerate Steam Pulse static figures (images/) and Tableau CSVs (app/tableau/).
 Usage: .venv/bin/python scripts/make_viz.py"""
 import sys
 from pathlib import Path
@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 from marts import load, enrich, add_score
 
 BLUE, ORANGE, GREEN, GREY, VERM = "#0072B2", "#E69F00", "#009E73", "#8C8C8C", "#D55E00"
-OUT = ROOT / "figures" / "polished"; OUT.mkdir(parents=True, exist_ok=True)
-TAB = ROOT / "tableau"; TAB.mkdir(exist_ok=True)
+OUT = ROOT / "images"; OUT.mkdir(parents=True, exist_ok=True)
+TAB = ROOT / "app" / "tableau"; TAB.mkdir(exist_ok=True)
 plt.rcParams.update({"font.family": "DejaVu Sans", "axes.spines.top": False, "axes.spines.right": False,
                      "axes.titleweight": "bold", "axes.titlesize": 13, "axes.titlelocation": "left",
                      "figure.dpi": 150, "axes.grid": True, "grid.alpha": .25})
@@ -41,7 +41,7 @@ from matplotlib.patches import Patch
 ax.legend(handles=[Patch(color=ORANGE, label="Free-to-play"), Patch(color=BLUE, label="Paid"), Patch(color=GREY, label="Software (excluded from game score)")], loc="lower right", frameon=False)
 fig.tight_layout(rect=(0, .05, 1, 1)); note(fig); fig.savefig(OUT / "hero.png"); plt.close(fig)
 
-# ---------- launch decay: real curves from Data Analyst's history (analysis/history_results.json) ----------
+# ---------- launch decay: real curves from the analysis layer's history (analysis/history_results.json) ----------
 import json
 H = json.loads((ROOT / "analysis" / "history_results.json").read_text())
 # cross-sectional frame kept for the Tableau CSV only
@@ -65,7 +65,7 @@ ax.set_title(f"Games keep {RA.loc[1,'median']:.0%} of launch-month players after
 ax.text(0, 1.02, "Monthly average players / launch-month peak; " + ("free-to-play holds better than paid" if RF.loc[6, "median"] > RP.loc[6, "median"] else "paid holds as well as or better than free-to-play"), transform=ax.transAxes, fontsize=9, color="#444")
 ax.legend(frameon=False)
 fig.tight_layout(rect=(0, .07, 1, 1))
-note(fig, f"History: Data Analyst (analysis/history_results.json), SteamCharts monthly players for {H['retention_n']} of today's tracked games with an observed launch (survivors only).")
+note(fig, f"History: analysis/history_results.json, SteamCharts monthly players for {H['retention_n']} of today's tracked games with an observed launch (survivors only).")
 fig.savefig(OUT / "launch_decay.png"); plt.close(fig)
 
 # ---------- f2p vs paid ----------
@@ -111,7 +111,7 @@ ax.set_ylim(0, dep.pct.max() * 1.25); ax.grid(axis="x", visible=False)
 ax.set_title(f"The first week of a sale goes with +{D['did_pct']:.0f}% players, and deeper discounts with bigger lifts", pad=22)
 ax.text(0, 1.02, f"Association, not causation: difference-in-differences over {D['n_events']:,} sale starts in {D['n_games']:,} games, 2019-20 data", transform=ax.transAxes, fontsize=9, color="#444")
 fig.tight_layout(rect=(0, .1, 1, 1))
-note(fig, f"History: Data Analyst (analysis/history_results.json); Mendeley CC BY 4.0 2019-20 price/player panel, not today's tracked games.\nPre-trend days -7..-1: {D['pretrend_days_-7_-1_pct']:+.1f}%. Sale timing is chosen by publishers, so read as association.")
+note(fig, f"History: analysis/history_results.json; Mendeley CC BY 4.0 2019-20 price/player panel, not today's tracked games.\nPre-trend days -7..-1: {D['pretrend_days_-7_-1_pct']:+.1f}%. Sale timing is chosen by publishers, so read as association.")
 fig.savefig(OUT / "sales_impact.png"); plt.close(fig)
 
 # ---------- Tableau CSVs (one per view) ----------
@@ -136,7 +136,7 @@ from marts import load_bridge
 b = load_bridge()
 b.merge(g[["appid", "game_name"]], on="appid").to_csv(TAB / "game_labels.csv", index=False)  # bridge: appid x genre/category
 
-# composite score per game from marts.mart_game_scores (port of Data Analyst's best_score.py)
+# composite score per game from marts.mart_game_scores (port of the analysis layer's best_score.py)
 g[["appid", "game_name", "app_type", "is_software", "score_price_usd", "positive", "negative", "last_players", "score", "score_rank", "excluded_reason",
    "review_bayes", "player_strength", "value_per_dollar", "review_bayes_part", "player_strength_part", "value_per_dollar_part"]
   ].dropna(subset=["score"]).sort_values("score", ascending=False).to_csv(TAB / "game_scores.csv", index=False)

@@ -1,11 +1,41 @@
 # Steam Pulse
 
-A scheduled pipeline that tracks concurrent players, prices, reviews, tags and Steam Deck status for about 1,000 of the most-owned Steam games. It builds a growing history to answer one question: what keeps a game alive?
+## Overview
+**What:** a scheduled data pipeline (Python → DuckDB → dbt) that snapshots concurrent players, prices, reviews, tags and Steam Deck status for about 1,000 of the most-owned Steam games, plus an interactive Streamlit dashboard on top.
+
+**Why:** to build a growing history that answers one question: *what keeps a game alive?*
+
+**Key result so far:** attention is extremely concentrated. Across the 1,000 most-owned games there were 6.57M concurrent players, and **10 games held 41%** of them. In the 2012–2026 history backfill, players drop 44% after the first month and then level off ([analysis](analysis/README.md)).
+
+![Top 15 games by concurrent players](images/hero_concentration.png)
+
+> **Status: in progress.** Live snapshots began 2026-10-12 (4 so far). A historical backfill (SteamCharts monthly since 2012, Mendeley daily 2017–2020) powers the retention, discount and sentiment findings in [`analysis/`](analysis/README.md). Metrics based on live history fill in as days accumulate.
+
+## Run the dashboard
+Copy and paste (Python 3.10+). The dashboard runs on the bundled parquet extract in `app/data/`, so no database or API key is needed:
+```bash
+git clone https://github.com/edeaver06/Data_Analytics_Portfolio.git
+cd Data_Analytics_Portfolio/projects/steam-pulse
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app/streamlit_app.py
+```
+Then open http://localhost:8501. Pages: Overview, Launch decay curves, Free-to-play vs paid, Sales impact, Game lookup, Game Finder, Category leaderboards.
+
+## What's in this folder
+| Folder | What it's for |
+|---|---|
+| `steam_pulse/` | Python ingestion: API clients with rate limits and retries, one-snapshot ingest, idempotent raw load into DuckDB |
+| `dbt/` | Warehouse models (staging → marts), SCD2 snapshots for price and tags, data tests, and the software-exclusion seed |
+| `app/` | Streamlit dashboard (`streamlit_app.py`), its parquet data extract (`data/`), and Tableau CSV exports plus a build guide (`tableau/`) |
+| `analysis/` | Historical analyses (retention, discount event study, sentiment lead/lag, composite score) with their SQL, code, charts and results |
+| `scripts/` | `snapshot.sh` (runs the full pipeline) and the chart/export generators (`make_hero.py`, `make_viz.py`) |
+| `images/` | Charts used in this README (`scripts/make_viz.py` can regenerate more chart PNGs here) |
+| `tests/` | pytest checks for the HTTP client, the loader and score parity |
+| `data/` | *Not in git.* Raw snapshots and `steam_pulse.duckdb`, created when you run the pipeline |
 
 ## What the first snapshots show (12 Oct 2026, 08:53 CST)
-
-![Top 15 games by concurrent players](figures/hero_concentration.png)
-
 - **Attention is extremely concentrated.** Across the 1,000 most-owned games there were 6.57M concurrent players, and **10 games held 41%** of them. Counter-Strike 2 alone had 1.23M, more than the next 3 games combined.
 - **"Game" on Steam isn't always a game.** Wallpaper Engine ranks #4 with 112k concurrent users, and the store labels it `app_type = game`. `dim_game.genres_any` and `tags` are there so analyses can exclude software (rule: `analysis/README.md`).
 - **Steam Deck readiness is mixed.** Of the first 200 games checked, 74 are Verified, 86 Playable, 39 Unsupported and 1 Unknown. Coverage grows by 200 per run.
@@ -14,10 +44,7 @@ A scheduled pipeline that tracks concurrent players, prices, reviews, tags and S
 
 **From the live snapshots, coming once history builds up:** retention curves (need 28 days), week-over-week momentum (14 days), launch-decay curves, sale and price elasticity (before/after panels from `snap_game_price`), and review-sentiment lead/lag. Until then these are NULL or blocked on purpose. Nothing is extrapolated.
 
-> **Status: in progress.** Live snapshots began 2026-10-12 (4 so far). A historical backfill (SteamCharts monthly since 2012, Mendeley daily 2017–2020) powers the retention, discount and sentiment findings in [`analysis/`](analysis/README.md). Metrics based on live history fill in as days accumulate.
-
-## One command
-
+## Run the pipeline (optional)
 ```bash
 ./scripts/snapshot.sh          # ingest -> raw parquet/json -> DuckDB (idempotent) -> dbt build (models, snapshots, tests)
 ```
@@ -45,15 +72,6 @@ Budgets keep store requests to 1 every 1.6 s (or slower). Every request uses ret
 
 **SteamSpy owner counts and playtimes are third-party estimates (bucketed ranges), not Valve figures.**
 
-## Layout
-```
-steam_pulse/   http.py (rate limits + retries) · ingest.py (one snapshot) · load.py (idempotent raw load)
-dbt/           models/{staging,marts} · snapshots/ (SCD2 price + tags) · tests/
-scripts/snapshot.sh   tests/   .github/workflows/steam-pulse-snapshot.yml (move to monorepo root)
-data/          (git-ignored) raw/<source>/dt=YYYY-MM-DD/*  +  steam_pulse.duckdb
-```
-The raw files are immutable and timestamped. The loads use `INSERT OR IGNORE` on natural keys, so running a load again never duplicates data.
-
 ## Marts: grain and refresh
 | Model | Grain | Refresh |
 |---|---|---|
@@ -71,7 +89,7 @@ The raw files are immutable and timestamped. The loads use `INSERT OR IGNORE` on
 `dim_game` covers the SteamSpy top 1,000 plus every app seen on a new-release list (`universe_source`, `first_seen_on_new_release_list`). It also has `launch_month_observed`: the first SteamCharts month, if later than 2012-08; otherwise NULL. It includes app_type, is_free, release_date (parsed), metacritic_score, genres, categories, tags, developers, publishers, platform flags, languages, deck_status, `first_seen_date_utc` (the first time the pipeline saw the game), owner estimates, and review totals. It also has these flags: `is_single_player, has_online_coop, has_local_coop, has_split_screen, has_pvp, full_controller_support, has_remote_play_together, has_workshop, has_achievements`.
 
 ### `mart_game_scores` (composite ported from `analysis/src/best_score.py`)
-Data Analyst validated this formula, and the dbt model reproduces it exactly. `tests/test_score_parity.py` checks this against the current DB: across 991 scored games the largest absolute difference is 0.0 and the Spearman correlation is 1.0.
+The dbt model reproduces it exactly. `tests/test_score_parity.py` checks this against the current DB: across 991 scored games the largest absolute difference is 0.0 and the Spearman correlation is 1.0.
 - **Scored set:** the latest player count is not null, SteamSpy positive + negative > 0, and `is_software` is false. Every other row has `excluded = true`, an `excluded_reason` (`software`, `no_player_count` or `no_reviews`) and a NULL score.
 - `review_bayes = (pos + 1000·μ) / (pos + neg + 1000)`. This uses SteamSpy review counts, with μ the global positive share over the scored set (1,000 pseudo-reviews).
 - `player_strength = ln(1 + players)`, using the latest day's `last_players`.

@@ -1,4 +1,4 @@
-"""Hero chart from the latest snapshot in data/steam_pulse.duckdb -> figures/hero_concentration.png"""
+"""Hero chart from the latest snapshot in data/steam_pulse.duckdb -> images/hero_concentration.png"""
 from pathlib import Path
 import duckdb, matplotlib
 matplotlib.use("Agg")
@@ -20,5 +20,5 @@ fig.suptitle(f"10 games hold {share:.0%} of all concurrent players\nacross Steam
 ax.set_xlabel("Concurrent players (thousands) · orange = top 10"); ax.spines[["top", "right"]].set_visible(False)
 fig.text(0.01, 0.01, f"Source: Steam Web API GetNumberOfCurrentPlayers, snapshot {ts:%Y-%m-%d %H:%M} CST (UTC-6); "
          f"{len(df)} games, {tot:,} players. Universe: SteamSpy top-1,000 by owners.", fontsize=7, color="gray")
-plt.tight_layout(rect=(0, 0.03, 1, 1)); plt.savefig(ROOT / "figures" / "hero_concentration.png", dpi=150)
+plt.tight_layout(rect=(0, 0.03, 1, 1)); plt.savefig(ROOT / "images" / "hero_concentration.png", dpi=150)
 print(f"top-10 share {share:.3f}, total {tot}, games {len(df)}")

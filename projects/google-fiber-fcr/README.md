@@ -1,6 +1,11 @@
 # Google Fiber: Repeat Calls & First-Contact Resolution
 
-**Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls (Q1 2022, 3 markets).**
+## Overview
+**What:** An analysis of 7-day repeat support calls at Google Fiber (Google Data Analytics capstone scenario: 3 markets, 5 problem types, Q1 2022).
+
+**Why:** Repeat calls cost money and frustrate customers, so the goal is to find where first-contact resolution fails and which fix would matter most.
+
+**Key result:** **Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls (Q1 2022, 3 markets).**
 
 ![Google Fiber: Repeat Calls & First-Contact Resolution](images/wifi_tech_share_by_market.png)
 
@@ -27,15 +32,15 @@ duckdb < sql/fcr_metrics.sql
 python -c "import duckdb; [print(duckdb.sql(q)) for q in open('sql/fcr_metrics.sql').read().split(';') if q.strip() and 'SELECT' in q]"
 ```
 
-## Repo layout
-```
-data/       raw inputs + generated outputs
-sql/        DuckDB SQL
-src/        Python pipeline + chart scripts
-notebooks/  walkthrough notebook
-images/     charts used in this README
-tests/      pytest checks
-```
+## What's in this folder
+| Folder | What it's for |
+|---|---|
+| `data/` | Raw case-study CSVs (`raw/market_1–3.csv`) |
+| `sql/` | DuckDB SQL computing the same metrics as the Python (by category, market, week) |
+| `src/` | Python: data loading and metrics (`fcr.py`), plus the chart and dashboard builder (`polish_figures.py`) |
+| `notebooks/` | Step-by-step analysis notebook |
+| `images/` | README charts and the interactive Plotly dashboard (`dashboard.html`) |
+| `tests/` | pytest checks that the key numbers hold and that SQL matches Python |
 
 ---
 ## Details

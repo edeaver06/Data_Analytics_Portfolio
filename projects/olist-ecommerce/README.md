@@ -1,5 +1,11 @@
 # Olist: When the Parcel Is Late, the Stars Fall
-**Reviewed after delivery, a late order scores 3.78★ vs 4.29★ on time (−0.51★, 95% CI −0.60 to −0.43). But 84% of late-order reviews are written before the parcel arrives, and those average 1.97★.**
+
+## Overview
+**What:** A SQL analysis of 99,441 orders from Olist, a Brazilian e-commerce marketplace, looking at delivery delays, review scores, sellers and routes.
+
+**Why:** Marketplace reputation lives on review scores, so the goal is to measure how much late deliveries hurt them and who or where causes the delays.
+
+**Key result:** **Reviewed after delivery, a late order scores 3.78★ vs 4.29★ on time (−0.51★, 95% CI −0.60 to −0.43). But 84% of late-order reviews are written before the parcel arrives, and those average 1.97★.**
 
 ![Review score by delivery outcome and review timing](images/08_review_timing.png)
 
@@ -24,15 +30,15 @@ jupyter nbconvert --to notebook --execute --inplace notebooks/olist_story.ipynb 
 ```
 The whole pipeline runs in about 5 seconds on a laptop. To explore the data yourself, run `duckdb data/olist.duckdb` and then `SELECT * FROM mart_lanes LIMIT 10;`.
 
-## Repo layout
-```
-data/       raw inputs + generated outputs
-sql/        DuckDB SQL
-src/        Python pipeline + chart scripts
-notebooks/  walkthrough notebook
-images/     charts used in this README
-tests/      pytest checks
-```
+## What's in this folder
+| Folder | What it's for |
+|---|---|
+| `data/` | `outputs/` with the exported SQL marts and headline metrics (raw CSVs download via `src/download_data.py` and aren't committed) |
+| `sql/` | Layered DuckDB SQL: load → staging → fact tables → 15 analysis marts |
+| `src/` | Python: data download, pipeline runner, chart builder and notebook builder |
+| `notebooks/` | Story notebook showing each mart next to its chart |
+| `images/` | README charts (plus one interactive HTML chart) |
+| `tests/` | 70 pytest checks: data integrity, pandas/SQL parity, and pinned README numbers |
 
 ---
 ## Details

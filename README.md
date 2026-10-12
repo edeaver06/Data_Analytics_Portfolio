@@ -1,21 +1,11 @@
 # Evan Deaver: Data Analyst Portfolio
 
-## About
-Hi, I'm Evan! I'm a Google-certified data analyst working in SQL, Python, R and Excel, and I'm moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish Tableau dashboards, check models for flaws such as target leakage, and do data QA on AI model outputs.
+## Overview
+I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish dashboards, check models for flaws such as target leakage, and do data QA on AI model outputs.
+
+**What's here:** six self-contained projects in [`projects/`](projects), each opening with an overview (what, why, key result, chart), a "what's in this folder" table and how to run it. Start with the table below; [Steam Pulse](projects/steam-pulse#run-the-dashboard) includes an interactive Streamlit dashboard you can run locally in a few commands.
 
 📄 **Resume:** [PDF](https://github.com/edeaver06/Data_Analytics_Portfolio/raw/main/resume/evan-deaver-resume-public.pdf)
-
-This repository collects my projects in one place. Each folder in `projects/` is self-contained, with its own README, data, code and tests.
-
-## Table of Contents
-- [About](#about)
-- [Portfolio Projects](#portfolio-projects)
-- [Earlier Work](#earlier-work)
-- [Skills](#skills)
-- [Experience](#experience)
-- [Education](#education)
-- [Certificates](#certificates)
-- [Contact](#contact)
 
 ## Portfolio Projects
 | | Project | Result |
@@ -24,8 +14,19 @@ This repository collects my projects in one place. Each folder in `projects/` is
 | <img src="projects/nfl-closing-line/images/03_strategy_win_rates.png" width="240"> | [**Can You Beat the NFL Closing Line?**](#nfl-closing-line) | No popular angle beats the 52.38% breakeven at -110 in a statistically defensible way. Closing spreads are unbiased (slope 1.04). |
 | <img src="projects/markets-vs-polls/images/01_brier_by_horizon.png" width="240"> | [**Markets vs Polls: Who Called It Better?**](#markets-vs-polls) | 1 day out: Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls). This is one election, so it isn't evidence that markets beat polls in general. |
 | <img src="projects/google-fiber-fcr/images/wifi_tech_share_by_market.png" width="240"> | [**Google Fiber: Repeat Calls & First-Contact Resolution**](#google-fiber-fcr) | Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls. |
-| <img src="projects/steam-pulse/figures/hero_concentration.png" width="240"> | [**Steam Pulse** *(in progress)*](#steam-pulse) | Across the 1,000 most-owned Steam games there were 6.57M concurrent players, and 10 games held 41% of them. |
+| <img src="projects/steam-pulse/images/hero_concentration.png" width="240"> | [**Steam Pulse** *(in progress)*](#steam-pulse) | Across the 1,000 most-owned Steam games there were 6.57M concurrent players, and 10 games held 41% of them. |
 | <img src="projects/operational-risk-briefing/images/revised_drivers_no_leakage.png" width="240"> | [**Audit Risk Model: A Target-Leakage Case Study**](#operational-risk-briefing) | My model's 97.8% accuracy was invalid (the label was built from its top feature). Rebuilt on 7 raw inputs vs a 60.6% baseline, the conclusions reverse. |
+
+## Table of Contents
+- [Overview](#overview)
+- [Portfolio Projects](#portfolio-projects)
+- [Earlier Work](#earlier-work)
+- [Skills](#skills)
+- [Experience](#experience)
+- [Education](#education)
+- [Certificates](#certificates)
+- [Contact](#contact)
+
 
 <a id="olist-ecommerce"></a>
 ### Olist: When the Parcel Is Late, the Stars Fall

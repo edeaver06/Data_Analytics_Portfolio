@@ -1,6 +1,6 @@
 # Steam Pulse: Analysis Layer
 
-Owned by Data Analyst. It reads Code Builder's marts (`marts.*`, `snapshots.*`, `staging.stg_player_counts` / `stg_steamspy_owners`) from `data/steam_pulse.duckdb`, attached **read-only**. No pipeline or mart files were edited. The historical backfill lives in `data/backfill/` (sources and licenses in [`data/backfill/SOURCES.md`](data/backfill/SOURCES.md); ingest spec for Code Builder in [`INGEST_SPEC.md`](INGEST_SPEC.md)).
+It reads the pipeline's marts (`marts.*`, `snapshots.*`, `staging.stg_player_counts` / `stg_steamspy_owners`) from `data/steam_pulse.duckdb`, attached **read-only**. No pipeline or mart files were edited. The historical backfill lives in `data/backfill/` (sources and licenses in [`data/backfill/SOURCES.md`](data/backfill/SOURCES.md); ingest notes are summarized in this README).
 
 ```
 analysis/.venv/bin/python analysis/src/steam_analysis.py          # snapshot cross-section -> results.json
@@ -18,7 +18,7 @@ analysis/.venv/bin/python -m pytest analysis/tests                  # 15 tests; 
 4. **Launch-time facts barely predict players 30 days after launch.** A linear model using price, F2P, developer prior hit, Q4 and post-2020 gets a backtest MAE of **1.76** (log players) vs **2.03** for a train-median baseline (4 expanding time folds, 655 launches), about 13% better. Adding the launch-month peak (post-launch information) cuts MAE to **0.97**, vs 1.66 for naive carry-forward.
 5. **"Best game" rankings are stable year to year.** Re-scored each December: Spearman **0.97–0.98** between consecutive years (2022→2025, 860–910 games). Top-20 overlap is **70–80%**, so the top of the list churns more than the whole ranking.
 
-## Snapshot cross-section (Code Builder's current marts, correlation only)
+## Snapshot cross-section (current marts, correlation only)
 - **Coverage:** 1,030 games (the top 1,000 plus 30 newly tracked releases; 1,029 with CCU); store details now cover **1,029**; Deck status 1,029; 4 snapshots, all on 2026-10-12.
 - **Concentration:** 6.22M concurrent players; the top 10 games hold 40.1%.
 - **F2P vs paid: no difference now.** Free median CCU 542 vs paid 411 (152 vs 877 games, Mann-Whitney p=0.47). The earlier "paid 551 vs free 135" used SteamSpy price=0 as the F2P flag; it now uses the store's `is_free`. Paid games still review better: 89.4% vs 80.2% positive.
@@ -79,12 +79,5 @@ Each component is a percentile rank, and the score is the weighted mean. Games w
 - Review histograms: young games come back in 7-day buckets. A week that straddles a month boundary is counted in its start month.
 - Everything here is correlation, not causation.
 
-## Remaining schema requests for Code Builder
-1. Ingest the backfill per `INGEST_SPEC.md` (monthly players, monthly reviews, Mendeley daily price/players, `launch_month_observed`).
-2. (Done by Code Builder: store details and Deck status now cover 1,029/1,030.) Tags: confirm coverage of `snap_game_tags`.
-4. `dim_game.is_software` (Steam's `app_type` calls Wallpaper Engine a game).
-5. New-release tracking from day 0 (`first_seen` exists; it needs a new-releases feed) so future launches enter with daily data.
-6. Optional: IsThereAnyDeal price history once Evan registers a key.
-
-## Charts for Viz Specialist
-`figures/retention_curves.png`, `discount_event_study.png`, `sentiment_lead_lag.png`, `category_gap.png` (lead), `f2p_vs_paid.png`, `sentiment_vs_ccu.png`, `genre_median_ccu.png`, `age_xsec.png` (keep the "survivors only" title).
+## Charts
+In `analysis/figures/` (polished versions in `analysis/figures/polished/`): `retention_curves.png`, `discount_event_study.png`, `sentiment_lead_lag.png`, `category_gap.png` (lead), `f2p_vs_paid.png`, `sentiment_vs_ccu.png`, `genre_median_ccu.png`, `age_xsec.png`.

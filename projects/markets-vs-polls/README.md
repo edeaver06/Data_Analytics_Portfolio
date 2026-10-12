@@ -1,6 +1,11 @@
 # Markets vs Polls: Who Called It Better?
 
-**In the 2024 US presidential race, Polymarket and Kalshi state prices scored better than a simple poll-average forecast at every matched time point from 3 weeks to 1 day out. With n = 1 election, this isn't evidence that markets beat polls in general.**
+## Overview
+**What:** A neutral accuracy scoring of 2024 US presidential forecasts, state by state: Polymarket and Kalshi prices vs a poll-average forecast.
+
+**Why:** Prediction markets are often said to beat polls, so this tests that with Brier scores and calibration on matched dates.
+
+**Key result:** **In the 2024 US presidential race, Polymarket and Kalshi state prices scored better than a simple poll-average forecast at every matched time point from 3 weeks to 1 day out. With n = 1 election, this isn't evidence that markets beat polls in general.**
 
 ![Markets vs Polls: Who Called It Better?](images/01_brier_by_horizon.png)
 
@@ -21,15 +26,15 @@ python -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 Notebook: `notebooks/markets_vs_polls.ipynb`. Charts: `images/01_brier_by_horizon.png`, `02_forecast_vs_outcome_T1.png`, `03_poll_margin_vs_actual.png`.
 
-## Repo layout
-```
-data/       raw inputs + generated outputs
-sql/        DuckDB SQL
-src/        Python pipeline + chart scripts
-notebooks/  walkthrough notebook
-images/     charts used in this README
-tests/      pytest checks
-```
+## What's in this folder
+| Folder | What it's for |
+|---|---|
+| `data/` | `raw/` source downloads (market prices, 538 polls, MIT election results) and `clean/` scored outputs |
+| `sql/` | DuckDB SQL that builds outcomes, market prices at each horizon and poll averages |
+| `src/` | Python: data fetching (`fetch_data.py`), scoring (`forecast_scoring.py`) and the pipeline (`run_analysis.py`) |
+| `notebooks/` | Walkthrough notebook |
+| `images/` | README charts |
+| `tests/` | pytest checks, including that no data after a cutoff is used |
 
 ---
 ## Details

@@ -1,4 +1,4 @@
--- Analysis-layer views over Code Builder's marts (DB attached read-only as sp). No raw.* access.
+-- Analysis-layer views over the pipeline's marts (DB attached read-only as sp). No raw.* access.
 create or replace view a_players as
 select appid, snapshot_date_utc d, snapshot_ts, player_count from steam_pulse.staging.stg_player_counts;
 

@@ -61,7 +61,7 @@ def history():
 def results():
     return marts.load_results()
 
-HIST_NOTE = "Source: Data Analyst history (analysis/history_results.json)."
+HIST_NOTE = "Source: Analysis history (analysis/history_results.json)."
 
 def decay():
     st.header("Launch decay curves")
@@ -107,7 +107,7 @@ def f2p():
         else:
             hi = "free-to-play" if fj["free"]["med_ccu"] > fj["paid"]["med_ccu"] else "paid"
             st.subheader(f"The typical {hi} game has more players (median {fj['free']['med_ccu']:,.0f} free vs {fj['paid']['med_ccu']:,.0f} paid, p = {pv:.1e})")
-        st.caption("Median and Mann-Whitney p from Data Analyst's analysis/results.json.")
+        st.caption("Median and Mann-Whitney p from the analysis layer's analysis/results.json.")
     else:
         st.subheader(f"Free-to-play is {s.loc['Free-to-play','share_of_games']:.0%} of games and {s.loc['Free-to-play','share_of_players']:.0%} of players")
     c = st.columns(2)
@@ -165,11 +165,11 @@ def lookup():
     source_note()
 
 # ------------------------------------------------------------------ Game Finder
-# Ranking options: Data Analyst's composite score (default) or one single metric.
+# Ranking options: the analysis layer's composite score (default) or one single metric.
 RANKS = {"score": "Composite score", "positive_review_share": "Positive reviews", "last_players": "Concurrent players"}
 PARTS = {"review_bayes_part": "Reviews (Bayes-adjusted) x0.45", "player_strength_part": "Players (log CCU) x0.35",
          "value_per_dollar_part": "Value per dollar x0.20"}
-SOFTWARE_NOTE = ("Software (e.g. Wallpaper Engine, Blender, Soundpad) is excluded from the score by Data Analyst's rule "
+SOFTWARE_NOTE = ("Software (e.g. Wallpaper Engine, Blender, Soundpad) is excluded from the score by the analysis layer's rule "
                  "(software-genre rule + curated list), applied in marts.mart_game_scores ({n} apps excluded).")
 
 @st.cache_data(show_spinner=False, ttl=3600)
@@ -209,7 +209,7 @@ def fmt_rank(m, v):
 
 def finder():
     st.header("Game Finder")
-    st.caption("Ranked by Data Analyst's validated composite score (marts.mart_game_scores, ported from analysis/src/best_score.py): percentile ranks of "
+    st.caption("Ranked by the analysis layer's validated composite score (marts.mart_game_scores, ported from analysis/src/best_score.py): percentile ranks of "
                "Bayesian review share (0.45), log concurrent players (0.35) and value per dollar (0.20). Retention and momentum are weighted 0 "
                "until there is daily history.")
     inc = software_controls("finder")
@@ -304,7 +304,7 @@ def leaderboards():
                     title=f"{kind.title()} x metric percentile (bright in every column = scarce but strong)")
     st.plotly_chart(style(fig, 40 + 26 * len(pct)), width="stretch")
     st.dataframe(agg.sort_values("games"))
-    source_note(f"{kind.title()}s with at least 5 games among the {int(det.has_store_details.fillna(False).sum()):,} scored games with store details. Score = Data Analyst composite.")
+    source_note(f"{kind.title()}s with at least 5 games among the {int(det.has_store_details.fillna(False).sum()):,} scored games with store details. Score = analysis-layer composite.")
 
 
 PAGES = {"Overview": overview, "Launch decay curves": decay, "Free-to-play vs paid": f2p, "Sales impact": sales,

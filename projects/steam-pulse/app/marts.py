@@ -1,4 +1,4 @@
-"""Load Steam Pulse data for the app from Code Builder's dbt marts (read-only).
+"""Load Steam Pulse data for the app from the dbt marts (read-only).
 
 Order of preference:
   1. data/steam_pulse.duckdb (override with STEAM_PULSE_DB), marts.* tables, opened read_only
@@ -22,7 +22,7 @@ QUERIES = {
     "fct_daily_players": "select * from marts.fct_daily_players",
     "fct_daily_price": "select * from marts.fct_daily_price",
     "bridge_game_category": "select * from marts.bridge_game_category",
-    # Inputs Data Analyst's best_score.py expects: SteamSpy review counts + SteamSpy price (Code Builder's
+    # Inputs the analysis layer's best_score.py expects: SteamSpy review counts + SteamSpy price (the pipeline's
     # staging view; the marts only carry the share) and the latest concurrent-player reading.
     "score_inputs": """select o.appid, o.positive, o.negative, o.price_usd as steamspy_price_usd
                        from staging.stg_steamspy_owners o""",
@@ -72,7 +72,7 @@ def enrich(dim, fct):
     g["positive_review_share"] = g["steamspy_positive_share"]
     g["discount_pct"] = g["store_discount_pct"]            # store details only (449 games); NULL elsewhere
     g["initial_price_usd"] = g["store_list_price_usd"]
-    # F2P = store is_free (Data Analyst's definition since full coverage); SteamSpy price $0 only as fallback
+    # F2P = store is_free (the analysis layer's definition since full coverage); SteamSpy price $0 only as fallback
     free = g["is_free"].astype("boolean").fillna(g["price_usd"].eq(0))
     g["pricing"] = free.map({True: "Free-to-play", False: "Paid"})
     g.loc[free.isna(), "pricing"] = "Unknown"
@@ -84,7 +84,7 @@ def enrich(dim, fct):
     return g
 
 # ---- Composite score: marts.mart_game_scores ------------------------------------------
-# Code Builder ported Data Analyst's best_score.py into the mart (verified 2026-10-12: 991 scores and ranks
+# The dbt mart is a port of the analysis layer's best_score.py into the mart (verified 2026-10-12: 991 scores and ranks
 # identical, same 8 software apps excluded; GTA IV is excluded for no_player_count, which best_score also drops).
 # So best_score.py is no longer imported at runtime.
 WEIGHTS = {"review_bayes": 0.45, "player_strength": 0.35, "value_per_dollar": 0.20}  # mart_game_scores.sql
@@ -106,14 +106,14 @@ def add_score(g, include_software=False):
 HISTORY_JSON = ROOT / "analysis" / "history_results.json"
 
 def load_history():
-    """Data Analyst's history results (SteamCharts monthly retention, 2019-20 discount DiD). None if absent."""
+    """the analysis layer's history results (SteamCharts monthly retention, 2019-20 discount DiD). None if absent."""
     import json
     return json.loads(HISTORY_JSON.read_text()) if HISTORY_JSON.exists() else None
 
 RESULTS_JSON = ROOT / "analysis" / "results.json"
 
 def load_results():
-    """Data Analyst's snapshot results (f2p test, genres). None if absent."""
+    """the analysis layer's snapshot results (f2p test, genres). None if absent."""
     import json
     return json.loads(RESULTS_JSON.read_text()) if RESULTS_JSON.exists() else None
 

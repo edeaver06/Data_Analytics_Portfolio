@@ -1,6 +1,11 @@
 # Can You Beat the NFL Closing Line?
 
-**Across 7,354 games (1999–2026), the closing line is a very good forecast, and no popular angle beats the -110 vig in a statistically defensible way.**
+## Overview
+**What:** A test of NFL betting-market efficiency over 7,354 games (1999–2026): closing spreads, totals, moneylines and 10 popular betting angles.
+
+**Why:** Betting "systems" are everywhere, so this checks whether any of them beats the -110 vig once you test them properly.
+
+**Key result:** **Across 7,354 games (1999–2026), the closing line is a very good forecast, and no popular angle beats the -110 vig in a statistically defensible way.**
 
 ![Can You Beat the NFL Closing Line?](images/03_strategy_win_rates.png)
 
@@ -22,15 +27,15 @@ curl -L -o data/raw/games.csv https://github.com/nflverse/nfldata/raw/master/dat
 ```
 Notebook walkthrough: `notebooks/nfl_closing_line.ipynb`.
 
-## Repo layout
-```
-data/       raw inputs + generated outputs
-sql/        DuckDB SQL
-src/        Python pipeline + chart scripts
-notebooks/  walkthrough notebook
-images/     charts used in this README
-tests/      pytest checks
-```
+## What's in this folder
+| Folder | What it's for |
+|---|---|
+| `data/` | `raw/games.csv` (nflverse) and `clean/` result tables |
+| `sql/` | DuckDB SQL that builds games, strategy bets and summaries |
+| `src/` | Python: stats (`clv.py`), the pipeline (`run_analysis.py`) and the chart builder (`polish_figures.py`) |
+| `notebooks/` | Walkthrough notebook |
+| `images/` | README charts |
+| `tests/` | pytest checks on the key statistics |
 
 ---
 ## Details

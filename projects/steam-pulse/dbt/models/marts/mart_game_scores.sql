@@ -1,5 +1,5 @@
 -- Grain: one row per game in dim_game (current state). Rebuilt every snapshot.
--- Composite = port of analysis/src/best_score.py (Data Analyst's validated formula); parity enforced by tests/test_score_parity.py.
+-- Composite = port of analysis/src/best_score.py (the analysis layer's validated formula); parity enforced by tests/test_score_parity.py.
 --   review_bayes    = (pos + 1000*mu) / (pos + neg + 1000), mu = global pos/(pos+neg) over the scored set (SteamSpy counts)
 --   player_strength = ln(1 + latest-day last_players)
 --   value_per_dollar= review_bayes * ln(1 + players) / max(price_usd, $1)   (free games floored at $1)
