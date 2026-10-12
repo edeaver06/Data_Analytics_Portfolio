@@ -1,6 +1,6 @@
 # Google Fiber: the story in plain English
 
-[Back to the project page](README.md) · [The code and how it's built](code/README.md)
+**▶️ [Try the live app](https://fiber-e.streamlit.app/)** · [Back to the project page](README.md) · [The code and how it's built](code/README.md)
 
 **The setting:** Google Fiber sells home internet. When something goes wrong, customers call support. Ideally the problem is fixed on that first call. When it isn't, the customer calls back.
 

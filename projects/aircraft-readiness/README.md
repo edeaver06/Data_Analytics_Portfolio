@@ -1,8 +1,11 @@
 # Aircraft Readiness: What Grounds Airplanes, and How Fast Is It Reported?
 
+### ▶️ [Try the live app](https://aircraft-ready-e.streamlit.app/)
+No install needed; if the app has been idle it shows a short wake-up screen first.
+
 **Which aircraft systems actually disrupt flights, and which defects keep coming back?** Across 34,350 FAA maintenance-difficulty reports on 6,521 aircraft (Jan–Jun 2025), 85% of reports were routine inspection findings. The 2,521 that disrupted a flight came mostly from three systems: air conditioning, landing gear and engines.
 
-**[📖 Story](STORY.md) | [💻 Code](code/README.md)**
+**[▶️ Live app](https://aircraft-ready-e.streamlit.app/) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
 
 ![Operational disruptions by aircraft system](images/interruptions_by_ata.png)
 

@@ -1,6 +1,6 @@
 # Olist: the story in plain English
 
-[Back to the project page](README.md) · [The code and how it's built](code/README.md)
+**▶️ [Try the live app](https://olist-e.streamlit.app/)** · [Back to the project page](README.md) · [The code and how it's built](code/README.md)
 
 **The setting:** Olist is a Brazilian company that lets small shops sell on big online marketplaces. After each order, the customer is asked to rate it from 1 to 5 stars.
 

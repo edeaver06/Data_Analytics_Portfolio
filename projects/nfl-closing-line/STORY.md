@@ -1,6 +1,6 @@
 # Can You Beat the NFL Closing Line? The story in plain English
 
-[Back to the project page](README.md) · [The code and how it's built](code/README.md)
+**▶️ [Try the live app](https://nfl-line-e.streamlit.app/)** · [Back to the project page](README.md) · [The code and how it's built](code/README.md)
 
 **The setting:** before every NFL game, sportsbooks publish a *line*, their prediction of the result. The final line just before kickoff is the *closing line*.
 

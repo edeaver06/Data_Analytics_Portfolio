@@ -1,8 +1,11 @@
 # Can You Beat the NFL Closing Line?
 
+### ▶️ [Try the live app](https://nfl-line-e.streamlit.app/)
+No install needed; if the app has been idle it shows a short wake-up screen first.
+
 **Do popular betting "systems" beat the sportsbook?** No: across 7,354 games (1999–2026), the closing line is a very good forecast, and none of 10 common angles beats the -110 vig in a statistically defensible way.
 
-**[📖 Story](STORY.md) | [💻 Code](code/README.md)**
+**[▶️ Live app](https://nfl-line-e.streamlit.app/) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
 
 ![Win rate of 10 betting strategies vs the 52.38% breakeven](images/03_strategy_win_rates.png)
 

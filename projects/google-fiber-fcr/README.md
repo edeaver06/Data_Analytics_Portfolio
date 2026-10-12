@@ -1,8 +1,11 @@
 # Google Fiber: Why Do Customers Call Back?
 
+### ▶️ [Try the live app](https://fiber-e.streamlit.app/)
+No install needed; if the app has been idle it shows a short wake-up screen first.
+
 **Where does first-contact support fail?** Two problem types, Wi-Fi & Internet and Technical Troubleshooting, drive 80.2% of all repeat calls, so that's where a fix pays off most.
 
-**[📖 Story](STORY.md) | [💻 Code](code/README.md)**
+**[▶️ Live app](https://fiber-e.streamlit.app/) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
 
 ![Share of repeat calls from Wi-Fi and technical problems, by market](images/wifi_tech_share_by_market.png)
 

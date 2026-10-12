@@ -1,8 +1,11 @@
 # Olist: When the Parcel Is Late, the Stars Fall
 
+### ▶️ [Try the live app](https://olist-e.streamlit.app/)
+No install needed; if the app has been idle it shows a short wake-up screen first.
+
 **How much do late deliveries hurt a marketplace's reviews?** Reviewed after delivery, a late order scores 3.78★ vs 4.29★ on time, and most late-order anger arrives before the parcel does.
 
-**[📖 Story](STORY.md) | [💻 Code](code/README.md)**
+**[▶️ Live app](https://olist-e.streamlit.app/) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
 
 ![Review score by delivery outcome and review timing](images/08_review_timing.png)
 

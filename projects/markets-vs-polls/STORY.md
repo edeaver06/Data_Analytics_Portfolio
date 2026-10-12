@@ -1,6 +1,6 @@
 # Markets vs Polls: the story in plain English
 
-[Back to the project page](README.md) · [The code and how it's built](code/README.md)
+**▶️ [Try the live app](https://markets-polls-e.streamlit.app/)** · [Back to the project page](README.md) · [The code and how it's built](code/README.md)
 
 **The setting:** before an election, two kinds of forecasts compete. *Polls* ask voters who they'll vote for. *Prediction markets* (Polymarket and Kalshi) let people bet on the outcome; a price of 70¢ means the market thinks there's a 70% chance.
 

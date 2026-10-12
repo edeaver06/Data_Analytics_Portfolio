@@ -1,6 +1,6 @@
 # Aircraft Readiness: the story in plain English
 
-[Back to the project page](README.md) · [The code and how it's built](code/README.md)
+**▶️ [Try the live app](https://aircraft-ready-e.streamlit.app/)** · [Back to the project page](README.md) · [The code and how it's built](code/README.md)
 
 **The setting:** an aircraft is "mission capable" when it can fly and do its job. When something breaks, it's down for maintenance, or down waiting on parts. Readiness analysts track how often that happens, why, and how long it lasts.
 

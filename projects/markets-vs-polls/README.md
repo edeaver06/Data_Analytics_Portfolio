@@ -1,8 +1,11 @@
 # Markets vs Polls: Who Called the 2024 Election Better?
 
+### ▶️ [Try the live app](https://markets-polls-e.streamlit.app/)
+No install needed; if the app has been idle it shows a short wake-up screen first.
+
 **Did betting markets forecast the 2024 presidential race better than polls?** Yes, state by state, at every matched date from 3 weeks to 1 day out. But it was one election, and the polls all missed in the same direction.
 
-**[📖 Story](STORY.md) | [💻 Code](code/README.md)**
+**[▶️ Live app](https://markets-polls-e.streamlit.app/) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
 
 ![Forecast accuracy (Brier score) of Polymarket, Kalshi and the poll average by days before the election](images/01_brier_by_horizon.png)
 
