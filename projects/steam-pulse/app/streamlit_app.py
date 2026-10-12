@@ -32,12 +32,20 @@ def style(fig, h=420):
 def fmt(n):
     return "n/a" if pd.isna(n) else f"{n/1e6:.2f}M" if n >= 1e6 else f"{n/1e3:.0f}K" if n >= 1e3 else f"{n:,.0f}"
 
+def short(n):
+    """Compact count for narrow metric tiles: 100M, 1.5M, 20K."""
+    for div, suf in ((1e6, "M"), (1e3, "K")):
+        if n >= div: return f"{n/div:.1f}".rstrip("0").rstrip(".") + suf
+    return f"{n:,.0f}"
+
 # ------------------------------------------------------------------ pages
 def overview():
     g, fct, snaps, _ = data()
     total = g.last_players.sum(); top3 = g.nlargest(3, "last_players")
     st.title("Steam Pulse")
-    st.markdown(f"Concurrent-player tracking for {len(g):,} popular Steam games.")
+    n_live = int(g.last_players.notna().sum())
+    st.markdown(f"Concurrent-player tracking for {n_live:,} popular Steam games "
+                f"({len(g):,} in the catalogue; {len(g) - n_live} had no player count in the latest snapshot).")
     c = st.columns(4)
     c[0].metric("Games tracked", f"{g.last_players.notna().sum():,}")
     c[1].metric("Concurrent players", fmt(total))
@@ -92,13 +100,23 @@ def decay():
     source_note()
 
 def f2p():
-    g, *_ = data()
     st.header("Free-to-play vs paid")
-    k = g[g.pricing != "Unknown"]
+    s, k = f2p_table()
+    Rj = results()
+    _f2p_header(s, Rj)
+    _f2p_body(s, k)
+
+@st.cache_data(show_spinner="Building the free-to-play vs paid table…", ttl=3600)
+def f2p_table():
+    """Games with a player count only, so counts match 'Games tracked' on the Overview."""
+    g, *_ = data()
+    k = g[(g.pricing != "Unknown") & g.last_players.notna()]
     s = k.groupby("pricing").agg(games=("appid", "size"), players=("last_players", "sum"), median_players=("last_players", "median"),
                                  median_positive_reviews=("positive_review_share", "median"))
     s["share_of_games"] = s.games / s.games.sum(); s["share_of_players"] = s.players / s.players.sum()
-    Rj = results()
+    return s, k[["pricing", "last_players"]]
+
+def _f2p_header(s, Rj):
     if Rj is not None:
         fj = {r["segment"]: r for r in Rj["f2p"]}; pv = Rj["f2p_mwu_p"]
         if pv >= 0.05:
@@ -110,6 +128,8 @@ def f2p():
         st.caption("Median and Mann-Whitney p from the analysis layer's analysis/results.json.")
     else:
         st.subheader(f"Free-to-play is {s.loc['Free-to-play','share_of_games']:.0%} of games and {s.loc['Free-to-play','share_of_players']:.0%} of players")
+
+def _f2p_body(s, k):
     c = st.columns(2)
     long = s[["share_of_games", "share_of_players"]].reset_index().melt("pricing")
     c[0].plotly_chart(style(px.bar(long, x="variable", y="value", color="pricing", barmode="group", color_discrete_map=PRICE_COLORS,
@@ -118,7 +138,7 @@ def f2p():
                                    title="Concurrent players per game", labels={"last_players": "Concurrent players (log)", "pricing": ""})), width="stretch")
     st.dataframe(s.style.format({"players": "{:,.0f}", "median_players": "{:,.0f}", "median_positive_reviews": "{:.1%}",
                                  "share_of_games": "{:.1%}", "share_of_players": "{:.1%}"}))
-    source_note("Free-to-play = Steam store is_free.")
+    source_note(f"Free-to-play = Steam store is_free. {int(s.games.sum()):,} games with a player count in the latest snapshot.")
 
 def sales():
     st.header("Sales impact")
@@ -135,7 +155,10 @@ def sales():
     fig = px.bar(dep, x="depth", y="pct", text=dep.apply(lambda r: f"+{r.pct:.0f}% (n={r.n:,})", axis=1),
                  color_discrete_sequence=[GREEN], title="Lift by discount depth",
                  labels={"depth": "Discount depth", "pct": "Players in first week vs. controls (%)"})
-    fig.add_hline(y=D["did_pct"], line_dash="dash", line_color=VERM, annotation_text=f"all sales +{D['did_pct']:.0f}%")
+    fig.add_hline(y=D["did_pct"], line_dash="dash", line_color=VERM, annotation_text=f"All sales +{D['did_pct']:.0f}%",
+                  annotation_position="top left", annotation_bgcolor="rgba(255,255,255,0.85)")
+    fig.update_traces(textposition="outside", cliponaxis=False)
+    fig.update_yaxes(range=[0, dep.pct.max() * 1.2])
     st.plotly_chart(style(fig), width="stretch")
     st.warning("**Association, not causation, from 2019-20 data.** Difference-in-differences vs. non-discounted paid games in "
                "the same window, on a Mendeley CC BY 4.0 2019-20 price/player panel (not today's tracked games). "
@@ -155,14 +178,39 @@ def lookup():
     r = g[g.game_name == name].iloc[0]
     st.subheader(f"[{name}]({STORE.format(int(r.appid))})")
     c = st.columns(4)
-    c[0].metric("Concurrent players", fmt(r.last_players)); c[1].metric("Owners (est.)", r.owners_estimate_range or "n/a")
+    c[0].metric("Concurrent players", fmt(r.last_players))
+    lo, hi = r.owners_estimate_low, r.owners_estimate_high
+    c[1].metric("Owners (est.)", "n/a" if pd.isna(lo) or pd.isna(hi) else f"{short(lo)}–{short(hi)}",
+                help=f"SteamSpy estimate range: {r.owners_estimate_range}" if isinstance(r.owners_estimate_range, str) else None)
     c[2].metric("Positive reviews", "n/a" if pd.isna(r.positive_review_share) else f"{r.positive_review_share:.0%}")
     c[3].metric("Price", "Free" if r.pricing == "Free-to-play" else ("n/a" if pd.isna(r.price_usd) else f"${r.price_usd:.2f}"))
-    st.write({k: (None if pd.isna(v) else v) for k, v in r[["developer", "publisher", "primary_genre", "release_date", "discount_pct", "metacritic_score", "players_per_1k_owners"]].items()})
-    ts = fct[fct.appid == r.appid]
-    st.plotly_chart(style(px.line(ts, x="snapshot_date_utc", y=["peak_players_sampled", "avg_players_sampled"], markers=True,
-                                  title="Daily players", labels={"value": "Players", "snapshot_date_utc": "Date (UTC)"})), width="stretch")
+    st.table(details_table(r))
+    ts = fct[fct.appid == r.appid].sort_values("snapshot_date_utc")
+    if len(ts) < 3:
+        st.info(f"Daily player chart appears once there are at least 3 days of data (currently {len(ts)} day"
+                f"{'' if len(ts) == 1 else 's'}). The pipeline adds a day every run.")
+    else:
+        fig = px.line(ts.rename(columns={"peak_players_sampled": "Peak", "avg_players_sampled": "Average"}),
+                      x="snapshot_date_utc", y=["Peak", "Average"], markers=True, title="Daily players",
+                      labels={"value": "Players", "snapshot_date_utc": "Date (UTC)", "variable": ""})
+        fig.update_xaxes(tickformat="%b %d, %Y", dtick="D1")
+        st.plotly_chart(style(fig), width="stretch")
     source_note()
+
+def details_table(r):
+    """Clean, labelled details for one game: missing values shown as 'n/a', numbers rounded, dates as text."""
+    def val(v, kind=None):
+        if v is None or (not isinstance(v, (list, tuple)) and pd.isna(v)): return "n/a"
+        if kind == "date": return pd.to_datetime(v).strftime("%b %d, %Y")
+        if kind == "pct": return f"{v:.0f}%"
+        if kind == "int": return f"{v:,.0f}"
+        if kind == "1dp": return f"{v:,.1f}"
+        return str(v)
+    rows = [("Developer", val(r.developer)), ("Publisher", val(r.publisher)), ("Main genre", val(r.primary_genre)),
+            ("Release date", val(r.release_date, "date")), ("Discount today", val(r.discount_pct, "pct")),
+            ("Metacritic score", val(r.metacritic_score, "int")),
+            ("Players per 1,000 owners", val(r.players_per_1k_owners, "1dp"))]
+    return pd.DataFrame(rows, columns=["Detail", "Value"]).set_index("Detail")
 
 # ------------------------------------------------------------------ Game Finder
 # Ranking options: the analysis layer's composite score (default) or one single metric.
@@ -314,7 +362,7 @@ def main():
     st.set_page_config(page_title="Steam Pulse", page_icon="🎮", layout="wide")
     page = st.sidebar.radio("Page", list(PAGES))
     try:
-        data()
+        data(); history(); results()  # warm the shared caches once so switching pages doesn't redo the loading
     except marts.DataUnavailable as e:
         st.title("Steam Pulse")
         st.error(f"Data isn't available right now. {e}")

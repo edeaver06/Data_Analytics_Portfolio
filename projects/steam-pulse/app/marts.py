@@ -5,7 +5,7 @@ Order of preference:
   2. parquet extract in app/data/ (written by `python app/marts.py`, used on Streamlit Cloud)
   3. neither -> DataUnavailable, which the app shows as a clear message
 """
-import os, sys
+import os, sys, functools
 from pathlib import Path
 import duckdb, pandas as pd
 
@@ -40,7 +40,16 @@ def _from_db():
     finally:
         con.close()
 
+@functools.lru_cache(maxsize=1)
+def _load_tables_cached():
+    return _load_tables_uncached()
+
 def load_tables():
+    """Cached once per process. Returns (dict of DataFrame copies, source label)."""
+    t, src = _load_tables_cached()
+    return {k: v.copy() for k, v in t.items()}, src
+
+def _load_tables_uncached():
     """Returns (dict of DataFrames, source label). Raises DataUnavailable if no source exists."""
     if DB.exists():
         try:
