@@ -1,0 +1,5 @@
+# Notebook tooling (not needed to run the pipeline, app or tests)
+-r requirements.txt
+nbformat==5.11.1
+nbconvert==7.17.2
+ipykernel==7.4.0

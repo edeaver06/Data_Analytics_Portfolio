@@ -5,7 +5,7 @@ Everything technical lives here. For the recruiter summary see the [project page
 ## How to run
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt   # pins + notebook tooling (requirements.txt alone runs src/ and tests)
 python src/fcr.py                       # print summary tables
 pytest -q                               # verify numbers + SQL/Python parity
 jupyter nbconvert --to notebook --execute --inplace notebooks/google_fiber_fcr.ipynb   # rebuild draft figures

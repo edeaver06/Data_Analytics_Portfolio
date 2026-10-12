@@ -1,10 +1,7 @@
-pandas>=2.0
-numpy
-scipy
-statsmodels
-matplotlib>=3.7
-duckdb>=1.0
-nbformat
-nbconvert
-ipykernel
-pytest
+pandas==3.0.6
+numpy==2.5.4
+scipy==1.18.1
+statsmodels==0.15.0
+matplotlib==3.11.2
+duckdb==1.5.6
+pytest==9.1.1

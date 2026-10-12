@@ -4,10 +4,10 @@ Everything technical lives here. For the recruiter summary see the [project page
 
 ## How to run
 ```bash
-python -m venv .venv && .venv/bin/pip install -r requirements.txt
+python -m venv .venv && .venv/bin/pip install -r requirements-dev.txt   # pins + notebook tooling (requirements.txt alone runs src/ and tests)
 .venv/bin/python src/fetch_data.py     # downloads all raw data (~2 min); raw files are also committed
 .venv/bin/python src/run_analysis.py           # prints scores, writes data/clean/ + ../images/
-.venv/bin/python -m pytest -q tests        # 7 tests
+.venv/bin/python -m pytest -q tests
 ```
 Notebook: `notebooks/markets_vs_polls.ipynb`. Charts are written to `../images/`.
 

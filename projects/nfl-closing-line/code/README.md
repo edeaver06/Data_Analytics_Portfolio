@@ -4,10 +4,10 @@ Everything technical lives here. For the recruiter summary see the [project page
 
 ## How to run
 ```bash
-python -m venv .venv && .venv/bin/pip install -r requirements.txt
+python -m venv .venv && .venv/bin/pip install -r requirements-dev.txt   # pins + notebook tooling (requirements.txt alone runs src/ and tests)
 curl -L -o data/raw/games.csv https://github.com/nflverse/nfldata/raw/master/data/games.csv
 .venv/bin/python src/run_analysis.py        # prints results, writes data/clean/*.csv + draft charts
-.venv/bin/python -m pytest -q tests     # 6 tests
+.venv/bin/python -m pytest -q tests
 .venv/bin/python src/polish_figures.py  # polished charts -> ../images/ and figures/
 ```
 Notebook walkthrough: `notebooks/nfl_closing_line.ipynb`.
