@@ -10,7 +10,7 @@ This repository collects my projects in one place. Each folder in `projects/` is
 ## Table of Contents
 - [About](#about)
 - [Portfolio Projects](#portfolio-projects)
-- [In Progress & Earlier Work](#in-progress--earlier-work)
+- [Earlier Work](#earlier-work)
 - [Skills](#skills)
 - [Experience](#experience)
 - [Education](#education)
@@ -24,6 +24,8 @@ This repository collects my projects in one place. Each folder in `projects/` is
 | <img src="projects/nfl-closing-line/images/03_strategy_win_rates.png" width="240"> | [**Can You Beat the NFL Closing Line?**](#nfl-closing-line) | No popular angle beats the 52.38% breakeven at -110 in a statistically defensible way. Closing spreads are unbiased (slope 1.04). |
 | <img src="projects/markets-vs-polls/images/01_brier_by_horizon.png" width="240"> | [**Markets vs Polls: Who Called It Better?**](#markets-vs-polls) | 1 day out: Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls). This is one election, so it isn't evidence that markets beat polls in general. |
 | <img src="projects/google-fiber-fcr/images/wifi_tech_share_by_market.png" width="240"> | [**Google Fiber: Repeat Calls & First-Contact Resolution**](#google-fiber-fcr) | Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls. |
+| <img src="projects/steam-pulse/figures/hero_concentration.png" width="240"> | [**Steam Pulse** *(in progress)*](#steam-pulse) | Across the 1,000 most-owned Steam games there were 6.57M concurrent players, and 10 games held 41% of them. |
+| <img src="projects/operational-risk-briefing/images/revised_drivers_no_leakage.png" width="240"> | [**Audit Risk Model: A Target-Leakage Case Study**](#operational-risk-briefing) | My model's 97.8% accuracy was invalid (the label was built from its top feature). Rebuilt on 7 raw inputs vs a 60.6% baseline, the conclusions reverse. |
 
 <a id="olist-ecommerce"></a>
 ### Olist: When the Parcel Is Late, the Stars Fall
@@ -81,9 +83,36 @@ This repository collects my projects in one place. Each folder in `projects/` is
 
 **Results:** Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls.
 
-## In Progress & Earlier Work
-- **[Steam Pulse](projects/steam-pulse)** *(in progress)*: a scheduled pipeline tracking about 1,000 Steam games (Python, dbt, DuckDB).
-- **[Operational Risk Briefing](https://rpubs.com/slammerjammer/1422063)** (R, Random Forest), **[The Synthetic Predator](https://rpubs.com/slammerjammer/1423363)** (R), **[Cyclistic bike-share](https://rpubs.com/slammerjammer/1371255)** (R, Google DA capstone)
+<a id="steam-pulse"></a>
+### Steam Pulse *(in progress)*
+**Code:** [`projects/steam-pulse`](projects/steam-pulse)
+
+**Goal:** Build a growing history of Steam games to answer one question: what keeps a game alive?
+
+**Description:** A scheduled pipeline tracking concurrent players, prices, reviews, tags and Steam Deck status for about 1,000 of the most-owned Steam games. History started 2026-10-12.
+
+**Skills:** API ingestion with retries and rate limits, warehouse modeling, dbt tests and snapshots, scheduling.
+
+**Technology:** Python, DuckDB, dbt, Streamlit, Tableau.
+
+**Results (first snapshots):** 6.57M concurrent players, with 10 games holding 41% of them. Retention, momentum and price-elasticity analyses are blocked on purpose until enough history exists.
+
+<a id="operational-risk-briefing"></a>
+### Audit Risk Model: A Target-Leakage Case Study
+**Code:** [`projects/operational-risk-briefing`](projects/operational-risk-briefing)
+
+**Goal:** Check whether my earlier Random Forest's reported accuracy on 775 audit records was trustworthy.
+
+**Description:** Showed that the label `Risk` equals `Audit_Risk > 1` in 100% of rows, and that `Audit_Risk` is computed from the model's top feature. Rebuilt the model on the 7 raw inputs and corrected the business conclusions.
+
+**Skills:** model validation, target-leakage detection, feature selection, baseline comparison.
+
+**Technology:** R, randomForest, tidyverse, R Markdown.
+
+**Results:** The original 97.8% out-of-bag accuracy was invalid. The rebuilt model scores 98.5% vs a 60.6% majority-class baseline, but only because the label is a deterministic scoring rule. The honest drivers reverse the original "ignore asset value" advice.
+
+## Earlier Work
+- **[The Synthetic Predator](https://rpubs.com/slammerjammer/1423363)** (R), **[Cyclistic bike-share](https://rpubs.com/slammerjammer/1371255)** (R, Google DA capstone)
 - **[Tableau Public dashboards](https://public.tableau.com/app/profile/evan.deaver/vizzes)**
 
 To run a project: `cd projects/<name> && pip install -r requirements.txt && pytest -q` (or `make test` from the root).

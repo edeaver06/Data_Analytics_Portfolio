@@ -1,33 +1,28 @@
--- Analysis-layer views. Read-only over Code Builder's DB (attached as sp).
--- Mirrors dim_game / fct_daily_players logic because the marts are not materialized yet.
+-- Analysis-layer views over Code Builder's marts (DB attached read-only as sp). No raw.* access.
 create or replace view a_players as
-select appid, cast(snapshot_ts at time zone 'UTC' as date) as d, snapshot_ts, player_count
-from sp.raw.player_counts where ok and player_count is not null;
+select appid, snapshot_date_utc d, snapshot_ts, player_count from steam_pulse.staging.stg_player_counts;
+
+create or replace view a_daily as select * from steam_pulse.marts.fct_daily_players;
 
 create or replace view a_owners as
-select * exclude rn from (
-  select *, row_number() over (partition by appid order by fetched_at desc) rn from sp.raw.steamspy_owners) where rn=1;
+select appid, game_name as "name", developer, publisher, owners_estimate_range from steam_pulse.marts.dim_game;
 
 create or replace view a_store as
-select appid,
-  payload->>'$.type' app_type,
-  cast(payload->>'$.is_free' as boolean) is_free,
-  try_strptime(payload->>'$.release_date.date', ['%d %b, %Y','%b %d, %Y','%b %Y'])::date release_date,
-  payload->>'$.genres[0].description' primary_genre,
-  json_extract_string(payload, '$.genres[*].description') genres
-from (select *, row_number() over (partition by appid order by fetched_at desc) rn
-      from sp.raw.appdetails where success) where rn=1;
-
-create or replace view a_game as
-select o.appid, o.name, o.positive, o.negative,
-  case when o.positive+o.negative>0 then o.positive/(o.positive+o.negative) end pos_share,
-  o.price_cents/100.0 price_usd, o.initialprice_cents/100.0 list_price_usd, o.discount_pct,
-  o.owners_estimate_range, o.ccu_yesterday_peak,
-  (o.price_cents=0 and coalesce(o.initialprice_cents,0)=0) as f2p_steamspy,
-  s.is_free, s.release_date, s.primary_genre, s.genres, s.app_type,
-  p.player_count, p.d snapshot_date
-from a_owners o left join a_store s using(appid) left join a_players p using(appid);
+select appid, app_type, is_free, release_date, primary_genre, genres_any genres from steam_pulse.marts.dim_game where has_store_details;
 
 create or replace view a_store_cats as
-select appid, json_extract_string(payload, '$.categories[*].description') categories
-from (select *, row_number() over (partition by appid order by fetched_at desc) rn from sp.raw.appdetails where success) where rn=1;
+select appid, categories from steam_pulse.marts.dim_game where has_store_details;
+
+create or replace view a_game as
+select d.appid, d.game_name as "name", s.positive, s.negative,
+  case when s.positive+s.negative>0 then s.positive/(s.positive+s.negative) end pos_share,
+  d.price_usd, d.store_list_price_usd list_price_usd, coalesce(pr.store_discount_pct, d.store_discount_pct) discount_pct,
+  d.owners_estimate_range,
+  (coalesce(d.is_free, d.price_usd = 0)) as f2p_steamspy,
+  d.is_free, d.release_date, d.primary_genre, d.genres_any genres, d.app_type, d.deck_status,
+  d.has_online_coop, d.has_local_coop, d.has_split_screen, d.full_controller_support, d.has_remote_play_together,
+  p.last_players player_count, p.snapshot_date_utc snapshot_date
+from steam_pulse.marts.dim_game d
+left join steam_pulse.staging.stg_steamspy_owners s using(appid)
+left join (select * from steam_pulse.snapshots.snap_game_price where dbt_valid_to is null) pr using(appid)
+left join (select * from steam_pulse.marts.fct_daily_players qualify row_number() over (partition by appid order by snapshot_date_utc desc)=1) p using(appid);

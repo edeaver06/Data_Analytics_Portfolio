@@ -5,6 +5,21 @@ import steam_analysis as sa
 
 WEIGHTS = {"review_bayes": 0.45, "player_strength": 0.35, "value_per_dollar": 0.20, "retention": 0.0, "momentum": 0.0}
 PRIOR_N = 1000  # pseudo-reviews at the global mean
+SOFTWARE_GENRES = {"Utilities", "Software", "Design & Illustration", "Animation & Modeling", "Audio Production",
+                   "Video Production", "Photo Editing", "Web Publishing", "Game Development", "Education"}
+# 'Casual' deliberately omitted: Steam tags Wallpaper Engine Casual + Utilities, so including it would let it through.
+GAME_GENRES = {"Action", "Adventure", "RPG", "Strategy", "Simulation", "Sports", "Racing"}
+EXCL_CSV = sa.ROOT / "software_exclusions.csv"
+
+def is_software(genres, appid, curated):
+    if appid in curated: return True
+    if not isinstance(genres, (list, tuple, np.ndarray)): return False
+    g = set(genres); return bool(g & SOFTWARE_GENRES) and not (g & GAME_GENRES)
+
+def filter_software(df, include_software=False):
+    curated = set(pd.read_csv(EXCL_CSV).appid)
+    flag = np.array([is_software(g, a, curated) for g, a in zip(df.genres, df.appid)], bool)
+    return (df if include_software else df[~flag]), df[flag]
 
 def bayes_review(pos, neg, prior_n=PRIOR_N, mu=None):
     pos, neg = np.asarray(pos, float), np.asarray(neg, float)
@@ -47,7 +62,7 @@ def validate(df, n=200, seed=0):
     return {"weight_perturb_spearman_median": float(np.median(ws[:, 0])), "weight_perturb_spearman_p5": float(np.percentile(ws[:, 0], 5)),
             "weight_perturb_top20_overlap_median": float(np.median(ws[:, 1])),
             "bootstrap_top20_retained_median": float(np.nanmedian(boot)), "alt_ranking_spearman": alt, "prior_n_spearman": prior,
-            "rank_stability_over_time": "NOT POSSIBLE: 1 snapshot"}
+            "rank_stability_over_time": "see history_results.json rank_stability"}
 
 def categories(c, g):
     cats = c.sql("select appid, categories from a_store_cats").df()
@@ -76,11 +91,11 @@ def categories(c, g):
     out["n_with_category_flags"] = int(sub.appid.nunique())
     return out
 
-def main():
+def main(include_software=False):
     c = sa.connect()
-    g = c.sql("select * from a_game where player_count is not null and positive+negative>0").df()
+    g, sw = filter_software(c.sql("select * from a_game where player_count is not null and positive+negative>0").df(), include_software)
     s = score(g)
-    res = {"weights": WEIGHTS, "prior_n": PRIOR_N, "n": len(g), "top15": s.head(15)[["name", "score", "review_bayes", "player_count", "price_usd"]].round(3).to_dict("records"),
+    res = {"include_software": include_software, "excluded_software": sw[["appid", "name"]].to_dict("records"), "weights": WEIGHTS, "prior_n": PRIOR_N, "n": len(g), "top15": s.head(15)[["name", "score", "review_bayes", "player_count", "price_usd"]].round(3).to_dict("records"),
            "validation": validate(g), **categories(c, g)}
     (sa.ROOT / "best_score_results.json").write_text(json.dumps(res, indent=1, default=str))
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
@@ -88,10 +103,10 @@ def main():
     ax.scatter(a.supply_share, a.engagement_index)
     for _, r in a.iterrows(): ax.annotate(r["cat"].split(":")[1][:22], (r.supply_share, r.engagement_index), fontsize=6)
     ax.set_xlabel("share of detailed games in category (supply)"); ax.set_ylabel("median CCU / overall median (engagement)")
-    ax.set_title("Demand vs supply by category (148 top games, 1 snapshot)"); fig.tight_layout(); fig.savefig(sa.ROOT / "figures" / "category_gap.png", dpi=120)
+    ax.set_title("Demand vs supply by category (148 top games excl. software, 1 snapshot)"); fig.tight_layout(); fig.savefig(sa.ROOT / "figures" / "category_gap.png", dpi=120)
     return res
 
 if __name__ == "__main__":
-    r = main(); print(json.dumps({k: r[k] for k in ["top15", "validation", "by_price_tier", "n_with_category_flags"]}, indent=1, default=str))
+    import sys; r = main("--include-software" in sys.argv); print(json.dumps({k: r[k] for k in ["top15", "validation", "by_price_tier", "n_with_category_flags"]}, indent=1, default=str))
     for x in r["categories"][:8] + r["categories"][-4:]: print(x)
     print(json.dumps(r["best_by_category"], indent=0))

@@ -71,6 +71,29 @@ def get_universe(http: PoliteSession, ts: datetime, max_age_days: int = 7, limit
     return _top(data, limit), path
 
 
+FEATURED_URL = "https://store.steampowered.com/api/featuredcategories"
+
+
+def get_new_releases(http: PoliteSession, ts: datetime) -> list[int]:
+    """New-release tracking: SteamSpy top100in2weeks + store 'new_releases'. Every app ever seen here stays tracked
+    (cumulative), so launch decay can be observed. Lands raw/universe/ parquet (appid, list_source, name)."""
+    rows = []
+    t2w = http.get_json(STEAMSPY_URL, {"request": "top100in2weeks"}) or {}
+    for k, v in (t2w.items() if isinstance(t2w, dict) else []):
+        rows.append({"appid": int(k), "list_source": "steamspy_top100in2weeks", "name": (v or {}).get("name")})
+    feat = http.get_json(FEATURED_URL, {"cc": "us", "l": "english"}) or {}
+    for it in ((feat.get("new_releases") or {}).get("items") or []):
+        if it.get("type") == 0 and it.get("id"):  # type 0 = app
+            rows.append({"appid": int(it["id"]), "list_source": "store_new_releases", "name": it.get("name")})
+    if rows:
+        df = pd.DataFrame(rows).drop_duplicates(["appid", "list_source"]); df["fetched_at"] = ts
+        path = RAW / "universe" / f"dt={ts:%Y-%m-%d}" / f"universe_{stamp(ts)}.parquet"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        df.to_parquet(path, index=False)
+    files = sorted(RAW.glob("universe/dt=*/*.parquet"))
+    return sorted(set(pd.concat([pd.read_parquet(f, columns=["appid"]) for f in files]).appid.astype(int))) if files else []
+
+
 def _top(data: dict, limit: int) -> list[int]:
     return [int(k) for k in list(data.keys())[:limit]]
 
@@ -173,6 +196,28 @@ def refresh_steamspy_details(http: PoliteSession, appids: list[int], ts: datetim
     return sum(r["ok"] for r in rows)
 
 
+def snapshot_prices(http: PoliteSession, appids: list[int], ts: datetime, batch: int = 50) -> int:
+    """Every run: price_overview for ALL tracked games via batched appdetails?filters=price_overview (~20 calls).
+    This is the forward daily price history (fct_daily_price / snap_game_price)."""
+    rows = []
+    for i in range(0, len(appids), batch):
+        chunk = appids[i:i + batch]
+        j = http.get_json(APPDETAILS_URL, {"appids": ",".join(map(str, chunk)), "filters": "price_overview", "cc": "us"})
+        fetched = utcnow()
+        for a in chunk:
+            rec = (j or {}).get(str(a)) or {}
+            data = rec.get("data")
+            po = data.get("price_overview") if isinstance(data, dict) else None
+            rows.append({"appid": a, "fetched_at": fetched, "ok": bool(rec.get("success")), "has_price": po is not None,
+                         "currency": (po or {}).get("currency"), "initial_cents": (po or {}).get("initial"),
+                         "final_cents": (po or {}).get("final"), "discount_pct": (po or {}).get("discount_percent")})
+    df = pd.DataFrame(rows).astype({"initial_cents": "Int64", "final_cents": "Int64", "discount_pct": "Int64"})
+    path = RAW / "prices" / f"dt={ts:%Y-%m-%d}" / f"prices_{stamp(ts)}.parquet"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_parquet(path, index=False)
+    return int(df.has_price.sum())
+
+
 DECK_LABELS = {0: "Unknown", 1: "Unsupported", 2: "Playable", 3: "Verified"}
 
 
@@ -203,9 +248,13 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--reviews-budget", type=int, default=250, help="max appreviews summary requests this run")
     ap.add_argument("--tags-budget", type=int, default=150, help="max SteamSpy per-app requests this run (~1.1 s each)")
     ap.add_argument("--deck-budget", type=int, default=200, help="max Steam Deck compatibility requests this run")
+    ap.add_argument("--catch-up", action="store_true",
+                    help="one-off coverage pass: budgets large enough to cover every tracked game (~60-70 min, polite rate)")
     ap.add_argument("--skip-load", action="store_true")
     a = ap.parse_args(argv)
 
+    if a.catch_up:
+        a.appdetails_budget = a.reviews_budget = a.tags_budget = a.deck_budget = 5000
     RAW.mkdir(parents=True, exist_ok=True)
     lock = open(ROOT / "data" / ".snapshot.lock", "w")
     try:
@@ -216,7 +265,10 @@ def main(argv: list[str] | None = None) -> int:
 
     http, ts, sid = PoliteSession(), utcnow(), uuid.uuid4().hex
     appids, uni_path = get_universe(http, ts, limit=a.limit)
+    extra = [x for x in get_new_releases(http, ts) if x not in set(appids)]
+    appids = appids + extra
     players_path = snapshot_players(http, appids, ts, sid)
+    n_prices = snapshot_prices(http, appids, ts)
     n_details = refresh_appdetails(http, appids, ts, a.appdetails_budget)
     n_reviews = refresh_reviews(http, appids, ts, a.reviews_budget)
     n_tags = refresh_steamspy_details(http, appids, ts, a.tags_budget)
@@ -224,7 +276,7 @@ def main(argv: list[str] | None = None) -> int:
     df = pd.read_parquet(players_path)
     print(f"snapshot {sid} at {ts.isoformat()}: {len(df)} games, {int(df.ok.sum())} ok, "
           f"{int(df.player_count.fillna(0).sum()):,} concurrent players; appdetails fetched {n_details}, "
-          f"reviews {n_reviews}, steamspy tags {n_tags}, deck {n_deck}")
+          f"reviews {n_reviews}, steamspy tags {n_tags}, deck {n_deck}, priced games {n_prices}")
     if not a.skip_load:
         print(load.load_all())
     return 0

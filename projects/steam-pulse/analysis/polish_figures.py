@@ -46,28 +46,42 @@ except Exception as e:
 # ---------- 1. category_gap (lead) ----------
 cat = pd.DataFrame(B["categories"]); ndet = B["n_with_category_flags"]
 cat["kind"] = cat.cat.str.split(":").str[0]; cat["label"] = cat.cat.str.split(":", n=1).str[1]
+C = cat.set_index("label"); E, S, N = C.engagement_index, C.supply_share, C.n
+# Lead categories as named in analysis/README.md ("clearest gaps"); every number below is read from the JSON.
+LEAD = [l for l in ["Steam Input API Support", "Save Anytime"] if l in C.index]
+NICE = {"Steam Input API Support": "Steam Input API", "Shared/Split Screen Co-op": "Split-screen co-op"}
+SS, EA = "Shared/Split Screen Co-op", "Early Access"
+check("category_gap n", ndet, B["n"] - 1)  # store-detail games with CCU, software excluded
+check("Steam Input API engagement", round(E["Steam Input API Support"], 1), 9.7); check("Steam Input API n", N["Steam Input API Support"], 31)
+check("Save Anytime engagement", round(E["Save Anytime"], 1), 5.9); check("split-screen co-op engagement", round(E[SS], 2), 1.05)
+is_gap = lambda l: l in C.index and E[l] >= 2 and S[l] <= 0.10 and N[l] >= 10
 fig, ax = plt.subplots(figsize=(11, 6.8))
-xs = np.linspace(0.02, 0.9, 200)
-for gi, ls in [(10, ":"), (30, "--")]: ax.plot(xs, gi * xs, color=GREY, lw=.9, ls=ls); ax.text(3.25/gi, 3.25, f"gap index = {gi} ", fontsize=7, color=GREY, ha="right", va="top", rotation=0)
-ax.axhline(1, color=GREY, lw=.8); ax.text(0.9, 1.02, "overall median engagement", fontsize=7, color=GREY, ha="right", va="bottom")
-col = cat.kind.map({"cat": BLUE, "genre": ORANGE})
-ax.scatter(cat.supply_share, cat.engagement_index, s=18 + cat.n * 2.2, c=col, alpha=.7, edgecolor="white", lw=.6)
-top = cat.nlargest(8, "gap_index"); low = cat.nsmallest(3, "gap_index")
-POS = {"Steam Input API Support": (.17, 3.12), "HDR available": (.17, 2.78), "Early Access": (.14, 2.45), "LAN Co-op": (.14, 2.33),
-       "LAN PvP": (.14, 1.97), "Tracked Controller Support": (.14, 1.62), "VR Supported": (.14, 1.50), "Gamepad Recommended": (.14, 1.38),
-       "Family Sharing": (.62, .62), "Action": (.62, .50), "Free To Play": (.31, .12)}
-for _, r in pd.concat([top, low]).iterrows():
-    tx, ty = POS.get(r.label, (r.supply_share + .02, r.engagement_index + .1))
-    ax.annotate(f"{r.label}  (gap {r.gap_index:.0f}, n={r.n})", (r.supply_share, r.engagement_index), xytext=(tx, ty), fontsize=7.5,
-                color="#222", va="center", arrowprops=dict(arrowstyle="-", color=GREY, lw=.5, shrinkA=0, shrinkB=3))
-ax.set_xlabel(f"Supply: share of the {ndet} store-detail games in the category"); ax.set_ylabel("Engagement: median CCU / overall median")
-ax.xaxis.set_major_formatter(lambda v, _: f"{v:.0%}"); ax.set_ylim(0, 3.3)
-ax.set_title("Controller, LAN and Early Access games draw ~2-3x typical players\nfrom a small slice of supply", pad=22)
-sub(ax, f"Category demand vs supply, {len(cat)} categories/genres with n>=5; labels show gap index (engagement / supply) and game count")
+big = cat[cat.n >= 10]; small = cat[cat.n < 10]
+ax.scatter(small.supply_share, small.engagement_index, s=14, facecolor="white", edgecolor=GREY, lw=.7)
+ax.scatter(big.supply_share, big.engagement_index, s=18 + big.n * .35, c=big.kind.map({"cat": BLUE, "genre": ORANGE}), alpha=.7, edgecolor="white", lw=.6)
+ax.axhline(1, color=GREY, lw=.8); ax.text(.99, 1.03, "overall median players", fontsize=7, color=GREY, ha="right", va="bottom", transform=ax.get_yaxis_transform())
+for l in LEAD:
+    ax.scatter([S[l]], [E[l]], s=220, facecolor="none", edgecolor=VERM, lw=2.2, zorder=5)
+    ax.annotate(f"{NICE.get(l, l)}: {E[l]:.1f}x players, {S[l]:.0%} of games (n={N[l]})", (S[l], E[l]), textcoords="offset points",
+                xytext=(14, 6), fontsize=8.5, color=VERM, fontweight="bold")
+others = [SS, EA, "Adjustable Text Size", "Online Co-op", "RPG", "Free To Play"]
+for l in others:
+    if l in C.index and N[l] >= 10:
+        extra = "  (no longer a gap)" if l == SS and not is_gap(SS) else ""
+        ax.annotate(f"{NICE.get(l, l)} ({E[l]:.1f}x, n={N[l]}){extra}", (S[l], E[l]), textcoords="offset points", xytext=(8, -12 if l in (EA, SS) else 4), fontsize=7.5, color="#222")
+ax.set_yscale("log"); ax.yaxis.set_major_formatter(lambda v, _: f"{v:g}x")
+ax.set_xlabel(f"Supply: share of the {ndet:,} store-detail games in the category"); ax.set_ylabel("Players: median CCU / overall median (log)")
+ax.xaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
+title = " and ".join(f"{NICE.get(l, l)} ({E[l]:.1f}x)" for l in LEAD) + " are the clearest gaps:\nfew games, many more players than the typical game"
+ax.set_title(title, pad=22)
+sub(ax, f"Based on {ndet:,} popular games; correlation only.")
 ax.legend(handles=[Patch(color=BLUE, label="Steam category"), Patch(color=ORANGE, label="Genre"),
-                   Line2D([], [], marker="o", ls="", color=GREY, label="bubble size = games")], frameon=False, loc="upper right")
+                   Line2D([], [], marker="o", ls="", markerfacecolor="white", markeredgecolor=GREY, label="n < 10 (ignore)")], frameon=False, loc="lower right")
 fig.tight_layout(rect=(0, .06, 1, 1))
-note(fig, "Gap index is relative within the top-player store-detail sample only; small categories (n=5) are noisy. Not a market-wide demand estimate.")
+note(fig, (f"Split-screen co-op is {E[SS]:.2f}x with {S[SS]:.0%} of games, so not a gap at full coverage (it was 2.5x at 444 games). " if not is_gap(SS) else "")
+          + (f"Early Access is {E[EA]:.1f}x from {S[EA]:.0%} of games. " if EA in C.index else "") + "Software excluded.")
+print("category_gap title:", ax.get_title(loc="left").replace("\n", " | "))
+print("  top by engagement (n>=20):", ", ".join(f"{l} {E[l]:.1f}x" for l in C[C.n >= 20].engagement_index.nlargest(3).index))
 fig.savefig(OUT / "category_gap.png"); plt.close(fig)
 
 # ---------- 2. f2p_vs_paid ----------
@@ -90,10 +104,16 @@ for j, (k, t, fm) in enumerate(mets):
         a2.barh(y, val, color=cl); a2.text(val, y, " " + fm(f[seg][k]), va="center", fontsize=9)
 a2.set_yticks([0.5, 3.5]); a2.set_yticklabels([m[1] for m in mets]); a2.invert_yaxis(); a2.set_xticks([]); a2.grid(False)
 a2.spines["bottom"].set_visible(False); a2.set_xlim(0, 1.35); a2.set_title("Medians (bar length relative to paid)", fontsize=10)
-fig.suptitle(f"The typical paid game has {f['paid']['med_ccu']/f['free']['med_ccu']:.1f}x the players of a free-to-play game ({f['paid']['med_ccu']:,.0f} vs {f['free']['med_ccu']:,.0f})",
-             x=.01, ha="left", fontweight="bold", fontsize=13)
-fig.text(.01, .9, f"Top-1,000 Steam games by players, one snapshot; Mann-Whitney p = {R['f2p_mwu_p']:.1e}", fontsize=9, color="#444")
-fig.tight_layout(rect=(0, .06, 1, .89)); note(fig, "Free-to-play = SteamSpy flag. Per-game medians; a few F2P giants dominate total players (see hero chart).")
+pv = R["f2p_mwu_p"]
+if pv >= 0.05:
+    ft = f"No clear player difference between free-to-play and paid games (median {f['free']['med_ccu']:,.0f} vs {f['paid']['med_ccu']:,.0f}, p = {pv:.2f})"
+else:
+    hi, lo = ("free", "paid") if f["free"]["med_ccu"] > f["paid"]["med_ccu"] else ("paid", "free")
+    ft = f"The typical {hi} game has {f[hi]['med_ccu']/f[lo]['med_ccu']:.1f}x the players of a {lo} game ({f[hi]['med_ccu']:,.0f} vs {f[lo]['med_ccu']:,.0f})"
+fig.suptitle(ft, x=.01, ha="left", fontweight="bold", fontsize=13)
+print("f2p title:", ft)
+fig.text(.01, .9, f"{R['coverage']['games_with_players']:,} tracked Steam games, latest snapshot; Mann-Whitney p = {R['f2p_mwu_p']:.2f}", fontsize=9, color="#444")
+fig.tight_layout(rect=(0, .06, 1, .89)); note(fig, "Free-to-play = Steam store is_free (SteamSpy price $0 as fallback). Per-game medians; a few F2P giants dominate total players (see hero chart).")
 fig.savefig(OUT / "f2p_vs_paid.png"); plt.close(fig)
 
 # ---------- 3. sentiment_vs_ccu ----------
@@ -122,8 +142,16 @@ ax.xaxis.set_major_formatter(lambda v, _: fmt(v)); ax.grid(axis="y", visible=Fal
 best = gen[gen.n >= 15].iloc[-1]
 ax.set_title(f"{best.genre} has the highest median players among well-sampled genres ({best.med_ccu:,.0f})", pad=22)
 sub(ax, f"Median concurrent players by genre, {R['coverage']['games_with_store_details']} games with store details; a game can have several genres")
-ax.legend(handles=[Patch(color=BLUE, label="n >= 15"), Patch(color=GREY, label="n < 15 (noisy)"), Patch(color=VERM, label="Highest median (Early Access, n=9)")], frameon=False, loc="lower right")
+ax.legend(handles=[Patch(color=BLUE, label="n >= 15"), Patch(color=GREY, label="n < 15 (noisy)"), Patch(color=VERM, label=f"Highest median ({gen.iloc[-1].genre}, n={gen.iloc[-1].n})")], frameon=False, loc="lower right")
 fig.tight_layout(rect=(0, .05, 1, 1)); note(fig); fig.savefig(OUT / "genre_median_ccu.png"); plt.close(fig)
+
+if g is not None and "genres" in g:
+    rpg = g[g.genres.apply(lambda v: isinstance(v, (list, np.ndarray)) and "RPG" in list(v))].player_count.median()
+    check("RPG median ccu (duckdb)", rpg, gen.set_index("genre").med_ccu["RPG"])
+print("RPG median CCU:", gen.set_index("genre").med_ccu["RPG"], "| genre title:", ax.get_title(loc="left"))
+
+gm = gen.set_index("genre").med_ccu
+for gname, want in [("Racing", 1096), ("RPG", 711.5), ("Early Access", 685)]: check(f"genre {gname} median", gm[gname], want)
 
 # ---------- 5. age_xsec ----------
 age = pd.DataFrame(R["age"])
@@ -136,13 +164,64 @@ for i, (_, r) in enumerate(age.iterrows()):
     ax.annotate(f"{fmt(r.med_ccu)}\nn={int(r.n)}", (r.bucket_years, r.med_ccu), textcoords="offset points", xytext=(0, 9 if i % 2 else -22), ha="center", fontsize=6.5, color="#333" if r.n >= 5 else GREY)
 ax.set_yscale("log"); ax.set_xlabel("Years since release"); ax.set_ylabel("Median concurrent players (log)")
 ax.yaxis.set_major_formatter(lambda v, _: fmt(v)); ax.legend(frameon=False, loc="lower left")
-ax.set_title("Age vs players (survivors only, NOT a decay curve):\nolder games still in the top 1,000 keep thousands of players", pad=22, fontsize=12)
+ax.set_title("Age vs players (survivors only, NOT a decay curve):\nolder games still among today's popular games keep players", pad=22, fontsize=12)
 sub(ax, f"Median CCU by whole years since release, {age.n.sum()} games with store details, one snapshot; dead games are absent by construction")
 fig.tight_layout(rect=(0, .06, 1, 1)); note(fig, "Survivorship bias: only games still popular today are sampled. Real launch decay needs daily per-game snapshots.")
 fig.savefig(OUT / "age_xsec.png"); plt.close(fig)
 
+# ---------- 6-8. history charts (history_results.json) ----------
+Hp = A / "history_results.json"
+if Hp.exists():
+    H = json.loads(Hp.read_text())
+    # 6. retention_curves
+    ret = {k: pd.DataFrame(H["retention"][k]).set_index("m") for k in ["all", "free", "paid", "2012-2019", "2020+"]}
+    check("retention n", H["retention_n"], 600)
+    for m_, want in [(1, .56), (6, .25)]: check(f"retention all m{m_}", round(ret["all"].loc[m_, "median"], 2), want)
+    fig, ax = plt.subplots(figsize=(10, 5.8))
+    for k, lab, cl, ls, lw in [("all", "All", GREY, "-", 3), ("free", "Free-to-play", ORANGE, "-", 2), ("paid", "Paid", BLUE, "-", 2),
+                               ("2020+", "Launched 2020+", VERM, "--", 1.6)]:
+        r = ret[k]; ax.plot(r.index, r["median"], marker="o", color=cl, ls=ls, lw=lw, label=f"{lab} (n={int(r['count'].iloc[0])})")
+    ax.set_xticks(ret["all"].index); ax.set_ylim(0, 1.05); ax.yaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
+    ax.set_xlabel("Months since launch"); ax.set_ylabel("Median share of launch-month peak players"); ax.legend(frameon=False)
+    a6 = ret["all"]["median"]
+    ax.set_title(f"Players drop {1 - a6[1]:.0%} after the first month, then level off; free-to-play holds better", pad=22)
+    sub(ax, f"Median monthly players / launch-month peak, {H['retention_n']} of today's tracked games with an observed launch (SteamCharts)")
+    fig.tight_layout(rect=(0, .06, 1, 1)); note(fig, f"History: SteamCharts monthly players via history_results.json. Survivors only. 2020+ launches are a small group (n={int(ret['2020+']['count'].iloc[0])}).")
+    print("retention_curves title:", ax.get_title(loc="left")); fig.savefig(OUT / "retention_curves.png"); plt.close(fig)
+    # 7. discount_event_study
+    D = H["discount_did"]; dep = pd.DataFrame([{"depth": k, **v} for k, v in D["by_depth"].items()])
+    check("did n_events", D["n_events"], 10756); check("did pct", round(D["did_pct"], 1), 39.4)
+    fig, ax = plt.subplots(figsize=(10, 5.6))
+    ax.bar(dep.depth, dep.pct, color=GREEN)
+    for i, r in dep.iterrows(): ax.text(i, r.pct, f"+{r.pct:.0f}%\n(n={r.n:,})", ha="center", va="bottom", fontsize=9)
+    ax.axhline(D["did_pct"], color=VERM, ls="--", lw=1.4)
+    ax.text(-.45, D["did_pct"] + .8, f"all sales +{D['did_pct']:.1f}% (95% CI {D['ci95_pct'][0]:.1f} to {D['ci95_pct'][1]:.1f}%)", color=VERM, fontsize=8.5)
+    ax.set_ylim(0, dep.pct.max() * 1.25); ax.yaxis.set_major_formatter(lambda v, _: f"+{v:.0f}%"); ax.grid(axis="x", visible=False)
+    ax.set_xlabel("Discount depth"); ax.set_ylabel("Players, first week of sale vs. controls")
+    ax.set_title(f"Sales go with +{D['did_pct']:.0f}% players in their first week; deeper discounts, bigger lifts", pad=22)
+    sub(ax, f"Association from 2019-20 data: difference-in-differences, {D['n_events']:,} sale starts in {D['n_games']:,} games; pre-trend {D['pretrend_days_-7_-1_pct']:+.1f}%")
+    fig.tight_layout(rect=(0, .07, 1, 1)); note(fig, "History: Mendeley CC BY 4.0 2019-20 panel via history_results.json, not today's tracked games. Publishers choose sale timing; not causal.")
+    print("discount_event_study title:", ax.get_title(loc="left")); fig.savefig(OUT / "discount_event_study.png"); plt.close(fig)
+    # 8. sentiment_lead_lag
+    fig, ax = plt.subplots(figsize=(10, 5.6))
+    for k, lab, cl in [("pos", "Change in positive-review share", BLUE), ("lrev", "Change in log review volume", ORANGE)]:
+        d = pd.DataFrame(H["lead_lag"][k]); ax.plot(d.lag, d["corr"], marker="o", color=cl, lw=2.2, label=lab)
+        if k == "pos": mx = d["corr"].abs().max()
+        else: r0 = d.set_index("lag")["corr"][0]
+    ax.axhline(0, color=GREY, lw=.8); ax.axhspan(-.05, .05, color=GREY, alpha=.12, lw=0)
+    ax.annotate(f"same month r = {r0:.2f}", (0, r0), textcoords="offset points", xytext=(10, -4), fontsize=8.5, color=ORANGE)
+    ax.set_xticks(range(-3, 4)); ax.set_xlabel("Lag k in months (positive k: reviews lead players by k months)")
+    ax.set_ylabel("Correlation with change in log players")
+    ax.set_title("Review sentiment doesn't lead player counts; review volume just moves with players", pad=22)
+    sub(ax, f"Within-game monthly changes, {H['lead_lag_apps']} games, {H['lead_lag_rows']:,} game-months; sentiment |r| <= {mx:.2f} at every lag")
+    ax.legend(frameon=False, loc="upper left")
+    fig.tight_layout(rect=(0, .06, 1, 1)); note(fig, "History: SteamCharts monthly players + review history via history_results.json. Shaded band = |r| < 0.05. Correlation only.")
+    print("sentiment_lead_lag title:", ax.get_title(loc="left")); fig.savefig(OUT / "sentiment_lead_lag.png"); plt.close(fig)
+else:
+    MISMATCH.append("history_results.json missing: retention/discount/lead-lag charts skipped")
+
 # ---------- cross-checks on summary numbers ----------
 if B["n_with_category_flags"] != R["coverage"]["games_with_store_details"]:
-    MISMATCH.append(f"best_score n_with_category_flags={B['n_with_category_flags']} vs results.json games_with_store_details={R['coverage']['games_with_store_details']} (original category_gap title says 148)")
+    print(f"note: category_gap uses {B['n_with_category_flags']} games (store-detail games with category flags, software excluded) vs {R['coverage']['games_with_store_details']} with store details")
 print("wrote:", *sorted(p.name for p in OUT.glob("*.png")))
 print("MISMATCHES:" if MISMATCH else "no mismatches", *MISMATCH, sep="\n  ")

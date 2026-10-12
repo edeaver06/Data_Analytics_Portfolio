@@ -39,7 +39,46 @@ CREATE TABLE IF NOT EXISTS raw.steamspy_tags (
 CREATE TABLE IF NOT EXISTS raw.deck_compat (
     appid INTEGER, fetched_at TIMESTAMPTZ, ok BOOLEAN, deck_category INTEGER, deck_status VARCHAR, payload JSON,
     source_file VARCHAR, PRIMARY KEY (appid, fetched_at));
+CREATE TABLE IF NOT EXISTS raw.price_checks (
+    appid INTEGER, fetched_at TIMESTAMPTZ, ok BOOLEAN, has_price BOOLEAN, currency VARCHAR,
+    initial_cents INTEGER, final_cents INTEGER, discount_pct INTEGER, source_file VARCHAR,
+    PRIMARY KEY (appid, fetched_at));
+CREATE TABLE IF NOT EXISTS raw.universe_members (
+    appid INTEGER, list_source VARCHAR, name VARCHAR, fetched_at TIMESTAMPTZ, source_file VARCHAR,
+    PRIMARY KEY (appid, list_source, fetched_at));
 """
+
+BACKFILL = ROOT / "analysis" / "data" / "backfill" / "tables"
+# table -> (parquet file, select list, empty-schema DDL). Full replace from the current parquet = idempotent and
+# picks up rows added by a still-running crawl on the next load.
+BACKFILL_TABLES = {
+    "backfill_steamcharts_monthly": ("steamcharts_monthly.parquet",
+        "cast(appid as integer) appid, month, avg_players, cast(peak_players as bigint) peak_players",
+        "appid INTEGER, month DATE, avg_players DOUBLE, peak_players BIGINT"),
+    "backfill_reviews_monthly": ("reviews_monthly.parquet",
+        "cast(appid as integer) appid, month, cast(up as bigint) reviews_up, cast(down as bigint) reviews_down, cast(n_buckets as integer) n_buckets, rollup_type",
+        "appid INTEGER, month DATE, reviews_up BIGINT, reviews_down BIGINT, n_buckets INTEGER, rollup_type VARCHAR"),
+    "backfill_mendeley_price_daily": ("mendeley_price_daily.parquet",
+        "appid, date, initialprice initial_price_usd, finalprice final_price_usd, discount discount_pct",
+        "appid INTEGER, date DATE, initial_price_usd DOUBLE, final_price_usd DOUBLE, discount_pct DOUBLE"),
+    "backfill_mendeley_players_daily": ("mendeley_players_daily.parquet",
+        "appid, date, avg_players, peak_players, n_obs n_hourly_obs",
+        "appid INTEGER, date DATE, avg_players DOUBLE, peak_players DOUBLE, n_hourly_obs BIGINT"),
+}
+
+
+def load_backfill(con) -> dict:
+    out = {}
+    for t, (fname, sel, ddl) in BACKFILL_TABLES.items():
+        f = BACKFILL / fname
+        if f.exists():
+            mtime = pd.Timestamp(f.stat().st_mtime, unit="s", tz="UTC")
+            con.execute(f"CREATE OR REPLACE TABLE raw.{t} AS SELECT {sel}, TIMESTAMPTZ '{mtime.isoformat()}' AS fetched_at, "
+                        f"'{fname}' AS source_file FROM read_parquet('{f.as_posix()}')")
+        else:
+            con.execute(f"CREATE TABLE IF NOT EXISTS raw.{t} ({ddl}, fetched_at TIMESTAMPTZ, source_file VARCHAR)")
+        out[t] = con.execute(f"SELECT COUNT(*) FROM raw.{t}").fetchone()[0]
+    return out
 
 
 def _int(v):
@@ -110,7 +149,21 @@ def load_all(db_path: Path = DB) -> dict:
                     "payload_json::JSON, source_file FROM df")
         con.unregister("df")
 
-    for t in ["player_counts", "steamspy_owners", "appdetails", "app_reviews", "steamspy_tags", "deck_compat"]:
+    for f in sorted(RAW.glob("universe/dt=*/*.parquet")):
+        df = pd.read_parquet(f); df["source_file"] = f.relative_to(RAW).as_posix()
+        con.register("df", df)
+        con.execute("INSERT OR IGNORE INTO raw.universe_members SELECT appid, list_source, name, fetched_at, source_file FROM df")
+        con.unregister("df")
+
+    for f in sorted(RAW.glob("prices/dt=*/*.parquet")):
+        df = pd.read_parquet(f); df["source_file"] = f.relative_to(RAW).as_posix()
+        con.register("df", df)
+        con.execute("INSERT OR IGNORE INTO raw.price_checks SELECT appid, fetched_at, ok, has_price, currency, "
+                    "initial_cents, final_cents, discount_pct, source_file FROM df")
+        con.unregister("df")
+
+    counts.update(load_backfill(con))
+    for t in ["player_counts", "steamspy_owners", "appdetails", "app_reviews", "steamspy_tags", "deck_compat", "universe_members", "price_checks"]:
         counts[t] = con.execute(f"SELECT COUNT(*) FROM raw.{t}").fetchone()[0]
     counts["snapshots"] = con.execute("SELECT COUNT(DISTINCT snapshot_id) FROM raw.player_counts").fetchone()[0]
     con.close()

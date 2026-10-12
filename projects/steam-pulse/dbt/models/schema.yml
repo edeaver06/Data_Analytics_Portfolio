@@ -70,3 +70,45 @@ models:
     columns:
       - name: appid
         tests: [unique, not_null]
+  - name: stg_backfill_steamcharts_monthly
+    tests:
+      - dbt_utils_free_unique_combo: {columns: [appid, month]}
+      - avg_le_peak
+      - month_not_future: {column: month}
+  - name: stg_backfill_reviews_monthly
+    columns:
+      - name: reviews_up
+        tests: [not_null]
+    tests:
+      - dbt_utils_free_unique_combo: {columns: [appid, month]}
+      - month_not_future: {column: month}
+  - name: stg_backfill_price_daily
+    columns:
+      - name: discount_pct
+        tests:
+          - in_range: {min: 0, max: 100}
+      - name: appid
+        tests:
+          - relationships: {to: ref('dim_game'), field: appid, config: {severity: warn}}
+    tests:
+      - dbt_utils_free_unique_combo: {columns: [appid, date]}
+  - name: stg_backfill_players_daily
+    columns:
+      - name: appid
+        tests:
+          - relationships: {to: ref('dim_game'), field: appid, config: {severity: warn}}
+    tests:
+      - dbt_utils_free_unique_combo: {columns: [appid, date]}
+      - avg_le_peak
+  - name: fct_monthly_players
+    columns:
+      - name: source
+        tests:
+          - accepted_values: {values: ['steamcharts', 'steam_pulse']}
+      - name: appid
+        tests:
+          - relationships: {to: ref('dim_game'), field: appid, config: {severity: warn}}
+    tests:
+      - dbt_utils_free_unique_combo: {columns: [appid, month, source]}
+      - avg_le_peak
+      - month_not_future: {column: month}

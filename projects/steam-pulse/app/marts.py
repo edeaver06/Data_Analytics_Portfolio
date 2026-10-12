@@ -1,64 +1,81 @@
-"""Load Steam Pulse marts. Prefers built dbt marts (marts.dim_game / marts.fct_daily_players);
-falls back to the same SQL as the dbt models run in-memory on raw tables (read-only), or to a
-parquet extract in app/data/ (for Streamlit Cloud)."""
+"""Load Steam Pulse data for the app from Code Builder's dbt marts (read-only).
+
+Order of preference:
+  1. data/steam_pulse.duckdb (override with STEAM_PULSE_DB), marts.* tables, opened read_only
+  2. parquet extract in app/data/ (written by `python app/marts.py`, used on Streamlit Cloud)
+  3. neither -> DataUnavailable, which the app shows as a clear message
+"""
+import os, sys
 from pathlib import Path
-import sys
 import duckdb, pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-DB = ROOT / "data" / "steam_pulse.duckdb"
-EXTRACT = Path(__file__).resolve().parent / "data"
+DB = Path(os.environ.get("STEAM_PULSE_DB", ROOT / "data" / "steam_pulse.duckdb"))
+EXTRACT = Path(os.environ.get("STEAM_PULSE_EXTRACT", Path(__file__).resolve().parent / "data"))
+TABLES = ["dim_game", "fct_daily_players", "fct_daily_price", "bridge_game_category", "score_inputs", "mart_game_scores", "snapshots"]
 
-STG = """
-create temp view stg_steamspy_owners as
-with ranked as (select *, row_number() over (partition by appid order by fetched_at desc) rn from raw.steamspy_owners)
-select appid, name, developer, publisher, fetched_at, owners_estimate_range,
-  cast(replace(split_part(owners_estimate_range,' .. ',1),',','') as bigint) owners_estimate_low,
-  cast(replace(split_part(owners_estimate_range,' .. ',2),',','') as bigint) owners_estimate_high,
-  positive, negative, case when positive+negative>0 then positive/(positive+negative) end positive_review_share,
-  price_cents/100.0 price_usd, initialprice_cents/100.0 initial_price_usd, discount_pct, ccu_yesterday_peak
-from ranked where rn=1;
-create temp view stg_appdetails as
-with ranked as (select *, row_number() over (partition by appid order by fetched_at desc) rn from raw.appdetails where success)
-select appid, payload->>'$.name' store_name, payload->>'$.type' app_type, cast(payload->>'$.is_free' as boolean) is_free,
-  try_strptime(payload->>'$.release_date.date',['%d %b, %Y','%b %d, %Y','%b %Y'])::date release_date,
-  cast(payload->>'$.price_overview.final' as integer)/100.0 store_price_usd,
-  cast(payload->>'$.metacritic.score' as integer) metacritic_score, payload->>'$.genres[0].description' primary_genre
-from ranked where rn=1;
-create temp view stg_player_counts as
-select snapshot_id, snapshot_ts, cast(snapshot_ts at time zone 'UTC' as date) snapshot_date_utc, appid, player_count
-from raw.player_counts where ok and player_count is not null;
-"""
-DIM = """select s.appid, coalesce(a.store_name,s.name) game_name, s.developer, s.publisher, a.app_type, a.is_free,
-  a.release_date, a.primary_genre, a.metacritic_score, coalesce(a.store_price_usd,s.price_usd) price_usd,
-  s.owners_estimate_range, s.owners_estimate_low, s.owners_estimate_high, s.positive_review_share,
-  a.appid is not null has_store_details,
-  -- extra SteamSpy fields used by the viz layer (not in dim_game yet)
-  s.price_usd as steamspy_price_usd, s.initial_price_usd, s.discount_pct, s.ccu_yesterday_peak, s.positive, s.negative
-from stg_steamspy_owners s left join stg_appdetails a using(appid)"""
-FCT = """with d as (select appid, snapshot_date_utc, count(*) n_snapshots, max(player_count) peak_players_sampled,
-  avg(player_count) avg_players_sampled, min(player_count) min_players_sampled,
-  arg_max(player_count,snapshot_ts) last_players, max(snapshot_ts) last_snapshot_ts from stg_player_counts group by 1,2)
-select *, peak_players_sampled - lag(peak_players_sampled) over (partition by appid order by snapshot_date_utc) peak_change_vs_prev_day from d"""
-SNAPS = "select snapshot_ts, count(*) n_games, sum(player_count) total_players from stg_player_counts group by 1 order by 1"
+class DataUnavailable(RuntimeError):
+    pass
+
+QUERIES = {
+    "dim_game": "select * from marts.dim_game",
+    "fct_daily_players": "select * from marts.fct_daily_players",
+    "fct_daily_price": "select * from marts.fct_daily_price",
+    "bridge_game_category": "select * from marts.bridge_game_category",
+    # Inputs Data Analyst's best_score.py expects: SteamSpy review counts + SteamSpy price (Code Builder's
+    # staging view; the marts only carry the share) and the latest concurrent-player reading.
+    "score_inputs": """select o.appid, o.positive, o.negative, o.price_usd as steamspy_price_usd
+                       from staging.stg_steamspy_owners o""",
+    "mart_game_scores": """select appid, is_software, software_rule, excluded, excluded_reason, review_bayes, player_strength,
+                           value_per_dollar, pct_review_bayes, pct_player_strength, pct_value_per_dollar, composite_score,
+                           composite_rank, price_usd as score_price_usd from marts.mart_game_scores""",
+    "snapshots": """select snapshot_ts, count(*) n_games, sum(player_count) total_players
+                    from staging.stg_player_counts group by 1 order by 1""",
+}
+
+def _from_db():
+    con = duckdb.connect(str(DB), read_only=True)
+    try:
+        return {k: con.sql(q).df() for k, q in QUERIES.items()}
+    finally:
+        con.close()
+
+def load_tables():
+    """Returns (dict of DataFrames, source label). Raises DataUnavailable if no source exists."""
+    if DB.exists():
+        try:
+            return _from_db(), f"dbt marts in {DB.name} (read-only)"
+        except duckdb.Error as e:  # e.g. marts not built yet, or file locked
+            err = e
+    else:
+        err = None
+    if all((EXTRACT / f"{t}.parquet").exists() for t in TABLES):
+        return {t: pd.read_parquet(EXTRACT / f"{t}.parquet") for t in TABLES}, "parquet extract (app/data)"
+    raise DataUnavailable(f"No data source found. Database {DB} {'is missing' if err is None else f'could not be read ({err})'} "
+                          f"and the parquet extract in {EXTRACT} is incomplete. Run the pipeline (dbt build) "
+                          f"or `python app/marts.py` to create the extract.")
 
 def load():
-    """Returns (dim, fct, snaps, source_label)."""
-    if (EXTRACT / "dim_game.parquet").exists() and not DB.exists():
-        r = lambda n: pd.read_parquet(EXTRACT / f"{n}.parquet")
-        return r("dim_game"), r("fct_daily_players"), r("snapshots"), "parquet extract"
-    con = duckdb.connect(str(DB), read_only=True)
-    con.execute("set TimeZone='UTC'")
-    con.execute(STG)
-    dim = con.sql(DIM).df(); fct = con.sql(FCT).df(); snaps = con.sql(SNAPS).df()
-    con.close()
-    return dim, fct, snaps, "raw tables via dbt mart SQL (marts not yet materialized)"
+    """Back-compat: (dim, fct, snaps, source_label) with dim enriched with SteamSpy score inputs."""
+    t, src = load_tables()
+    dim = t["dim_game"].merge(t["score_inputs"], on="appid", how="left")
+    return dim, t["fct_daily_players"], t["snapshots"], src
+
+def load_bridge():
+    t, _ = load_tables()
+    b = t["bridge_game_category"].rename(columns={"attribute_type": "kind", "attribute": "label"})
+    return b
 
 def enrich(dim, fct):
-    latest = fct.sort_values("snapshot_date_utc").groupby("appid").tail(1)[["appid","last_players","snapshot_date_utc"]]
+    latest = fct.sort_values("snapshot_date_utc").groupby("appid").tail(1)[["appid", "last_players", "snapshot_date_utc"]]
     g = dim.merge(latest, on="appid", how="left")
-    g["pricing"] = g["price_usd"].fillna(-1).eq(0).map({True: "Free-to-play", False: "Paid"})
-    g.loc[g["price_usd"].isna(), "pricing"] = "Unknown"
+    g["positive_review_share"] = g["steamspy_positive_share"]
+    g["discount_pct"] = g["store_discount_pct"]            # store details only (449 games); NULL elsewhere
+    g["initial_price_usd"] = g["store_list_price_usd"]
+    # F2P = store is_free (Data Analyst's definition since full coverage); SteamSpy price $0 only as fallback
+    free = g["is_free"].astype("boolean").fillna(g["price_usd"].eq(0))
+    g["pricing"] = free.map({True: "Free-to-play", False: "Paid"})
+    g.loc[free.isna(), "pricing"] = "Unknown"
     g["on_sale"] = g["discount_pct"].fillna(0) > 0
     g["owners_mid"] = (g["owners_estimate_low"] + g["owners_estimate_high"]) / 2
     ref = pd.Timestamp("2026-10-12")
@@ -66,55 +83,53 @@ def enrich(dim, fct):
     g["players_per_1k_owners"] = 1000 * g["last_players"] / g["owners_mid"].where(g["owners_mid"] > 0)
     return g
 
-def export_parquet():
-    dim, fct, snaps, _ = load(); EXTRACT.mkdir(exist_ok=True)
-    for n, d in [("dim_game", dim), ("fct_daily_players", fct), ("snapshots", snaps)]:
-        d.to_parquet(EXTRACT / f"{n}.parquet", index=False)
+# ---- Composite score: marts.mart_game_scores ------------------------------------------
+# Code Builder ported Data Analyst's best_score.py into the mart (verified 2026-10-12: 991 scores and ranks
+# identical, same 8 software apps excluded; GTA IV is excluded for no_player_count, which best_score also drops).
+# So best_score.py is no longer imported at runtime.
+WEIGHTS = {"review_bayes": 0.45, "player_strength": 0.35, "value_per_dollar": 0.20}  # mart_game_scores.sql
+COMPONENTS = list(WEIGHTS)
 
-
-# ---- Composite score (Data Analyst, analysis/src/best_score.py) ------------------------
-# Reused, not reimplemented: we import best_score.score() and feed it the same population and
-# columns as analysis/sql/00_views.sql a_game (SteamSpy price, SteamSpy reviews, snapshot CCU).
-sys.path.insert(0, str(ROOT / "analysis" / "src"))
-import best_score  # noqa: E402
-SCORE_JSON = ROOT / "analysis" / "best_score_results.json"
-COMPONENTS = ["review_bayes", "player_strength", "value_per_dollar"]
-
-def add_score(g):
-    pop = g[g.last_players.notna() & ((g.positive + g.negative) > 0)]
-    inp = pop[["appid", "positive", "negative"]].assign(player_count=pop.last_players, price_usd=pop.steamspy_price_usd)
-    s = best_score.score(inp)
-    w = best_score.WEIGHTS
-    for k in COMPONENTS:  # weighted parts sum to the score (active weights sum to 1)
-        s[k + "_part"] = w[k] * s[k].rank(pct=True) / sum(w[c] for c in COMPONENTS)
-    keep = ["appid", "score"] + COMPONENTS + [k + "_part" for k in COMPONENTS]
-    out = g.merge(s[keep], on="appid", how="left")
-    out["score_rank"] = out.score.rank(ascending=False, method="min")
+def add_score(g, include_software=False):
+    """Attach mart scores. The mart does not score software, so include_software=True only adds the
+    8 software apps back to the list, unscored (score NaN), flagged is_software."""
+    t, _ = load_tables(); ms = t["mart_game_scores"].copy()
+    ms = ms.rename(columns={"composite_score": "score", "composite_rank": "score_rank"})
+    for k, w in WEIGHTS.items():  # weighted parts sum to the score
+        ms[k + "_part"] = w * ms["pct_" + k] / sum(WEIGHTS.values())
+    keep = ["appid", "score", "score_rank", "is_software", "excluded", "excluded_reason", "score_price_usd"] + COMPONENTS + [k + "_part" for k in COMPONENTS]
+    out = g.merge(ms[keep], on="appid", how="left")
+    out["is_software"] = out.is_software.fillna(False).astype(bool)
+    out["show_in_finder"] = out.score.notna() | (include_software & out.is_software)
     return out
 
-# ---- Game Finder support -------------------------------------------------------------
-# No Code Builder category bridge or score mart exists yet (checked dbt/models/marts and the DB),
-# so this builds a long-form bridge from raw.appdetails (store categories + genres) in memory.
-BRIDGE = """
-select appid, 'category' as kind, c->>'description' as label from raw.appdetails,
-  unnest(from_json(payload->'$.categories','["json"]')) t(c) where success
-union all
-select appid, 'genre', g->>'description' from raw.appdetails,
-  unnest(from_json(payload->'$.genres','["json"]')) t(g) where success
-"""
-FEATS = """select appid, payload->>'$.controller_support' controller_support,
-  try_strptime(payload->>'$.release_date.date',['%d %b, %Y','%b %d, %Y','%b %Y'])::date release_date
-  from raw.appdetails where success qualify row_number() over (partition by appid order by fetched_at desc)=1"""
+HISTORY_JSON = ROOT / "analysis" / "history_results.json"
 
-def load_bridge():
-    if (EXTRACT / "game_labels.parquet").exists() and not DB.exists():
-        return pd.read_parquet(EXTRACT / "game_labels.parquet")
-    con = duckdb.connect(str(DB), read_only=True)
-    b = con.sql(f"select distinct * from ({BRIDGE})").df(); con.close()
-    return b
+def load_history():
+    """Data Analyst's history results (SteamCharts monthly retention, 2019-20 discount DiD). None if absent."""
+    import json
+    return json.loads(HISTORY_JSON.read_text()) if HISTORY_JSON.exists() else None
 
-def export_bridge():
-    EXTRACT.mkdir(exist_ok=True); load_bridge().to_parquet(EXTRACT / "game_labels.parquet", index=False)
+RESULTS_JSON = ROOT / "analysis" / "results.json"
+
+def load_results():
+    """Data Analyst's snapshot results (f2p test, genres). None if absent."""
+    import json
+    return json.loads(RESULTS_JSON.read_text()) if RESULTS_JSON.exists() else None
+
+def coverage(dim):
+    return {"games": len(dim), "tags": int(dim.has_tags.fillna(False).sum()),
+            "deck": int(dim.deck_status.notna().sum()), "store_details": int(dim.has_store_details.fillna(False).sum())}
+
+def export_parquet():
+    t, src = load_tables()
+    if not src.startswith("dbt marts"):
+        raise SystemExit("Refusing to export: source is not the database.")
+    EXTRACT.mkdir(exist_ok=True)
+    for n, d in t.items():
+        d.to_parquet(EXTRACT / f"{n}.parquet", index=False)
+    for old in ["game_labels.parquet"]:  # superseded by bridge_game_category
+        (EXTRACT / old).unlink(missing_ok=True)
 
 if __name__ == "__main__":
-    export_parquet(); export_bridge()
+    export_parquet()

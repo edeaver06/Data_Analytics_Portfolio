@@ -1,0 +1,6 @@
+.venv/
+data/backfill/mendeley/
+data/backfill/steamcharts/
+data/backfill/reviews/
+data/backfill/*.log
+history_stdout.txt

@@ -9,7 +9,7 @@ DB = ROOT.parent / "data" / "steam_pulse.duckdb"
 
 def connect(db=DB):
     c = duckdb.connect()
-    c.execute(f"attach '{db}' as sp (read_only)")
+    c.execute(f"attach '{db}' as steam_pulse (read_only)")
     c.execute((ROOT / "sql" / "00_views.sql").read_text())
     return c
 

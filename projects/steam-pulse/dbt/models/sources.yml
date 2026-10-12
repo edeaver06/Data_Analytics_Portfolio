@@ -17,3 +17,15 @@ sources:
         description: SteamSpy per-app user tags + owner ESTIMATE range, one row per fetch.
       - name: deck_compat
         description: Steam Deck compatibility (store saleaction endpoint, undocumented). 3=Verified 2=Playable 1=Unsupported 0=Unknown.
+      - name: universe_members
+        description: New-release lists per run (SteamSpy top100in2weeks, store featuredcategories new_releases).
+      - name: backfill_steamcharts_monthly
+        description: "SteamCharts.com monthly avg/peak concurrent players (HTML table). Attribution: Data: SteamCharts.com. Terms unclear (no ToS/robots)."
+      - name: backfill_reviews_monthly
+        description: Steam store appreviewhistogram monthly up/down counts, English only.
+      - name: backfill_mendeley_price_daily
+        description: "Vihanga et al., Steam Games Dataset, Mendeley Data v1, doi:10.17632/ycy3sy3vj2.1, CC BY 4.0. Daily price 2019-04..2020-08."
+      - name: backfill_mendeley_players_daily
+        description: "Same Mendeley dataset (CC BY 4.0). Hourly player counts aggregated to daily mean/max 2017-12..2020-08."
+      - name: price_checks
+        description: Every-run batched appdetails?filters=price_overview for all tracked games (cc=us, USD).

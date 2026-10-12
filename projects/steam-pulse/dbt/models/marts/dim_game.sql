@@ -1,16 +1,39 @@
 -- One row per game in the tracked universe. owners_* columns are SteamSpy ESTIMATES (bucketed ranges).
-with latest_reviews as (
+with universe as (
+    -- tracked universe: SteamSpy top-1000 (latest list) UNION every app ever seen on a new-release list
+    select appid, 'steamspy_top1000' as universe_source, null::varchar as list_name from {{ ref('stg_steamspy_owners') }}
+    union all
+    select appid, string_agg(distinct list_source, ',' order by list_source), any_value(name)
+    from {{ source('raw', 'universe_members') }}
+    where appid not in (select appid from {{ ref('stg_steamspy_owners') }})
+    group by appid
+),
+new_release_seen as (
+    select appid, min(fetched_at) as first_seen_on_new_release_list from {{ source('raw', 'universe_members') }} group by 1
+),
+launch as (
+    select appid, case when min(month) > date '2012-08-01' then min(month) end as launch_month_observed
+    from {{ ref('stg_backfill_steamcharts_monthly') }} group by 1
+),
+latest_reviews as (
     select * from {{ ref('stg_app_reviews') }}
     qualify row_number() over (partition by appid order by fetched_at desc) = 1
 )
 select
-    s.appid,
-    coalesce(a.store_name, s.name) as game_name,
+    u.appid,
+    coalesce(a.store_name, s.name, u.list_name) as game_name,
+    u.universe_source,
+    nr.first_seen_on_new_release_list,
+    lm.launch_month_observed,
     s.developer, s.publisher,
     a.app_type, a.is_free, a.release_date, a.primary_genre, a.genres, a.metacritic_score,
     coalesce(a.store_price_usd, s.price_usd) as price_usd,
     a.store_list_price_usd, a.store_discount_pct, a.is_on_sale,
     a.categories, t.tags, t.n_tags,
+    case when t.steamspy_genre_text <> '' then list_sort(string_split(t.steamspy_genre_text, ', ')) end as steamspy_genres,
+    -- best-available genre list: store genres, else SteamSpy genres (for software exclusion rules, e.g. 'Utilities')
+    coalesce(a.genres, case when t.steamspy_genre_text <> '' then list_sort(string_split(t.steamspy_genre_text, ', ')) end) as genres_any,
+    case when a.genres is not null then 'store' when t.steamspy_genre_text <> '' then 'steamspy' end as genres_source,
     a.developers, a.publishers, a.on_windows, a.on_mac, a.on_linux,
     coalesce(a.supported_languages, t.steamspy_languages) as languages,
     a.required_age, a.achievements_total, a.store_recommendations, a.coming_soon,
@@ -32,7 +55,10 @@ select
     a.appid is not null as has_store_details,
     t.appid is not null as has_tags,
     r.appid is not null as has_reviews
-from {{ ref('stg_steamspy_owners') }} s
+from universe u
+left join {{ ref('stg_steamspy_owners') }} s using (appid)
+left join new_release_seen nr using (appid)
+left join launch lm using (appid)
 left join {{ ref('stg_appdetails') }} a using (appid)
 left join {{ ref('stg_steamspy_tags') }} t using (appid)
 left join latest_reviews r using (appid)

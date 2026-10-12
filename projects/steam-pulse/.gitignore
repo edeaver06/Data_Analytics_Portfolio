@@ -2,10 +2,21 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
-data/
+/data/
+app/data/*
+!app/data/*.parquet
+# backfill: keep provenance + small CC BY-derived table only; raw crawls and Valve/SteamCharts-derived tables stay local
+analysis/data/**
+!analysis/data/
+!analysis/data/backfill/
+!analysis/data/backfill/SOURCES.md
+!analysis/data/backfill/tables/
+!analysis/data/backfill/tables/event_study.csv
 logs/
 dbt/target/
 dbt/logs/
 dbt/dbt_packages/
 .user.yml
 .DS_Store
+*.duckdb
+*.duckdb.wal

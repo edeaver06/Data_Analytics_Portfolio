@@ -1,15 +1,17 @@
 {
   "coverage": {
-    "games": 1000,
-    "games_with_players": 999,
-    "games_with_store_details": 148,
-    "n_snapshots": 1,
+    "games": 1030,
+    "games_with_players": 1029,
+    "games_with_store_details": 1029,
+    "games_with_release_date": 1016,
+    "store_details_with_players": 1028,
+    "n_snapshots": 4,
     "first_snapshot": "2026-10-12 08:03:50-06",
-    "last_snapshot": "2026-10-12 08:03:50-06",
+    "last_snapshot": "2026-10-12 09:29:18-06",
     "n_days": 1,
-    "min_release": "1998-11-19",
-    "max_release": "2026-09-09",
-    "released_last_30d": 0
+    "min_release": "1997-11-14",
+    "max_release": "2026-10-12",
+    "released_last_30d": 31
   },
   "readiness": {
     "launch_decay": false,
@@ -21,243 +23,273 @@
   "f2p": [
     {
       "segment": "free",
-      "n": 235,
-      "med_ccu": 135.0,
-      "med_peak_yday": 172.0,
-      "med_pos_share": 0.7912326528857213,
-      "med_reviews": 26682.0
+      "n": 152,
+      "med_ccu": 542.0,
+      "med_pos_share": 0.8022409873335499,
+      "med_reviews": 30870.0
     },
     {
       "segment": "paid",
-      "n": 764,
-      "med_ccu": 551.0,
-      "med_peak_yday": 435.0,
-      "med_pos_share": 0.9022300252553823,
-      "med_reviews": 49938.0
+      "n": 877,
+      "med_ccu": 411.0,
+      "med_pos_share": 0.8936179634187131,
+      "med_reviews": 45389.5
     }
   ],
-  "f2p_mwu_p": 4.829759473482433e-11,
+  "f2p_mwu_p": 0.4660410927967954,
   "discount": [
     {
       "segment": "full_price",
-      "n": 605,
-      "med_ccu": 564.0,
-      "med_ccu_per_review": 0.01154129115320949
+      "n": 751,
+      "med_ccu": 403.0,
+      "med_ccu_per_review": 0.01019795283988062
     },
     {
       "segment": "on_sale",
-      "n": 159,
-      "med_ccu": 463.0,
-      "med_ccu_per_review": 0.010516777613676092
+      "n": 126,
+      "med_ccu": 519.5,
+      "med_ccu_per_review": 0.017796437952202267
     }
   ],
-  "discount_mwu_p": 0.979864543218651,
+  "discount_mwu_p": 0.7885002878121752,
   "genre": [
     {
       "genre": "Action",
-      "n": 114,
-      "med_ccu": 6479.0,
-      "total_ccu": 3964255.0,
-      "med_pos_share": 0.8758253270750223
-    },
-    {
-      "genre": "Free To Play",
-      "n": 40,
-      "med_ccu": 1697.0,
-      "total_ccu": 2641836.0,
-      "med_pos_share": 0.7779827035469559
+      "n": 686,
+      "med_ccu": 342.5,
+      "total_ccu": 4709282.0,
+      "med_pos_share": 0.8732443813693238
     },
     {
       "genre": "Adventure",
-      "n": 62,
-      "med_ccu": 10255.5,
-      "total_ccu": 2003253.0,
-      "med_pos_share": 0.8858488732393446
+      "n": 392,
+      "med_ccu": 617.5,
+      "total_ccu": 2518277.0,
+      "med_pos_share": 0.885702204254637
+    },
+    {
+      "genre": "Free To Play",
+      "n": 175,
+      "med_ccu": 185.0,
+      "total_ccu": 2505016.0,
+      "med_pos_share": 0.769697989082255
     },
     {
       "genre": "RPG",
-      "n": 43,
-      "med_ccu": 18322.0,
-      "total_ccu": 1153179.0,
-      "med_pos_share": 0.8963099586476484
-    },
-    {
-      "genre": "Massively Multiplayer",
-      "n": 26,
-      "med_ccu": 4633.5,
-      "total_ccu": 1111197.0,
-      "med_pos_share": 0.7501542887167947
+      "n": 266,
+      "med_ccu": 711.5,
+      "total_ccu": 1698245.0,
+      "med_pos_share": 0.843949907742854
     },
     {
       "genre": "Indie",
-      "n": 50,
-      "med_ccu": 8257.5,
-      "total_ccu": 1035260.0,
-      "med_pos_share": 0.929559906180051
+      "n": 378,
+      "med_ccu": 300.0,
+      "total_ccu": 1640112.0,
+      "med_pos_share": 0.9138865936789919
+    },
+    {
+      "genre": "Massively Multiplayer",
+      "n": 119,
+      "med_ccu": 486.0,
+      "total_ccu": 1178094.0,
+      "med_pos_share": 0.7503207961447432
     },
     {
       "genre": "Simulation",
-      "n": 34,
-      "med_ccu": 12019.5,
-      "total_ccu": 710027.0,
-      "med_pos_share": 0.8824631054269468
+      "n": 207,
+      "med_ccu": 948.0,
+      "total_ccu": 1158427.0,
+      "med_pos_share": 0.9022493751735629
     },
     {
       "genre": "Strategy",
-      "n": 22,
-      "med_ccu": 11052.5,
-      "total_ccu": 373816.0,
-      "med_pos_share": 0.8738856764859766
+      "n": 209,
+      "med_ccu": 721.0,
+      "total_ccu": 848738.0,
+      "med_pos_share": 0.8801813489869836
     },
     {
       "genre": "Casual",
-      "n": 17,
-      "med_ccu": 3730.0,
-      "total_ccu": 251532.0,
-      "med_pos_share": 0.9120367035911323
+      "n": 139,
+      "med_ccu": 361.0,
+      "total_ccu": 486562.0,
+      "med_pos_share": 0.9031960461285008
     },
     {
       "genre": "Early Access",
-      "n": 9,
-      "med_ccu": 21022.0,
-      "total_ccu": 206606.0,
-      "med_pos_share": 0.9650510121631958
+      "n": 32,
+      "med_ccu": 685.0,
+      "total_ccu": 276683.0,
+      "med_pos_share": 0.8004551134928313
     },
     {
       "genre": "Sports",
-      "n": 10,
-      "med_ccu": 970.0,
-      "total_ccu": 100815.0,
-      "med_pos_share": 0.5792976902643923
+      "n": 40,
+      "med_ccu": 847.0,
+      "total_ccu": 174855.0,
+      "med_pos_share": 0.835625047103837
+    },
+    {
+      "genre": "Racing",
+      "n": 29,
+      "med_ccu": 1096.0,
+      "total_ccu": 152369.0,
+      "med_pos_share": 0.8821849613406283
     }
   ],
   "age": [
     {
       "bucket_years": 0,
-      "n": 2,
-      "med_ccu": 78105.5
+      "n": 39,
+      "med_ccu": 6.0
     },
     {
       "bucket_years": 1,
-      "n": 6,
-      "med_ccu": 16197.5
+      "n": 21,
+      "med_ccu": 5896.0
     },
     {
       "bucket_years": 2,
-      "n": 10,
-      "med_ccu": 17332.5
+      "n": 44,
+      "med_ccu": 5199.0
     },
     {
       "bucket_years": 3,
-      "n": 7,
-      "med_ccu": 15698.0
+      "n": 43,
+      "med_ccu": 1304.0
     },
     {
       "bucket_years": 4,
-      "n": 8,
-      "med_ccu": 2716.5
+      "n": 58,
+      "med_ccu": 989.0
     },
     {
       "bucket_years": 5,
-      "n": 7,
-      "med_ccu": 18954.0
+      "n": 56,
+      "med_ccu": 798.0
     },
     {
       "bucket_years": 6,
-      "n": 7,
-      "med_ccu": 11763.0
+      "n": 70,
+      "med_ccu": 1532.5
     },
     {
       "bucket_years": 7,
-      "n": 11,
-      "med_ccu": 7370.0
+      "n": 75,
+      "med_ccu": 699.0
     },
     {
       "bucket_years": 8,
-      "n": 12,
-      "med_ccu": 5876.0
+      "n": 73,
+      "med_ccu": 672.0
     },
     {
       "bucket_years": 9,
-      "n": 13,
-      "med_ccu": 8309.0
+      "n": 92,
+      "med_ccu": 256.5
     },
     {
       "bucket_years": 10,
-      "n": 13,
-      "med_ccu": 10651.0
+      "n": 77,
+      "med_ccu": 244.0
     },
     {
       "bucket_years": 11,
-      "n": 14,
-      "med_ccu": 10590.5
+      "n": 71,
+      "med_ccu": 378.0
     },
     {
       "bucket_years": 12,
-      "n": 7,
-      "med_ccu": 177.0
+      "n": 70,
+      "med_ccu": 135.0
     },
     {
       "bucket_years": 13,
-      "n": 9,
-      "med_ccu": 10804.0
+      "n": 53,
+      "med_ccu": 167.0
     },
     {
       "bucket_years": 14,
-      "n": 4,
-      "med_ccu": 1693.0
+      "n": 43,
+      "med_ccu": 276.0
     },
     {
       "bucket_years": 15,
-      "n": 2,
-      "med_ccu": 27213.0
+      "n": 28,
+      "med_ccu": 118.5
     },
     {
       "bucket_years": 16,
-      "n": 3,
-      "med_ccu": 13680.0
+      "n": 28,
+      "med_ccu": 146.5
+    },
+    {
+      "bucket_years": 17,
+      "n": 24,
+      "med_ccu": 183.0
+    },
+    {
+      "bucket_years": 18,
+      "n": 10,
+      "med_ccu": 118.5
     },
     {
       "bucket_years": 19,
-      "n": 3,
-      "med_ccu": 22075.0
+      "n": 23,
+      "med_ccu": 97.0
     },
     {
       "bucket_years": 20,
-      "n": 1,
-      "med_ccu": 1.0
+      "n": 4,
+      "med_ccu": 25.5
     },
     {
       "bucket_years": 21,
       "n": 3,
-      "med_ccu": 1716.0
+      "med_ccu": 1941.0
     },
     {
       "bucket_years": 22,
-      "n": 2,
-      "med_ccu": 282.5
+      "n": 3,
+      "med_ccu": 62.0
     },
     {
       "bucket_years": 23,
       "n": 1,
-      "med_ccu": 112.0
+      "med_ccu": 89.0
+    },
+    {
+      "bucket_years": 24,
+      "n": 1,
+      "med_ccu": 94.0
     },
     {
       "bucket_years": 25,
-      "n": 2,
-      "med_ccu": 5701.0
+      "n": 3,
+      "med_ccu": 54.0
+    },
+    {
+      "bucket_years": 26,
+      "n": 1,
+      "med_ccu": 115.0
     },
     {
       "bucket_years": 27,
       "n": 1,
-      "med_ccu": 911.0
+      "med_ccu": 1000.0
+    },
+    {
+      "bucket_years": 28,
+      "n": 1,
+      "med_ccu": 55.0
     }
   ],
   "sentiment_spearman": {
-    "rho": 0.22410829551131028,
-    "p": 8.586270696004371e-13,
+    "rho": 0.22210352826049284,
+    "p": 1.382154937527471e-12,
     "n": 995
   },
-  "top10_share_of_ccu": 0.423327844624282,
-  "total_ccu": 6496974
+  "top10_share_of_ccu": 0.4008739779416196,
+  "total_ccu": 6222125
 }

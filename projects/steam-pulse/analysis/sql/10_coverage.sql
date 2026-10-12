@@ -1,7 +1,9 @@
 select
  (select count(*) from a_game) games,
  (select count(*) from a_game where player_count is not null) games_with_players,
- (select count(*) from a_game where release_date is not null) games_with_store_details,
+ (select count(*) from steam_pulse.marts.dim_game where has_store_details) games_with_store_details,
+ (select count(*) from a_game where release_date is not null) games_with_release_date,
+ (select count(*) from steam_pulse.marts.dim_game d join a_game g using(appid) where d.has_store_details and g.player_count is not null) store_details_with_players,
  (select count(distinct snapshot_ts) from a_players) n_snapshots,
  (select min(snapshot_ts)::varchar from a_players) first_snapshot,
  (select max(snapshot_ts)::varchar from a_players) last_snapshot,
