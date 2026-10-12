@@ -1,113 +1,109 @@
 # Evan Deaver: Data Analyst Portfolio
 
-### About
-Hi, I'm Evan, a data analyst based in Austin, Texas. I also spend a lot of time on my ranch in Pringle, SD. I enjoy nature, animals and "the simple life", and I've had a passion for data since I was a teenager. I work in Python, R, SQL and Tableau, turning raw data into clear, actionable business recommendations. I also dabble in app development, automation and machine learning.
+## About
+Hi, I'm Evan! I'm a Google-certified data analyst working in SQL, Python, R and Excel, and I'm moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish Tableau dashboards, check models for flaws such as target leakage, and do data QA on AI model outputs.
 
-I'm looking for **junior remote data analyst and data engineer roles**. This portfolio is a work in progress.
+This repository collects my projects in one place. Each folder in `projects/` is self-contained, with its own README, data, code and tests.
 
----
-
-### Table of Contents
+## Table of Contents
+- [About](#about)
 - [Portfolio Projects](#portfolio-projects)
-- [In Progress](#in-progress)
-- [Earlier Work](#earlier-work)
-- [Tableau & Dashboards](#tableau--dashboards)
-- [Technical Skills](#technical-skills)
-- [Approach](#approach)
+- [In Progress & Earlier Work](#in-progress--earlier-work)
+- [Skills](#skills)
+- [Experience](#experience)
+- [Education](#education)
 - [Certificates](#certificates)
 - [Contact](#contact)
 
----
+## Portfolio Projects
+| | Project | Result |
+|---|---|---|
+| <img src="projects/olist-ecommerce/images/08_review_timing.png" width="240"> | [**Olist: When the Parcel Is Late, the Stars Fall**](#olist-ecommerce) | Reviewed after delivery, late orders score 3.78★ vs 4.29★ on time. The least reliable seller quartile is late 9.6% vs 6.9% for the best. |
+| <img src="projects/nfl-closing-line/images/03_strategy_win_rates.png" width="240"> | [**Can You Beat the NFL Closing Line?**](#nfl-closing-line) | No popular angle beats the 52.38% breakeven at -110 in a statistically defensible way. Closing spreads are unbiased (slope 1.04). |
+| <img src="projects/markets-vs-polls/images/01_brier_by_horizon.png" width="240"> | [**Markets vs Polls: Who Called It Better?**](#markets-vs-polls) | 1 day out: Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls). This is one election, so it isn't evidence that markets beat polls in general. |
+| <img src="projects/google-fiber-fcr/images/wifi_tech_share_by_market.png" width="240"> | [**Google Fiber: Repeat Calls & First-Contact Resolution**](#google-fiber-fcr) | Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls. |
 
-### Portfolio Projects
+<a id="olist-ecommerce"></a>
+### Olist: When the Parcel Is Late, the Stars Fall
+**Code:** [`projects/olist-ecommerce`](projects/olist-ecommerce)
 
-| Project | Business question | Tools | Link |
-|---|---|---|---|
-| **Olist: Late Deliveries Are the Review Killer** | How much do late deliveries hurt reviews, and who or where causes them? | DuckDB SQL, Python, pytest | [Repo](https://github.com/edeaver06/olist-ecommerce) |
-| **Can You Beat the NFL Closing Line?** | Is the betting market efficient, and do popular angles beat the -110 vig? | DuckDB SQL, Python (statsmodels OLS, binomial tests), pytest | [Repo](https://github.com/edeaver06/nfl-closing-line) |
-| **Markets vs Polls: Who Called It Better?** | Were 2024 Polymarket and Kalshi state prices better calibrated than a poll-average forecast? | Python (APIs), DuckDB SQL, pytest | [Repo](https://github.com/edeaver06/markets-vs-polls) |
-| **Google Fiber: Repeat Calls & First-Contact Resolution** | Which support categories and markets drive 7-day repeat calls? | Python (pandas, matplotlib), DuckDB SQL, pytest, Plotly | [Repo](https://github.com/edeaver06/google-fiber-fcr) |
-| **Operational Risk Briefing: Strategic Audit Prioritization** | Which operational units should auditors prioritize? | R, Random Forest, tidyverse, ggplot2 | [RPubs report](https://rpubs.com/slammerjammer/1422063) |
-| **The Synthetic Predator: AI-Automation in 2025 Bitcoin Scams** | Does word-complexity variability separate scam lures from human text? | R, tidyverse, ggplot2 | [RPubs report](https://rpubs.com/slammerjammer/1423363) |
+**Goal:** Measure how late deliveries affect review scores, and find which sellers and routes cause them.
 
-#### Olist: Late Deliveries Are the Review Killer (SQL + Python)
-A SQL analysis of 99,441 orders from a Brazilian e-commerce marketplace.
-- Only **6.8%** of orders arrive late, but a late order averages **2.27★ vs 4.29★** on time. **62.4%** of late orders get a 1–2★ review, compared with **9.3%** of on-time orders.
-- It's dose-response: once an order is 8–14 days late, **80%** of reviews are 1–2★.
-- The worst seller quartile is late **12.0%** of the time vs **1.7%** for the best. The worst lane, São Paulo → Alagoas, is late **24.0%** of the time.
-- Growth is strong (**+138%** GMV, Jan–Aug 2018 vs 2017), but only **3.0%** of customers ever order twice.
-- Layered DuckDB marts (window functions, `QUALIFY`, cohorts, Pareto), grain traps handled, and **43 pytest tests** pin every headline number.
+**Description:** 99,441 orders from a Brazilian e-commerce marketplace, modeled in layered DuckDB SQL marts.
 
-#### Can You Beat the NFL Closing Line? (SQL + Python stats)
-Covers 7,354 games from 1999 through early 2026.
-- Closing spreads are unbiased (slope 1.04, 95% CI 0.99–1.09), but the typical miss is still 10.3 points per game.
-- After removing the vig, moneylines are well calibrated (Brier 0.211 vs 0.250 for a coin flip).
-- Famous angles fail. Home underdogs cover 50.5% and primetime overs hit 48.7%, both below the **52.38%** breakeven at -110.
-- Wind 15+ mph unders went 57.0%, but they don't beat the vig after Holm correction (p = 0.09).
-- Uses OLS with robust standard errors, Wilson CIs, Holm correction and a walk-forward check, and ends with a responsible-gambling takeaway.
+**Skills:** data modeling, window functions, cohort analysis, hypothesis testing, automated testing (70 tests).
 
-#### Markets vs Polls: Who Called It Better? (APIs + SQL + forecast scoring)
-Scores the 2024 US presidential race state by state, neutrally (accuracy only, no side taken).
-- At 1 day out across 35 states, the Brier score (lower is better) was **0.042** for Polymarket, **0.043** for Kalshi and **0.053** for the poll average. Both markets beat the polls at every matched horizon from 21 days to 1 day out.
-- Why: the polls missed in the same direction almost everywhere, with the actual margin on average **3.2 points** more Republican than the poll average. With n = 1 election, this is not evidence that markets beat polls in general.
-- Data comes from the Polymarket and Kalshi public APIs, an archived 538 polls CSV and MIT Election Lab results. Uses a paired bootstrap, a σ sensitivity check and a test that no data after each cutoff is used.
+**Technology:** SQL (DuckDB), Python, pandas, pytest.
 
-#### Google Fiber: Repeat Calls & FCR (Python + SQL)
-Google Data Analytics capstone scenario: 3 markets, 5 problem types, Q1 2022.
-- **Wi-Fi & Internet + Technical Troubleshooting account for 80.2% of repeat calls.** The share varies by market (87.1%, 89.3%, 66.5%).
-- Market_3 has the highest repeat rate (44.7%), and its Billing rows are flagged as a likely data-quality issue.
-- Scheduling: 60.6% repeat rate (1,469 repeat calls).
-- The metrics are built in both pandas and DuckDB SQL (CTEs, window functions), and a pytest confirms the two agree. Includes an interactive Plotly dashboard.
+**Results:** Reviewed after delivery, late orders score 3.78★ vs 4.29★ on time. The least reliable seller quartile is late 9.6% vs 6.9% for the best.
 
-#### Operational Risk Briefing (R)
-Trained a Random Forest model to rank risk drivers and grouped operational units into risk tiers, so field audit effort can go to the highest-risk clusters.
+<a id="nfl-closing-line"></a>
+### Can You Beat the NFL Closing Line?
+**Code:** [`projects/nfl-closing-line`](projects/nfl-closing-line)
 
-#### The Synthetic Predator (R)
-A forensic text analysis comparing word length and its coefficient of variation in 2025 Bitcoin scam lures against a human baseline.
+**Goal:** Test whether the NFL betting market is efficient and whether popular betting angles beat the -110 vig.
 
----
+**Description:** 7,354 games from 1999 through early 2026, using nflverse schedule and line data.
 
-### In Progress
-- **Steam Pulse** (Python, dbt, DuckDB): an end-to-end data pipeline built on Steam data. *In progress.*
+**Skills:** regression, calibration, binomial tests, multiple-testing correction, walk-forward validation.
 
----
+**Technology:** SQL (DuckDB), Python, statsmodels, pytest.
 
-### Earlier Work
-- **Cyclistic Bike-Share: Casual vs. Annual Riders** (R, dplyr, ggplot2): Google Data Analytics capstone; usage-pattern EDA and conversion recommendations. [RPubs report](https://rpubs.com/slammerjammer/1371255)
+**Results:** No popular angle beats the 52.38% breakeven at -110 in a statistically defensible way. Closing spreads are unbiased (slope 1.04).
 
----
+<a id="markets-vs-polls"></a>
+### Markets vs Polls: Who Called It Better?
+**Code:** [`projects/markets-vs-polls`](projects/markets-vs-polls)
 
-### Tableau & Dashboards
-- **Tableau Public:** [Evan Deaver on Tableau Public](https://public.tableau.com/app/profile/evan.deaver/vizzes)
+**Goal:** Score how accurately prediction markets and poll averages forecast the 2024 US presidential race, state by state.
 
----
+**Description:** Polymarket and Kalshi public APIs, an archived 538 polls CSV, and MIT Election Lab results.
 
-### Technical Skills
-- **Python:** pandas, NumPy, matplotlib, seaborn, Plotly, Jupyter, pytest, statistical testing
-- **SQL:** CTEs, window functions, QUALIFY, cohorts, joins, aggregations (DuckDB)
-- **Data engineering:** layered SQL marts, dbt (in progress), reproducible pipelines, data tests
-- **R:** tidyverse, dplyr, ggplot2, randomForest, RMarkdown
-- **Visualization / BI:** Tableau, Plotly
-- **Spreadsheets:** Excel (pivot tables, lookups, formulas)
-- **Methods:** EDA, data cleaning and validation, hypothesis testing, classification, feature importance
+**Skills:** API ingestion, joining time series across sources, Brier scoring, bootstrap confidence intervals.
 
-### Approach
-- **Clear problem definition:** understand the business context before writing code.
-- **Rigorous methodology:** use appropriate statistical methods and check the results.
-- **Data-driven storytelling:** turn analysis into clear, actionable recommendations for decision-makers.
+**Technology:** Python, SQL (DuckDB), pytest.
 
----
+**Results:** 1 day out: Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls). This is one election, so it isn't evidence that markets beat polls in general.
 
-### Certificates
-- **Google Data Analytics Professional Certificate:** Google / Coursera ([Verify](https://www.coursera.org/account/accomplishments/specialization/3JJSOM5SNM00))
-- **Python:** Kaggle ([Verify](https://www.kaggle.com/learn/certification/evandeaver/python))
-- **Intro to Machine Learning:** Kaggle ([Verify](https://www.kaggle.com/learn/certification/evandeaver/intro-to-machine-learning))
+<a id="google-fiber-fcr"></a>
+### Google Fiber: Repeat Calls & First-Contact Resolution
+**Code:** [`projects/google-fiber-fcr`](projects/google-fiber-fcr)
 
----
+**Goal:** Find which support categories and markets drive 7-day repeat calls.
 
-### Contact
+**Description:** Google Data Analytics capstone scenario: 3 markets, 5 problem types, Q1 2022.
+
+**Skills:** data cleaning, aggregation, SQL/Python parity testing, dashboarding.
+
+**Technology:** Python, pandas, SQL (DuckDB), Plotly, pytest.
+
+**Results:** Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls.
+
+## In Progress & Earlier Work
+- **[Steam Pulse](projects/steam-pulse)** *(in progress)*: a scheduled pipeline tracking about 1,000 Steam games (Python, dbt, DuckDB).
+- **[Operational Risk Briefing](https://rpubs.com/slammerjammer/1422063)** (R, Random Forest), **[The Synthetic Predator](https://rpubs.com/slammerjammer/1423363)** (R), **[Cyclistic bike-share](https://rpubs.com/slammerjammer/1371255)** (R, Google DA capstone)
+- **[Tableau Public dashboards](https://public.tableau.com/app/profile/evan.deaver/vizzes)**
+
+To run a project: `cd projects/<name> && pip install -r requirements.txt && pytest -q` (or `make test` from the root).
+
+## Skills
+- **Languages & querying:** SQL (DuckDB, Google BigQuery, PostgreSQL), Python (pandas), R (tidyverse, ggplot2, caret), dbt, Advanced Excel (pivot tables, Power Query, XLOOKUP)
+- **BI & visualization:** Tableau (Tableau Public), dashboards, metric reporting
+- **Data quality & AI operations:** data validation and reconciliation, anomaly detection, automated testing, human-in-the-loop (HITL) model evaluation, multimodal data annotation
+
+## Experience
+- **AI Data Annotator & Model Evaluator**, Outlier.ai (2025–present): QA on LLM outputs for factual accuracy, safety and instruction-following; defect classification with an error taxonomy; multimodal text and vision annotation.
+- **E-Commerce & Digital Storefront Operations**, self-employed (2003–present): multi-channel sales, catalog, pricing and fulfillment; tracking inventory turnover across 200+ active listings in Excel.
+
+## Education
+- **Bachelor of General Studies** (emphases: Business, Sociology, Education), Black Hills State University (2015)
+
+## Certificates
+- **Google Professional Certificates:** [Data Analytics](https://www.coursera.org/account/accomplishments/specialization/3JJSOM5SNM00) (2025), Business Intelligence (2026), AI (2026)
+- **Kaggle:** [Intro to Machine Learning](https://www.kaggle.com/learn/certification/evandeaver/intro-to-machine-learning) (2026), [Python](https://www.kaggle.com/learn/certification/evandeaver/python) (2026)
+
+## Contact
 - **Email:** edeaver06@gmail.com
-- **GitHub:** [github.com/edeaver06](https://github.com/edeaver06)
 - **LinkedIn:** [linkedin.com/in/evan-deaver-276152a5](https://www.linkedin.com/in/evan-deaver-276152a5/)
-- **Kaggle:** [kaggle.com/evandeaver](https://www.kaggle.com/evandeaver)
-- **RPubs:** [rpubs.com/slammerjammer](https://rpubs.com/slammerjammer)
+- **Tableau Public:** [evan.deaver](https://public.tableau.com/app/profile/evan.deaver/vizzes)
+- **Kaggle:** [evandeaver](https://www.kaggle.com/evandeaver) · **RPubs:** [slammerjammer](https://rpubs.com/slammerjammer)

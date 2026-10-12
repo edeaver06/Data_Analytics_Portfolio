@@ -1,0 +1,72 @@
+version: 2
+models:
+  - name: stg_player_counts
+    columns:
+      - name: appid
+        tests: [not_null]
+      - name: player_count
+        tests: [not_null]
+    tests:
+      - dbt_utils_free_unique_combo:
+          columns: [snapshot_id, appid]
+  - name: stg_steamspy_owners
+    columns:
+      - name: appid
+        tests: [unique, not_null]
+  - name: stg_appdetails
+    columns:
+      - name: appid
+        tests: [unique, not_null]
+  - name: dim_game
+    columns:
+      - name: appid
+        tests: [unique, not_null]
+  - name: fct_daily_players
+    columns:
+      - name: appid
+        tests:
+          - not_null
+          - relationships: {to: ref('dim_game'), field: appid}
+    tests:
+      - dbt_utils_free_unique_combo:
+          columns: [appid, snapshot_date_utc]
+  - name: stg_app_reviews
+    columns:
+      - name: total_reviews
+        tests: [not_null]
+    tests:
+      - dbt_utils_free_unique_combo:
+          columns: [appid, fetched_at]
+  - name: stg_steamspy_tags
+    columns:
+      - name: appid
+        tests: [unique, not_null]
+  - name: fct_review_counts
+    columns:
+      - name: appid
+        tests:
+          - not_null
+          - relationships: {to: ref('dim_game'), field: appid}
+    tests:
+      - dbt_utils_free_unique_combo:
+          columns: [appid, fetched_date_utc]
+  - name: bridge_game_category
+    columns:
+      - name: attribute_type
+        tests:
+          - accepted_values: {values: ['genre', 'category', 'tag']}
+    tests:
+      - dbt_utils_free_unique_combo:
+          columns: [appid, attribute_type, attribute]
+  - name: mart_game_scores
+    columns:
+      - name: appid
+        tests: [unique, not_null]
+  - name: fct_daily_price
+    tests:
+      - dbt_utils_free_unique_combo:
+          columns: [appid, price_date_utc]
+  - name: stg_deck_compat
+    columns:
+      - name: appid
+        tests: [unique, not_null]

@@ -1,0 +1,30 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.env
+
+# Local databases / generated data
+*.duckdb
+*.duckdb.wal
+projects/olist-ecommerce/data/raw/
+projects/steam-pulse/data/
+projects/steam-pulse/logs/
+projects/steam-pulse/dbt/target/
+projects/steam-pulse/dbt/logs/
+projects/steam-pulse/dbt/dbt_packages/
+.user.yml
+**/data/clean/draft_charts/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Resume (contains phone number; add a phone-free PDF later)
+resume/

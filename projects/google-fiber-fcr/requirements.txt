@@ -1,0 +1,8 @@
+pandas>=2.0
+matplotlib>=3.7
+duckdb>=1.0
+nbformat
+nbconvert
+ipykernel
+pytest
+plotly>=5

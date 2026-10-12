@@ -1,0 +1,81 @@
+{
+  "orders": 99441,
+  "gmv_brl_delivered": 13220248.93,
+  "gmv_brl_all_statuses": 13591643.7,
+  "late_rate_pct": 6.77,
+  "late_avg_score": 2.27,
+  "ontime_avg_score": 4.29,
+  "late_pct_1_2_star": 62.42,
+  "ontime_pct_1_2_star": 9.27,
+  "score_8_14_days_late": 1.671,
+  "pct_1_2_star_8_14_days_late": 80.15,
+  "pct_late_reviews_before_delivery": 83.56,
+  "pct_ontime_reviews_before_delivery": 3.14,
+  "late_before_delivery_score": 1.974,
+  "late_after_delivery_score": 3.779,
+  "ontime_after_delivery_score": 4.291,
+  "ontime_after_pct_1_2_star": 9.25,
+  "late_before_delivery_n": 5332,
+  "late_after_delivery_n": 1049,
+  "late_after_pct_1_2_star": 18.3,
+  "late_before_pct_1_2_star": 71.1,
+  "gap_all": -2.02,
+  "gap_all_t_ci": [
+    -2.059,
+    -1.981
+  ],
+  "gap_all_boot_ci": [
+    -2.06,
+    -1.981
+  ],
+  "gap_after_delivery": -0.512,
+  "gap_after_t_ci": [
+    -0.595,
+    -0.429
+  ],
+  "gap_after_boot_ci": [
+    -0.596,
+    -0.436
+  ],
+  "gap_before_delivery": -2.317,
+  "gap_before_boot_ci": [
+    -2.355,
+    -2.275
+  ],
+  "gap_stratified_state_items": -2.034,
+  "gap_after_stratified_state_items": -0.545,
+  "mannwhitney_p": 0.0,
+  "delivered_without_review": 646,
+  "orders_with_multiple_reviews": 547,
+  "multi_review_orders_conflicting_scores": 202,
+  "review_ids_shared_across_orders": 789,
+  "multi_seller_orders": 1278,
+  "avg_promised_days": 24.4,
+  "avg_actual_days": 12.5,
+  "median_days_early": 12.0,
+  "seller_q4_late_pct": 9.6,
+  "seller_q1_late_pct": 6.85,
+  "seller_q4_score": 3.98,
+  "seller_tier_sellers_each": 46,
+  "seller_q4_pct_sp": 89.1,
+  "seller_q1_pct_sp": 56.5,
+  "seller_q1_score": 4.129,
+  "sellers_for_80pct_gmv": 544,
+  "sellers_total": 3095,
+  "repeat_rate_pct": 3.04,
+  "gmv_yoy_jan_aug_2018_pct": 138.3,
+  "top_category": "health_beauty",
+  "top_category_gmv": 1258681.34,
+  "worst_state": "AL",
+  "worst_state_late_pct": 21.41,
+  "worst_lane": "SP->AL",
+  "worst_lane_late_pct": 24.02,
+  "worst_lane_orders": 254,
+  "worst_lane_wilson_ci_pct": [
+    19.2,
+    29.6
+  ],
+  "credit_card_pct": 75.4,
+  "aov_single_installment": 100.91,
+  "aov_7plus_installments": 337.08
+}

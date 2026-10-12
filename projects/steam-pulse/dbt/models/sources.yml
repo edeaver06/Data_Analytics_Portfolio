@@ -1,0 +1,19 @@
+version: 2
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: player_counts
+        description: One row per (snapshot, game). Steam Web API GetNumberOfCurrentPlayers.
+        loaded_at_field: snapshot_ts
+        freshness: {warn_after: {count: 26, period: hour}}
+      - name: steamspy_owners
+        description: SteamSpy top-1000 universe. Owner counts are ESTIMATED RANGES, not exact figures.
+      - name: appdetails
+        description: Steam store appdetails payloads (JSON), refreshed slowly.
+      - name: app_reviews
+        description: Store appreviews query_summary counts (no review text), one row per fetch.
+      - name: steamspy_tags
+        description: SteamSpy per-app user tags + owner ESTIMATE range, one row per fetch.
+      - name: deck_compat
+        description: Steam Deck compatibility (store saleaction endpoint, undocumented). 3=Verified 2=Playable 1=Unsupported 0=Unknown.

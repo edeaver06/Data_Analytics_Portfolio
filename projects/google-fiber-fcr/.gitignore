@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.env
+
+# Test / tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# DuckDB local databases (SQL runs in-memory; don't commit db files)
+*.duckdb
+*.duckdb.wal
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Generated output that isn't meant for the repo (keep images/ committed)
+
+# Notebook draft charts (README uses images/)
+data/clean/

@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+# data/raw (~10 MB) is kept in git: the 538 source is archived-only and market APIs may change

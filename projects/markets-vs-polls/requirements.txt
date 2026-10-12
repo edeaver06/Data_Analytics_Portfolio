@@ -1,0 +1,10 @@
+pandas>=2.0
+numpy
+scipy
+duckdb>=1.0
+matplotlib>=3.7
+statsmodels
+pytest
+nbformat
+nbconvert
+ipykernel

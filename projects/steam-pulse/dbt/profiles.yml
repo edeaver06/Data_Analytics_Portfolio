@@ -1,0 +1,7 @@
+steam_pulse:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('STEAM_PULSE_DB', '../data/steam_pulse.duckdb') }}"
+      threads: 2
