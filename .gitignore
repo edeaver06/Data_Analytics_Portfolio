@@ -11,7 +11,7 @@ __pycache__/
 # Local databases / generated data
 *.duckdb
 *.duckdb.wal
-projects/olist-ecommerce/data/raw/
+projects/olist-ecommerce/code/data/raw/
 projects/steam-pulse/data/
 projects/steam-pulse/logs/
 projects/steam-pulse/dbt/target/
