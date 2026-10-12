@@ -3,6 +3,8 @@
 ## About
 Hi, I'm Evan! I'm a Google-certified data analyst working in SQL, Python, R and Excel, and I'm moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish Tableau dashboards, check models for flaws such as target leakage, and do data QA on AI model outputs.
 
+📄 **Resume:** [PDF](resume/evan-deaver-resume-public.pdf)
+
 This repository collects my projects in one place. Each folder in `projects/` is self-contained, with its own README, data, code and tests.
 
 ## Table of Contents

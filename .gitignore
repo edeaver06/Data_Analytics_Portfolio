@@ -27,4 +27,5 @@ Thumbs.db
 .idea/
 
 # Resume (contains phone number; add a phone-free PDF later)
-resume/
+resume/*
+!resume/evan-deaver-resume-public.pdf
