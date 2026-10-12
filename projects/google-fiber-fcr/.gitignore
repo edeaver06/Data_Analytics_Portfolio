@@ -30,4 +30,5 @@ Thumbs.db
 # Generated output that isn't meant for the repo (keep images/ committed)
 
 # Notebook draft charts (README uses images/)
-data/clean/
+code/data/clean/
+code/figures/*_headline_alt.png

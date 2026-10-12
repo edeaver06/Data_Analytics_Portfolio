@@ -3,4 +3,4 @@ __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
 # data/raw/games.csv (2.1 MB) is kept in git for reproducibility
-data/clean/draft_charts/
+code/data/clean/draft_charts/

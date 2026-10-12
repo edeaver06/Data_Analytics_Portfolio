@@ -3,19 +3,19 @@
 ## Overview
 I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish dashboards, check models for flaws such as target leakage, and do data QA on AI model outputs.
 
-**What's here:** six self-contained projects in [`projects/`](projects), each opening with an overview (what, why, key result, chart), a "what's in this folder" table and how to run it. Start with the table below; [Steam Pulse](projects/steam-pulse#run-the-app) includes an interactive Streamlit dashboard: [▶️ live app](https://steam-pulse-e.streamlit.app/), or run it locally in a few commands.
+**What's here:** six projects in [`projects/`](projects). Each one opens with a one-page summary (the question, the answer, key findings, what I built), a plain-English **Story**, and a `code/` folder with everything technical. Start with **Steam Pulse**: its [▶️ live app](https://steam-pulse-e.streamlit.app/) runs in your browser with no install.
 
 📄 **Resume:** [PDF](https://github.com/edeaver06/Data_Analytics_Portfolio/raw/main/resume/evan-deaver-resume-public.pdf)
 
 ## Portfolio Projects
-| | Project | Result |
-|---|---|---|
-| <img src="projects/olist-ecommerce/images/08_review_timing.png" width="240"> | [**Olist: When the Parcel Is Late, the Stars Fall**](#olist-ecommerce) | Reviewed after delivery, late orders score 3.78★ vs 4.29★ on time. The least reliable seller quartile is late 9.6% vs 6.9% for the best. |
-| <img src="projects/nfl-closing-line/images/03_strategy_win_rates.png" width="240"> | [**Can You Beat the NFL Closing Line?**](#nfl-closing-line) | No popular angle beats the 52.38% breakeven at -110 in a statistically defensible way. Closing spreads are unbiased (slope 1.04). |
-| <img src="projects/markets-vs-polls/images/01_brier_by_horizon.png" width="240"> | [**Markets vs Polls: Who Called It Better?**](#markets-vs-polls) | 1 day out: Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls). This is one election, so it isn't evidence that markets beat polls in general. |
-| <img src="projects/google-fiber-fcr/images/wifi_tech_share_by_market.png" width="240"> | [**Google Fiber: Repeat Calls & First-Contact Resolution**](#google-fiber-fcr) | Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls. |
-| <img src="projects/steam-pulse/images/hero_concentration.png" width="240"> | [**Steam Pulse** *(in progress)*](#steam-pulse) | Across 1,029 tracked Steam games there were 6.22M concurrent players, and 10 games held 40.1% of them. |
-| <img src="projects/operational-risk-briefing/images/revised_drivers_no_leakage.png" width="240"> | [**Audit Risk Model: A Target-Leakage Case Study**](#operational-risk-briefing) | My model's 97.8% accuracy was invalid (the label was built from its top feature). Rebuilt on 7 raw inputs vs a 60.6% baseline, the conclusions reverse. |
+| Project | Result | Role type | Links |
+|---|---|---|---|
+| **[Steam Pulse: What keeps a video game alive?](projects/steam-pulse)** *(in progress)* | 6.22M people were playing 1,029 tracked games, and the top 10 held 40.1%; games lose 44% of players after month one. | Data engineer (pipeline, warehouse, dbt, app) | **[▶️ Live app](https://steam-pulse-e.streamlit.app/)** · [Story](projects/steam-pulse/STORY.md) · [Code](projects/steam-pulse/code/README.md) |
+| **[Olist: When the Parcel Is Late, the Stars Fall](projects/olist-ecommerce)** | Reviewed after delivery, late orders score 3.78★ vs 4.29★; 84% of late-order reviews are written before the parcel arrives. | Data analyst / BI (SQL) | [Story](projects/olist-ecommerce/STORY.md) · [Code](projects/olist-ecommerce/code/README.md) |
+| **[Google Fiber: Why Do Customers Call Back?](projects/google-fiber-fcr)** | Two problem types drive 80.2% of repeat calls, and an "impossible" billing number points to a likely data problem. | Data analyst / BI (operations) | [Story](projects/google-fiber-fcr/STORY.md) · [Code](projects/google-fiber-fcr/code/README.md) |
+| **[Markets vs Polls: Who Called the 2024 Election Better?](projects/markets-vs-polls)** | 1 day out, Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls), in one election where polls missed 3.2 points one way. | Data analyst (APIs, forecasting) | [Story](projects/markets-vs-polls/STORY.md) · [Code](projects/markets-vs-polls/code/README.md) |
+| **[Can You Beat the NFL Closing Line?](projects/nfl-closing-line)** | Across 7,354 games, no popular betting angle beats the 52.38% breakeven in a statistically defensible way. | Data analyst (statistics) | [Story](projects/nfl-closing-line/STORY.md) · [Code](projects/nfl-closing-line/code/README.md) |
+| **[Audit Risk Model: A Target-Leakage Case Study](projects/operational-risk-briefing)** | My model's 97.8% accuracy came from target leakage; rebuilt honestly, the business advice reverses. | Data analyst (model validation, R) | [Story](projects/operational-risk-briefing/STORY.md) · [Code](projects/operational-risk-briefing/code/README.md) |
 
 ## Table of Contents
 - [Overview](#overview)
@@ -27,98 +27,11 @@ I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) movin
 - [Certificates](#certificates)
 - [Contact](#contact)
 
-
-<a id="olist-ecommerce"></a>
-### Olist: When the Parcel Is Late, the Stars Fall
-**Code:** [`projects/olist-ecommerce`](projects/olist-ecommerce)
-
-**Goal:** Measure how late deliveries affect review scores, and find which sellers and routes cause them.
-
-**Description:** 99,441 orders from a Brazilian e-commerce marketplace, modeled in layered DuckDB SQL marts.
-
-**Skills:** data modeling, window functions, cohort analysis, hypothesis testing, automated testing (70 tests).
-
-**Technology:** SQL (DuckDB), Python, pandas, pytest.
-
-**Results:** Reviewed after delivery, late orders score 3.78★ vs 4.29★ on time. The least reliable seller quartile is late 9.6% vs 6.9% for the best.
-
-<a id="nfl-closing-line"></a>
-### Can You Beat the NFL Closing Line?
-**Code:** [`projects/nfl-closing-line`](projects/nfl-closing-line)
-
-**Goal:** Test whether the NFL betting market is efficient and whether popular betting angles beat the -110 vig.
-
-**Description:** 7,354 games from 1999 through early 2026, using nflverse schedule and line data.
-
-**Skills:** regression, calibration, binomial tests, multiple-testing correction, walk-forward validation.
-
-**Technology:** SQL (DuckDB), Python, statsmodels, pytest.
-
-**Results:** No popular angle beats the 52.38% breakeven at -110 in a statistically defensible way. Closing spreads are unbiased (slope 1.04).
-
-<a id="markets-vs-polls"></a>
-### Markets vs Polls: Who Called It Better?
-**Code:** [`projects/markets-vs-polls`](projects/markets-vs-polls)
-
-**Goal:** Score how accurately prediction markets and poll averages forecast the 2024 US presidential race, state by state.
-
-**Description:** Polymarket and Kalshi public APIs, an archived 538 polls CSV, and MIT Election Lab results.
-
-**Skills:** API ingestion, joining time series across sources, Brier scoring, bootstrap confidence intervals.
-
-**Technology:** Python, SQL (DuckDB), pytest.
-
-**Results:** 1 day out: Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls). This is one election, so it isn't evidence that markets beat polls in general.
-
-<a id="google-fiber-fcr"></a>
-### Google Fiber: Repeat Calls & First-Contact Resolution
-**Code:** [`projects/google-fiber-fcr`](projects/google-fiber-fcr)
-
-**Goal:** Find which support categories and markets drive 7-day repeat calls.
-
-**Description:** Google Data Analytics capstone scenario: 3 markets, 5 problem types, Q1 2022.
-
-**Skills:** data cleaning, aggregation, SQL/Python parity testing, dashboarding.
-
-**Technology:** Python, pandas, SQL (DuckDB), Plotly, pytest.
-
-**Results:** Wi-Fi & Internet + Technical Troubleshooting drive 80.2% of repeat calls.
-
-<a id="steam-pulse"></a>
-### Steam Pulse *(in progress)*
-**Code:** [`projects/steam-pulse`](projects/steam-pulse) · **📖 [Read the story (plain-English notebook)](projects/steam-pulse/notebooks/steam_pulse_story.ipynb)**
-
-**▶️ [Live app: try the Steam Pulse dashboard](https://steam-pulse-e.streamlit.app/)** (no install; may take a moment to wake up)
-
-**Goal:** Build a growing history of Steam games to answer one question: what keeps a game alive?
-
-**Description:** A scheduled pipeline tracking concurrent players, prices, reviews, tags and Steam Deck status for about 1,000 of the most-owned Steam games. History started 2026-10-12.
-
-**Skills:** API ingestion with retries and rate limits, warehouse modeling, dbt tests and snapshots, scheduling.
-
-**Technology:** Python, DuckDB, dbt, Streamlit, Tableau.
-
-**Results:** 6.22M concurrent players across 1,029 tracked games, with 10 games holding 40.1% of them (latest snapshot, 2026-10-12). In the 2012–2026 history backfill, players drop 44% after the first month and then level off.
-
-<a id="operational-risk-briefing"></a>
-### Audit Risk Model: A Target-Leakage Case Study
-**Code:** [`projects/operational-risk-briefing`](projects/operational-risk-briefing)
-
-**Goal:** Check whether my earlier Random Forest's reported accuracy on 775 audit records was trustworthy.
-
-**Description:** Showed that the label `Risk` equals `Audit_Risk > 1` in 100% of rows, and that `Audit_Risk` is computed from the model's top feature. Rebuilt the model on the 7 raw inputs and corrected the business conclusions.
-
-**Skills:** model validation, target-leakage detection, feature selection, baseline comparison.
-
-**Technology:** R, randomForest, tidyverse, R Markdown.
-
-**Results:** The original 97.8% out-of-bag accuracy was invalid. The rebuilt model scores 98.5% vs a 60.6% majority-class baseline, but only because the label is a deterministic scoring rule. The honest drivers reverse the original "ignore asset value" advice.
-
 ## Earlier Work
 - **[The Synthetic Predator](https://rpubs.com/slammerjammer/1423363)** (R), **[Cyclistic bike-share](https://rpubs.com/slammerjammer/1371255)** (R, Google DA capstone)
 - **[Tableau Public dashboards](https://public.tableau.com/app/profile/evan.deaver/vizzes)**
 
-To run a project: `cd projects/<name> && pip install -r requirements.txt && pytest -q` (or `make test` from the root).
+To run a project: `cd projects/<name>/code && pip install -r requirements.txt && pytest -q` (or `make test` from the root). Each `code/README.md` has the full steps.
 
 ## Skills
 - **Languages & querying:** SQL (DuckDB, Google BigQuery, PostgreSQL), Python (pandas), R (tidyverse, ggplot2, caret), dbt, Advanced Excel (pivot tables, Power Query, XLOOKUP)

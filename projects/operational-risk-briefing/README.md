@@ -1,37 +1,31 @@
 # Audit Risk Model: A Target-Leakage Case Study
 
-## Overview
-**What:** A correction of my own April 2026 audit-risk Random Forest, showing its 97.8% accuracy came from target leakage.
+**Was my 97.8%-accurate audit-risk model real?** No. The label was computed from the model's own top feature, so I found the leak, rebuilt the model honestly and reversed the business advice.
 
-**Why:** A model that looks near-perfect usually isn't, so this audits the published result, rebuilds the model honestly and corrects the business advice.
+**[📖 Story](STORY.md) | [💻 Code](code/README.md)**
 
-**Key result:** **My April 2026 Random Forest predicted audit risk with 97.8% out-of-bag accuracy. That number was invalid: the label `Risk` is just `Audit_Risk > 1`, and `Audit_Risk` is computed from the model's top feature.**
+![Drivers of audit risk after removing the leak](images/revised_drivers_no_leakage.png)
 
-![Drivers after removing leakage](images/revised_drivers_no_leakage.png)
+## The problem
+Auditors have limited time and need to know which firms to check first. In April 2026 I published a Random Forest that seemed to predict audit risk almost perfectly and gave resource-allocation advice. A result that good on a real-world risk problem is a warning sign, so I audited my own work.
 
-## Key results
-- **The leak:** `Risk == (Audit_Risk > 1)` in 100% of 775 rows, and `Audit_Risk = Inherent_Risk × CONTROL_RISK × Detection_Risk` (Detection_Risk is fixed at 0.5). The original "Systemic Risk Factor" *was* Inherent_Risk.
-- **Rebuilt on the 7 raw inputs** an auditor actually records: 98.5% out-of-bag accuracy vs a 60.6% majority-class baseline. Accuracy stays high because the label is a deterministic scoring rule, so the model re-learns the policy rather than predicting independent failures.
-- **The conclusions change:** the honest top drivers are District_Loss (100), Money_Value (88) and PARA_B (72). Asset exposure goes from "irrelevant" to the #2 driver, so the original "don't prioritise by asset value" advice is reversed and the published tier and 70%-allocation figures are withdrawn.
+## Key findings
+- **The label was a formula:** `Risk` equals `Audit_Risk > 1` in 100% of 775 rows, and `Audit_Risk` is calculated from the model's top feature, the "Systemic Risk Factor".
+- **Rebuilt on the 7 raw inputs** an auditor actually records: 98.5% accuracy vs a 60.6% always-"Pass" baseline, because the model re-learns the scoring rule.
+- **The honest top drivers** are district loss (100), money value (88) and discrepancy B (72).
+- **Advice reversed:** asset exposure went from "irrelevant" to the #2 driver, so the original "don't prioritise by asset value" advice and its 70%-allocation figures are withdrawn.
 
-## Explore
-[Report (HTML, download)](reports/target_leakage_case_study.html) · [R Markdown source](notebooks/target_leakage_case_study.Rmd) · [Original published version (RPubs)](https://rpubs.com/slammerjammer/1422063)
+## What I built
+- A leak investigation that traced where every column comes from and proved the label is a threshold on a formula.
+- Automated R tests that assert the leak and the 60.6% baseline.
+- A rebuilt Random Forest on raw inputs only, with permutation importance.
+- A corrected report that keeps the original for comparison and states what the model can and can't show.
 
-## How to run
-```bash
-# R with tidyverse, randomForest, rmarkdown
-Rscript tests/test_leakage.R                        # verifies the leak and the baseline
-cd notebooks && Rscript -e 'rmarkdown::render("target_leakage_case_study.Rmd", output_dir = "../reports")'
-```
+## Tools
+R · tidyverse · randomForest · R Markdown · ggplot2
 
-## What's in this folder
-| Folder | What it's for |
-|---|---|
-| `data/` | `raw/audit_data.csv`, the 776-record audit dataset |
-| `notebooks/` | R Markdown source of the case study (plus the original published chart it embeds) |
-| `reports/` | Knitted HTML report |
-| `images/` | Original vs revised driver charts |
-| `tests/` | R check proving the leak and the 60.6% baseline |
-
-## Data
-`audit_data.csv`: an audit-risk dataset of 776 firm records (775 after dropping incomplete rows). Its source and license still need to be confirmed and cited before publishing.
+## Go deeper
+- [The story in plain English](STORY.md)
+- [How it's built: design decisions, how to run](code/README.md)
+- [Full report (HTML, download)](code/reports/target_leakage_case_study.html) · [R Markdown source](code/notebooks/target_leakage_case_study.Rmd)
+- [Original published version (RPubs)](https://rpubs.com/slammerjammer/1422063)

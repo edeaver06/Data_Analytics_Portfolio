@@ -3,6 +3,6 @@ PROJECTS := google-fiber-fcr nfl-closing-line markets-vs-polls olist-ecommerce s
 .PHONY: test $(PROJECTS) operational-risk-briefing
 test: $(PROJECTS) operational-risk-briefing
 $(PROJECTS):
-	cd projects/$@ && python -m pytest -q
+	cd projects/$@/code && python -m pytest -q
 operational-risk-briefing:
-	cd projects/$@ && Rscript tests/test_leakage.R
+	cd projects/$@/code && Rscript tests/test_leakage.R

@@ -1,0 +1,80 @@
+---
+title: "Operational Risk Audit Model: A Target-Leakage Case Study"
+author: "Evan Deaver"
+date: "Revised October 2026 (original: April 15, 2026)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.width = 8, fig.height = 4.5)
+suppressMessages({library(tidyverse); library(randomForest)})
+a <- read.csv("../data/raw/audit_data.csv") %>% na.omit() %>% mutate(Risk = factor(Risk, labels = c("Pass", "Risk")))
+fit <- function(df) { set.seed(123); randomForest(Risk ~ ., data = df, importance = TRUE) }
+acc <- function(m) 1 - tail(m$err.rate[, "OOB"], 1)
+scaled_imp <- function(m) { i <- importance(m, type = 1)[, 1]; tibble(Feature = names(i), Score = (i - min(i)) / (max(i) - min(i)) * 100) }
+```
+
+## 1. Summary
+The original briefing (April 2026) reported a Random Forest that predicted audit failure with near-perfect accuracy. It named a **"Systemic Risk Factor"** as the dominant driver and **asset exposure** as irrelevant.
+
+Re-examining the data shows the model was **reading the answer key**. The target `Risk` is defined directly from `Audit_Risk`, and `Audit_Risk` is calculated from the same composite score the model ranked first. This revision documents the leak, rebuilds the model without it, and corrects the business conclusions.
+
+## 2. Finding the Leak
+```{r leak_proof}
+tibble(
+  Check = c("Risk == (Audit_Risk > 1)",
+            "Audit_Risk == Inherent_Risk x CONTROL_RISK x Detection_Risk",
+            "Risk_A == PARA_A x Score_A (sub-scores are derived too)",
+            "Distinct values of Detection_Risk"),
+  Result = c(sprintf("%.1f%% of rows", 100 * mean((a$Audit_Risk > 1) == (a$Risk == "Risk"))),
+             sprintf("max difference %.1e", max(abs(a$Audit_Risk - a$Inherent_Risk * a$CONTROL_RISK * a$Detection_Risk))),
+             sprintf("max difference %.1e", max(abs(a$Risk_A - a$PARA_A * a$Score_A))),
+             paste(unique(a$Detection_Risk), collapse = ", "))
+) %>% knitr::kable()
+```
+
+The label is not an independent audit outcome. It is a **threshold applied to a formula**: Risk = 1 exactly when Inherent_Risk × Control_Risk × 0.5 > 1. Any feature that feeds that formula (Inherent_Risk, the Score/Risk sub-columns, Audit_Risk itself) hands the model the answer. The original "Systemic Risk Factor" *was* Inherent_Risk.
+
+## 3. Original Model (kept for comparison)
+Features: Systemic Risk Factor (Inherent_Risk), Standard Compliance (PARA_A + PARA_B) and Asset Exposure (Money_Value).
+
+```{r original}
+orig <- a %>% transmute(Risk, Systemic_Risk_Factor = Inherent_Risk, Standard_Compliance = PARA_A + PARA_B, Asset_Exposure = Money_Value)
+m_orig <- fit(orig)
+```
+![Published chart: Primary Drivers of Audit Failure](../../images/original_published_drivers.png)
+
+Reconstructed out-of-bag accuracy: **`r sprintf("%.1f%%", 100 * acc(m_orig))`**. The ranking reproduces (Systemic Risk Factor 100, Standard Compliance about 18, Asset Exposure 0).
+
+## 4. Rebuilt Model: Raw Inputs Only
+I removed every engineered column (all Score_*, Risk_*, Inherent_Risk, CONTROL_RISK, Detection_Risk, Audit_Risk, TOTAL, Score, PROB/Prob). I kept only the seven raw measurements an auditor would actually record: `Sector_score`, `PARA_A`, `PARA_B`, `numbers`, `Money_Value`, `District_Loss` and `History`.
+
+```{r rebuilt}
+clean <- a %>% select(Risk, Sector_score, PARA_A, PARA_B, numbers, Money_Value, District_Loss, History)
+m_clean <- fit(clean)
+base <- max(prop.table(table(a$Risk)))
+tibble(Model = c("Majority-class baseline (always 'Pass')", "Original (leaky composite features)", "Rebuilt (raw inputs only)"),
+       `OOB accuracy` = sprintf("%.1f%%", 100 * c(base, acc(m_orig), acc(m_clean)))) %>% knitr::kable()
+```
+
+```{r rebuilt_plot}
+scaled_imp(m_clean) %>%
+  mutate(Feature = recode(Feature, Sector_score = "Sector score", PARA_A = "Discrepancy A (PARA_A)", PARA_B = "Discrepancy B (PARA_B)",
+                          numbers = "Historical discrepancy count", Money_Value = "Asset exposure (Money_Value)",
+                          District_Loss = "District loss", History = "Prior-loss history")) %>%
+  ggplot(aes(reorder(Feature, Score), Score)) + geom_col(fill = "#2c3e50") + coord_flip() + theme_minimal() +
+  labs(title = "Drivers after removing leaky features", subtitle = "Random Forest permutation importance, scaled 0-100",
+       x = NULL, y = "Relative importance")
+```
+
+**Why is accuracy still high?** Because the label is a deterministic scoring rule, and the raw inputs are exactly what that rule scores. The rebuilt model isn't finding hidden risk. It is **re-learning the auditors' formula**. That is still a useful result, but it means this dataset can't show that a model predicts real-world audit failure, only that it reproduces an existing policy.
+
+## 5. Corrected Conclusions
+* **Asset exposure matters.** The original briefing called financial volume "a poor leading indicator". Without the leak, Money_Value is one of the strongest drivers, alongside district loss and the two discrepancy amounts. The recommendation to stop prioritising by asset value is reversed.
+* **The "Systemic Risk Factor" isn't a discovery.** It was the target's own formula. The tier chart and "risk probability above 80%" thresholds built on it are withdrawn.
+* **The resource-allocation figures** (70% of field audits, quarterly monitoring) weren't derived from the model and are withdrawn.
+
+## 6. What I Learned / Next Steps
+* **Trace every feature's lineage before modelling.** If a column is computed from the target, or the target from it, it can't be used as a predictor.
+* **Be suspicious of near-perfect accuracy.** About 98% on a real-world risk problem is a signal to check for leakage, not a result to publish.
+* **Next:** obtain an *independent* outcome, such as confirmed fraud or a later audit finding, rather than the rule-based score. Then evaluate with time-based or entity-grouped hold-out data, and compare against a simple logistic regression for interpretability.

@@ -2,33 +2,34 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
-/data/
-app/data/*
-!app/data/*.parquet
+code/data/
+code/app/data/*
+!code/app/data/*.parquet
 # backfill: keep provenance + small CC BY-derived table only; raw crawls and Valve/SteamCharts-derived tables stay local
-analysis/data/**
-!analysis/data/
-!analysis/data/backfill/
-!analysis/data/backfill/SOURCES.md
-!analysis/data/backfill/tables/
-!analysis/data/backfill/tables/event_study.csv
-logs/
-dbt/target/
-dbt/logs/
-dbt/dbt_packages/
+code/analysis/data/**
+!code/analysis/data/
+!code/analysis/data/backfill/
+!code/analysis/data/backfill/SOURCES.md
+!code/analysis/data/backfill/tables/
+!code/analysis/data/backfill/tables/event_study.csv
+code/logs/
+code/dbt/target/
+code/dbt/logs/
+code/dbt/dbt_packages/
 .user.yml
 .DS_Store
 *.duckdb
 *.duckdb.wal
 
 # analysis (merged from analysis/.gitignore)
-analysis/.venv/
-analysis/data/backfill/mendeley/
-analysis/data/backfill/steamcharts/
-analysis/data/backfill/reviews/
-analysis/data/backfill/*.log
-analysis/history_stdout.txt
+code/analysis/.venv/
+code/analysis/data/backfill/mendeley/
+code/analysis/data/backfill/steamcharts/
+code/analysis/data/backfill/reviews/
+code/analysis/data/backfill/*.log
+code/analysis/history_stdout.txt
 # rough draft charts; only analysis/figures/polished/ is committed
-analysis/figures/*.png
+code/analysis/figures/*.png
 # Tableau CSV exports from scripts/make_viz.py (archived outside the repo)
-app/tableau/
+code/app/tableau/
+code/figures/viz/
