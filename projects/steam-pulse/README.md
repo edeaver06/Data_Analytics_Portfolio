@@ -9,13 +9,15 @@
 - **Sales work.** In the first week of a sale, games had about **39% more** daily players than similar games not on sale (10,756 sales, 2019–20).
 - **The "best" games are cheap old favourites:** Terraria, Stardew Valley and Left 4 Dead 2 top a combined review, popularity and value score.
 
-**[📖 Read the story (notebook)](notebooks/steam_pulse_story.ipynb)**: the plain-English walkthrough, one question and one chart at a time.  
-**[▶️ Run the app](#run-the-app)**: an interactive dashboard, including a Game Finder where you pick categories and get the top game.
+### ▶️ [Live app: open the Steam Pulse dashboard](https://steam-pulse-e.streamlit.app/)
+An interactive dashboard in your browser, no install needed, including a Game Finder where you pick categories and get the top game. (If it's been idle it may show a short wake-up screen first.) Prefer to run it yourself? See [Run the app locally](#run-the-app).
+
+**[📖 Read the story (notebook)](notebooks/steam_pulse_story.ipynb)**: the plain-English walkthrough, one question and one chart at a time.
 
 ![Top 15 games by concurrent players](images/hero_concentration.png)
 
 ## Run the app
-Copy and paste (Python 3.10+). The dashboard runs on the bundled parquet extract in `app/data/`, so no database or API key is needed:
+The easiest way is the [live app](https://steam-pulse-e.streamlit.app/). To run it on your own computer instead, copy and paste (Python 3.10+). The dashboard runs on the bundled parquet extract in `app/data/`, so no database or API key is needed:
 ```bash
 git clone https://github.com/edeaver06/Data_Analytics_Portfolio.git
 cd Data_Analytics_Portfolio/projects/steam-pulse
@@ -53,12 +55,12 @@ The app reads the dbt marts in `data/steam_pulse.duckdb` (`marts.dim_game`, `bri
 - **Composite score:** read from `marts.mart_game_scores` (a verified dbt port of `best_score.py`: 991 scored of 1,030 rows, 8 software apps, 30 excluded for no reviews and 1 for no player count). The mart doesn't score software, so the "Include software" toggle only lists software apps, unscored, at the bottom.
 - **History pages:** Launch decay and Sales impact read `analysis/history_results.json`, so deploy the `analysis/` folder with the app. If the file is missing, those pages show a notice.
 
-### Free deployment: Streamlit Community Cloud (prepared, not deployed)
+### Free deployment: Streamlit Community Cloud (live at https://steam-pulse-e.streamlit.app/)
 The parquet extract is committed in `app/data/`, `app/requirements.txt` sits next to the entrypoint (Community Cloud looks for dependencies in the entrypoint's folder, then the repo root, so this file is required), and the theme is in `.streamlit/config.toml` at the **repo root**.
 1. Sign in at https://share.streamlit.io with GitHub (edeaver06) and allow access to `Data_Analytics_Portfolio`.
 2. **Create app → Deploy a public app from GitHub**: repo `edeaver06/Data_Analytics_Portfolio`, branch `main`, main file `projects/steam-pulse/app/streamlit_app.py`.
 3. Optional: a custom subdomain such as `steam-pulse.streamlit.app`; Python 3.12 under Advanced settings. Click **Deploy**.
-4. Paste the app URL into this README and the hub.
+4. Done: deployed at https://steam-pulse-e.streamlit.app/.
 
 Limits: about 1 GB RAM, and the app sleeps when idle (the first visitor wakes it in under a minute). Data only updates when a new extract is committed.
 
