@@ -1,28 +1,31 @@
-# Can You Beat the NFL Closing Line?
+# Is the Market's Closing Price an Accurate Forecast? (NFL, 1999–2026)
 
 ### ▶️ [Try the live app](https://nfl-line-e.streamlit.app/)
 No install needed; if the app has been idle it shows a short wake-up screen first.
 
-**Do popular betting "systems" beat the sportsbook?** No: across 7,354 games (1999–2026), the closing line is a very good forecast, and none of 10 common angles beats the -110 vig in a statistically defensible way.
+**How accurate is the market's closing price as a forecast of NFL games?** Very accurate: across 7,354 games (1999–2026), closing spreads are unbiased, moneyline probabilities are well calibrated, and none of 10 common strategies beats the market's built-in margin in a statistically defensible way.¹
 
 **[▶️ Live app](https://nfl-line-e.streamlit.app/) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
 
-![Win rate of 10 betting strategies vs the 52.38% breakeven](images/03_strategy_win_rates.png)
+![Win rate of 10 strategies vs the 52.38% breakeven](images/03_strategy_win_rates.png)
 
 ## The problem
-Sports-betting content is full of "systems": bet home underdogs, bet the over in primetime, bet unders when it's windy. At standard -110 odds a bettor needs to win 52.38% of bets just to break even. This project tests whether any popular angle clears that bar once it's tested properly.
+A market price is a forecast. NFL closing lines (point spreads, totals and moneylines) price thousands of games a year, so they are a clean test of how efficient a forecasting market is. Popular strategies claim the market is systematically wrong (home underdogs, primetime overs, unders in wind). At the standard -110 price a strategy must be right 52.38% of the time just to match the market. This project measures the market's forecast accuracy and tests whether any popular strategy clears that bar once it's tested properly.
 
 ## Key findings
-- **The spread is right on average:** closing spreads are unbiased (slope 1.04, 95% CI 0.99–1.09), even though the typical game misses by 10.3 points. Totals are slightly off (slope 0.93; games ran 0.71 points above the line), not by enough to beat the fee.
+- **The spread is right on average:** closing spreads are unbiased (slope 1.04, 95% CI 0.99–1.09), even though the typical game misses by 10.3 points. Totals are slightly off: games averaged 0.71 points **over** the closing total, so the total line ran slightly low (slope 0.93, 95% CI 0.87–1.00). That gap isn't large enough to clear the market's margin.
 - **The famous biases aren't there:** home underdogs covered 50.5% and primetime overs hit 48.7%, both below the 52.38% breakeven.
-- **Simple strategies lose money:** betting every favorite lost 7.0% per bet (about −499 units over 7,122 bets).
-- **One angle stands out but isn't proven profitable:** unders with 15+ mph wind went 57.0%, but the beat-the-vig test doesn't survive multiple-testing correction (p = 0.09).
+- **Moneyline probabilities are well calibrated:** after removing the ~2.7% margin, the Brier score is 0.211 vs 0.250 for a coin flip (5,358 games).
+- **Simple strategies fall short of the market:** favorites covered 48.7% of 7,122 decided games¹ (95% CI 47.6–49.9%), below the 52.38% needed.
+- **One strategy stands out but isn't proven:** unders with 15+ mph wind were right 57.0% of the time (674 games), but the beat-the-margin test doesn't survive multiple-testing correction (Holm p = 0.09).
 
 ## What I built
-- A DuckDB SQL model of 7,354 games, every strategy's bets and their win rates and ROI.
+- A DuckDB SQL model of 7,354 games, every strategy's picks and their hit rates.
 - A Python statistics module: regression with robust errors, bookmaker-margin removal, calibration and Brier score, exact binomial tests with Holm correction.
 - A walk-forward check: strategies chosen on seasons before 2015 and tested only on 2015+.
-- Polished charts and a responsible-gambling takeaway.
+- Polished charts of forecast accuracy and strategy hit rates.
+
+¹ All 7,354 games are used to test forecast accuracy. Strategy counts are smaller: for "favorites," 31 games were pick'ems with no favorite and 201 landed exactly on the spread (pushes), leaving 7,122 decided games.
 
 ## Tools
 Python (pandas, statsmodels, SciPy) · SQL · DuckDB · matplotlib · Jupyter · pytest

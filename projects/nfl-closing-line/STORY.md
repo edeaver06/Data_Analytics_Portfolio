@@ -1,4 +1,4 @@
-# Can You Beat the NFL Closing Line? The story in plain English
+# Is the Market's Closing Price an Accurate Forecast? The story in plain English
 
 **▶️ [Try the live app](https://nfl-line-e.streamlit.app/)** · [Back to the project page](README.md) · [The code and how it's built](code/README.md)
 
