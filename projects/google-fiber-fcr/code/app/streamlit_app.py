@@ -50,7 +50,7 @@ def overview(d):
 
 **Main findings**
 - Two problem types, Wi-Fi & Internet and Technical Troubleshooting, cause most repeat calls.
-- Market_3 has the highest repeat rate.
+- Market_3 has the highest repeat rate (44.7%; 36.7% without its impossible Billing rows).
 - Market_3's Billing numbers are impossible (more repeats than first calls), so they're most likely a data error. See *Billing: a data check*.
 
 Use the pages on the left to explore.""")

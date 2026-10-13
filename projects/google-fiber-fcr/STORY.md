@@ -24,11 +24,11 @@ Mostly. Wi-Fi + Technical make up 87.1% of repeats in market_1 and 89.3% in mark
 
 ![Share of repeats from Wi-Fi and technical problems, by market](images/wifi_tech_share_by_market.png)
 
-**What this means:** the pattern holds everywhere. Market_3 looks different, which is a reason to look closer at market_3.
+**What this means:** the pattern holds in market_1 and market_2; in market_3 these two make up only two-thirds of repeats, partly due to its suspect Billing numbers.
 
 ## 3. Which market has the most callbacks?
 
-Market_3: 44.7% of its first calls lead to a repeat call, compared with 27.9% in market_1 and 17.9% in market_2.
+Market_3: 44.7% of its first calls lead to a repeat call (36.7% without its impossible Billing rows, still the highest), compared with 27.9% in market_1 and 17.9% in market_2.
 
 ![Repeat rate by market](images/repeat_rate_by_market.png)
 
@@ -36,7 +36,7 @@ Market_3: 44.7% of its first calls lead to a repeat call, compared with 27.9% in
 
 ## 4. Is Billing really a problem?
 
-At first glance Billing has the worst repeat rate: 67.5%. But market_3 records 1,498 Billing repeat calls against only 759 Billing first calls. You can't have more follow-up calls than calls, so this is most likely a data or labelling error. Without market_3, Billing's repeat rate is 32.3%, in line with the other problem types.
+At first glance Account Management & Billing ("Billing") has the worst repeat rate: 67.5%. But market_3 records 1,498 Billing repeat calls against only 759 Billing first calls. You can't have more follow-up calls than calls, so this is most likely a data or labelling error. Without market_3, Billing's repeat rate is 32.3%, in line with the other problem types.
 
 ![Billing repeat rate with and without market_3](images/billing_with_without_market3.png)
 
@@ -44,7 +44,7 @@ At first glance Billing has the worst repeat rate: 67.5%. But market_3 records 1
 
 ## 5. Which problems are hardest to fix in one call?
 
-Looking at the rate rather than the volume: Billing 67.5% (see above), Scheduling 60.6%, Construction 34.1%, Wi-Fi & Internet 33.8%, Technical Troubleshooting 21.2%.
+Looking at the rate rather than the volume: Billing 67.5% (see above), Scheduling 60.6% (50.0% outside market_3, still the highest after Billing), Construction 34.1%, Wi-Fi & Internet 33.8%, Technical Troubleshooting 21.2%.
 
 ![Repeat rate by problem type](code/figures/repeat_rate_by_category.png)
 
@@ -60,7 +60,7 @@ Weekly repeat calls rise and fall with the number of first calls. The first week
 
 ## Summary
 1. Wi-Fi & Internet and Technical Troubleshooting cause 80.2% of repeat calls.
-2. Market_3 has the highest repeat rate (44.7%).
+2. Market_3 has the highest repeat rate (44.7%, or 36.7% without its impossible Billing rows).
 3. Market_3's Billing numbers are impossible and need fixing before anyone acts on them.
 4. Scheduling is small but hard to resolve in one call (60.6%).
 

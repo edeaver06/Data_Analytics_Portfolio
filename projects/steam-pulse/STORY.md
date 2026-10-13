@@ -116,7 +116,7 @@ In the first week of a sale, games had about **39% more daily players** than the
 
 ## Limitations (in plain words)
 
-- **One day of live data.** The live counts are four snapshots from a single morning (12 Oct 2026). Weekends, holidays and big updates change the picture. The pipeline collects every 6 hours, so this gets stronger over time.
+- **One day of live data.** The live counts are four snapshots from a single morning (12 Oct 2026). Weekends, holidays and big updates change the picture. The pipeline is built to collect every 6 hours (that job runs on a private machine), but the public app uses this fixed snapshot.
 - **Links, not proof.** Most findings show that two things go together, not that one causes the other.
 - **Only today's popular games.** The history looks at games that are still popular, so games that launched and flopped are missing. That makes survival look better than it is.
 - **The sales data is older** (2019 to 2020); there's no free source of price history after that.

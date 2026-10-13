@@ -19,7 +19,7 @@ Steam lists tens of thousands of games, but players' time is limited. A studio, 
 - **Sales work:** in the first week of a sale, games had about **39% more** daily players than similar games not on sale (10,756 sales, 2019–20).
 
 ## What I built
-- A scheduled Python pipeline that collects live player counts, prices, reviews and features for about 1,000 games from public Steam APIs.
+- A Python pipeline, built to run on a schedule, that collects live player counts, prices, reviews and features for about 1,000 games from public Steam APIs. A 6-hourly snapshot job runs on a private machine; the public app uses a fixed snapshot.
 - A DuckDB warehouse modelled with dbt (staging → marts, price history snapshots, 65 passing data checks).
 - A 2012–2026 history backfill, used to measure launch decay and the effect of sales.
 - A "best game" score that blends reviews, players and value for money, with a Python-to-SQL parity test.

@@ -24,7 +24,7 @@ This depends on *when* the customer wrote the review. Among customers who review
 
 ![Review score by delivery outcome and when the review was written](images/08_review_timing.png)
 
-**What this means:** the biggest damage comes from asking for a review while the customer is still waiting. Many analyses mix the two groups and report a much bigger gap (−2.02★); the honest "received late" effect is about −0.51★.
+**What this means:** the lowest scores come from reviews written while the customer was still waiting; sending the request after delivery is worth testing. Many analyses mix the two groups and report a much bigger gap (−2.02★); the honest "received late" effect is about −0.51★.
 
 ## 3. Are a few bad sellers to blame?
 
@@ -32,7 +32,7 @@ I ranked sellers by how often they were late in 2017, then checked the same sell
 
 ![Seller late rate in 2018, grouped by their 2017 ranking](images/02_seller_tiers.png)
 
-**What this means:** being "a bad seller" only partly carries over from one year to the next. A lot of the problem is location and shipping route, not the seller.
+**What this means:** last year's ranking only weakly predicts this year's lateness (9.6% vs 6.85%, about 1.4x), and most sellers in every group ship from São Paulo, so route and shipping matter alongside the seller; this data can't fully separate the two.
 
 ## 4. Where do deliveries go wrong?
 
@@ -40,7 +40,7 @@ Some routes are much worse than others. Parcels from São Paulo sellers to custo
 
 ![Late rate by seller state and customer state](images/06_lane_heatmap.png)
 
-**What this means:** fixing a handful of long-distance routes (better carriers or more realistic delivery dates) would help more than punishing individual sellers.
+**What this means:** fixing a handful of long-distance routes (better carriers or more realistic delivery dates) is a promising thing to test before penalising individual sellers.
 
 ## 5. Is the business growing?
 
@@ -52,7 +52,7 @@ Yes. Sales from January to August 2018 were 138% higher than the same months in 
 
 ## 6. Do customers come back?
 
-Rarely. Only 3.0% of customers ever placed a second order. In each monthly group of new customers, under 1% ordered again in any later month.
+Rarely. Only 3.0% of customers ever placed a second order. In every monthly group with more than a handful of customers, under 1% ordered again in any later month.
 
 ![Share of each month's new customers who ordered again](code/figures/07_cohort_retention.png)
 

@@ -27,7 +27,7 @@ After removing the bookmaker's margin (about 2.7%), the odds' win chances match 
 
 ![Odds-implied win chance vs how often teams actually won](images/01_moneyline_calibration.png)
 
-**What this means:** the market's probabilities are trustworthy. There's no easy group of teams it consistently misprices.
+**What this means:** the market's probabilities are trustworthy. The odds' win chances closely match how often teams actually won, in every probability band we checked.
 
 ## 3. Do home underdogs beat the spread?
 
@@ -43,7 +43,7 @@ I tested 10 common angles. Only unders in windy games (15+ mph) clearly differ f
 
 ![Win rate of 10 strategies with uncertainty ranges](images/03_strategy_win_rates.png)
 
-**What this means:** when you test many ideas, some look good by luck. Wind is also measured at kickoff, which a bettor doesn't know when betting, and sportsbooks already adjust for it.
+**What this means:** when you test many ideas, some look good by luck. Wind is also measured at kickoff, which a bettor doesn't know when betting, and lines may already reflect forecast wind. The out-of-sample check is also small (225 bets).
 
 ## 5. What happens if you just follow a simple rule?
 
@@ -54,7 +54,7 @@ Betting 1 unit on every favorite lost about 499 units over 7,122 bets (−7.0% p
 **What this means:** the fee does its job. Over time, simple rules steadily lose money.
 
 ## Summary
-1. The closing line is an unbiased forecast, but single games miss by about 10 points.
+1. The closing spread is an unbiased forecast, but single games miss by about 10 points. Totals are slightly off (slope 0.93, CI excludes 1; games ran 0.71 points above the line), not by enough to beat the fee.
 2. Odds-based win chances are well calibrated.
 3. Famous edges like home underdogs and primetime overs don't beat the breakeven.
 4. Wind unders look good but aren't proven profitable.

@@ -6,7 +6,7 @@
 
 **The question:** in the 2024 US presidential election, which forecast did a better job state by state?
 
-**The data:** daily market prices for each state (Polymarket for 47 states, Kalshi for all 51 from Oct 5, 2024), 18,095 state polls archived from FiveThirtyEight, and the certified results from the MIT Election Lab.
+**The data:** daily market prices for each state (Polymarket for 47 states, Kalshi for all 51 from Oct 5, 2024), 18,095 rows of 2024 presidential poll data archived from FiveThirtyEight (about 2,000 distinct state polls), and the certified results from the MIT Election Lab.
 
 > **One term:** the *Brier score* measures how good a probability forecast was. 0 is perfect; always saying 50/50 scores 0.25. Lower is better, and confident wrong calls are punished hardest.
 
@@ -14,11 +14,11 @@
 
 ## 1. Who was more accurate?
 
-At every date from 21 days to 1 day before the election, both markets scored better than the poll average. One day out, across 35 states: Polymarket 0.042, Kalshi 0.043, polls 0.053.
+At every date from 21 days to 1 day before the election, both markets had lower (better) Brier scores than the poll average. One day out, across 35 states: Polymarket 0.042, Kalshi 0.043, polls 0.053.
 
 ![Brier score by days before the election](images/01_brier_by_horizon.png)
 
-**What this means:** in 2024, the markets were the better forecast. The 28-day bar covers only 7 swing states, so it's anecdotal.
+**What this means:** In 2024 both markets had lower (better) Brier scores than the poll average at every matched date. One day out the gap is small: statistically clear for Polymarket but not for Kalshi, and on log loss Kalshi was slightly worse than the polls. The 28-day bar covers only 7 swing states, so it's anecdotal.
 
 ## 2. Where did each forecast get it wrong?
 
@@ -38,15 +38,15 @@ The polls missed in the same direction almost everywhere: the actual result was 
 
 ## 4. Polymarket or Kalshi?
 
-Very close. Polymarket was slightly better 7 and 14 days out (by 0.005 Brier), and they were tied 1 day out. Kalshi priced safe states at 5–10% instead of 1–2%, which cost it a little. That probably reflects its fees and order book rather than real doubt.
+Very close. Polymarket was slightly better 7 and 14 days out (by a small margin, about 10% lower error), and they were tied 1 day out. Kalshi priced safe states at about 90–95% certainty, where Polymarket was at 96–99%, which cost it a little. That probably reflects its fees and order book rather than real doubt.
 
 ![Polymarket and Kalshi side by side at each date](images/01_brier_by_horizon.png)
 
 **What this means:** the two markets told almost the same story.
 
 ## Summary
-1. Both markets beat a simple poll average in 2024 at every matched date.
-2. The win came mostly from a one-directional polling miss (3.2 points toward Republicans).
+1. Both markets had lower Brier scores than a simple poll average in 2024 (1 day out: 0.042 and 0.043 vs 0.053; 33 of 35 states right vs 31). The 1-day gap is statistically clear for Polymarket but not for Kalshi.
+2. The gap came mostly from a one-directional polling miss (3.2 points toward Republicans).
 3. The poll average got 4 close states wrong; the markets got 2 wrong.
 4. Polymarket and Kalshi were nearly tied.
 

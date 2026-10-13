@@ -41,7 +41,7 @@ def overview(s, p, F):
     d = p[p.days_before == 1]
     st.markdown(f"""
 **Main findings**
-- The markets scored better than the poll average at every matched date, from 4 weeks to 1 day out.
+- Both markets had lower (better) Brier scores than the poll average at every matched date. One day out the gap is small: statistically clear for Polymarket but not for Kalshi, and on log loss Kalshi was slightly worse than the polls.
 - The polls missed in one direction: results were more Republican than the polls in **{(d.poll_miss > 0).sum()} of {len(d)}** states.
 - The two markets were close to each other.
 

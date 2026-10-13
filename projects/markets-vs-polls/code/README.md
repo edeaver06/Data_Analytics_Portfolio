@@ -31,7 +31,7 @@ To deploy on Streamlit Community Cloud, set the main file to `projects/markets-v
 
 ## Details
 ### Context
-**Bottom line: in 2024, Polymarket and Kalshi state-level prices scored better than a simple poll-average forecast at every matched time point from 3 weeks to 1 day out. But this is one election with errors that were correlated across states, so it isn't evidence that markets beat polls in general.**
+**Bottom line: in 2024, Polymarket and Kalshi state-level prices scored slightly better than a simple poll-average forecast at every matched time point from 3 weeks to 1 day out, but with only 35 states the 1-day-out difference is not statistically clear for Kalshi. But this is one election with errors that were correlated across states, so it isn't evidence that markets beat polls in general.**
 
 Every forecast is coded as P(Republican candidate wins the state). That's only a convention, and the same metrics apply to both sides. This project scores accuracy, not which side is right.
 
@@ -45,7 +45,7 @@ Brier score (lower is better; always guessing 50% scores 0.25), scored only on s
 | 7 | 34 | **0.029** | 0.034 | 0.047 | 34 / 33 / 31 |
 | 1 | 35 | **0.042** | 0.043 | 0.053 | 33 / 33 / 31 |
 
-1. **Both markets beat polls at every horizon.** Polymarket minus polls at 1 day out: -0.011 Brier (paired bootstrap 95% CI -0.023 to -0.002). Kalshi minus polls: -0.010 (CI -0.022 to +0.001, which just includes 0). At 7 and 14 days out, both CIs exclude 0.
+1. **Both markets scored slightly better than polls at every horizon; at 1 day out the edge is not statistically clear.** Polymarket minus polls at 1 day out: -0.011 Brier (paired bootstrap 95% CI -0.023 to -0.002). Kalshi minus polls: -0.010 (CI -0.022 to +0.001, which just includes 0). At 7 and 14 days out, both CIs exclude 0.
 2. **Why the markets won:** the polls missed in the same direction almost everywhere. At 1 day out, the actual two-party margin was on average **3.2 points more Republican** than the poll average (SD 3.0 across 35 states). The poll average narrowly had the wrong leader in MI, WI, PA and NV. The markets also had MI and WI wrong, but leaned the right way in PA and NV. Any forecaster that leaned toward the outcome in close states looks good in a cycle with a one-directional miss. A cycle where polls miss the other way could reverse this ranking.
 3. **Polymarket edged out Kalshi.** The gap was small (-0.005 Brier at 7 and 14 days), but its CI excludes 0 there. At 1 day out they're tied (CI includes 0). Kalshi's safe-state prices sat at 5–10% instead of 1–2%, which costs a little Brier score. That probably reflects its order-book prices and fees rather than real uncertainty.
 4. **The poll forecast's result doesn't depend on its one tuning setting.** Turning the poll average into a win probability takes an assumed error size σ. I fixed σ at 5 points before scoring. Any σ from 3 to 8 gives a Brier of 0.053–0.059 at 1 day out, still worse than both markets.

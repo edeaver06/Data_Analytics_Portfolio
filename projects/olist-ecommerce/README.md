@@ -15,7 +15,7 @@ Olist connects thousands of small Brazilian sellers to big online marketplaces, 
 ## Key findings
 - **Late orders score lower:** reviewed after delivery, 3.78★ vs 4.29★ on time (−0.51★, 95% CI −0.60 to −0.43).
 - **Most late reviews come early:** 84% of late-order reviews are written before the parcel arrives, and those average 1.97★.
-- **Routes matter more than "bad sellers":** last year's least reliable sellers are late only 9.6% vs 6.85% for the best (about 1.4x), and São Paulo → Alagoas is late 24.0% of the time.
+- **"Bad sellers" are only part of it:** last year's least reliable sellers are late only 9.6% vs 6.85% for the best (about 1.4x), and São Paulo → Alagoas is late 24.0% of the time.
 - **Growth without loyalty:** sales grew 138% year over year, but only 3.0% of customers ever order twice.
 
 ## What I built

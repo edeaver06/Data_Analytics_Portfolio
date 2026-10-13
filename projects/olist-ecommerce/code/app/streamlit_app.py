@@ -39,7 +39,7 @@ def overview(t):
 **Main findings**
 - Counting reviews written after delivery, late orders average **{H['late_after_delivery_score']:.2f}★** vs **{H['ontime_after_delivery_score']:.2f}★** on time, a gap of **{H['gap_after_delivery']:+.2f}★**.
 - Across all reviews the gap looks far bigger ({H['late_avg_score']:.2f}★ vs {H['ontime_avg_score']:.2f}★), because {H['pct_late_reviews_before_delivery']:.0f}% of late orders were reviewed *before* the parcel arrived. Much of the damage is the review prompt arriving too early.
-- Routes matter more than "bad sellers": last year's least reliable sellers are late {H['seller_q4_late_pct']}% vs {H['seller_q1_late_pct']}% for the best (about {H['seller_q4_late_pct'] / H['seller_q1_late_pct']:.1f}x), while {H['worst_lane'].replace('->', ' → ')} is late {H['worst_lane_late_pct']}% of the time.
+- "Bad sellers" are only part of it: last year's least reliable sellers are late {H['seller_q4_late_pct']}% vs {H['seller_q1_late_pct']}% for the best (about {H['seller_q4_late_pct'] / H['seller_q1_late_pct']:.1f}x), while {H['worst_lane'].replace('->', ' → ')} is late {H['worst_lane_late_pct']}% of the time.
 
 These are associations in observed data, not proof of cause.""")
     st.caption(FOOTER)

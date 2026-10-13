@@ -58,7 +58,7 @@ def overview():
                  labels={"last_players": "Concurrent players", "game_name": ""}, hover_data=["appid"])
     st.plotly_chart(style(fig, 520), width="stretch")
     if len(snaps) < 2:
-        st.info("Only one snapshot has been collected so far. Time-series views fill in as the daily cron runs.")
+        st.info("Only one snapshot has been collected so far. This public app uses a fixed snapshot, so time-series views are limited.")
     source_note()
 
 @st.cache_data(show_spinner=False, ttl=3600)
@@ -290,8 +290,8 @@ def finder():
     f = f.sort_values(rank_by, ascending=False, na_position="last")
     cov = marts.coverage(data()[0])
     st.caption(f"Coverage (live): tags for {cov['tags']:,} of {cov['games']:,} games, Steam Deck status for {cov['deck']:,}, "
-               f"store details (genres, categories, feature flags) for {cov['store_details']:,}. These fill in every 6 hours as the "
-               f"pipeline fetches more games, so tag, Deck and feature filters only return games covered so far.")
+               f"store details (genres, categories, feature flags) for {cov['store_details']:,}. This public app uses a fixed snapshot, "
+               f"so tag, Deck and feature filters only return games covered so far.")
     st.write(f"**{len(f)}** of {len(det)} {'apps' if inc else 'scored games'} match.")
     if f.empty:
         st.info("No games match. Loosen the filters."); return
