@@ -38,7 +38,7 @@ The polls missed in the same direction almost everywhere: the actual result was 
 
 ## 4. Polymarket or Kalshi?
 
-Very close. Polymarket was slightly better 7 and 14 days out (by a small margin, about 10% lower error), and they were tied 1 day out. Kalshi priced safe states at about 90–95% certainty, where Polymarket was at 96–99%, which cost it a little. That probably reflects its fees and order book rather than real doubt.
+Very close. Polymarket was slightly better 7 and 14 days out (by a small margin, about 11–14% lower error), and they were tied 1 day out. Kalshi priced safe states at about 90–99% certainty (most at 95%), where Polymarket was at about 96–99%, which cost it a little. That probably reflects its fees and order book rather than real doubt.
 
 ![Polymarket and Kalshi side by side at each date](images/01_brier_by_horizon.png)
 

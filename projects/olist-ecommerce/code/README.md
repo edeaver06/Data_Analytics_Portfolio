@@ -85,7 +85,7 @@ Delivered GMV (orders with status `delivered` and a delivery date, the same base
 **Where lateness happens:** late rate by seller-state → customer-state lane, for lanes with 100+ single-seller delivered orders. São Paulo sellers shipping to the North-East stand out.
 ![Lane heatmap](../images/06_lane_heatmap.png)
 
-**Why growth is all acquisition:** in each monthly cohort, under 1% of customers order again in any later month.
+**Why growth is all acquisition:** in each monthly cohort with more than a handful of customers, under 1% of customers order again in any later month.
 ![Cohort retention](figures/07_cohort_retention.png)
 
 The category chart is also available as an interactive Plotly version: `figures/05_category_matrix.html`.

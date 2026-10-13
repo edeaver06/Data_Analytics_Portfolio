@@ -134,7 +134,7 @@ def calibration(x):
     k[0].metric("Accuracy score (Brier, lower is better)", f"{F['brier']:.3f}")
     k[1].metric("Coin flip would score", f"{F['brier_coinflip']:.3f}")
     k[2].metric("Games with moneylines", f"{F['ml_games']:,}")
-    st.markdown("**What this means:** the market's win chances match reality closely; the odds' win chances closely match how often teams actually won, in every probability band we checked.")
+    st.markdown("**What this means:** the odds' win chances closely match how often teams actually won, in every probability band we checked.")
     st.caption(FOOTER)
 
 

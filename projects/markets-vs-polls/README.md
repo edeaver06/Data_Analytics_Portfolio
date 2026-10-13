@@ -16,7 +16,7 @@ Prediction markets such as Polymarket and Kalshi are often said to beat polls. N
 - **Markets scored slightly better 1 day out:** Brier score (lower is better) Polymarket 0.042, Kalshi 0.043, poll average 0.053, across 35 states. The gap is statistically clear for Polymarket but not for Kalshi.
 - **The polls missed in one direction:** actual results were on average 3.2 points more Republican than the poll average, and the miss went the same way in 31 of 35 states.
 - **Close calls decided it:** the poll average had the wrong leader in 4 states (MI, WI, PA, NV); the markets missed 2.
-- **The two markets were nearly tied:** Polymarket edged out Kalshi at 7 and 14 days out (a small margin, about 10% lower error) and they tied at 1 day.
+- **The two markets were nearly tied:** Polymarket edged out Kalshi at 7 and 14 days out (a small margin, about 11–14% lower error) and they tied at 1 day.
 
 ## What I built
 - A data pipeline pulling daily prices from the Polymarket and Kalshi public APIs, archived 538 polls and certified MIT election results.

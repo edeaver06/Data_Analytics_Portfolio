@@ -61,7 +61,7 @@ Rarely. Only 3.0% of customers ever placed a second order. In every monthly grou
 ## Summary
 1. Late orders reviewed after delivery score about half a star lower (3.78★ vs 4.29★).
 2. Most late-order reviews are written before the parcel arrives, and they average 1.97★.
-3. Routes, especially São Paulo to the North-East, matter more than individual sellers.
+3. Routes, especially São Paulo to the North-East, matter alongside individual sellers; this data can't fully separate the two.
 4. Sales are growing fast, but only 3.0% of customers return.
 
 **Ideas to test:** send the review request after delivery, set delivery dates by route, and run a win-back offer for customers whose first order was late.
