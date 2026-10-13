@@ -41,7 +41,7 @@ This is one of the most famous beliefs about the market. Home underdogs covered 
 
 I tested 10 common strategies. Only unders in windy games (15+ mph) clearly differ from a coin flip: 57.0% over 674 games. But after correcting for testing 10 strategies at once, the evidence that it beats the 52.38% bar isn't strong enough (p = 0.09). Out of sample (2015 onward), it went 56.4% over 225 games.
 
-![Win rate of 10 strategies with uncertainty ranges](images/03_strategy_win_rates.png)
+![Forecast hit rate of 10 strategies with 95% confidence intervals](images/03_forecast_hit_rate.png)
 
 **What this means:** when you test many ideas, some look good by luck. Wind is also measured at kickoff, which isn't known when the line closes, and lines may already reflect forecast wind. The out-of-sample check is also small (225 games).
 
@@ -49,7 +49,7 @@ I tested 10 common strategies. Only unders in windy games (15+ mph) clearly diff
 
 Picking every favorite was right 48.7% of the time over 7,122 decided games (95% CI 47.6–49.9%), below the 52.38% bar. Picking every over was right 49.4% of the time (7,248 games), home underdogs 50.5% (2,417) and primetime overs 48.7% (1,233). None reaches the bar.
 
-![Cumulative results of simple strategies against the closing line over time](images/04_backtest_pnl.png)
+![Hit rate of 10 strategies vs the 52.38% bar: two point estimates sit above it (wind unders 57.0%, playoff underdogs 54.6%), but none is significant after correction](images/04_forecast_accuracy_vs_breakeven.png)
 
 **What this means:** from 1999 to 2026, no simple rule forecasts games better than the closing line.
 

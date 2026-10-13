@@ -11,7 +11,7 @@ from clv import connect, pnl_curve, BREAKEVEN
 
 C = ROOT / "data/clean"
 # Charts shown in README/STORY live in the project-root images/; the rest go to code/figures/.
-MAIN = {"03_strategy_win_rates.png", "02_cover_rate_by_spread.png", "04_backtest_pnl.png", "01_moneyline_calibration.png"}
+MAIN = {"02_cover_rate_by_spread.png", "01_moneyline_calibration.png"}
 def fig_path(name):
     d = (ROOT.parent / "images") if name in MAIN else (ROOT / "figures")
     d.mkdir(parents=True, exist_ok=True)
@@ -64,35 +64,8 @@ ax.legend(handles=[Patch(color=ORANGE, label="Home underdog"), Patch(color=BLUE,
 finish(fig, "Home teams cover close to 50% in most spread buckets",
        "Most buckets sit below the 52.38% breakeven; the 7+ point home-dog bucket is one subgroup, not a tested edge", "02_cover_rate_by_spread.png")
 
-# 03 strategy win rates
-s = summ.sort_values("win_rate").reset_index(drop=True)
-fig, ax = plt.subplots(figsize=(10, 6))
-for i, r in s.iterrows():
-    c = GREEN if r.sig_bias_holm else (BLUE if r.win_rate >= .5 else GREY)
-    ax.plot([r.ci_low, r.ci_high], [i, i], color=c, lw=2.2, alpha=.7); ax.plot(r.win_rate, i, "o", color=c, ms=8)
-    ax.text(r.ci_high + .004, i, f"{r.win_rate:.1%}  (n={int(r.bets):,})", va="center", fontsize=8.8)
-ax.set_yticks(range(len(s))); ax.set_yticklabels(s.strategy); ax.grid(axis="y", visible=False)
-ax.axvline(.5, color="#333", lw=1); be_line(ax, True)
-ax.text(BREAKEVEN + .002, len(s) - .4, "52.38% breakeven", color=VERM, fontsize=9)
-ax.set_xticks(np.arange(.44, .661, .02)); ax.set(xlim=(.44, .66), xlabel="Win rate with 95% Wilson confidence interval"); ax.xaxis.set_major_formatter("{x:.0%}")
-w = s[s.strategy.str.contains("wind")].iloc[0]
-ax.text(.995, .03, f"Green = differs from 50% after Holm correction.\nWind 15+ unders: 57.0%, but beating the vig is not\nsignificant after correction (Holm p = {w.p_beats_vig_holm:.2f}).",
-        transform=ax.transAxes, ha="right", va="bottom", fontsize=8.8, bbox=dict(fc="white", ec="#ccc"))
-finish(fig, "Only high-wind unders stand out, and that's not proven profitable",
-       "Home dogs (50.5%) and primetime overs (48.7%) fall short of the 52.38% breakeven; 10 strategies tested", "03_strategy_win_rates.png")
-
-# 04 backtest P&L
+# 03 and 04 are now forecast-accuracy charts rendered by forecast_figures.py (no betting framing).
 con = connect()
-fig, ax = plt.subplots(figsize=(10, 5))
-for st, lab, c, dy in [("Bet home underdogs ATS", "Home underdogs ATS", ORANGE, 9), ("Bet primetime overs", "Primetime overs", PURPLE, -9),
-                      ("Bet all overs", "All overs", SKY, 0), ("Bet favorites ATS", "Favorites ATS", BLUE, 0)]:
-    cv = pnl_curve(con, st); ax.plot(cv.index, cv.values, color=c, lw=2)
-    ax.annotate(f"{lab}: {cv.values[-1]:+.0f}u", (cv.index[-1], cv.values[-1]),
-                xytext=(6, dy), textcoords="offset points", va="center", fontsize=9, color=c, fontweight="bold")
-ax.axhline(0, color="#333", lw=1)
-ax.set(xlabel="Season", ylabel="Cumulative units (1 unit per bet at -110)"); ax.set_xlim(right=S1 + 8); ax.set_xticks(range(2000, S1 + 1, 5))
-finish(fig, "Naive betting strategies lose money to the vig over time",
-       "Cumulative profit/loss betting 1 unit per game at -110; every curve finishes below zero", "04_backtest_pnl.png")
 
 # 05 spread error histogram
 g = con.execute("SELECT * FROM games").df()

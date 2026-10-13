@@ -7,7 +7,7 @@ No install needed; if the app has been idle it shows a short wake-up screen firs
 
 **[▶️ Live app](https://nfl-line-e.streamlit.app/) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
 
-![Win rate of 10 strategies vs the 52.38% breakeven](images/03_strategy_win_rates.png)
+![Forecast hit rate of 10 strategies with 95% confidence intervals; only high-wind unders (57.0%, 674 decided games) differs from 50% after correction](images/03_forecast_hit_rate.png)
 
 ## The problem
 A market price is a forecast. NFL closing lines (point spreads, totals and moneylines) price thousands of games a year, so they are a clean test of how efficient a forecasting market is. Popular strategies claim the market is systematically wrong (home underdogs, primetime overs, unders in wind). At the standard -110 price a strategy must be right 52.38% of the time just to match the market. This project measures the market's forecast accuracy and tests whether any popular strategy clears that bar once it's tested properly.

@@ -57,7 +57,8 @@ To deploy on Streamlit Community Cloud, set the main file to `projects/nfl-closi
 
 ### Charts
 ![Cover rate by spread bucket](../images/02_cover_rate_by_spread.png)
-![Cumulative strategy results over time](../images/04_backtest_pnl.png)
+![Forecast accuracy vs the 52.38% bar](../images/04_forecast_accuracy_vs_breakeven.png)
+![Forecast hit rate by strategy](../images/03_forecast_hit_rate.png)
 ![Moneyline calibration](../images/01_moneyline_calibration.png)
 ![Spread error distribution](figures/05_spread_error_hist.png)
 
