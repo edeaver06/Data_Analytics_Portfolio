@@ -7,7 +7,7 @@
 **The question:** out of about 1,000 of the most popular games on Steam, which ones are people actually playing, and what do the busiest games have in common?
 
 **The data:**
-- A live count of players for **1,029 games**, collected from Steam on 12 Oct 2026.
+- A count of players for **1,029 games**, from a snapshot on Oct 12, 2026.
 - Each game's store details: price, genre, features (like co-op), and reviews.
 - Monthly player history going back to 2012 (from SteamCharts.com) and daily prices from 2019 to 2020 (a public research dataset).
 
@@ -17,7 +17,7 @@
 
 ## 1. Which games are people playing right now?
 
-On 12 Oct 2026 (9:29 AM CST), about **6.22 million** people were playing one of these 1,029 games. The chart shows the 15 busiest.
+In a snapshot on Oct 12, 2026 (9:29 AM CST), about **6.22 million** people were playing one of these 1,029 games. The chart shows the 15 busiest.
 
 Counter-Strike 2, a free team shooter, is in a league of its own with about 1.16 million players, more than the next three games combined. Note the orange bar: **Wallpaper Engine** isn't a game at all (it makes animated desktop backgrounds), but Steam lists it as one. Later rankings filter out apps like it.
 
@@ -107,16 +107,16 @@ In the first week of a sale, games had about **39% more daily players** than the
 
 ## Summary: what we learned
 
-1. **Winner takes most.** 6.22M people were playing; the top 10 games held 40.1%, and the typical game had just 417.
+1. **Winner takes most.** In a snapshot on Oct 12, 2026, 6.22M people were playing; the top 10 games held 40.1%, and the typical game had just 417.
 2. **Free isn't a magic ticket.** Free and paid games draw similar crowds; paid games review better.
 3. **Social games are busier.** Online co-op games have almost 4× the typical crowd.
-4. **The first month is make-or-break.** Games lose about 44% of players after month one, then level off.
+4. **The first month is make-or-break.** A month after their launch month, games have about 44% fewer players, then level off.
 5. **Sales work.** About +39% players in sale week, more for deeper discounts.
 6. **The best games are cheap, old favourites**, led by Terraria and Stardew Valley.
 
 ## Limitations (in plain words)
 
-- **One day of live data.** The live counts are four snapshots from a single morning (12 Oct 2026). Weekends, holidays and big updates change the picture. The pipeline is built to collect every 6 hours (that job runs on a private machine), but the public app uses this fixed snapshot.
+- **One day of data.** The player counts are four snapshots from a single morning (12 Oct 2026). Weekends, holidays and big updates change the picture. The pipeline is built to collect every 6 hours (that job runs on a private machine), but the public app uses this fixed snapshot.
 - **Links, not proof.** Most findings show that two things go together, not that one causes the other.
 - **Only today's popular games.** The history looks at games that are still popular, so games that launched and flopped are missing. That makes survival look better than it is.
 - **The sales data is older** (2019 to 2020); there's no free source of price history after that.

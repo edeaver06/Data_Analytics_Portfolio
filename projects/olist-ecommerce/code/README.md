@@ -27,7 +27,7 @@ To deploy on Streamlit Community Cloud, set the main file to `projects/olist-eco
 | Folder | What it's for |
 |---|---|
 | `data/` | `outputs/` with the exported SQL marts and headline metrics (raw CSVs download via `src/download_data.py` and aren't committed) |
-| `sql/` | Layered DuckDB SQL: load → staging → fact tables → 15 analysis marts |
+| `sql/` | Layered DuckDB SQL: load → staging → fact tables → 17 analysis marts |
 | `src/` | Python: data download, pipeline runner, chart builder and notebook builder |
 | `notebooks/` | Story notebook showing each mart next to its chart |
 | `figures/` | Extra charts plus one interactive HTML chart (README/STORY charts are in `../images/`) |

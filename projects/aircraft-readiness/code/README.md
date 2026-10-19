@@ -16,8 +16,6 @@ pip install -r app/requirements.txt
 streamlit run app/streamlit_app.py
 ```
 
-**Power BI:** `powerbi/` (Viz Specialist) holds the model spec, DAX measures and build guide, built on `data/export/`.
-
 ## What's in this folder (`code/`)
 | Path | What it's for |
 |---|---|
@@ -28,10 +26,9 @@ streamlit run app/streamlit_app.py
 | `sql/` | `01_staging` → `02_dims` → `03_facts` → `04_kpis`. `sql/tests/` holds 22 checks, and each must return 0 rows |
 | `app/` | Streamlit dashboard, its requirements and a 300 KB parquet extract |
 | `data/ref/` | JASC/ATA codes (FAA), SDR code labels (inferred), GAO rates (verified) plus the raw table extract |
-| `data/export/` | Model-ready parquet (tracked) and CSV (regenerated, gitignored) for Power BI / Tableau |
+| `data/export/` | Model-ready parquet (tracked) and CSV (regenerated, gitignored) for BI tools such as Tableau |
 | `data/raw/`, `data/*.duckdb` | *Not in git.* Re-created by `scripts/run.sh` |
 | `docs/schema.md` | Star schema, relationships, KPI definitions, real vs approximated vs synthetic, column lists |
-| `powerbi/` | Power BI model spec, measures and build guide |
 | `tests/` | pytest: windowing, repeat and interval logic on toy data, synthetic calibration, warehouse checks, export parity, dashboard smoke test |
 
 ## Data sources (verified 12 Oct 2026)
@@ -47,7 +44,7 @@ streamlit run app/streamlit_app.py
 ## Design decisions
 1. **SDRS plus the registry over C-MAPSS alone.** C-MAPSS is simulated sensor data with no maintenance records. SDRS is the only public, report-level maintenance-discrepancy source with aircraft hours and cycles.
 2. **Star schema with one row per report.** `fct_discrepancy` sits at the SDR level (de-duplicated by operator control number), with conformed dimensions for date, aircraft, ATA system, operator, part, stage and precaution.
-3. **Unknown members (key −1) instead of nulls.** 175 reports have no N-number and 578 have no operator. They point to `<UNKNOWN>` rows (key −1; `ata_key = 'UNK'` for missing codes), so every relationship in Power BI holds and totals reconcile.
+3. **Unknown members (key −1) instead of nulls.** 175 reports have no N-number and 578 have no operator. They point to `<UNKNOWN>` rows (key −1; `ata_key = 'UNK'` for missing codes), so every relationship in the star schema holds and totals reconcile.
 4. **Code lookups are unique.** `dim_stage` and `dim_precaution` are unique on their code and cover every code seen in the facts. `dim_sdr_code` is unique on `code_key = code_type:code`.
 5. **Inferred code meanings are flagged, never hidden.** The FAA doesn't publish precautionary-procedure meanings. Labels come from reading report text, and `label_basis` says whether each is inferred, unverified or Unknown (I, J and L stay Unknown).
 6. **Operational repeats exclude inspection findings.** Counting heavy-check findings inflates the repeat rate to 39%, because one check spans several days. The headline 7.1% counts only problems that came up in operation.

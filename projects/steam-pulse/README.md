@@ -13,9 +13,9 @@ Pick categories in the Game Finder and get the top game. No install needed; if t
 Steam lists tens of thousands of games, but players' time is limited. A studio, publisher or store team needs to know where attention actually goes, what the busiest games have in common, and how quickly a launch fades, so it can decide what to build and when to discount.
 
 ## Key findings
-- **Winner takes most:** 6.22M people were playing 1,029 tracked games, and the **top 10 held 40.1%**. The typical game had just 417 players.
+- **Winner takes most:** In a snapshot on Oct 12, 2026, 6.22M people were playing 1,029 tracked games, and the **top 10 held 40.1%**. The typical game had just 417 players.
 - **Playing with friends matters:** games with online co-op have a typical crowd of about 1,090 players, almost 4× the 278 for games without it.
-- **The first month is make-or-break:** games lose about **44%** of their players after month one, then level off for years.
+- **The first month is make-or-break:** a month after their launch month, games have about **44%** fewer players, then level off for years.
 - **Sales work:** in the first week of a sale, games had about **39% more** daily players than similar games not on sale (10,756 sales, 2019–20).
 
 ## What I built
