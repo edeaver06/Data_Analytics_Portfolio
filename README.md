@@ -3,7 +3,7 @@
 [![CI](https://github.com/edeaver06/Data_Analytics_Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/edeaver06/Data_Analytics_Portfolio/actions/workflows/ci.yml)
 
 ## Overview
-I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) moving into **data analyst and data engineer roles (Remote, US)**. I build tested SQL pipelines, publish dashboards, check models and data for flaws, and do data QA on AI model outputs.
+I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) moving into **data analyst and data engineer roles** (Remote, worldwide or US). I build tested SQL pipelines, publish dashboards, check models and data for flaws, and do data QA on AI model outputs.
 
 **What's here:** six projects in [`projects/`](projects). Each one opens with a one-page summary (the question, the answer, key findings, what I built), a plain-English **Story**, and a `code/` folder with everything technical. Start with **Steam Pulse**: its [▶️ live app](https://steam-pulse-e.streamlit.app/) runs in your browser with no install.
 
@@ -12,26 +12,21 @@ I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) movin
 ## Portfolio Projects
 | Project | Result | Role type | Links |
 |---|---|---|---|
-| **[Steam Pulse: What keeps a video game alive?](projects/steam-pulse)** *(in progress)* | 6.22M people were playing 1,029 tracked games, and the top 10 held 40.1%; games lose 44% of players after month one. | Data engineer (pipeline, warehouse, dbt, app) | **[▶️ Live app](https://steam-pulse-e.streamlit.app/)** · [Story](projects/steam-pulse/STORY.md) · [Code](projects/steam-pulse/code/README.md) |
+| **[Steam Pulse: What keeps a video game alive?](projects/steam-pulse)** | 6.22M people were playing 1,029 tracked games, and the top 10 held 40.1%; games lose 44% of players after month one. | Data engineer (pipeline, warehouse, dbt, app) | **[▶️ Live app](https://steam-pulse-e.streamlit.app/)** · [Story](projects/steam-pulse/STORY.md) · [Code](projects/steam-pulse/code/README.md) |
 | **[Markets vs Polls: Who Called the 2024 Election Better?](projects/markets-vs-polls)** | 1 day out, Brier 0.042 (Polymarket) and 0.043 (Kalshi) vs 0.053 (polls), in one election where polls missed 3.2 points one way. | Data analyst (APIs, forecasting) | **[▶️ Live app](https://markets-polls-e.streamlit.app/)** · [Story](projects/markets-vs-polls/STORY.md) · [Code](projects/markets-vs-polls/code/README.md) |
-| **[Olist: When the Parcel Is Late, the Stars Fall](projects/olist-ecommerce)** | Reviewed after delivery, late orders score 3.78★ vs 4.29★; 84% of late-order reviews are written before the parcel arrives. | Data analyst / BI (SQL) | **[▶️ Live app](https://olist-e.streamlit.app/)** · [Story](projects/olist-ecommerce/STORY.md) · [Code](projects/olist-ecommerce/code/README.md) |
-| **[Aircraft Readiness: What Grounds Airplanes, and How Fast Is It Reported?](projects/aircraft-readiness)** | Of 34,350 FAA maintenance-difficulty reports, 2,521 disrupted a flight, mostly from air conditioning, landing gear and engines; 7.1% of in-flight problems came back within 30 days. | Data analyst / BI | **[▶️ Live app](https://aircraft-ready-e.streamlit.app/)** · [Story](projects/aircraft-readiness/STORY.md) · [Code](projects/aircraft-readiness/code/README.md) |
-| **[Google Fiber: Why Do Customers Call Back?](projects/google-fiber-fcr)** | Two problem types drive 80.2% of repeat calls, and an "impossible" billing number points to a likely data problem. | Data analyst / BI (operations) | **[▶️ Live app](https://fiber-e.streamlit.app/)** · [Story](projects/google-fiber-fcr/STORY.md) · [Code](projects/google-fiber-fcr/code/README.md) |
+| **[Olist: When the Parcel Is Late, the Stars Fall](projects/olist-ecommerce)** | Reviewed after delivery, late orders score 3.78★ vs 4.29★; 84% of late-order reviews are written before the parcel arrives. | Data analyst / BI (SQL) | **[▶️ Live app](https://olist-e.streamlit.app/)** · [Tableau](https://public.tableau.com/app/profile/evan.deaver/viz/OlistLateDeliveries/OlistLateDeliveries) · [Story](projects/olist-ecommerce/STORY.md) · [Code](projects/olist-ecommerce/code/README.md) |
+| **[Aircraft Readiness: What Grounds Airplanes, and How Fast Is It Reported?](projects/aircraft-readiness)** | Of 34,350 FAA maintenance-difficulty reports, 2,521 disrupted a flight, mostly from air conditioning, landing gear and engines; 7.1% of in-flight problems came back within 30 days. | Data analyst / BI | **[▶️ Live app](https://aircraft-ready-e.streamlit.app/)** · [Tableau](https://public.tableau.com/app/profile/evan.deaver/viz/AircraftReliability/AircraftReliability) · [Story](projects/aircraft-readiness/STORY.md) · [Code](projects/aircraft-readiness/code/README.md) |
+| **[Google Fiber: Why Do Customers Call Back?](projects/google-fiber-fcr)** | Two problem types drive 80.2% of repeat calls, and an "impossible" billing number points to a likely data problem. | Data analyst / BI (operations) | **[▶️ Live app](https://fiber-e.streamlit.app/)** · [Tableau](https://public.tableau.com/app/profile/evan.deaver/viz/GoogleFiberRepeatCallsFCR/GoogleFiberRepeatCalls) · [Story](projects/google-fiber-fcr/STORY.md) · [Code](projects/google-fiber-fcr/code/README.md) |
 | **[NFL: Is the Market's Closing Price an Accurate Forecast?](projects/nfl-closing-line)** | Across 7,354 games, closing spreads are unbiased and moneyline odds are well calibrated (Brier 0.211); no popular strategy beats the 52.38% bar in a statistically defensible way. | Data analyst (statistics) | **[▶️ Live app](https://nfl-line-e.streamlit.app/)** · [Story](projects/nfl-closing-line/STORY.md) · [Code](projects/nfl-closing-line/code/README.md) |
 
 ## Table of Contents
 - [Overview](#overview)
 - [Portfolio Projects](#portfolio-projects)
-- [Earlier Work](#earlier-work)
 - [Skills](#skills)
 - [Experience](#experience)
 - [Education](#education)
 - [Certificates](#certificates)
 - [Contact](#contact)
-
-## Earlier Work
-- **[The Synthetic Predator](https://rpubs.com/slammerjammer/1423363)** (R), **[Cyclistic bike-share](https://rpubs.com/slammerjammer/1371255)** (R, Google DA capstone)
-- **[Tableau Public dashboards](https://public.tableau.com/app/profile/evan.deaver/vizzes)**
 
 To run a project: `cd projects/<name>/code && pip install -r requirements.txt && pytest -q` (or `make test` from the root). Each `code/README.md` has the full steps.
 
@@ -55,4 +50,4 @@ To run a project: `cd projects/<name>/code && pip install -r requirements.txt &&
 - **Email:** edeaver06@gmail.com
 - **LinkedIn:** [linkedin.com/in/evan-deaver-276152a5](https://www.linkedin.com/in/evan-deaver-276152a5/)
 - **Tableau Public:** [evan.deaver](https://public.tableau.com/app/profile/evan.deaver/vizzes)
-- **Kaggle:** [evandeaver](https://www.kaggle.com/evandeaver) · **RPubs:** [slammerjammer](https://rpubs.com/slammerjammer)
+- **Kaggle:** [evandeaver](https://www.kaggle.com/evandeaver)
