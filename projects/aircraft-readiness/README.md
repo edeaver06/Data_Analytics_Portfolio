@@ -5,7 +5,7 @@ No install needed; if the app has been idle it shows a short wake-up screen firs
 
 **Which aircraft systems actually disrupt flights, and which defects keep coming back?** Across 34,350 FAA maintenance-difficulty reports on 6,521 aircraft (Jan–Jun 2025), 85% of reports were routine inspection findings. The 2,521 that disrupted a flight came mostly from three systems: air conditioning, landing gear and engines.
 
-**[▶️ Live app](https://aircraft-ready-e.streamlit.app/) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
+**[▶️ Live app](https://aircraft-ready-e.streamlit.app/) | [📊 Tableau](https://public.tableau.com/app/profile/evan.deaver/viz/AircraftReliability/AircraftReliability) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
 
 ![Operational disruptions by aircraft system](images/interruptions_by_ata.png)
 
@@ -24,11 +24,11 @@ Maintenance and readiness teams need the same answers every day: what takes airc
 ## What I built
 - A star-schema data warehouse (fact and dimension tables) joining FAA difficulty reports to the FAA aircraft registry, with readiness KPIs and 22 automated data-quality checks.
 - A seven-page Streamlit dashboard, including a clearly labelled simulated-fleet page for readiness, repair time and parts backlog.
-- Model-ready exports and a documented data model for Power BI and Tableau.
+- Model-ready exports and a documented data model for Tableau and other BI tools.
 - An honest data inventory showing which KPIs are real, which are estimated, and which public data can't support.
 
 ## Tools
-SQL · DuckDB · Python (pandas) · Streamlit · Plotly · Power BI · matplotlib · pytest
+SQL · DuckDB · Python (pandas) · Streamlit · Plotly · matplotlib · pytest
 
 ## Go deeper
 - [The story in plain English](STORY.md)
