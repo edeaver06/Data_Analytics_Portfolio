@@ -6,10 +6,9 @@ import pytest
 APP = Path(__file__).resolve().parents[1] / "app/streamlit_app.py"
 st_testing = pytest.importorskip("streamlit.testing.v1")
 PAGES = ['Overview',
-         'Strategies vs the breakeven',
-         'Follow a strategy',
+         'Which patterns beat a coin flip?',
          'Home underdogs',
-         'Are the odds honest?']
+         'Are closing prices honest?']
 
 
 @pytest.mark.skipif(not (APP.parent / "data/strategy_by_season.csv").exists(), reason="app data not present")
