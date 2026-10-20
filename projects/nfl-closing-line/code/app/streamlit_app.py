@@ -10,7 +10,7 @@ import streamlit as st
 D = Path(__file__).resolve().parent / "data"
 BREAKEVEN = 110 / 210  # win share needed at -110 odds
 FOOTER = ("Source: nflverse games data (closing lines), 1999 to early 2026 seasons. "
-          "Flat 1-unit bets at -110; pushes excluded.")
+          "Hit rates count decided games (pushes excluded); analysis by Evan Deaver.")
 
 
 @st.cache_data(show_spinner=False)
@@ -31,52 +31,49 @@ def nice(s):
 
 def overview(x):
     F, t = x["F"], x["tests"]
-    st.title("Can you beat the NFL closing line?")
-    st.markdown("Before every NFL game, sportsbooks publish a prediction of the result (the *line*). At standard **-110** odds you risk "
-                "\\$110 to win \\$100, so you must win **52.38%** of bets just to break even. This dashboard tests whether "
-                "popular betting \"systems\" clear that bar.")
+    st.title("Is the market's closing price an accurate forecast?")
+    st.markdown("Before every NFL game, the market publishes a forecast of the result (the closing *line*). A pattern has to be right "
+                "**52.38%** of the time just to cover the market's built-in margin. This dashboard tests how accurate the closing "
+                "line is and whether any popular pattern clears that bar.")
     k = st.columns(4)
     k[0].metric("Games", f"{F['games']:,}", f"{F['seasons'][0]}-{F['seasons'][1]}", delta_color="off")
     k[1].metric("Strategies tested", len(t))
-    k[2].metric("Breakeven at -110", f"{BREAKEVEN:.2%}")
+    k[2].metric("Accuracy needed to cover the margin", f"{BREAKEVEN:.2%}")
     k[3].metric("Typical miss of the spread", f"{F['efficiency']['result']['mae']:.1f} pts")
     st.markdown(f"""
 **Main findings**
 - The closing spread is right **on average** (average miss {F['efficiency']['result']['mean_err']:+.2f} points), even though single games miss by about {F['efficiency']['result']['mae']:.0f} points.
-- None of the {len(t)} popular strategies beats the breakeven in a statistically defensible way.
-- Betting odds give honest win chances once the bookmaker's margin is removed.
-
-**Treat betting as paid entertainment, not income.** If it stops being fun, get help: 1-800-GAMBLER (US).""")
+- None of the {len(t)} popular patterns clears 52.38% in a statistically defensible way.
+- Closing prices give honest win chances once the bookmaker's margin is removed.""")
     st.caption(FOOTER)
 
 
 def strategies(x):
-    st.header("Do any betting strategies beat the breakeven?")
+    st.header("Which patterns beat a coin flip?")
     t = x["tests"].assign(name=lambda d: nice(d.strategy)).sort_values("win_rate")
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=t.win_rate * 100, y=t.name, mode="markers", marker=dict(size=11, color="#0072B2"),
                              error_x=dict(type="data", symmetric=False, array=(t.ci_high - t.win_rate) * 100,
-                                          arrayminus=(t.win_rate - t.ci_low) * 100), name="Win rate (95% range)"))
-    fig.add_vline(x=BREAKEVEN * 100, line_dash="dash", line_color="#D55E00", annotation_text="52.38% breakeven")
-    fig.update_xaxes(title="Win rate (%)")
+                                          arrayminus=(t.win_rate - t.ci_low) * 100), name="Hit rate (95% range)"))
+    fig.add_vline(x=BREAKEVEN * 100, line_dash="dash", line_color="#D55E00", annotation_text="52.38% needed to cover the margin")
+    fig.update_xaxes(title="Forecast hit rate (%)")
     st.plotly_chart(style(fig, 460), width="stretch")
-    show = t[["name", "bets", "win_rate", "ci_low", "ci_high", "roi_per_unit", "p_beats_vig_holm"]].sort_values("win_rate", ascending=False)
+    show = t[["name", "bets", "win_rate", "ci_low", "ci_high", "p_beats_vig_holm"]].sort_values("win_rate", ascending=False)
     st.dataframe(show, hide_index=True, column_config={
-        "name": "Strategy", "bets": "Bets", "win_rate": st.column_config.NumberColumn("Win rate", format="percent"),
+        "name": "Pattern", "bets": "Decided games", "win_rate": st.column_config.NumberColumn("Hit rate", format="percent"),
         "ci_low": st.column_config.NumberColumn("Low end (95%)", format="percent"),
         "ci_high": st.column_config.NumberColumn("High end (95%)", format="percent"),
-        "roi_per_unit": st.column_config.NumberColumn("Profit per bet", format="percent"),
         "p_beats_vig_holm": st.column_config.NumberColumn("Chance it's luck (corrected p)", format="%.2f")})
     w = x["tests"].set_index("strategy").loc["Bet unders, wind 15+ mph"]
     st.markdown("**What this means:** the lines show how uncertain each win rate is. Only windy-game unders sit fully right of the "
-                f"dashed line ({w.win_rate:.1%} over {w.bets:,} bets), but after correcting for testing {len(x['tests'])} ideas at once the chance it's "
-                f"luck is {w.p_beats_vig_holm:.2f}, above the usual 0.05 bar. So no strategy is proven to beat the book.")
-    st.subheader("Does it hold up on later seasons?")
+                f"dashed line ({w.win_rate:.1%} over {w.bets:,} decided games), but after correcting for testing {len(x['tests'])} ideas at once the chance it's "
+                f"luck is {w.p_beats_vig_holm:.2f}, above the usual 0.05 bar. So no pattern is proven to beat the market.")
+    st.subheader("Does the pattern hold in later seasons?")
     wf = x["wf"].assign(name=lambda d: nice(d.strategy))
     st.dataframe(wf[["name", "in_sample_rate", "oos_rate", "oos_bets", "picked"]], hide_index=True, column_config={
-        "name": "Strategy", "in_sample_rate": st.column_config.NumberColumn("Win rate, 1999-2014", format="percent"),
-        "oos_rate": st.column_config.NumberColumn("Win rate, 2015 on", format="percent"),
-        "oos_bets": "Bets, 2015 on", "picked": "Looked good early?"})
+        "name": "Pattern", "in_sample_rate": st.column_config.NumberColumn("Hit rate, 1999-2014", format="percent"),
+        "oos_rate": st.column_config.NumberColumn("Hit rate, 2015 on", format="percent"),
+        "oos_bets": "Decided games, 2015 on", "picked": "Looked good early?"})
     st.markdown("Each strategy is judged on 1999-2014, then checked on 2015 onward, seasons it never saw.")
     st.caption(FOOTER)
 
@@ -108,22 +105,22 @@ def bankroll(x):
 
 
 def spreads(x):
-    st.header("Do home underdogs beat the spread?")
+    st.header("Are home underdogs underrated?")
     b = x["buckets"].copy()
     b["group"] = b.bucket.str.replace(r"^[a-z]\) ", "", regex=True)
     fig = px.bar(b, x="group", y=b.home_cover_rate * 100, text=b.home_cover_rate.map("{:.1%}".format), hover_data=["games"],
                  color_discrete_sequence=["#0072B2"], labels={"group": "Home team's spread", "y": "Home team cover rate (%)"})
-    fig.add_hline(y=BREAKEVEN * 100, line_dash="dash", line_color="#D55E00", annotation_text="52.38% breakeven")
+    fig.add_hline(y=BREAKEVEN * 100, line_dash="dash", line_color="#D55E00", annotation_text="52.38% needed to cover the margin")
     fig.update_yaxes(range=[40, 62])
     st.plotly_chart(style(fig), width="stretch")
-    st.markdown("**What this means:** most groups sit below the breakeven. The 7+ point home underdogs look good, but that's one slice "
+    st.markdown("**What this means:** most groups sit below 52.38%. The 7+ point home underdogs look good, but that's one slice "
                 "out of many, not a tested strategy.")
     st.caption(FOOTER)
 
 
 def calibration(x):
     F, c = x["F"], x["cal"]
-    st.header("Do betting odds give honest win chances?")
+    st.header("Do closing prices give honest win chances?")
     st.markdown(f"After removing the bookmaker's margin (about {F['mean_overround']:.1%}), each game's odds give a win chance. "
                 "If the odds are honest, the dots sit on the diagonal line.")
     fig = px.scatter(c, x=c.pred * 100, y=c.actual * 100, size="n", hover_data=["bin", "n"],
@@ -138,12 +135,12 @@ def calibration(x):
     st.caption(FOOTER)
 
 
-PAGES = {"Overview": overview, "Strategies vs the breakeven": strategies, "Follow a strategy": bankroll,
-         "Home underdogs": spreads, "Are the odds honest?": calibration}
+PAGES = {"Overview": overview, "Which patterns beat a coin flip?": strategies,
+         "Home underdogs": spreads, "Are closing prices honest?": calibration}
 
 
 def main():
-    st.set_page_config(page_title="Can you beat the NFL closing line?", page_icon="🏈", layout="wide")
+    st.set_page_config(page_title="Is the market's closing price an accurate forecast?", page_icon="🏈", layout="wide")
     page = st.sidebar.radio("Page", list(PAGES))
     PAGES[page](load())
 

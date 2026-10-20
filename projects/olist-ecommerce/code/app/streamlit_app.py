@@ -9,7 +9,7 @@ import streamlit as st
 D = Path(__file__).resolve().parent / "data"
 BLUE, ORANGE, GREY = "#0072B2", "#D55E00", "#999999"
 FOOTER = ("Source: Olist Brazilian E-Commerce Public Dataset (Kaggle, CC BY-NC-SA 4.0), about 99k orders, Sep 2016 - Oct 2018. "
-          "Only aggregated summaries are shown. Late = delivered after the estimated date.")
+          "Only aggregated summaries are shown. Late = delivered after the estimated date. Analysis by Evan Deaver.")
 
 
 @st.cache_data(show_spinner=False)
@@ -80,7 +80,7 @@ def timing(t):
 
 def sellers(t):
     H = t["H"]
-    st.header("Is it bad sellers?")
+    st.header("Is it a few bad sellers, or the whole network?")
     d = t["seller_tiers"].copy()
     d["tier"] = d.late_quartile.map({1: "Most reliable in 2017", 2: "2nd", 3: "3rd", 4: "Least reliable in 2017"})
     fig = px.bar(d, x="tier", y="late_rate_pct", text="late_rate_pct", hover_data=["sellers", "orders_2018", "pct_sp_sellers"],

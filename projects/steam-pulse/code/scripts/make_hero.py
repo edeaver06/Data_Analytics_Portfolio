@@ -20,7 +20,7 @@ for y, v in enumerate(top.player_count):
     ax.text(v / 1e3 + 8, y, f"{v/1e3:,.0f}k", va="center", fontsize=8)
 fig.suptitle(f"10 games hold {share:.0%} of all concurrent players\nacross {len(df):,} tracked Steam games",
              x=0.02, ha="left", fontsize=13, weight="bold")
-ax.set_xlabel("Concurrent players (thousands) · orange = top 10"); ax.spines[["top", "right"]].set_visible(False)
+ax.set_xlabel("Players online at once (thousands) · orange = top 10"); ax.spines[["top", "right"]].set_visible(False)
 fig.text(0.01, 0.01, f"Latest snapshot {ts:%Y-%m-%d %H:%M} CST (UTC-6); {len(df):,} games, {tot:,} players. Universe: SteamSpy top-1,000 by owners plus newly tracked releases.\n"
          "Source: Steam Web API, SteamSpy; analysis by Evan Deaver", fontsize=7, color="gray")
 plt.tight_layout(rect=(0, 0.045, 1, 1)); plt.savefig(ROOT.parent / "images" / "hero_concentration.png", dpi=150)

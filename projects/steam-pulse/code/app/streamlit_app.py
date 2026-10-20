@@ -42,7 +42,7 @@ def short(n):
 def overview():
     g, fct, snaps, _ = data()
     total = g.last_players.sum(); top3 = g.nlargest(3, "last_players")
-    st.title("Steam Pulse")
+    st.title("Steam Pulse: which games keep players, and do sales work?")
     n_live = int(g.last_players.notna().sum())
     st.markdown(f"Concurrent-player tracking for {n_live:,} popular Steam games "
                 f"({len(g):,} in the catalogue; {len(g) - n_live} had no player count in the latest snapshot).")
@@ -72,7 +72,7 @@ def results():
 HIST_NOTE = "Source: Analysis history (analysis/history_results.json)."
 
 def decay():
-    st.header("Launch decay curves")
+    st.header("How fast do players leave after launch?")
     H = history()
     if H is None:
         st.warning("analysis/history_results.json is missing, so launch curves can't be shown."); return
@@ -141,7 +141,7 @@ def _f2p_body(s, k):
     source_note(f"Free-to-play = Steam store is_free. {int(s.games.sum()):,} games with a player count in the latest snapshot.")
 
 def sales():
-    st.header("Sales impact")
+    st.header("Do sales bring players back?")
     H = history()
     if H is None:
         st.warning("analysis/history_results.json is missing, so the discount event study can't be shown."); return
@@ -343,7 +343,7 @@ def leaderboards():
             st.dataframe(lb[lb.label == label][["game_name", "score", *PARTS, "store"]], hide_index=True,
                          column_config={"store": st.column_config.LinkColumn("Steam store", display_text="Open"),
                                         **{k: st.column_config.NumberColumn(v, format="%.3f") for k, v in PARTS.items()}})
-    st.subheader("Category gaps: low supply, high score or demand")
+    st.subheader("Under-served game categories")
     agg = lab[lab.label.isin(keep)].groupby("label").agg(games=("appid", "nunique"), median_score=("score", "median"),
                                                           median_players=("last_players", "median"))
     pct = agg.rank(pct=True); pct["games"] = 1 - pct["games"]  # high = scarce
@@ -364,7 +364,7 @@ def main():
     try:
         data(); history(); results()  # warm the shared caches once so switching pages doesn't redo the loading
     except marts.DataUnavailable as e:
-        st.title("Steam Pulse")
+        st.title("Steam Pulse: which games keep players, and do sales work?")
         st.error(f"Data isn't available right now. {e}")
         return
     PAGES[page]()

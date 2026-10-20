@@ -11,7 +11,7 @@ D = Path(__file__).resolve().parent / "data"
 NAMES = {"polymarket": "Polymarket", "kalshi": "Kalshi", "polls": "Poll average"}
 COLORS = {"Polymarket": "#0072B2", "Kalshi": "#009E73", "Poll average": "#D55E00"}
 FOOTER = ("Sources: Polymarket and Kalshi public price data, 538 archived state polls, MIT Election Lab certified results. "
-          "2024 US presidential race, states with both markets and polls on the same date.")
+          "2024 US presidential race, states with both markets and polls on the same date. Analysis by Evan Deaver.")
 
 
 @st.cache_data(show_spinner=False)

@@ -76,7 +76,7 @@ for l in others:
         extra = "  (no longer a gap)" if l == SS and not is_gap(SS) else ""
         ax.annotate(f"{NICE.get(l, l)} ({E[l]:.1f}x, n={N[l]}){extra}", (S[l], E[l]), textcoords="offset points", xytext=(8, -12 if l in (EA, SS) else 4), fontsize=7.5, color="#222")
 ax.set_yscale("log"); ax.yaxis.set_major_formatter(lambda v, _: f"{v:g}x")
-ax.set_xlabel(f"Supply: share of the {ndet:,} store-detail games in the category"); ax.set_ylabel("Players: median CCU / overall median (log)")
+ax.set_xlabel(f"Supply: share of the {ndet:,} store-detail games in the category"); ax.set_ylabel("Players online: category median / overall median (log)")
 ax.xaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
 title = " and ".join(f"{NICE.get(l, l)} ({E[l]:.1f}x)" for l in LEAD) + " are the clearest gaps:\nfew games, many more players than the typical game"
 ax.set_title(title, pad=22)
@@ -101,9 +101,9 @@ if g is not None:
         m = f["free" if k else "paid"]["med_ccu"]; a1.axvline(np.log10(m + 1), color=cl, lw=2, ls="--")
         a1.text(np.log10(m + 1), a1.get_ylim()[1] * (.92 if k else .82), f" median {m:,.0f}", color=cl, fontsize=8, fontweight="bold")
     a1.set_xticks(range(0, 7)); a1.set_xticklabels(["1", "10", "100", "1K", "10K", "100K", "1M"])
-    a1.set_xlabel("Concurrent players (log scale)"); a1.set_ylabel("Share of games (density)"); a1.legend(frameon=False)
-a1.set_title("Distribution of concurrent players", fontsize=10)
-mets = [("med_ccu", "Median CCU", lambda v: f"{v:,.0f}"), ("med_pos_share", "Median positive\nreview share", lambda v: f"{v:.1%}")]
+    a1.set_xlabel("Players online at once (log scale)"); a1.set_ylabel("Share of games (density)"); a1.legend(frameon=False)
+a1.set_title("Distribution of players online", fontsize=10)
+mets = [("med_ccu", "Median players\nonline", lambda v: f"{v:,.0f}"), ("med_pos_share", "Median positive\nreview share", lambda v: f"{v:.1%}")]
 for j, (k, t, fm) in enumerate(mets):
     for i, (seg, cl) in enumerate([("free", ORANGE), ("paid", BLUE)]):
         val = f[seg][k] / (f["paid"][k]); y = j * 3 + i
@@ -133,7 +133,7 @@ if x is not None:
     for m_, (_, r) in zip(mids, med.iterrows()):
         if r["size"] >= 10: ax.annotate(f"{fmt(r['median'])}\n(n={int(r['size'])})", (m_, r["median"] + 1), textcoords="offset points", xytext=(0, 9), ha="center", fontsize=7.5, color=VERM)
 ax.set_yscale("log"); ax.xaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
-ax.set_xlabel("Positive review share (SteamSpy)"); ax.set_ylabel("Concurrent players + 1 (log)"); ax.legend(frameon=False, loc="upper left")
+ax.set_xlabel("Positive review share (SteamSpy)"); ax.set_ylabel("Players online + 1 (log)"); ax.legend(frameon=False, loc="upper left")
 ax.set_title("Better-reviewed games tend to have more players, but only weakly", pad=22)
 sub(ax, f"Spearman rho = {ss['rho']:.2f} (p = {ss['p']:.1e}, n = {ss['n']:,} games with >=100 reviews); cross-section, not causal")
 fig.tight_layout(rect=(0, .05, 1, 1)); note(fig); fig.savefig(OUT / "sentiment_vs_ccu.png"); plt.close(fig)
@@ -168,10 +168,10 @@ ax.scatter(age.bucket_years[ok], age.med_ccu[ok], s=age.n[ok] * 8, color=BLUE, z
 ax.scatter(age.bucket_years[~ok], age.med_ccu[~ok], s=age.n[~ok] * 8 + 10, facecolor="white", edgecolor=GREY, zorder=2, label="n < 5 (noisy)")
 for i, (_, r) in enumerate(age.iterrows()):
     ax.annotate(f"{fmt(r.med_ccu)}\nn={int(r.n)}", (r.bucket_years, r.med_ccu), textcoords="offset points", xytext=(0, 9 if i % 2 else -22), ha="center", fontsize=6.5, color="#333" if r.n >= 5 else GREY)
-ax.set_yscale("log"); ax.set_xlabel("Years since release"); ax.set_ylabel("Median concurrent players (log)")
+ax.set_yscale("log"); ax.set_xlabel("Years since release"); ax.set_ylabel("Median players online (log)")
 ax.yaxis.set_major_formatter(lambda v, _: fmt(v)); ax.legend(frameon=False, loc="lower left")
-ax.set_title("Age vs players (survivors only, NOT a decay curve):\nolder games still among today's popular games keep players", pad=22, fontsize=12)
-sub(ax, f"Median CCU by whole years since release, {age.n.sum()} games with store details, one snapshot; dead games are absent by construction")
+ax.set_title("Older games still in today's top list keep players (survivors only)", pad=22, fontsize=12)
+sub(ax, f"Median players online by whole years since release, {age.n.sum()} games with store details, one snapshot; dead games are absent by construction")
 fig.tight_layout(rect=(0, .06, 1, 1)); note(fig, "Survivorship bias: only games still popular today are sampled. Real launch decay needs daily per-game snapshots.")
 fig.savefig(OUT / "age_xsec.png"); plt.close(fig)
 
@@ -190,7 +190,7 @@ if Hp.exists():
     ax.set_xticks(ret["all"].index); ax.set_ylim(0, 1.05); ax.yaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
     ax.set_xlabel("Months since launch"); ax.set_ylabel("Median share of launch-month peak players"); ax.legend(frameon=False)
     a6 = ret["all"]["median"]
-    ax.set_title(f"Players drop {1 - a6[1]:.0%} after the first month, then level off; free-to-play holds better", pad=22)
+    ax.set_title(f"Games lose {1 - a6[1]:.0%} of players after month one, then level off; free-to-play holds better", pad=22)
     sub(ax, f"Median monthly players / launch-month peak, {H['retention_n']} of today's tracked games with an observed launch (SteamCharts)")
     fig.tight_layout(rect=(0, .06, 1, 1)); note(fig, f"History: SteamCharts monthly players via history_results.json. Survivors only. 2020+ launches are a small group (n={int(ret['2020+']['count'].iloc[0])}).")
     print("retention_curves title:", ax.get_title(loc="left")); fig.savefig(OUT / "retention_curves.png"); plt.close(fig)
@@ -216,7 +216,7 @@ if Hp.exists():
         else: r0 = d.set_index("lag")["corr"][0]
     ax.axhline(0, color=GREY, lw=.8); ax.axhspan(-.05, .05, color=GREY, alpha=.12, lw=0)
     ax.annotate(f"same month r = {r0:.2f}", (0, r0), textcoords="offset points", xytext=(10, -4), fontsize=8.5, color=ORANGE)
-    ax.set_xticks(range(-3, 4)); ax.set_xlabel("Lag k in months (positive k: reviews lead players by k months)")
+    ax.set_xticks(range(-3, 4)); ax.set_xlabel("Months ahead (positive: reviews come before players)")
     ax.set_ylabel("Correlation with change in log players")
     ax.set_title("Review sentiment doesn't lead player counts; review volume just moves with players", pad=22)
     sub(ax, f"Within-game monthly changes, {H['lead_lag_apps']} games, {H['lead_lag_rows']:,} game-months; sentiment |r| <= {mx:.2f} at every lag")

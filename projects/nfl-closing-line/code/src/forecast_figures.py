@@ -46,12 +46,12 @@ for i, r in s.iterrows():
     ax.text(r.ci_high + .004, i, f"{r.win_rate:.1%}  (n={int(r.bets):,} games)", va="center", fontsize=8.8)
 ax.set_yticks(range(len(s))); ax.set_yticklabels(s.name); ax.grid(axis="y", visible=False)
 ax.axvline(.5, color="#333", lw=1); ax.text(.502, len(s) - .4, "50% = coin flip", color="#333", fontsize=9)
-ax.set_xticks(np.arange(.44, .661, .02)); ax.set(xlim=(.44, .66), xlabel="Forecast hit rate with 95% Wilson confidence interval")
+ax.set_xticks(np.arange(.44, .661, .02)); ax.set(xlim=(.44, .66), xlabel="Forecast hit rate (bars/lines = 95% range)")
 ax.xaxis.set_major_formatter("{x:.0%}")
 w = s[s.strategy.str.contains("wind")].iloc[0]
-ax.text(0, -0.11, f"Blue = only strategy that differs from 50% after Holm correction (p = {w.p_vs_50_holm:.4f}).\n"
+ax.text(0, -0.11, f"Blue = only strategy that differs from 50% after accounting for 10 tests (p = {w.p_vs_50_holm:.4f}).\n"
         "n = decided games (pushes excluded).", transform=ax.transAxes, ha="left", va="top", fontsize=8.8, bbox=dict(fc="white", ec="#ccc"))
-finish(fig, "Forecast hit rate by strategy: only high-wind unders beat a coin flip",
+finish(fig, f"The closing line is hard to beat: only windy-game unders ({w.win_rate:.1%}) beat a coin flip",
        f"{len(s)} rule-based strategies tested against closing lines; wind 15+ mph unders hit {w.win_rate:.1%}", "03_forecast_hit_rate.png")
 
 # 04: hit rate per strategy vs the 52.38% reference
@@ -63,13 +63,13 @@ ax.errorbar(s.win_rate, y, xerr=[s.win_rate - s.ci_low, s.ci_high - s.win_rate],
 for i, r in s.iterrows():
     ax.text(r.ci_high + .004, i, f"{r.win_rate:.1%}  (n={int(r.bets):,} games)", va="center", fontsize=8.8)
 ax.axvline(REF, color=VERM, ls="--", lw=1.6)
-ax.text(REF + .002, len(s) - .35, "52.38% reference accuracy\n(break-even vs standard -110 pricing)", color=VERM, fontsize=8.8, va="bottom")
+ax.text(REF + .002, len(s) - .35, "52.38% accuracy needed to cover\nthe sportsbook's margin", color=VERM, fontsize=8.8, va="bottom")
 ax.set_yticks(y); ax.set_yticklabels(s.name); ax.grid(axis="y", visible=False)
-ax.set_xticks(np.arange(.44, .661, .02)); ax.set(xlim=(.44, .66), ylim=(-.6, len(s) + .5), xlabel="Forecast hit rate with 95% Wilson confidence interval")
+ax.set_xticks(np.arange(.44, .661, .02)); ax.set(xlim=(.44, .66), ylim=(-.6, len(s) + .5), xlabel="Forecast hit rate (bars/lines = 95% range)")
 ax.xaxis.set_major_formatter("{x:.0%}")
 n_above = int((s.win_rate >= REF).sum())
 ax.text(0, -0.11, f"Wind 15+ unders: 95% CI {w.ci_low:.1%}-{w.ci_high:.1%} sits above 52.38% before correction,\n"
-        f"but Holm-corrected p = {w.p_beats_vig_holm:.2f} across {len(s)} tests (not significant).\n"
+        f"but it is not statistically reliable once {len(s)} tests are accounted for (p = {w.p_beats_vig_holm:.2f}).\n"
         "n = decided games (pushes excluded).", transform=ax.transAxes, ha="left", va="top", fontsize=8.8, bbox=dict(fc="white", ec="#ccc"))
 finish(fig, "No strategy clearly clears the 52.38% accuracy bar",
        f"{n_above} of {len(s)} strategies have a point estimate above 52.38%, but none is significant after correction", "04_forecast_accuracy_vs_breakeven.png")

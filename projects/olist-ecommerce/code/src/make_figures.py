@@ -23,7 +23,7 @@ def fig_path(name):
 # Okabe-Ito colorblind-safe palette: blue = baseline, vermillion = problem/highlight
 NAVY, RED, GREY, INK = "#0072B2", "#D55E00", "#6b7280", "#1f2937"
 SOURCE = ("Source: Brazilian E-Commerce Public Dataset by Olist (Kaggle, CC BY-NC-SA 4.0), "
-          "orders Sep 2016 - Oct 2018.")
+          "orders Sep 2016 - Oct 2018; analysis by Evan Deaver.")
 plt.rcParams.update({
     "figure.facecolor": "white", "axes.facecolor": "white", "savefig.facecolor": "white",
     "font.size": 11, "axes.spines.top": False, "axes.spines.right": False,
@@ -99,9 +99,10 @@ def review_timing(con):
     bars = ax.bar(labels, [r.avg_score for r in rows], color=[NAVY, "#E69F00", RED])
     ax.bar_label(bars, labels=[f"{r.avg_score:.2f}" for r in rows], padding=3)
     ax.set_ylim(1, 5); ax.set_ylabel("Avg review score (1-5)"); ygrid(ax)
+    before_pct = rows[2].orders / (rows[1].orders + rows[2].orders) * 100
     finish(fig, fig_path("08_review_timing.png"),
-           "Reviewed after it arrived, a late order scores about half a star lower",
-           "Average review score by delivery outcome and review timing; 84% of late-order reviews came before arrival",
+           f"Late deliveries cost about half a star ({rows[1].avg_score:.2f} vs {rows[0].avg_score:.2f})",
+           f"Average review score by delivery outcome and review timing; {before_pct:.0f}% of late-order reviews came before the parcel arrived",
            "Delivered orders with a review. On-time orders reviewed before delivery (3%) score 4.28.")
 
 
@@ -109,7 +110,7 @@ def monthly_gmv(con):
     df = con.execute("SELECT * FROM mart_monthly").fetchdf()
     fig, ax = plt.subplots(figsize=(10, 4.2))
     ax.plot(df.purchase_month, df.gmv.astype(float) / 1e3, color=NAVY, lw=2.5, marker="o", ms=4)
-    ax.set_ylabel("GMV (R$ thousands)"); ax.set_xlabel("Purchase month"); ygrid(ax)
+    ax.set_ylabel("Sales (R$ thousands)"); ax.set_xlabel("Purchase month"); ygrid(ax)
     ax.yaxis.set_major_formatter(mtick.StrMethodFormatter("{x:,.0f}"))
     peak = df.loc[df.purchase_month.dt.month.eq(11) & df.purchase_month.dt.year.eq(2017)].iloc[0]
     ax.annotate("Black Friday\nNov 2017", (peak.purchase_month, float(peak.gmv) / 1e3),
@@ -117,8 +118,8 @@ def monthly_gmv(con):
                 color=RED, fontsize=10)
     ax.plot([peak.purchase_month], [float(peak.gmv) / 1e3], "o", color=RED, ms=7)
     finish(fig, fig_path("03_monthly_gmv.png"),
-           "GMV grew through 2017 and peaked around Black Friday",
-           "Monthly gross merchandise value, Jan 2017 - Aug 2018 (R$ thousands)")
+           "Sales grew through 2017 and peaked around Black Friday",
+           "Monthly sales (gross merchandise value), Jan 2017 - Aug 2018 (R$ thousands)")
 
 
 def state_late(con):
@@ -131,7 +132,7 @@ def state_late(con):
     ax.xaxis.set_major_formatter(mtick.PercentFormatter()); ax.tick_params(axis="y", labelsize=9)
     ax.set_xlabel("Late-delivery rate"); ax.set_xlim(0, max(df.late_rate_pct) * 1.15); ygrid(ax, "x")
     finish(fig, fig_path("04_state_late_rate.png"),
-           "Late deliveries cluster in the North and Northeast",
+           f"Late deliveries cluster in the North and Northeast: {df.iloc[-1].customer_state} is worst at {df.iloc[-1].late_rate_pct:.1f}%",
            "Late-delivery rate by customer state (vermillion = more than 2x the national rate)")
 
 
@@ -141,9 +142,9 @@ def category_matrix(con):
     fig = px.scatter(df, x="late_rate_pct", y="avg_score", size="gmv_k", text="category",
                      hover_data=["orders", "aov"], size_max=45,
                      labels={"late_rate_pct": "Late-delivery rate (%)", "avg_score": "Avg review score",
-                             "gmv_k": "GMV (R$k)"},
+                             "gmv_k": "Sales (R$k)"},
                      title="Categories with more late deliveries tend to score lower"
-                           "<br><sup>Late-delivery rate vs. average review score; bubble = GMV (categories with 500+ orders)</sup>")
+                           "<br><sup>Late-delivery rate vs. average review score; bubble = sales (categories with 500+ orders)</sup>")
     fig.update_traces(textposition="top center", textfont_size=9, marker_color=NAVY, marker_opacity=0.6)
     fig.update_layout(template="simple_white", width=1000, height=640, font_family="Arial",
                       margin={"b": 90}, xaxis_showgrid=True, yaxis_showgrid=True)
@@ -159,7 +160,7 @@ def category_matrix(con):
     ax.xaxis.set_major_formatter(mtick.PercentFormatter())
     finish(fig2, fig_path("05_category_matrix.png"),
            "Categories with more late deliveries tend to score lower",
-           "Product categories with 500+ orders; bubble size = GMV, top 10 by GMV labelled")
+           "Product categories with 500+ orders; bubble size = sales, top 10 by sales labelled")
 
 
 def lane_heatmap(con, min_orders: int = 100):
@@ -210,7 +211,7 @@ def cohort_retention(con, max_offset: int = 12, min_cohort: int = 500):
     fig.colorbar(im, ax=ax, label="% of cohort ordering again", fraction=0.03, pad=0.01).outline.set_visible(False)
     finish(fig, fig_path("07_cohort_retention.png"),
            "Under 1% of customers return in any later month",
-           f"Cohort retention (%) by first-purchase month; cohorts with {min_cohort}+ customers, colour capped at 1%")
+           f"Share of customers ordering again (%) by first-purchase month; cohorts with {min_cohort}+ customers, colour capped at 1%")
 
 
 def main() -> None:

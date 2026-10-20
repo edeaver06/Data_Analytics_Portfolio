@@ -7,7 +7,7 @@ import streamlit as st
 
 DATA = Path(__file__).resolve().parent / "data" / "daily_calls.csv"
 FOOTER = ("Source: Google Data Analytics certificate case study (fictional Google Fiber data, 3 markets, "
-          "Jan 1 - Mar 31, 2022). Repeat call = another call within 7 days of the first.")
+          "Jan 1 - Mar 31, 2022). Repeat call = another call within 7 days of the first. Analysis by Evan Deaver.")
 COLORS = {"Wi-Fi & Internet": "#0072B2", "Technical Troubleshooting": "#56B4E9",
           "Account Management & Billing": "#D55E00", "Scheduling": "#E69F00", "Construction": "#009E73"}
 
@@ -59,6 +59,8 @@ Use the pages on the left to explore.""")
 
 def problems(d):
     st.header("Which problems cause the most callbacks?")
+    _wt = d[d.problem_category.isin(["Wi-Fi & Internet", "Technical Troubleshooting"])].repeat_calls.sum() / d.repeat_calls.sum()
+    st.markdown(f"**Answer:** Wi-Fi and tech: {_wt:.1%} of repeat calls.")
     mk = st.multiselect("Markets", sorted(d.market.unique()), default=sorted(d.market.unique()))
     metric = st.radio("Show", ["Number of repeat calls", "Repeat rate"], horizontal=True)
     c = rates(d[d.market.isin(mk)], "problem_category")
@@ -80,6 +82,8 @@ def problems(d):
 def markets(d):
     st.header("Which market has the most callbacks?")
     m = rates(d, "market")
+    _r = m.set_index("market").repeat_rate_pct
+    st.markdown(f"**Answer:** market_3, at {_r['market_3']:.1f}% vs {_r['market_1']:.1f}% (market_1) and {_r['market_2']:.1f}% (market_2).")
     fig = px.bar(m, x="market", y="repeat_rate_pct", text="repeat_rate_pct", color_discrete_sequence=["#0072B2"],
                  labels={"market": "", "repeat_rate_pct": "Repeat rate (%)"})
     st.plotly_chart(style(fig), width="stretch")
@@ -93,6 +97,8 @@ def markets(d):
 
 def billing(d):
     st.header("Billing: a data check")
+    _b = d[(d.problem_category == "Account Management & Billing") & (d.market != "market_3")]
+    st.markdown(f"**Answer:** Billing only looks bad because of suspect market_3 rows; without them its repeat rate is {_b.repeat_calls.sum() / _b.first_calls.sum():.1%}.")
     st.markdown("Billing looks like the worst problem type. But in market_3, Billing logs **more repeat calls than first calls**, "
                 "which is impossible if repeats are follow-ups to first calls.")
     b = d[d.problem_category == "Account Management & Billing"]

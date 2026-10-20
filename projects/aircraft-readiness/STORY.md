@@ -44,7 +44,7 @@ GAO reviewed 8 Air Force and Navy fleets, and none met its FY2021 mission-capabl
 ## 7. Engines don't wear out on schedule
 In NASA's simulation, 709 engines ran until they failed, and they lasted anywhere from 128 to 543 cycles. That spread is why condition-based maintenance beats fixed overhaul intervals.
 
-![Engine life](images/engine_cycles_to_failure.png)
+![SIMULATED: engine life (NASA C-MAPSS)](images/engine_cycles_to_failure.png)
 
 ## What public data can't show, and what I did about it
 Aircraft-by-aircraft status, repair work orders and parts orders aren't public. Rather than invent "real-looking" numbers, I built a **separate, clearly labelled simulated fleet** of 20 aircraft. Its failure rate and system mix come from the FAA data, and every other setting is a listed assumption tuned to the GAO readiness range. It shows a 60% mission-capable rate, about 320 parts orders and the backlog over time. It is demo data for dashboard design, not a finding.

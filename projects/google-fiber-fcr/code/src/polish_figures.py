@@ -18,7 +18,7 @@ def fig_path(name):
     d = (ROOT.parent / "images") if name in MAIN else (ROOT / "figures")
     d.mkdir(parents=True, exist_ok=True)
     return d / name
-SOURCE = "Source: Google Fiber FCR sample data, Jan-Mar 2022"
+SOURCE = "Source: Google Fiber FCR sample data, Jan-Mar 2022; analysis by Evan Deaver"
 # Okabe-Ito colorblind-safe palette
 BLUE, ORANGE, GREEN, VERM, SKY, GREY, YELLOW = "#0072B2", "#E69F00", "#009E73", "#D55E00", "#56B4E9", "#9E9E9E", "#F0E442"
 CAT_COLORS = {"Wi-Fi & Internet": BLUE, "Technical Troubleshooting": SKY,
@@ -55,7 +55,7 @@ METRICS = dict(wt_share=wt_share, share=share, share_ex=share_ex, bill_all=bill_
                m3_bill_rep=int(m3b.repeat_calls), m3_bill_first=int(m3b.first_calls))
 
 def note(fig, extra=""):
-    fig.text(0.01, 0.01, SOURCE + (f"  ·  {extra}" if extra else ""), fontsize=8.5, color="#666")
+    fig.text(0.01, -0.03, SOURCE + (f"  ·  {extra}" if extra else ""), fontsize=8.5, color="#666")
 
 def title(ax, t, s):
     ax.set_title(t, pad=28)
@@ -77,9 +77,9 @@ def draw_wt_share(ax, neutral=True):
     ax.set_yticks(list(y), [MKT[m] for m in ms]); ax.invert_yaxis()
     ax.set_xlim(0, 100); ax.xaxis.set_major_formatter(PercentFormatter())
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.1), ncol=2, frameon=False, fontsize=9)
-    t = ("Wi-Fi + Tech Troubleshooting share of repeat calls by market" if neutral else
+    t = (f"Wi-Fi and tech problems cause {wt_share:.1f}% of repeat calls: fixing them first cuts the most callbacks" if neutral else
          "Wi-Fi + Tech Troubleshooting are the majority of repeats in every market")
-    title(ax, t, f"{wt_share:.1f}% of all repeat calls; Market 3's share is diluted by suspect Billing rows")
+    title(ax, t, f"Share by market, Q1 2022. Market 3 is {share['market_3']:.1f}% with suspect Billing rows, {share_ex['market_3']:.1f}% without")
 
 def draw_rate_by_cat(ax):
     c = cat.sort_values("repeat_rate_pct")
@@ -98,7 +98,7 @@ def draw_vol_by_cat(ax):
         ax.text(bb.get_width() + 150, bb.get_y() + bb.get_height()/2, f"{n:,}  ({p:.1f}%)", va="center", fontsize=9.5)
     ax.set_xlim(0, c.repeat_calls.max() * 1.3); ax.set_xlabel("Repeat calls")
     ax.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda x, _: f"{x:,.0f}"))
-    title(ax, "Repeat-call volume by problem category", f"Wi-Fi + Tech Troubleshooting account for {wt_share:.1f}% of {tot_rep:,} repeat calls")
+    title(ax, f"Wi-Fi and tech problems drive {wt_share:.1f}% of {tot_rep:,} repeat calls", "Repeat calls by problem category, Q1 2022")
 
 def draw_rate_by_mkt(ax):
     m = mkt.copy(); cols = [VERM if x == "market_3" else GREY for x in m.market]
@@ -107,8 +107,9 @@ def draw_rate_by_mkt(ax):
         ax.text(bb.get_x() + bb.get_width()/2, r + 1, f"{r:.1f}%", ha="center", fontweight="bold")
         ax.text(bb.get_x() + bb.get_width()/2, 1.5, f"{f:,}\nfirst calls", ha="center", fontsize=8, color="white")
     ax.set_ylim(0, 55); ax.yaxis.set_major_formatter(PercentFormatter()); ax.set_ylabel("Repeat rate")
-    title(ax, "Repeat rate by market", "Market 3 is highest at "
-          f"{mkt.set_index('market').loc['market_3','repeat_rate_pct']:.1f}% and deserves a closer look")
+    r = mkt.set_index('market').repeat_rate_pct
+    title(ax, f"Market 3 customers call back most: {r['market_3']:.1f}% vs {r['market_1']:.1f}% and {r['market_2']:.1f}%",
+          "Repeat calls per 100 first calls by market, Q1 2022")
 
 def draw_billing(ax):
     labels = ["All markets", "Markets 1-2 only\n(excl. Market 3)"]; vals = [bill_all, bill_ex3]
@@ -120,7 +121,7 @@ def draw_billing(ax):
                 xy=(0, bill_all), xytext=(0.55, 72), fontsize=9, color="#333",
                 arrowprops=dict(arrowstyle="->", color="#555"),
                 bbox=dict(boxstyle="round", fc="#FFF8E1", ec=ORANGE))
-    title(ax, "Billing repeat rate, with and without Market 3", f"{bill_all:.1f}% overall drops to {bill_ex3:.1f}% once Market 3 is excluded")
+    title(ax, "Billing callbacks look high only because of suspect Market 3 rows", f"{bill_all:.1f}% overall drops to {bill_ex3:.1f}% once Market 3 is excluded")
 
 def draw_weekly(ax):
     ax.plot(wk.week, wk.repeat_rate_pct, color=BLUE, lw=2.2, marker="o", ms=4)
@@ -132,7 +133,7 @@ def draw_weekly(ax):
     ax.yaxis.set_major_formatter(PercentFormatter()); ax.set_ylabel("Repeat rate")
     ax.tick_params(axis="x", labelsize=9); plt.setp(ax.get_xticklabels(), rotation=0)
     import matplotlib.dates as md; ax.xaxis.set_major_formatter(md.DateFormatter("%b %d"))
-    title(ax, "Weekly repeat rate, Q1 2022", f"Weekly range {wk.repeat_rate_pct.min():.1f}%-{wk.repeat_rate_pct.max():.1f}% (weeks start Monday)")
+    title(ax, f"Repeat rate stayed between {wk.repeat_rate_pct.min():.1f}% and {wk.repeat_rate_pct.max():.1f}% every week", "Weekly repeat rate, Q1 2022 (weeks start Monday)")
 
 CHARTS = [("wifi_tech_share_by_market.png", draw_wt_share), ("billing_with_without_market3.png", draw_billing),
           ("repeat_rate_by_market.png", draw_rate_by_mkt), ("repeat_rate_by_category.png", draw_rate_by_cat),
@@ -146,13 +147,15 @@ save(fig, "wifi_tech_share_by_market_headline_alt.png")
 
 # ---------- static dashboard ----------
 fig = plt.figure(figsize=(20, 17))
-fig.suptitle("Google Fiber First-Call Resolution - Q1 2022", x=0.01, ha="left", fontsize=22, fontweight="bold", y=0.995)
+fig.suptitle(f"Fix Wi-Fi and tech issues first: {wt_share:.1f}% of repeat calls", x=0.01, ha="left", fontsize=22, fontweight="bold", y=0.995)
 fig.text(0.01, 0.965, f"Wi-Fi + Tech Troubleshooting drive {wt_share:.1f}% of repeat calls  ·  Billing {bill_all:.1f}% "
          f"overall vs {bill_ex3:.1f}% excl. Market 3  ·  Market 3 repeat rate "
          f"{mkt.set_index('market').loc['market_3','repeat_rate_pct']:.1f}%", fontsize=13, color="#333")
 gs = fig.add_gridspec(3, 2, hspace=0.55, wspace=0.35, top=0.91, bottom=0.05)
 for i, (_, fn) in enumerate(CHARTS):
-    fn(fig.add_subplot(gs[i // 2, i % 2]))
+    ax = fig.add_subplot(gs[i // 2, i % 2]); fn(ax)
+    if i < 2:  # shorter titles so the two top panels don't collide
+        ax.set_title([f"Wi-Fi and tech: {wt_share:.1f}% of repeat calls", "Billing looks high only because of Market 3"][i], pad=28)
 note(fig, f"{len(df):,} rows; repeat rate = repeat calls (days 1-7) / first calls")
 save(fig, "dashboard.png")
 

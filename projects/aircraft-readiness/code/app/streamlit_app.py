@@ -87,7 +87,7 @@ elif page == "Reporting lag":
     st.caption(SRC + " SDRS publishes operator designators only, not names.")
 
 elif page == "Top parts":
-    st.title("Most-reported parts")
+    st.title("Parts reported most often (demand signal, not a backlog)")
     p = d[~d.part_name.isin(["<UNKNOWN>", "UNKNOWN", "NONE", "N/A"])]
     g = p.groupby("part_name").agg(reports=("part_name", "size"), disruptions=("is_operational_interruption", "sum"),
                                    condition=("part_condition", lambda s: s.mode().iat[0] if s.notna().any() else None)).reset_index()
@@ -97,7 +97,7 @@ elif page == "Top parts":
     st.caption(SRC + " Part demand signal, not a backlog: public data has no requisitions.")
 
 elif page == "Engine life (NASA C-MAPSS)":
-    st.title("Engine cycles to failure (NASA C-MAPSS simulation)")
+    st.title("SIMULATED: engine cycles to failure (NASA C-MAPSS simulation)")
     e = load("engine_run")
     st.plotly_chart(px.box(e, x="cycles_to_failure", y="dataset", points="all", title=f"{len(e)} simulated turbofans run to failure"),
                     width="stretch")
@@ -105,7 +105,7 @@ elif page == "Engine life (NASA C-MAPSS)":
     st.caption("Source: NASA C-MAPSS Turbofan Engine Degradation Simulation (train FD001-FD004). Simulated, not field data.")
 
 else:
-    st.title("Simulated fleet (demo data)")
+    st.title("SIMULATED fleet (demo data, not real aircraft)")
     st.error("SYNTHETIC DATA. A notional 20-aircraft fleet simulated for 2025 to demonstrate readiness visuals "
              "(MC/NMCM/NMCS, MTTR, parts backlog). Only the failure rate and system mix come from real FAA reports; "
              "every other parameter is an assumption listed below. These are not findings.")
