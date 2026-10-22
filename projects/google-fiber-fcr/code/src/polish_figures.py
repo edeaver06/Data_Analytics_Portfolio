@@ -79,7 +79,7 @@ def draw_wt_share(ax, neutral=True):
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.1), ncol=2, frameon=False, fontsize=9)
     t = (f"Wi-Fi and tech problems cause {wt_share:.1f}% of repeat calls: fixing them first cuts the most callbacks" if neutral else
          "Wi-Fi + Tech Troubleshooting are the majority of repeats in every market")
-    title(ax, t, f"Share by market, Q1 2022. Market 3 is {share['market_3']:.1f}% with suspect Billing rows, {share_ex['market_3']:.1f}% without")
+    title(ax, t, f"Share by market, Q1 2022. Market 3 is {share['market_3']:.1f}% with Billing, {share_ex['market_3']:.1f}% without")
 
 def draw_rate_by_cat(ax):
     c = cat.sort_values("repeat_rate_pct")
@@ -117,11 +117,11 @@ def draw_billing(ax):
     for bb, v in zip(bars, vals): ax.text(bb.get_x() + bb.get_width()/2, v + 1.5, f"{v:.1f}%", ha="center", fontweight="bold", fontsize=13)
     ax.set_ylim(0, 85); ax.yaxis.set_major_formatter(PercentFormatter()); ax.set_ylabel("Billing repeat rate")
     ax.annotate(f"Market 3 Billing: {METRICS['m3_bill_rep']:,} repeats on\n{METRICS['m3_bill_first']:,} first calls "
-                f"({METRICS['m3_bill_rep']/METRICS['m3_bill_first']*100:.0f}%) - likely\ndata-quality / mapping issue",
+                f"({METRICS['m3_bill_rep']/METRICS['m3_bill_first']:.2f} per first call) - billing\nissues often not resolved first time",
                 xy=(0, bill_all), xytext=(0.55, 72), fontsize=9, color="#333",
                 arrowprops=dict(arrowstyle="->", color="#555"),
                 bbox=dict(boxstyle="round", fc="#FFF8E1", ec=ORANGE))
-    title(ax, "Billing callbacks look high only because of suspect Market 3 rows", f"{bill_all:.1f}% overall drops to {bill_ex3:.1f}% once Market 3 is excluded")
+    title(ax, "Billing callbacks are high mainly because of Market 3", f"{bill_all:.1f}% overall drops to {bill_ex3:.1f}% once Market 3 is excluded")
 
 def draw_weekly(ax):
     ax.plot(wk.week, wk.repeat_rate_pct, color=BLUE, lw=2.2, marker="o", ms=4)

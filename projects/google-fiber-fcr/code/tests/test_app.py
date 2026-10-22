@@ -8,7 +8,7 @@ st_testing = pytest.importorskip("streamlit.testing.v1")
 PAGES = ['Overview',
          'Problem types',
          'Markets',
-         'Billing: a data check',
+         'Billing in market_3',
          'Week by week']
 
 

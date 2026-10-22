@@ -50,8 +50,8 @@ def overview(d):
 
 **Main findings**
 - Two problem types, Wi-Fi & Internet and Technical Troubleshooting, cause most repeat calls.
-- Market_3 has the highest repeat rate (44.7%; 36.7% without its impossible Billing rows).
-- Market_3's Billing numbers are impossible (more repeats than first calls), so they're most likely a data error. See *Billing: a data check*.
+- Market_3 has the highest repeat rate (44.7%; 36.7% without its Billing calls).
+- Market_3 Billing gets about 1.97 repeat calls per first call, so billing issues there often aren't resolved on first contact. See *Billing in market_3*.
 
 Use the pages on the left to explore.""")
     footer()
@@ -96,11 +96,11 @@ def markets(d):
 
 
 def billing(d):
-    st.header("Billing: a data check")
+    st.header("Billing in market_3")
     _b = d[(d.problem_category == "Account Management & Billing") & (d.market != "market_3")]
-    st.markdown(f"**Answer:** Billing only looks bad because of suspect market_3 rows; without them its repeat rate is {_b.repeat_calls.sum() / _b.first_calls.sum():.1%}.")
+    st.markdown(f"**Answer:** Billing looks bad mainly because of market_3, where billing issues often take several calls; without market_3 its repeat rate is {_b.repeat_calls.sum() / _b.first_calls.sum():.1%}.")
     st.markdown("Billing looks like the worst problem type. But in market_3, Billing logs **more repeat calls than first calls**, "
-                "which is impossible if repeats are follow-ups to first calls.")
+                "about 1.97 per first call. One customer can call back several times, so billing issues there are often not resolved on first contact.")
     b = d[d.problem_category == "Account Management & Billing"]
     by_m = rates(b, "market")
     st.dataframe(by_m[["market", "first_calls", "repeat_calls", "repeat_rate_pct"]].rename(columns={
@@ -131,7 +131,7 @@ def weekly(d):
     footer()
 
 
-PAGES = {"Overview": overview, "Problem types": problems, "Markets": markets, "Billing: a data check": billing, "Week by week": weekly}
+PAGES = {"Overview": overview, "Problem types": problems, "Markets": markets, "Billing in market_3": billing, "Week by week": weekly}
 
 
 def main():

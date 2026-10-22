@@ -41,12 +41,12 @@ To deploy on Streamlit Community Cloud, set the main file to `projects/google-fi
 Case study from the **Google Data Analytics Professional Certificate** capstone (Google Fiber scenario). The data is fictional/anonymized: 1,350 rows covering 3 markets × 5 problem types × 90 days (Jan 1 – Mar 31, 2022).
 
 ### Headline
-**Wi-Fi & Internet + Technical Troubleshooting drive about 80% of repeat calls (80.2% overall).** Their share of repeats varies by market: **market_1 87.1%, market_2 89.3%, market_3 66.5%**. Market_3 is lower mainly because of its anomalous Billing rows; without them it would be 85.3%.
+**Wi-Fi & Internet + Technical Troubleshooting drive about 80% of repeat calls (80.2% overall).** Their share of repeats varies by market: **market_1 87.1%, market_2 89.3%, market_3 66.5%**. Market_3 is lower mainly because of its very high Billing repeat volume; without Billing it would be 85.3%.
 
 
 **Market_3 has the highest repeat rate, 44.7%** (6,806 / 15,217), against 27.9% in market_1 and 17.9% in market_2. It deserves a closer look, starting with its data.
 
-**Billing, two ways:** 67.5% overall (2,400 / 3,553) but **32.3% without market_3** (902 / 2,794). Market_3 Billing logs 1,498 repeats against only 759 first calls. If repeats are follow-ups to first calls, that is impossible, so it's a likely data-quality or category-mapping issue to investigate before treating Billing as a problem area.
+**Billing, two ways:** 67.5% overall (2,400 / 3,553) but **32.3% without market_3** (902 / 2,794). Market_3 Billing logs 1,498 repeats against 759 first calls, about 1.97 repeats per first call. Repeats can outnumber first calls because one customer can call back several times, so this means billing issues in market_3 are often not resolved on first contact. That is worth investigating.
 
 ![Billing with and without market_3](../images/billing_with_without_market3.png)
 
@@ -76,7 +76,7 @@ Every headline metric is also computed in DuckDB SQL in [`sql/fcr_metrics.sql`](
 
 ### Suggestions (hypotheses to test, not proven by this data)
 1. **Wi-Fi & Tech (biggest lever):** pilot better first-call diagnostics and measure the effect on callbacks.
-2. **Market_3:** audit its data pipeline and type-code mapping (the Billing anomaly), then review its operations; it also has the highest Scheduling rate (75.9%).
+2. **Market_3:** investigate why Billing issues there so often need more calls (about 1.97 repeats per first call), then review its other operations; it also has the highest Scheduling rate (75.9%).
 3. **Billing:** hold conclusions until the market_3 data is explained. Outside market_3, Billing (32.3%) is in line with the other categories.
 4. **Scheduling (60.6%, 1,469 repeats):** test giving customers appointment-status visibility.
 
@@ -98,7 +98,7 @@ data/raw/market_1-3.csv ──► src/fcr.py (load, label codes, metrics) ──
 ## Design decisions (and why)
 1. **Repeat rate = repeat calls ÷ first calls.** A simple, explainable metric (FCR ≈ 100 − repeat rate); its limit (one customer can call back more than once) is stated.
 2. **Every headline computed twice, in Python and in SQL.** A pytest checks they match, so a bug in one shows up as a mismatch.
-3. **Flag the anomaly instead of reporting it as a finding.** Market_3 Billing logs more repeats than first calls, which is impossible if repeats follow first calls, so it's treated as a data-quality issue and shown with and without market_3.
+3. **Show Billing with and without market_3.** Market_3 Billing logs more repeats than first calls (about 1.97 per first call), which can happen when customers call back several times. It is reported as a finding and shown both ways so the market_3 effect is clear.
 4. **Suggestions are written as hypotheses to test.** The data has no call reasons, customer IDs or costs, so it can show where repeats cluster, not why.
 5. **Colorblind-safe palette and one message per chart.** Charts are built for a non-technical reader.
 6. **DuckDB for the SQL.** It runs the same SQL in-memory from Python with no database server.

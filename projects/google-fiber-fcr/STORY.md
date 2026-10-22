@@ -24,23 +24,23 @@ Mostly. Wi-Fi + Technical make up 87.1% of repeats in market_1 and 89.3% in mark
 
 ![Share of repeats from Wi-Fi and technical problems, by market](images/wifi_tech_share_by_market.png)
 
-**What this means:** the pattern holds in market_1 and market_2; in market_3 these two make up only two-thirds of repeats, partly due to its suspect Billing numbers.
+**What this means:** the pattern holds in market_1 and market_2; in market_3 these two make up only two-thirds of repeats, partly because of its very high Billing repeat volume.
 
 ## 3. Which market has the most callbacks?
 
-Market_3: 44.7% of its first calls lead to a repeat call (36.7% without its impossible Billing rows, still the highest), compared with 27.9% in market_1 and 17.9% in market_2.
+Market_3: 44.7% of its first calls lead to a repeat call (36.7% without its Billing calls, still the highest), compared with 27.9% in market_1 and 17.9% in market_2.
 
 ![Repeat rate by market](images/repeat_rate_by_market.png)
 
-**What this means:** market_3 is the outlier. Before blaming its support team, check its data.
+**What this means:** market_3 is the outlier, and Billing is a big part of why.
 
 ## 4. Is Billing really a problem?
 
-At first glance Account Management & Billing ("Billing") has the worst repeat rate: 67.5%. But market_3 records 1,498 Billing repeat calls against only 759 Billing first calls. You can't have more follow-up calls than calls, so this is most likely a data or labelling error. Without market_3, Billing's repeat rate is 32.3%, in line with the other problem types.
+At first glance Account Management & Billing ("Billing") has the worst repeat rate: 67.5%. But market_3 records 1,498 Billing repeat calls against only 759 Billing first calls. That's about 1.97 repeat calls per first call. Repeats can outnumber first calls because one customer can call back several times, so billing issues in market_3 often aren't resolved on the first contact. Without market_3, Billing's repeat rate is 32.3%, in line with the other problem types.
 
 ![Billing repeat rate with and without market_3](images/billing_with_without_market3.png)
 
-**What this means:** a striking number can be a data problem. Fix market_3's data before making any decision about Billing.
+**What this means:** Billing is a market_3 problem, not a company-wide one. It's worth finding out why billing issues there take so many calls.
 
 ## 5. Which problems are hardest to fix in one call?
 
@@ -60,8 +60,8 @@ Weekly repeat calls rise and fall with the number of first calls. The first week
 
 ## Summary
 1. Wi-Fi & Internet and Technical Troubleshooting cause 80.2% of repeat calls.
-2. Market_3 has the highest repeat rate (44.7%, or 36.7% without its impossible Billing rows).
-3. Market_3's Billing numbers are impossible and need fixing before anyone acts on them.
+2. Market_3 has the highest repeat rate (44.7%, or 36.7% without its Billing calls).
+3. Market_3 Billing gets about 1.97 repeat calls per first call, so billing issues there often aren't resolved on first contact.
 4. Scheduling is small but hard to resolve in one call (60.6%).
 
 ## Limitations (in plain words)
