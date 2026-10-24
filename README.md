@@ -1,13 +1,13 @@
 # Evan Deaver: Data Analyst Portfolio
 
+### 📄 [View my Resume (PDF)](https://github.com/edeaver06/Data_Analytics_Portfolio/raw/main/resume/evan-deaver-resume-public.pdf)
+
 [![CI](https://github.com/edeaver06/Data_Analytics_Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/edeaver06/Data_Analytics_Portfolio/actions/workflows/ci.yml)
 
 ## Overview
 I'm Evan, a Google-certified data analyst (SQL, Python, R, Excel, Tableau) moving into **data analyst and data engineer roles** (Remote, worldwide or US). I build tested SQL pipelines, publish dashboards, check models and data for flaws, and do data QA on AI model outputs.
 
-**What's here:** six projects in [`projects/`](projects). Each one opens with a one-page summary (the question, the answer, key findings, what I built), a plain-English **Story**, and a `code/` folder with everything technical. Start with **Steam Pulse**: its [▶️ live app](https://steam-pulse-e.streamlit.app/) runs in your browser with no install.
-
-📄 **Resume:** [PDF](https://github.com/edeaver06/Data_Analytics_Portfolio/raw/main/resume/evan-deaver-resume-public.pdf)
+**What's here:** Six projects in [`projects/`](projects). Each one opens with a one-page summary (the question, the answer, key findings, what I built), a plain-English **Story**, and a `code/` folder with everything technical. Start with **Steam Pulse**. It runs in your browser with no install: [▶️ live app](https://steam-pulse-e.streamlit.app/).
 
 ## Portfolio Projects
 | Project | Result | Role type | Links |
