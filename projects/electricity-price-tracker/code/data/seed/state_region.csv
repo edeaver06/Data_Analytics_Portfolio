@@ -1,0 +1,52 @@
+state,primary_region,region_type,other_regions,multi_region,note
+AL,Southeast,non-RTO,,0,Southern Company / TVA area
+AK,Alaska,isolated,,0,Not connected to the lower-48 grid
+AZ,Southwest,non-RTO,,0,
+AR,MISO,ISO/RTO,SPP,1,
+CA,CAISO,ISO/RTO,,0,Some northern utilities are outside CAISO
+CO,Mountain West,non-RTO,SPP,1,
+CT,ISO-NE,ISO/RTO,,0,
+DE,PJM,ISO/RTO,,0,
+DC,PJM,ISO/RTO,,0,
+FL,Florida,non-RTO,,0,
+GA,Southeast,non-RTO,,0,
+HI,Hawaii,isolated,,0,Island grids
+ID,Northwest,non-RTO,,0,
+IL,PJM,ISO/RTO,MISO,1,Chicago area in PJM; central/southern IL in MISO
+IN,MISO,ISO/RTO,PJM,1,
+IA,MISO,ISO/RTO,SPP,1,
+KS,SPP,ISO/RTO,,0,
+KY,PJM,ISO/RTO,MISO;Southeast,1,Split across PJM / LG&E-KU / TVA
+LA,MISO,ISO/RTO,SPP,1,
+ME,ISO-NE,ISO/RTO,,0,Northern Maine is not in ISO-NE
+MD,PJM,ISO/RTO,,0,
+MA,ISO-NE,ISO/RTO,,0,
+MI,MISO,ISO/RTO,PJM,1,
+MN,MISO,ISO/RTO,,0,
+MS,MISO,ISO/RTO,Southeast,1,
+MO,MISO,ISO/RTO,SPP,1,
+MT,Northwest,non-RTO,MISO;SPP,1,
+NE,SPP,ISO/RTO,,0,
+NV,Northwest,non-RTO,Southwest,1,
+NH,ISO-NE,ISO/RTO,,0,
+NJ,PJM,ISO/RTO,,0,
+NM,Southwest,non-RTO,SPP,1,
+NY,NYISO,ISO/RTO,,0,
+NC,Southeast,non-RTO,PJM,1,Northeast NC is in PJM
+ND,MISO,ISO/RTO,SPP,1,
+OH,PJM,ISO/RTO,,0,
+OK,SPP,ISO/RTO,,0,
+OR,Northwest,non-RTO,,0,
+PA,PJM,ISO/RTO,,0,
+RI,ISO-NE,ISO/RTO,,0,
+SC,Southeast,non-RTO,,0,
+SD,SPP,ISO/RTO,MISO,1,
+TN,Southeast,non-RTO,,0,TVA
+TX,ERCOT,ISO/RTO,SPP;MISO,1,Panhandle in SPP; East TX in MISO
+UT,Northwest,non-RTO,,0,
+VT,ISO-NE,ISO/RTO,,0,
+VA,PJM,ISO/RTO,Southeast,1,Southwest VA in TVA area
+WA,Northwest,non-RTO,,0,
+WV,PJM,ISO/RTO,,0,
+WI,MISO,ISO/RTO,,0,
+WY,Northwest,non-RTO,SPP,1,
