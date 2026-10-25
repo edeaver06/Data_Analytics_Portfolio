@@ -13,6 +13,7 @@ import argparse
 import fcntl
 import json
 import sys
+import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
@@ -20,7 +21,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from steam_pulse.http import PoliteSession
+from steam_pulse.http import PoliteSession, Redirected
 from steam_pulse import load
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -154,16 +155,36 @@ def _last_seen_parquet(pattern: str, col: str = "fetched_at") -> dict[int, datet
     return {int(k): v.to_pydatetime() for k, v in df.groupby("appid")[col].max().items()}
 
 
-def refresh_reviews(http: PoliteSession, appids: list[int], ts: datetime, budget: int, max_age_hours: int = 20) -> int:
-    """Review summary counts from the store (no review text). Lands one parquet per run."""
+def refresh_reviews(http: PoliteSession, appids: list[int], ts: datetime, budget: int, max_age_hours: int = 20,
+                   time_budget_s: float = 180.0, breaker_n: int = 5) -> int:
+    """Review summary counts from the store (no review text). Lands one parquet per run.
+
+    Safety valves so a misbehaving endpoint can never stall the snapshot:
+    - redirects / HTML answers are not retried; that app's row is written with ok=False
+    - time_budget_s: once this many seconds have passed, the remaining apps are skipped
+    - circuit breaker: if the first breaker_n calls all redirect, skip reviews for the whole run
+    """
     seen = _last_seen_parquet("reviews/dt=*/*.parquet")
     todo = _oldest_first(appids, seen, ts, timedelta(hours=max_age_hours), budget)
     rows = []
-    for appid in todo:
-        j = http.get_json(REVIEWS_URL.format(appid=appid),
-                          {"json": 1, "language": "all", "purchase_type": "all", "num_per_page": 0, "filter": "all"})
-        q = (j or {}).get("query_summary") or {}
-        ok = bool(j) and j.get("success") == 1 and "total_reviews" in q
+    start, redirects = time.monotonic(), 0
+    for i, appid in enumerate(todo):
+        if time.monotonic() - start > time_budget_s:
+            print(f"reviews: time budget of {time_budget_s:.0f}s used up; skipping {len(todo) - i} remaining apps",
+                  file=sys.stderr)
+            break
+        if breaker_n and i == breaker_n and redirects == breaker_n:
+            print(f"reviews: first {breaker_n} calls were all redirected; skipping reviews for this run "
+                  f"({len(todo) - i} apps)", file=sys.stderr)
+            break
+        try:
+            j = http.get_json(REVIEWS_URL.format(appid=appid),
+                              {"json": 1, "language": "all", "purchase_type": "all", "num_per_page": 0,
+                               "filter": "all"}, follow_redirects=False, raise_on_redirect=True)
+        except Redirected:
+            redirects, j = redirects + 1, None
+        q = (j or {}).get("query_summary") or {} if isinstance(j, dict) else {}
+        ok = isinstance(j, dict) and j.get("success") == 1 and "total_reviews" in q
         rows.append({"appid": appid, "fetched_at": utcnow(), "ok": ok,
                      "review_score": q.get("review_score"), "review_score_desc": q.get("review_score_desc"),
                      "total_positive": q.get("total_positive"), "total_negative": q.get("total_negative"),

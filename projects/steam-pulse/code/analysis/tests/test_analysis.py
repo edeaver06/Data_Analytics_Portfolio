@@ -13,7 +13,7 @@ def test_coverage_and_views(using_real_db):
     assert cov.games_with_store_details <= cov.games and cov.n_days <= cov.n_snapshots
     if using_real_db:  # thresholds for the real ~1,000-game universe
         assert cov.games >= 1000 and cov.games_with_players >= 999
-    assert c.sql("select count(*) from a_game").fetchone()[0] == c.sql("select count(distinct appid) from a_game").fetchone()[0]
+    assert c.sql("select count(*) from a_game").fetchall()[0][0] == c.sql("select count(distinct appid) from a_game").fetchall()[0][0]
     g = sa.q(c, "40_genre"); assert not g.genre.str.contains('"').any()
 
 def test_readiness_blocks_timeseries_on_one_snapshot():
