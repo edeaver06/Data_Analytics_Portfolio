@@ -1,0 +1,673 @@
+rank,patient_id,age,sex,payer_group,last_visit,days_since_visit,last_a1c,a1c_date,sbp,dbp,open_gaps,priority,gaps
+1,355850d5,71,F,Medicare,2026-01-07,291,NA,NA,NA,NA,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+2,9e05779c,70,F,Medicare,2026-01-13,285,NA,NA,NA,NA,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+3,91a859d6,44,F,Medicare,2026-01-29,269,NA,NA,144,80,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+4,7f780ce2,64,F,Commercial,2026-02-05,262,NA,NA,130,95,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+5,6d763b9f,61,M,Commercial,2026-02-11,256,NA,NA,112,98,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+6,4f9d10e1,46,F,Commercial,2026-03-12,227,NA,NA,NA,NA,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+7,a64a8f7b,41,F,Medicaid,2026-03-17,222,NA,NA,151,116,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+8,728c180c,59,M,Medicaid,2026-04-07,201,NA,NA,NA,NA,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+9,26c81eb3,42,M,Medicaid,2026-04-24,184,NA,NA,116,93,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+10,19a914f7,44,M,Medicare,2026-04-26,182,NA,NA,137,96,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+11,81b861a9,44,M,Commercial,2026-04-27,181,NA,NA,114,90,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+12,97e71cb0,69,M,Dual Eligible,2026-04-28,180,NA,NA,138,99,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+13,ad1eb8cb,45,M,Commercial,2026-05-02,176,NA,NA,137,108,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+14,5173b5dc,57,F,Commercial,2026-05-06,172,NA,NA,146,104,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+15,9f706f97,60,M,Commercial,2026-05-19,159,NA,NA,147,105,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+16,0ebbf0c2,66,F,Dual Eligible,2026-05-23,155,NA,NA,138,112,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+17,318d7fcb,57,M,Commercial,2026-06-10,137,NA,NA,122,103,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+18,812f0f01,59,F,Commercial,2026-06-14,133,NA,NA,126,99,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+19,391206d7,55,M,Commercial,2026-06-17,130,NA,NA,135,105,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+20,4900afbc,44,M,Commercial,2026-06-24,123,NA,NA,121,96,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+21,23668122,59,F,Commercial,2026-06-26,121,NA,NA,NA,NA,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+22,7d7411ed,47,M,Uninsured,2026-07-01,116,NA,NA,130,103,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+23,82a7b645,45,M,Commercial,2026-07-02,115,NA,NA,121,95,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+24,74140f69,69,M,Medicare,2026-07-04,113,NA,NA,NA,NA,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+25,b68d9cda,64,F,Medicare,2026-07-07,110,NA,NA,NA,NA,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+26,92609b75,65,M,Dual Eligible,2026-07-23,94,NA,NA,134,97,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+27,65d24384,57,F,Commercial,2026-07-25,92,NA,NA,134,90,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+28,44c5fa28,57,M,Medicare,2026-07-30,87,NA,NA,145,85,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+29,3fb4b657,55,F,Commercial,2026-08-05,81,NA,NA,109,94,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+30,af9a1296,47,F,Commercial,2026-08-08,78,NA,NA,116,94,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+31,d287dfb6,68,F,Medicare,2026-08-23,63,NA,NA,121,100,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+32,fe24712a,63,M,Commercial,2026-08-24,62,NA,NA,125,93,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+33,22055901,51,M,Commercial,2026-08-30,56,NA,NA,123,92,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+34,571c3f04,60,M,Commercial,2026-08-30,56,NA,NA,135,100,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+35,f79c37dd,54,M,Dual Eligible,2026-09-01,54,NA,NA,141,87,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+36,b8823244,65,F,Medicare,2026-09-03,52,NA,NA,NA,NA,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+37,f26c6033,54,M,Medicare,2026-09-03,52,NA,NA,133,106,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+38,501b5b5b,54,M,Commercial,2026-09-04,51,NA,NA,125,92,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+39,6650d2d2,62,M,Commercial,2026-09-09,46,NA,NA,110,90,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+40,323f59b1,46,F,Dual Eligible,2026-09-10,45,NA,NA,132,97,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+41,23117a5d,63,M,Medicare,2026-09-12,43,NA,NA,127,106,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+42,638fb596,71,M,Medicare,2026-09-13,42,NA,NA,137,100,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+43,ca8279f9,55,F,Commercial,2026-09-14,41,NA,NA,148,94,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+44,7949c641,49,F,Commercial,2026-09-15,40,NA,NA,108,95,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+45,eafff53b,58,M,Commercial,2026-09-19,36,NA,NA,125,93,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+46,5584545c,52,M,Medicare,2026-09-20,35,NA,NA,147,107,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+47,a2a642a9,68,F,Medicare,2026-09-23,32,NA,NA,131,102,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+48,b66b47ca,40,F,Medicaid,2026-09-23,32,NA,NA,146,109,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+49,38e2e355,55,F,Commercial,2026-09-25,30,NA,NA,132,108,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+50,8dadd860,56,F,Commercial,2026-09-25,30,NA,NA,128,93,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+51,eb2862ad,56,F,Commercial,2026-09-29,26,NA,NA,128,96,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+52,4e68f37f,50,F,Commercial,2026-10-02,23,NA,NA,115,101,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+53,d1e73235,71,F,Medicare,2026-10-02,23,NA,NA,143,108,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+54,3ff96eba,66,F,Dual Eligible,2026-10-03,22,NA,NA,138,93,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+55,a428e976,57,F,Commercial,2026-10-03,22,NA,NA,127,102,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+56,14b3d01b,43,M,Medicare,2026-10-05,20,NA,NA,146,114,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+57,210b7a5e,46,F,Commercial,2026-10-06,19,NA,NA,150,103,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+58,29cff04c,53,F,Commercial,2026-10-06,19,NA,NA,129,107,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+59,83099696,63,M,Medicare,2026-10-07,18,NA,NA,129,100,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+60,ca0239f3,58,M,Commercial,2026-10-10,15,NA,NA,141,89,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+61,6d38553e,56,M,Commercial,2026-10-11,14,NA,NA,144,94,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+62,ba1e9f8c,61,M,Commercial,2026-10-12,13,NA,NA,107,96,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+63,04c1439f,61,M,Commercial,2026-10-13,12,NA,NA,126,100,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+64,ba1eb4ec,54,M,Commercial,2026-10-13,12,NA,NA,135,94,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+65,9e02b69d,57,M,Medicare,2026-10-16,9,NA,NA,123,92,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+66,d9a61e1b,69,F,Medicare,2026-10-16,9,NA,NA,140,92,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+67,367fff0c,50,M,Medicare,2026-10-18,7,NA,NA,128,92,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+68,cfe04aa6,55,F,Commercial,2026-10-18,7,NA,NA,153,97,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+69,289ba6a4,49,M,Uninsured,2026-10-19,6,NA,NA,129,91,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+70,b8383348,56,M,Commercial,2026-10-19,6,NA,NA,120,106,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+71,405e6df3,42,F,Commercial,2026-10-20,5,NA,NA,126,94,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+72,611be7c3,60,M,Medicare,2026-10-20,5,NA,NA,NA,NA,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+73,65690d82,57,F,Commercial,2026-10-20,5,NA,NA,131,92,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+74,b31fb5fb,67,M,Medicare,2026-10-20,5,NA,NA,122,100,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+75,b8ef2bbc,44,M,Commercial,2026-10-20,5,NA,NA,135,97,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+76,411edca6,61,F,Commercial,2026-10-21,4,NA,NA,150,96,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+77,626ce947,70,M,Dual Eligible,2026-10-21,4,NA,NA,116,100,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+78,af17dce1,55,M,Commercial,2026-10-21,4,NA,NA,132,102,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+79,eb9041b5,47,F,Commercial,2026-10-21,4,NA,NA,115,92,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+80,27b2007e,46,M,Commercial,2026-10-22,3,NA,NA,127,104,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+81,6ee4e73d,52,M,Commercial,2026-10-22,3,NA,NA,131,101,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+82,dcdf3032,53,M,Commercial,2026-10-22,3,NA,NA,133,106,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+83,24a20abe,75,M,Medicare,2026-10-24,1,NA,NA,102,92,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+84,7554af38,48,M,Dual Eligible,2026-10-24,1,NA,NA,135,114,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+85,6f6ddaa8,65,F,Medicare,2026-10-25,0,NA,NA,NA,NA,5,8,A1c test; BP; Eye exam; Kidney eval; Statin
+86,82a9b2ee,63,F,Medicaid,2026-10-25,0,NA,NA,141,83,5,8,A1c retest (implausible value); BP; Eye exam; Kidney eval; Statin
+87,6a605e53,57,F,Medicare,2026-01-16,282,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+88,dc9371ff,48,M,Commercial,2026-01-21,277,NA,NA,NA,NA,4,7,A1c test; BP; Eye exam; Kidney eval
+89,fc7d13a9,69,F,Medicare,2026-02-01,266,NA,NA,134,92,4,7,A1c test; BP; Eye exam; Kidney eval
+90,70a5c7ca,72,F,Medicare,2026-02-12,255,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+91,5ab33dc8,59,M,Uninsured,2026-04-04,204,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+92,464d4e51,61,M,Medicaid,2026-04-17,191,NA,NA,NA,NA,4,7,A1c test; BP; Eye exam; Kidney eval
+93,677f0ca5,64,M,Commercial,2026-04-21,187,NA,NA,NA,NA,4,7,A1c test; BP; Eye exam; Kidney eval
+94,d1a1f744,29,M,Commercial,2026-05-19,159,NA,NA,132,105,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+95,df4124bf,61,F,Commercial,2026-06-19,128,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+96,c9564839,39,M,Commercial,2026-07-04,113,NA,NA,141,85,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+97,9ee2045e,54,M,Medicare,2026-07-11,106,NA,NA,118,93,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+98,6cb0ce1e,51,M,Commercial,2026-07-18,99,NA,NA,111,92,4,7,A1c retest (implausible value); BP; Eye exam; Statin
+99,b5074ccd,63,F,Commercial,2026-07-18,99,NA,NA,123,93,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+100,c811d3f0,32,M,Commercial,2026-07-18,99,NA,NA,127,100,4,7,A1c test; BP; Eye exam; Kidney eval
+101,e841ad65,68,M,Medicare,2026-07-20,97,NA,NA,105,90,4,7,A1c test; BP; Eye exam; Kidney eval
+102,9940269b,55,M,Commercial,2026-07-24,93,NA,NA,111,92,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+103,89076f5e,65,M,Dual Eligible,2026-07-27,90,NA,NA,NA,NA,4,7,A1c test; BP; Eye exam; Kidney eval
+104,29d64077,64,M,Medicare,2026-07-30,87,NA,NA,NA,NA,4,7,A1c test; BP; Eye exam; Kidney eval
+105,2e2141b6,42,F,Commercial,2026-08-01,85,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+106,82a8c98d,74,M,Medicare,2026-08-03,83,NA,NA,110,91,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+107,f055d92d,67,F,Medicare,2026-08-15,71,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+108,5f8d4437,68,F,Medicare,2026-08-16,70,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+109,55b14f4c,70,F,Medicare,2026-08-27,59,NA,NA,NA,NA,4,7,A1c test; BP; Eye exam; Kidney eval
+110,777571d6,71,M,Medicare,2026-09-01,54,NA,NA,111,98,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+111,02e394af,75,M,Medicare,2026-09-08,47,NA,NA,124,93,4,7,A1c test; BP; Eye exam; Kidney eval
+112,2fb35cfe,59,M,Commercial,2026-09-11,44,NA,NA,119,92,4,7,A1c test; BP; Eye exam; Kidney eval
+113,6f9d22f6,45,F,Commercial,2026-09-12,43,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+114,22be543f,36,F,Commercial,2026-09-13,42,NA,NA,118,104,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+115,c346c668,69,M,Medicare,2026-09-17,38,NA,NA,126,92,4,7,A1c test; BP; Eye exam; Kidney eval
+116,d31ec580,66,F,Medicare,2026-09-17,38,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+117,b005185e,39,F,Commercial,2026-09-19,36,NA,NA,NA,NA,4,7,A1c test; BP; Eye exam; Kidney eval
+118,3ac07026,55,F,Medicaid,2026-09-22,33,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+119,223dfcbd,64,M,Commercial,2026-09-26,29,NA,NA,NA,NA,4,7,A1c test; BP; Eye exam; Kidney eval
+120,5b6c395a,64,M,Medicaid,2026-09-26,29,NA,NA,116,96,4,7,A1c test; BP; Eye exam; Kidney eval
+121,74c424a5,55,M,Dual Eligible,2026-09-29,26,NA,NA,130,93,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+122,a9cdbfdc,70,M,Medicare,2026-09-30,25,NA,NA,111,96,4,7,A1c test; BP; Eye exam; Kidney eval
+123,175d6d1f,45,M,Commercial,2026-10-06,19,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+124,229200ee,63,M,Commercial,2026-10-06,19,NA,NA,135,101,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+125,da14f590,69,F,Medicare,2026-10-08,17,NA,NA,112,95,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+126,16ef656c,42,F,Commercial,2026-10-11,14,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+127,ef62011e,58,M,Uninsured,2026-10-12,13,NA,NA,120,98,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+128,3aba90cb,34,M,Medicaid,2026-10-14,11,NA,NA,151,99,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+129,4ebabdde,70,F,Medicare,2026-10-14,11,NA,NA,128,95,4,7,A1c retest (implausible value); BP; Eye exam; Statin
+130,61b4d022,55,M,Medicaid,2026-10-15,10,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+131,8e60a12f,58,F,Commercial,2026-10-15,10,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+132,1d390ee6,65,F,Medicare,2026-10-18,7,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+133,543b88c0,60,F,Commercial,2026-10-19,6,NA,NA,143,84,4,7,A1c retest (implausible value); BP; Eye exam; Statin
+134,9c0cabf0,61,F,Commercial,2026-10-19,6,NA,NA,146,94,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+135,307f1998,52,M,Medicare,2026-10-20,5,NA,NA,112,94,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+136,37563811,61,F,Commercial,2026-10-20,5,NA,NA,139,93,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+137,cec34a1e,63,M,Commercial,2026-10-21,4,NA,NA,143,91,4,7,A1c test; BP; Eye exam; Kidney eval
+138,074d19de,54,F,Dual Eligible,2026-10-22,3,NA,NA,NA,NA,4,7,A1c test; BP; Kidney eval; Statin
+139,47761836,67,M,Uninsured,2026-10-22,3,NA,NA,125,97,4,7,A1c test; BP; Eye exam; Kidney eval
+140,80a18d82,59,M,Commercial,2026-10-22,3,NA,NA,145,117,4,7,A1c retest (implausible value); BP; Eye exam; Statin
+141,3a272b22,60,M,Commercial,2026-10-23,2,NA,NA,NA,NA,4,7,A1c test; BP; Eye exam; Kidney eval
+142,3ad2b8e5,62,F,Medicaid,2026-10-25,0,NA,NA,114,90,4,7,A1c retest (implausible value); BP; Eye exam; Kidney eval
+143,ee369e61,71,F,Medicare,2026-01-13,285,NA,NA,118,71,4,6,A1c test; Eye exam; Kidney eval; Statin
+144,67dd9f3f,56,F,Commercial,2026-01-24,274,NA,NA,122,67,4,6,A1c test; Eye exam; Kidney eval; Statin
+145,54c4e222,69,M,Medicare,2026-03-02,237,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+146,61a1172b,59,M,Dual Eligible,2026-03-26,213,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+147,69af8d46,53,F,Commercial,2026-03-27,212,NA,NA,129,85,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+148,6df23e0d,56,F,Medicaid,2026-04-12,196,NA,NA,99,73,4,6,A1c test; Eye exam; Kidney eval; Statin
+149,0f8f2b5d,49,M,Commercial,2026-04-14,194,NA,NA,126,87,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+150,ef95f62e,62,F,Commercial,2026-04-14,194,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+151,ad42de54,58,F,Commercial,2026-04-23,185,NA,NA,104,76,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+152,8f439156,57,M,Medicare,2026-05-22,156,NA,NA,132,95,3,6,A1c retest (implausible value); BP; Statin
+153,ba213ebb,59,M,Medicaid,2026-05-25,153,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+154,f280dd2d,50,M,Commercial,2026-05-26,152,NA,NA,135,86,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+155,2e88fff8,69,F,Medicare,2026-05-30,148,NA,NA,121,71,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+156,660ffeef,67,F,Medicare,2026-06-01,146,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+157,ec37e04c,59,M,Commercial,2026-06-07,140,NA,NA,132,76,4,6,A1c test; Eye exam; Kidney eval; Statin
+158,dc4cace8,42,M,Uninsured,2026-06-08,139,NA,NA,125,79,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+159,ab4e6185,58,M,Commercial,2026-06-12,135,NA,NA,111,67,4,6,A1c test; Eye exam; Kidney eval; Statin
+160,e41cadd3,68,F,Medicare,2026-06-12,135,NA,NA,122,87,4,6,A1c test; Eye exam; Kidney eval; Statin
+161,0db425b8,65,F,Medicare,2026-06-13,134,NA,NA,98,79,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+162,342e74e5,61,M,Medicare,2026-06-14,133,NA,NA,122,75,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+163,24977545,60,M,Commercial,2026-06-18,129,NA,NA,123,70,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+164,60937ed0,63,M,Commercial,2026-07-04,113,NA,NA,125,78,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+165,9a3a860f,49,M,Commercial,2026-07-04,113,NA,NA,126,81,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+166,72692e05,34,F,Commercial,2026-07-05,112,9.1,2026-04-26,137,103,3,6,A1c >=8%; BP; Eye exam
+167,4b315d47,62,M,Medicare,2026-07-07,110,NA,NA,124,98,3,6,A1c retest (implausible value); BP; Eye exam
+168,6175577f,50,F,Commercial,2026-07-13,104,NA,NA,136,79,4,6,A1c test; Eye exam; Kidney eval; Statin
+169,6fda8ede,54,F,Commercial,2026-07-13,104,NA,NA,109,81,4,6,A1c test; Eye exam; Kidney eval; Statin
+170,790f6a8d,58,M,Commercial,2026-07-17,100,NA,NA,124,71,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+171,e84e2742,48,M,Uninsured,2026-07-17,100,NA,NA,107,63,4,6,A1c test; Eye exam; Kidney eval; Statin
+172,f59bd747,59,M,Medicare,2026-07-20,97,NA,NA,112,62,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+173,594e8605,55,M,Uninsured,2026-07-27,90,NA,NA,111,81,4,6,A1c test; Eye exam; Kidney eval; Statin
+174,14a96083,68,F,Medicare,2026-07-29,88,NA,NA,83,54,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+175,1bb3b781,48,F,Medicaid,2026-08-03,83,NA,NA,130,89,4,6,A1c test; Eye exam; Kidney eval; Statin
+176,7be9f192,52,F,Uninsured,2026-08-03,83,NA,NA,126,71,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+177,39091993,56,M,Commercial,2026-08-06,80,NA,NA,121,78,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+178,1e19f1a8,48,M,Dual Eligible,2026-08-08,78,NA,NA,135,87,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+179,ff5d4acb,74,M,Medicare,2026-08-08,78,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+180,2dd4a589,66,M,Medicare,2026-08-09,77,NA,NA,99,59,4,6,A1c test; Eye exam; Kidney eval; Statin
+181,6e69c9cf,69,F,Medicare,2026-08-11,75,NA,NA,106,88,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+182,f5b23718,58,F,Medicaid,2026-08-12,74,NA,NA,104,63,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+183,eef88edd,59,M,Uninsured,2026-08-13,73,NA,NA,118,82,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+184,6e5a1a7c,55,M,Medicare,2026-08-16,70,NA,NA,102,78,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+185,a261987c,65,F,Medicare,2026-08-16,70,NA,NA,122,89,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+186,44e6e72e,51,F,Commercial,2026-08-20,66,NA,NA,80,60,4,6,A1c test; Eye exam; Kidney eval; Statin
+187,7a05206e,51,M,Commercial,2026-08-25,61,NA,NA,125,75,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+188,e3bcd378,61,M,Dual Eligible,2026-08-28,58,NA,NA,105,79,4,6,A1c test; Eye exam; Kidney eval; Statin
+189,55b055a1,52,F,Commercial,2026-08-31,55,NA,NA,133,84,4,6,A1c test; Eye exam; Kidney eval; Statin
+190,9d7524c5,51,F,Commercial,2026-09-03,52,NA,NA,133,84,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+191,287fd5dd,66,M,Dual Eligible,2026-09-04,51,NA,NA,135,100,3,6,A1c retest (implausible value); BP; Statin
+192,d5f7bf94,36,M,Commercial,2026-09-04,51,NA,NA,126,96,3,6,A1c retest (implausible value); BP; Eye exam
+193,c07c6fac,63,F,Medicaid,2026-09-05,50,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+194,d8636b38,71,F,Medicare,2026-09-05,50,NA,NA,114,85,4,6,A1c test; Eye exam; Kidney eval; Statin
+195,fbd81176,75,F,Medicare,2026-09-09,46,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+196,8d8e0b08,57,M,Medicaid,2026-09-10,45,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+197,1db8c60b,64,F,Commercial,2026-09-11,44,NA,NA,107,62,4,6,A1c test; Eye exam; Kidney eval; Statin
+198,927fef64,70,F,Medicare,2026-09-12,43,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+199,7e371c2c,72,F,Medicare,2026-09-13,42,NA,NA,103,62,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+200,e58bbd43,63,M,Medicare,2026-09-16,39,NA,NA,129,81,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+201,5754a4e0,63,F,Commercial,2026-09-17,38,NA,NA,109,71,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+202,63ae58d9,44,M,Commercial,2026-09-17,38,NA,NA,133,87,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+203,68d85b09,68,F,Medicare,2026-09-18,37,NA,NA,127,86,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+204,4e53cdde,69,F,Medicare,2026-09-25,30,NA,NA,121,75,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+205,d8115961,63,F,Commercial,2026-09-26,29,NA,NA,119,87,4,6,A1c test; Eye exam; Kidney eval; Statin
+206,a07ddc31,44,M,Commercial,2026-09-27,28,NA,NA,106,71,4,6,A1c test; Eye exam; Kidney eval; Statin
+207,6f275745,56,M,Commercial,2026-09-28,27,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+208,55edd661,48,M,Commercial,2026-09-29,26,NA,NA,97,66,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+209,ca2f03a7,56,M,Commercial,2026-09-29,26,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+210,7b7b4239,58,F,Medicare,2026-10-01,24,NA,NA,109,87,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+211,7d7d65d2,60,F,Dual Eligible,2026-10-02,23,NA,NA,82,61,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+212,5d939f8a,64,F,Commercial,2026-10-05,20,NA,NA,133,76,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+213,aa3f2c6f,52,M,Commercial,2026-10-06,19,NA,NA,84,44,4,6,A1c test; Eye exam; Kidney eval; Statin
+214,1ef88360,74,M,Medicare,2026-10-09,16,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+215,86b46c8f,65,F,Medicare,2026-10-09,16,NA,NA,89,68,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+216,26225ad4,56,F,Commercial,2026-10-10,15,NA,NA,124,70,4,6,A1c test; Eye exam; Kidney eval; Statin
+217,77e74665,53,F,Medicaid,2026-10-11,14,NA,NA,88,58,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+218,16876ca4,50,M,Commercial,2026-10-12,13,NA,NA,139,76,4,6,A1c test; Eye exam; Kidney eval; Statin
+219,705b13f7,59,F,Medicare,2026-10-12,13,NA,NA,110,83,4,6,A1c test; Eye exam; Kidney eval; Statin
+220,4dd475f5,52,F,Commercial,2026-10-13,12,NA,NA,106,85,4,6,A1c test; Eye exam; Kidney eval; Statin
+221,67495625,49,M,Medicare,2026-10-13,12,NA,NA,105,83,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+222,6abf50c9,59,M,Commercial,2026-10-13,12,NA,NA,112,65,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+223,de2c8a77,54,F,Medicare,2026-10-13,12,NA,NA,121,73,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+224,0ea656e6,60,M,Medicaid,2026-10-14,11,NA,NA,109,71,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+225,c5009397,50,F,Medicare,2026-10-14,11,NA,NA,125,78,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+226,5e6a0ab0,64,F,Commercial,2026-10-15,10,NA,NA,108,76,4,6,A1c test; Eye exam; Kidney eval; Statin
+227,b307ffd9,49,F,Commercial,2026-10-15,10,NA,NA,109,62,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+228,ee766390,63,F,Commercial,2026-10-15,10,NA,NA,119,86,4,6,A1c test; Eye exam; Kidney eval; Statin
+229,453cb837,49,F,Commercial,2026-10-16,9,NA,NA,101,77,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+230,cc242cb2,59,F,Medicare,2026-10-16,9,NA,NA,124,71,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+231,38c7f998,62,F,Commercial,2026-10-17,8,NA,NA,128,78,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+232,5f5dcd3f,64,M,Medicare,2026-10-17,8,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+233,b1cc3d9a,73,F,Medicare,2026-10-18,7,NA,NA,143,66,3,6,A1c retest (implausible value); BP; Eye exam
+234,eaa42063,46,M,Medicare,2026-10-18,7,NA,NA,128,70,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+235,93835011,65,F,Medicare,2026-10-19,6,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+236,dab74034,56,F,Medicare,2026-10-19,6,NA,NA,132,78,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+237,eba386f5,61,F,Medicaid,2026-10-19,6,NA,NA,119,80,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+238,093b41f9,50,F,Medicaid,2026-10-20,5,NA,NA,117,80,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+239,10141723,55,F,Medicare,2026-10-20,5,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+240,156bcebb,62,F,Commercial,2026-10-20,5,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+241,1c5a998c,61,M,Medicare,2026-10-20,5,NA,NA,97,56,4,6,A1c test; Eye exam; Kidney eval; Statin
+242,2c04f6e0,71,M,Medicare,2026-10-20,5,NA,NA,NA,NA,3,6,A1c test; BP; Kidney eval
+243,48ff3ed3,43,F,Commercial,2026-10-20,5,NA,NA,112,73,4,6,A1c test; Eye exam; Kidney eval; Statin
+244,53751bd5,66,F,Medicare,2026-10-20,5,NA,NA,114,70,4,6,A1c test; Eye exam; Kidney eval; Statin
+245,e94499d1,50,M,Commercial,2026-10-20,5,NA,NA,126,82,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+246,f30581fb,64,F,Commercial,2026-10-20,5,NA,NA,107,89,4,6,A1c test; Eye exam; Kidney eval; Statin
+247,f83ea194,64,F,Medicare,2026-10-20,5,NA,NA,121,94,3,6,A1c retest (implausible value); BP; Eye exam
+248,2f961112,54,M,Uninsured,2026-10-21,4,NA,NA,113,83,4,6,A1c test; Eye exam; Kidney eval; Statin
+249,4a666cf8,63,F,Commercial,2026-10-21,4,NA,NA,132,81,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+250,86190d21,67,F,Medicare,2026-10-21,4,NA,NA,125,85,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+251,889ed9cd,61,F,Dual Eligible,2026-10-21,4,NA,NA,135,81,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+252,ce2c6ea3,58,F,Medicare,2026-10-21,4,NA,NA,134,71,4,6,A1c test; Eye exam; Kidney eval; Statin
+253,105c7e94,58,M,Commercial,2026-10-22,3,NA,NA,130,67,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+254,6fc258ea,53,F,Medicaid,2026-10-22,3,NA,NA,120,81,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+255,83090c57,59,M,Commercial,2026-10-22,3,NA,NA,109,85,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+256,8935c482,62,M,Commercial,2026-10-22,3,NA,NA,134,88,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+257,f812c5de,60,F,Medicaid,2026-10-22,3,NA,NA,121,87,4,6,A1c test; Eye exam; Kidney eval; Statin
+258,0c9d398d,53,F,Medicaid,2026-10-23,2,NA,NA,127,81,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+259,03147e4a,47,M,Commercial,2026-10-24,1,NA,NA,125,87,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+260,5cd9dd80,57,F,Commercial,2026-10-24,1,NA,NA,112,68,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+261,e3186843,52,F,Commercial,2026-10-24,1,NA,NA,123,78,4,6,A1c test; Eye exam; Kidney eval; Statin
+262,9395b9a3,60,M,Medicare,2026-10-25,0,NA,NA,130,77,4,6,A1c test; Eye exam; Kidney eval; Statin
+263,b46c2dd5,70,F,Medicare,2026-10-25,0,NA,NA,116,73,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+264,d84385a7,48,M,Medicaid,2026-10-25,0,NA,NA,131,82,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+265,e7dee4c7,49,M,Commercial,2026-10-25,0,NA,NA,134,89,4,6,A1c retest (implausible value); Eye exam; Kidney eval; Statin
+266,ba2a24dd,66,M,Medicare,2026-01-22,276,NA,NA,108,72,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+267,440e4b01,74,F,Medicare,2026-01-26,272,NA,NA,136,80,3,5,A1c test; Eye exam; Kidney eval
+268,87da1c26,57,M,Commercial,2026-02-07,260,NA,NA,119,82,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+269,fee03d17,66,F,Medicare,2026-03-05,234,NA,NA,112,88,3,5,A1c test; Eye exam; Kidney eval
+270,f755dc31,73,F,Medicare,2026-03-09,230,NA,NA,113,64,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+271,42131705,72,M,Medicare,2026-03-11,228,NA,NA,126,75,3,5,A1c test; Eye exam; Kidney eval
+272,d0940904,74,M,Medicare,2026-03-18,221,NA,NA,126,66,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+273,039f9b88,49,M,Medicaid,2026-03-31,208,NA,NA,112,73,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+274,1c63543f,54,M,Commercial,2026-04-05,203,NA,NA,119,87,3,5,A1c test; Eye exam; Kidney eval
+275,5757a958,69,M,Medicare,2026-04-24,184,NA,NA,93,63,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+276,a7f6beb9,75,F,Medicare,2026-04-26,182,NA,NA,81,55,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+277,c8f5157d,39,M,Commercial,2026-05-01,177,NA,NA,121,83,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+278,183d2413,36,M,Dual Eligible,2026-05-03,175,NA,NA,129,77,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+279,a90b7a6e,67,M,Medicare,2026-05-06,172,NA,NA,128,86,3,5,A1c test; Eye exam; Kidney eval
+280,294176a8,65,M,Commercial,2026-05-15,163,NA,NA,124,68,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+281,ec116e7f,64,M,Uninsured,2026-05-17,161,NA,NA,119,63,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+282,f6c8f113,63,F,Commercial,2026-05-18,160,NA,NA,89,50,3,5,A1c test; Eye exam; Kidney eval
+283,c08d5600,69,M,Medicare,2026-05-26,152,NA,NA,95,61,3,5,A1c test; Eye exam; Kidney eval
+284,2d417098,47,M,Medicare,2026-05-30,148,NA,NA,117,77,3,5,A1c test; Eye exam; Kidney eval
+285,9071d491,63,M,Medicare,2026-06-02,145,NA,NA,122,87,3,5,A1c test; Eye exam; Kidney eval
+286,a0d41ebb,47,M,Medicaid,2026-06-04,143,NA,NA,102,71,3,5,A1c retest (implausible value); Eye exam; Statin
+287,fdc06a77,71,F,Medicare,2026-06-17,130,NA,NA,113,84,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+288,3f6673f4,72,F,Medicare,2026-06-21,126,NA,NA,118,72,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+289,d3815c4b,53,M,Uninsured,2026-06-25,122,NA,NA,116,71,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+290,80d61111,61,F,Commercial,2026-06-28,119,NA,NA,110,88,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+291,cc6af3c6,66,M,Medicare,2026-07-03,114,NA,NA,110,66,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+292,4524e4b4,63,M,Medicare,2026-07-06,111,NA,NA,94,75,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+293,70122270,67,M,Medicare,2026-07-23,94,NA,NA,110,86,3,5,A1c test; Eye exam; Kidney eval
+294,4daaf68b,55,M,Uninsured,2026-08-05,81,NA,NA,124,80,3,5,A1c retest (implausible value); Eye exam; Statin
+295,b5448f30,37,F,Medicare,2026-08-05,81,NA,NA,98,56,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+296,be67b23f,66,F,Medicare,2026-08-05,81,NA,NA,108,71,3,5,A1c test; Eye exam; Kidney eval
+297,e7adefe9,63,M,Commercial,2026-08-10,76,NA,NA,113,83,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+298,99cabb16,70,F,Medicare,2026-08-14,72,NA,NA,89,54,3,5,A1c test; Eye exam; Kidney eval
+299,6be4175d,55,M,Uninsured,2026-08-16,70,NA,NA,111,73,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+300,a9b069e6,66,M,Dual Eligible,2026-08-16,70,NA,NA,111,82,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+301,ac8ec36b,56,M,Commercial,2026-08-21,65,NA,NA,116,77,3,5,A1c test; Eye exam; Kidney eval
+302,e06ad24b,59,F,Commercial,2026-08-26,60,6.2,2026-01-28,138,109,4,5,BP; Eye exam; Kidney eval; Statin
+303,58fdf746,63,M,Medicare,2026-08-30,56,NA,NA,128,76,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+304,84a6a55b,71,M,Medicare,2026-08-30,56,NA,NA,104,49,3,5,A1c test; Eye exam; Kidney eval
+305,6256a0f4,73,F,Medicare,2026-08-31,55,NA,NA,115,76,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+306,72a1c850,36,F,Commercial,2026-09-01,54,NA,NA,116,71,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+307,4d3e83d7,47,M,Commercial,2026-09-02,53,NA,NA,116,67,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+308,570c3bcd,59,M,Medicaid,2026-09-03,52,NA,NA,104,52,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+309,53cf1a6d,50,F,Medicaid,2026-09-04,51,NA,NA,111,74,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+310,59062650,65,M,Medicare,2026-09-04,51,NA,NA,116,74,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+311,e0c3a583,49,F,Medicaid,2026-09-06,49,NA,NA,120,85,3,5,A1c retest (implausible value); Eye exam; Statin
+312,51efd1bb,66,M,Medicare,2026-09-07,48,NA,NA,109,72,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+313,d1c67919,56,F,Commercial,2026-09-08,47,NA,NA,100,85,3,5,A1c test; Eye exam; Kidney eval
+314,983cc82d,54,M,Commercial,2026-09-09,46,NA,NA,104,84,3,5,A1c retest (implausible value); Eye exam; Statin
+315,c9b063b6,74,M,Medicare,2026-09-09,46,NA,NA,111,82,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+316,e5a12ce8,60,M,Commercial,2026-09-12,43,NA,NA,127,83,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+317,c991612b,75,M,Medicare,2026-09-14,41,NA,NA,82,40,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+318,1c9bc937,55,M,Commercial,2026-09-15,40,NA,NA,104,70,3,5,A1c test; Eye exam; Kidney eval
+319,3a071eab,72,M,Dual Eligible,2026-09-20,35,NA,NA,107,65,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+320,cf5c99bd,71,F,Medicare,2026-09-20,35,NA,NA,114,85,3,5,A1c test; Eye exam; Kidney eval
+321,f3684bda,66,F,Medicare,2026-09-20,35,NA,NA,123,85,3,5,A1c test; Eye exam; Kidney eval
+322,6751df06,66,F,Medicare,2026-09-21,34,NA,NA,123,78,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+323,dfac4050,63,F,Medicare,2026-09-22,33,NA,NA,108,66,3,5,A1c test; Eye exam; Kidney eval
+324,3a6e8f90,48,M,Commercial,2026-09-23,32,NA,NA,101,83,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+325,52eeb18b,55,F,Uninsured,2026-09-23,32,NA,NA,122,76,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+326,6685299f,52,M,Uninsured,2026-09-23,32,NA,NA,129,78,3,5,A1c test; Eye exam; Kidney eval
+327,d4e806e7,36,F,Medicare,2026-09-23,32,NA,NA,120,84,3,5,A1c test; Eye exam; Kidney eval
+328,18305b8b,72,M,Medicare,2026-09-27,28,NA,NA,131,81,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+329,78e62725,69,M,Medicare,2026-09-27,28,NA,NA,122,87,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+330,87cf9a02,75,M,Medicare,2026-09-27,28,NA,NA,109,89,3,5,A1c test; Eye exam; Kidney eval
+331,c2d20255,67,F,Medicare,2026-09-28,27,NA,NA,126,69,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+332,d51496d2,63,F,Commercial,2026-09-28,27,NA,NA,112,78,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+333,91fb233d,62,F,Commercial,2026-09-29,26,NA,NA,109,75,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+334,6be64e94,39,F,Commercial,2026-10-01,24,NA,NA,120,85,3,5,A1c test; Eye exam; Kidney eval
+335,93220d03,73,M,Medicare,2026-10-01,24,NA,NA,111,79,3,5,A1c test; Eye exam; Kidney eval
+336,37a8cd14,74,M,Medicare,2026-10-03,22,NA,NA,96,56,3,5,A1c test; Eye exam; Kidney eval
+337,69198e9b,73,M,Medicare,2026-10-03,22,NA,NA,126,80,3,5,A1c test; Eye exam; Kidney eval
+338,ff50a227,69,F,Medicare,2026-10-04,21,NA,NA,104,69,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+339,69d12290,75,M,Medicare,2026-10-06,19,NA,NA,124,83,3,5,A1c test; Eye exam; Kidney eval
+340,b1160390,73,F,Medicare,2026-10-06,19,NA,NA,129,61,3,5,A1c test; Eye exam; Kidney eval
+341,e33ceec3,61,M,Medicare,2026-10-06,19,NA,NA,127,94,2,5,A1c retest (implausible value); BP
+342,4340cd40,38,M,Medicare,2026-10-08,17,NA,NA,122,89,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+343,337cd5e3,67,F,Medicare,2026-10-09,16,NA,NA,99,52,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+344,29e3e58e,65,M,Medicare,2026-10-10,15,NA,NA,121,68,3,5,A1c test; Eye exam; Kidney eval
+345,32d33dcf,70,M,Uninsured,2026-10-10,15,NA,NA,138,77,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+346,48324dd0,37,F,Commercial,2026-10-11,14,NA,NA,121,82,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+347,ab4e88ee,33,F,Commercial,2026-10-12,13,NA,NA,105,67,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+348,2eb18bd8,70,F,Medicare,2026-10-13,12,NA,NA,116,61,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+349,2fdf948f,60,M,Medicare,2026-10-13,12,NA,NA,105,79,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+350,07e9250a,51,M,Medicare,2026-10-15,10,NA,NA,105,72,3,5,A1c test; Eye exam; Kidney eval
+351,233d19ab,74,F,Uninsured,2026-10-15,10,NA,NA,119,74,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+352,2d672fff,73,F,Medicare,2026-10-15,10,NA,NA,121,89,3,5,A1c test; Eye exam; Kidney eval
+353,d4619b80,72,M,Dual Eligible,2026-10-16,9,NA,NA,111,63,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+354,1156e9aa,72,F,Dual Eligible,2026-10-17,8,NA,NA,113,82,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+355,040238f7,75,F,Medicare,2026-10-18,7,NA,NA,99,76,3,5,A1c test; Eye exam; Kidney eval
+356,23434b9e,73,M,Medicare,2026-10-18,7,NA,NA,111,69,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+357,5a44a7e7,62,M,Commercial,2026-10-18,7,NA,NA,111,79,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+358,d5e73646,68,F,Medicare,2026-10-18,7,NA,NA,129,80,3,5,A1c test; Eye exam; Kidney eval
+359,1497fa86,63,M,Commercial,2026-10-19,6,NA,NA,109,78,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+360,16765739,65,M,Dual Eligible,2026-10-19,6,NA,NA,104,77,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+361,5949f039,60,F,Uninsured,2026-10-19,6,NA,NA,82,55,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+362,89d1aefe,68,M,Medicaid,2026-10-19,6,NA,NA,103,86,3,5,A1c test; Eye exam; Kidney eval
+363,e7098b43,71,M,Medicare,2026-10-19,6,NA,NA,114,85,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+364,123ca872,66,M,Medicare,2026-10-20,5,NA,NA,135,97,2,5,A1c retest (implausible value); BP
+365,4c458249,64,M,Commercial,2026-10-20,5,NA,NA,120,86,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+366,64bbefbc,56,F,Commercial,2026-10-20,5,NA,NA,129,69,3,5,A1c test; Eye exam; Kidney eval
+367,d153a80b,66,F,Medicare,2026-10-20,5,NA,NA,78,64,3,5,A1c test; Eye exam; Kidney eval
+368,dd9db7df,70,F,Dual Eligible,2026-10-20,5,NA,NA,111,77,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+369,64c1986f,74,F,Dual Eligible,2026-10-21,4,NA,NA,97,66,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+370,814492a5,70,M,Medicare,2026-10-21,4,NA,NA,104,71,3,5,A1c test; Eye exam; Kidney eval
+371,e27173ed,57,F,Dual Eligible,2026-10-21,4,NA,NA,133,75,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+372,ea8b709b,60,M,Commercial,2026-10-21,4,NA,NA,120,86,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+373,05789379,75,M,Medicare,2026-10-22,3,NA,NA,125,73,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+374,0d5ece54,53,M,Dual Eligible,2026-10-22,3,NA,NA,132,86,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+375,34ded6d4,72,F,Medicaid,2026-10-23,2,NA,NA,120,65,3,5,A1c test; Eye exam; Kidney eval
+376,39b38fbf,71,M,Medicare,2026-10-23,2,NA,NA,131,91,2,5,A1c retest (implausible value); BP
+377,5f5cdd70,65,M,Dual Eligible,2026-10-23,2,NA,NA,99,72,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+378,0abe7bb5,75,F,Medicare,2026-10-24,1,NA,NA,80,60,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+379,28561a33,69,M,Dual Eligible,2026-10-24,1,NA,NA,99,73,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+380,49b6c2d0,68,F,Medicare,2026-10-24,1,NA,NA,118,88,3,5,A1c test; Eye exam; Kidney eval
+381,e3571996,63,F,Medicare,2026-10-24,1,NA,NA,127,87,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+382,4e122dc5,75,F,Medicare,2026-10-25,0,NA,NA,130,88,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+383,66083a9e,73,F,Medicare,2026-10-25,0,NA,NA,113,76,3,5,A1c test; Eye exam; Kidney eval
+384,97ce6340,68,M,Medicare,2026-10-25,0,NA,NA,111,83,3,5,A1c retest (implausible value); Eye exam; Kidney eval
+385,d7c95a67,64,M,Uninsured,2026-10-25,0,NA,NA,130,93,2,5,A1c retest (implausible value); BP
+386,afc3b868,68,F,Medicare,2026-03-03,236,NA,NA,89,39,2,4,A1c retest (implausible value); Eye exam
+387,232df54b,50,F,Medicare,2026-04-10,198,7,2026-03-27,131,95,3,4,BP; Eye exam; Statin
+388,5bed9cd2,50,F,Commercial,2026-04-10,198,6.1,2026-03-27,129,90,3,4,BP; Eye exam; Statin
+389,9ee8e646,60,M,Commercial,2026-05-22,156,NA,NA,117,65,2,4,A1c retest (implausible value); Statin
+390,6a92a12c,49,M,Uninsured,2026-06-10,137,5.4,2026-06-10,151,102,3,4,BP; Eye exam; Statin
+391,738cb8b0,56,F,Commercial,2026-07-04,113,6.5,2026-07-04,143,94,3,4,BP; Eye exam; Statin
+392,84a92006,67,M,Medicare,2026-07-08,109,6.9,2026-06-24,150,113,3,4,BP; Eye exam; Statin
+393,d269b687,60,M,Medicare,2026-07-23,94,NA,NA,126,80,2,4,A1c retest (implausible value); Eye exam
+394,7bde6ec9,68,F,Medicare,2026-07-28,89,NA,NA,127,78,2,4,A1c retest (implausible value); Statin
+395,d8f8cd1f,52,F,Medicaid,2026-08-18,68,6.1,2026-08-04,149,112,3,4,BP; Eye exam; Statin
+396,bd008f85,52,F,Commercial,2026-08-23,63,6.1,2026-08-09,150,94,3,4,BP; Eye exam; Statin
+397,949feb9d,50,M,Medicare,2026-08-26,60,NA,NA,106,64,2,4,A1c retest (implausible value); Eye exam
+398,73a7f9dd,68,M,Medicare,2026-09-04,51,NA,NA,118,78,2,4,A1c retest (implausible value); Statin
+399,67463701,55,F,Commercial,2026-09-07,48,5.8,2026-01-12,118,93,3,4,BP; Eye exam; Kidney eval
+400,681fb22b,46,F,Commercial,2026-09-11,44,NA,NA,115,73,2,4,A1c retest (implausible value); Eye exam
+401,53556f58,68,F,Medicare,2026-09-13,42,6.9,2026-03-06,145,75,3,4,BP; Eye exam; Statin
+402,313661d7,54,F,Commercial,2026-09-15,40,NA,NA,134,71,2,4,A1c retest (implausible value); Statin
+403,700b7e7c,69,F,Medicare,2026-09-23,32,NA,NA,112,76,2,4,A1c retest (implausible value); Eye exam
+404,92f17a5c,70,F,Medicare,2026-09-23,32,NA,NA,114,79,2,4,A1c retest (implausible value); Eye exam
+405,4cba42a0,53,F,Uninsured,2026-09-27,28,NA,NA,113,89,2,4,A1c retest (implausible value); Eye exam
+406,7f0ef85f,29,F,Commercial,2026-09-29,26,NA,NA,129,85,2,4,A1c retest (implausible value); Eye exam
+407,bfb3ba39,69,F,Medicare,2026-10-03,22,NA,NA,124,73,2,4,A1c retest (implausible value); Eye exam
+408,07788dc4,58,F,Commercial,2026-10-10,15,NA,NA,121,75,2,4,A1c retest (implausible value); Statin
+409,670ad290,48,M,Dual Eligible,2026-10-12,13,6.9,2026-05-09,130,92,3,4,BP; Eye exam; Statin
+410,584ac59a,59,F,Commercial,2026-10-13,12,NA,NA,126,69,2,4,A1c retest (implausible value); Statin
+411,211ee53e,73,F,Medicare,2026-10-14,11,NA,NA,112,79,2,4,A1c retest (implausible value); Eye exam
+412,3b489398,59,F,Medicare,2026-10-14,11,NA,NA,123,88,2,4,A1c retest (implausible value); Statin
+413,a8bc7d68,67,M,Medicare,2026-10-17,8,NA,NA,77,66,2,4,A1c retest (implausible value); Eye exam
+414,08946ada,69,M,Medicare,2026-10-18,7,4.2,2026-10-18,128,97,3,4,BP; Eye exam; Kidney eval
+415,dfdc2a8d,69,M,Medicare,2026-10-20,5,4.5,2026-10-20,122,91,3,4,BP; Eye exam; Kidney eval
+416,f0d311ae,72,M,Medicare,2026-10-20,5,NA,NA,101,60,2,4,A1c retest (implausible value); Eye exam
+417,5e14d469,60,M,Commercial,2026-10-22,3,NA,NA,126,83,2,4,A1c retest (implausible value); Eye exam
+418,9cc825bd,61,F,Medicaid,2026-10-22,3,NA,NA,139,84,2,4,A1c retest (implausible value); Statin
+419,62166014,53,F,Commercial,2026-10-24,1,NA,NA,123,63,2,4,A1c retest (implausible value); Statin
+420,9cfd989e,70,M,Medicare,2026-10-24,1,NA,NA,114,69,2,4,A1c retest (implausible value); Eye exam
+421,ac7f4f40,49,F,Commercial,2026-10-24,1,NA,NA,134,78,2,4,A1c retest (implausible value); Statin
+422,3eb223d7,71,F,Medicare,2026-10-25,0,NA,NA,116,71,2,4,A1c retest (implausible value); Eye exam
+423,5ff5857d,64,M,Uninsured,2026-10-25,0,6.8,2026-10-25,143,80,3,4,BP; Eye exam; Statin
+424,f6b21b97,68,M,Medicare,2026-01-25,273,7,2026-01-11,136,97,2,3,BP; Eye exam
+425,49c6d1db,57,F,Commercial,2026-01-29,269,7.5,2026-01-01,143,78,2,3,BP; Statin
+426,c9db34f8,55,M,Medicaid,2026-01-31,267,7,2026-01-10,144,99,2,3,BP; Eye exam
+427,259c9f15,52,F,Uninsured,2026-02-14,253,7.5,2026-01-24,153,99,2,3,BP; Statin
+428,7106136b,45,F,Medicaid,2026-02-22,245,6,2026-02-08,127,91,2,3,BP; Statin
+429,7bda868a,59,M,Medicaid,2026-04-08,200,7.5,2026-03-04,176,125,2,3,BP; Statin
+430,a3709796,61,M,Commercial,2026-04-24,184,6.1,2026-04-04,148,107,2,3,BP; Statin
+431,eddfceea,65,F,Medicare,2026-05-02,176,5.5,2026-04-25,114,91,2,3,BP; Eye exam
+432,bbd1fa8b,54,F,Medicare,2026-05-03,175,6.5,2026-02-04,123,92,2,3,BP; Statin
+433,f1f4d415,57,F,Dual Eligible,2026-05-05,173,NA,NA,125,81,1,3,A1c retest (implausible value)
+434,8e615a71,60,F,Commercial,2026-05-09,169,6.1,2026-04-25,142,95,2,3,BP; Statin
+435,e30070e1,52,M,Commercial,2026-05-25,153,8.2,2026-04-20,126,80,2,3,A1c >=8%; Statin
+436,c5672fde,53,F,Commercial,2026-05-30,148,6.9,2026-04-14,113,93,2,3,BP; Statin
+437,e30e640d,63,M,Uninsured,2026-05-31,147,5.5,2026-05-17,135,92,2,3,BP; Statin
+438,7f024b3a,69,F,Medicare,2026-06-05,142,6,2026-03-06,136,101,2,3,BP; Statin
+439,41695256,46,F,Commercial,2026-06-08,139,7,2026-06-08,144,93,2,3,BP; Statin
+440,b2cdae29,54,M,Commercial,2026-07-07,110,7.3,2026-07-04,129,96,2,3,BP; Statin
+441,7490dd74,58,M,Medicare,2026-07-14,103,6.9,2026-06-23,136,115,2,3,BP; Eye exam
+442,077cc803,66,M,Dual Eligible,2026-07-23,94,5.4,2026-03-24,151,101,2,3,BP; Statin
+443,db27b3c8,53,M,Commercial,2026-07-23,94,6,2026-07-09,132,79,3,3,Eye exam; Kidney eval; Statin
+444,84580a49,53,F,Medicare,2026-07-25,92,5.9,2026-07-25,90,63,3,3,Eye exam; Kidney eval; Statin
+445,67268f5b,66,F,Medicare,2026-07-28,89,NA,NA,111,76,1,3,A1c retest (implausible value)
+446,80d99c47,40,M,Uninsured,2026-07-30,87,5.4,2026-03-18,119,99,2,3,BP; Statin
+447,7ab808b9,52,M,Uninsured,2026-08-01,85,5.5,2026-06-09,131,101,2,3,BP; Statin
+448,950d66fa,30,F,Medicaid,2026-08-02,84,7.2,2026-08-02,141,94,2,3,BP; Eye exam
+449,173cf80b,52,F,Uninsured,2026-08-04,82,6,2026-07-21,129,102,2,3,BP; Statin
+450,ca87e9f8,63,M,Commercial,2026-08-04,82,7,2026-02-26,145,111,2,3,BP; Statin
+451,ae682dfb,56,M,Commercial,2026-08-05,81,7.5,2026-04-27,158,85,2,3,BP; Statin
+452,9709169b,49,F,Commercial,2026-08-08,78,6.1,2026-04-16,146,95,2,3,BP; Statin
+453,f7816f22,54,M,Medicaid,2026-08-09,77,4,2026-08-09,95,68,3,3,Eye exam; Kidney eval; Statin
+454,1fddb83f,66,M,Medicaid,2026-08-11,75,6.9,2026-07-21,153,105,2,3,BP; Statin
+455,43a7c2ca,73,M,Medicare,2026-08-16,70,NA,NA,113,74,1,3,A1c retest (implausible value)
+456,adf1da19,60,F,Commercial,2026-08-20,66,6.1,2026-08-06,131,97,2,3,BP; Statin
+457,9bb75b12,57,F,Commercial,2026-08-24,62,6.1,2026-07-02,135,94,2,3,BP; Statin
+458,c44a4119,54,M,Commercial,2026-08-27,59,4.6,2026-08-27,122,89,3,3,Eye exam; Kidney eval; Statin
+459,17c05148,57,M,Commercial,2026-09-01,54,4,2026-04-04,136,93,2,3,BP; Statin
+460,f8691b26,66,F,Medicare,2026-09-04,51,6.8,2026-08-21,138,117,2,3,BP; Eye exam
+461,d2bada31,63,F,Uninsured,2026-09-05,50,8.2,2026-08-22,124,78,2,3,A1c >=8%; Statin
+462,c472d8fa,57,F,Commercial,2026-09-11,44,NA,NA,117,65,1,3,A1c retest (implausible value)
+463,85e65266,43,M,Dual Eligible,2026-09-13,42,6,2026-08-30,131,105,2,3,BP; Eye exam
+464,bc8a6740,49,F,Commercial,2026-09-18,37,7.1,2026-04-25,134,113,2,3,BP; Statin
+465,fd17ec21,52,F,Medicare,2026-09-18,37,6.9,2026-06-01,125,106,2,3,BP; Statin
+466,e53446c4,70,M,Medicare,2026-09-22,33,4.1,2026-09-15,143,74,2,3,BP; Eye exam
+467,1433aa3b,40,M,Commercial,2026-09-23,32,6.1,2026-09-23,118,103,2,3,BP; Statin
+468,1dde9cd9,54,F,Uninsured,2026-09-23,32,6.9,2026-09-09,126,93,2,3,BP; Statin
+469,b1a288ed,64,F,Medicaid,2026-09-24,31,NA,NA,130,69,1,3,A1c retest (implausible value)
+470,13384eea,39,F,Commercial,2026-09-29,26,NA,NA,132,81,1,3,A1c retest (implausible value)
+471,b27797c7,42,M,Commercial,2026-09-29,26,4.6,2026-09-29,118,75,3,3,Eye exam; Kidney eval; Statin
+472,44394fa1,56,F,Medicaid,2026-10-01,24,4,2026-03-19,90,63,3,3,Eye exam; Kidney eval; Statin
+473,675cb6d8,73,M,Medicare,2026-10-01,24,NA,NA,127,82,1,3,A1c retest (implausible value)
+474,34d19014,71,F,Medicare,2026-10-03,22,NA,NA,100,57,1,3,A1c retest (implausible value)
+475,46aa8bb5,57,F,Medicare,2026-10-03,22,5.4,2026-06-17,141,85,2,3,BP; Statin
+476,8a60b28b,64,F,Commercial,2026-10-04,21,NA,NA,117,85,1,3,A1c retest (implausible value)
+477,caf7cb17,59,F,Uninsured,2026-10-04,21,7,2026-10-04,133,106,2,3,BP; Statin
+478,2db4e007,68,M,Medicare,2026-10-08,17,NA,NA,91,72,1,3,A1c retest (implausible value)
+479,db261fe6,60,M,Commercial,2026-10-11,14,NA,NA,92,46,1,3,A1c retest (implausible value)
+480,028ca6b3,62,M,Medicaid,2026-10-12,13,7,2026-10-12,159,104,2,3,BP; Eye exam
+481,06e68347,68,F,Medicare,2026-10-12,13,NA,NA,131,82,1,3,A1c retest (implausible value)
+482,7a60636a,42,M,Commercial,2026-10-12,13,7,2026-09-12,141,97,2,3,BP; Statin
+483,f04b9f13,64,F,Medicare,2026-10-12,13,4,2026-10-12,114,78,3,3,Eye exam; Kidney eval; Statin
+484,ac3f0cd0,69,F,Medicare,2026-10-13,12,NA,NA,112,59,1,3,A1c retest (implausible value)
+485,5bf72be0,45,M,Uninsured,2026-10-14,11,6.9,2026-09-30,114,91,2,3,BP; Statin
+486,eef1c5e2,59,F,Medicaid,2026-10-14,11,NA,NA,119,73,1,3,A1c retest (implausible value)
+487,37a6016a,64,M,Commercial,2026-10-15,10,NA,NA,119,69,1,3,A1c retest (implausible value)
+488,7b4192c0,59,M,Medicaid,2026-10-15,10,NA,NA,124,77,1,3,A1c retest (implausible value)
+489,e53fc12f,55,M,Commercial,2026-10-15,10,6.9,2026-10-08,110,91,2,3,BP; Statin
+490,9fc26166,49,F,Commercial,2026-10-16,9,7,2026-02-17,117,96,2,3,BP; Statin
+491,0f59cc10,69,F,Dual Eligible,2026-10-17,8,NA,NA,117,78,1,3,A1c retest (implausible value)
+492,9a3d3d95,61,F,Medicare,2026-10-19,6,NA,NA,104,59,1,3,A1c retest (implausible value)
+493,25f64621,72,M,Dual Eligible,2026-10-20,5,NA,NA,117,84,1,3,A1c retest (implausible value)
+494,79f67d47,40,F,Commercial,2026-10-20,5,6,2026-06-30,131,83,3,3,Eye exam; Kidney eval; Statin
+495,9dbe3981,67,F,Medicare,2026-10-20,5,7.6,2026-10-06,120,104,2,3,BP; Statin
+496,b3ef4e52,51,M,Uninsured,2026-10-20,5,4,2026-10-13,139,90,2,3,BP; Statin
+497,ea13d88b,75,F,Medicare,2026-10-21,4,NA,NA,114,69,1,3,A1c retest (implausible value)
+498,0736deab,73,M,Medicare,2026-10-22,3,NA,NA,101,72,1,3,A1c retest (implausible value)
+499,4432fc21,68,F,Medicare,2026-10-23,2,NA,NA,94,56,1,3,A1c retest (implausible value)
+500,44dcebdb,64,F,Commercial,2026-10-23,2,NA,NA,90,56,1,3,A1c retest (implausible value)
+501,fcf16264,63,F,Medicare,2026-10-23,2,7,2026-10-09,123,96,2,3,BP; Eye exam
+502,cfaed245,50,M,Commercial,2026-10-24,1,7.5,2026-09-19,137,109,2,3,BP; Eye exam
+503,37335d92,68,M,Medicare,2026-10-25,0,NA,NA,118,72,1,3,A1c retest (implausible value)
+504,3ee5b49c,42,M,Medicare,2026-10-25,0,6.2,2026-01-25,129,69,3,3,Eye exam; Kidney eval; Statin
+505,c5327f5e,58,F,Uninsured,2026-02-02,265,4,2026-02-02,127,79,2,2,Eye exam; Statin
+506,1512d5d9,62,M,Commercial,2026-02-05,262,7,2026-01-22,99,57,2,2,Eye exam; Statin
+507,5976b649,73,M,Medicare,2026-03-04,235,5.7,2026-02-18,124,86,2,2,Eye exam; Statin
+508,ac382dba,72,F,Medicare,2026-03-05,234,6.1,2026-01-28,105,92,1,2,BP
+509,21852a32,51,M,Commercial,2026-03-29,210,7.5,2026-03-15,127,79,2,2,Eye exam; Statin
+510,3d51601e,48,M,Medicaid,2026-04-25,183,4.3,2026-04-25,110,78,2,2,Eye exam; Statin
+511,07b64c88,53,F,Commercial,2026-05-05,173,6.4,2026-04-21,105,61,2,2,Eye exam; Statin
+512,b4ff9ce7,49,M,Commercial,2026-05-16,162,6.7,2026-05-16,129,84,2,2,Eye exam; Statin
+513,e2e77075,54,M,Medicare,2026-05-19,159,6.6,2026-04-28,138,78,2,2,Eye exam; Statin
+514,a77fb2ab,61,F,Commercial,2026-05-24,154,7,2026-05-24,116,92,1,2,BP
+515,9c2873ca,63,M,Commercial,2026-06-03,144,7,2026-05-20,102,81,2,2,Eye exam; Statin
+516,7ba853f2,71,M,Medicare,2026-06-08,139,4.5,2026-06-08,96,77,2,2,Eye exam; Kidney eval
+517,816b4476,64,F,Commercial,2026-06-15,132,6.3,2026-06-01,109,73,2,2,Eye exam; Kidney eval
+518,b9e7371c,59,M,Medicaid,2026-06-25,122,6.9,2026-01-26,118,97,1,2,BP
+519,1ec9642f,65,F,Medicare,2026-06-29,118,5.4,2026-06-15,97,84,2,2,Eye exam; Statin
+520,91e91d81,53,F,Commercial,2026-07-03,114,6,2026-04-13,110,75,2,2,Eye exam; Statin
+521,21ed7070,65,M,Dual Eligible,2026-07-12,105,6.1,2026-04-17,115,98,1,2,BP
+522,e1012b85,50,M,Uninsured,2026-07-17,100,7,2026-06-11,117,91,1,2,BP
+523,315da6aa,50,M,Uninsured,2026-07-20,97,6.1,2026-07-06,126,76,2,2,Eye exam; Statin
+524,4db52bc1,58,F,Commercial,2026-07-26,91,5.6,2026-07-12,126,82,2,2,Eye exam; Statin
+525,492d1d90,52,F,Commercial,2026-08-04,82,7.6,2026-04-26,147,100,1,2,BP
+526,e587903d,45,F,Medicaid,2026-08-06,80,6.1,2026-08-06,122,88,2,2,Eye exam; Statin
+527,01f159d9,66,F,Dual Eligible,2026-08-11,75,6.1,2026-08-11,118,69,2,2,Eye exam; Statin
+528,7008690f,65,M,Medicare,2026-08-11,75,6.9,2026-05-08,121,91,1,2,BP
+529,6ad5c8ab,38,F,Commercial,2026-08-15,71,7,2026-08-15,115,94,1,2,BP
+530,dde115fd,56,M,Medicare,2026-08-19,67,7,2026-08-05,117,86,2,2,Eye exam; Statin
+531,8c6a8f48,65,F,Commercial,2026-08-20,66,5.5,2026-08-03,140,96,1,2,BP
+532,fec6e612,54,F,Commercial,2026-08-23,63,7,2026-08-02,120,100,1,2,BP
+533,c13acecd,55,F,Commercial,2026-08-27,59,7.9,2026-08-06,106,94,1,2,BP
+534,7a3c9533,73,M,Medicare,2026-08-29,57,7,2026-05-26,98,70,2,2,Eye exam; Statin
+535,e9660c75,62,M,Medicare,2026-08-30,56,6.2,2026-07-08,92,66,2,2,Eye exam; Kidney eval
+536,d9abbfb2,47,F,Commercial,2026-08-31,55,4.8,2026-02-28,113,65,2,2,Eye exam; Statin
+537,f06d7b62,56,F,Medicare,2026-09-10,45,4,2026-09-10,106,79,2,2,Eye exam; Statin
+538,449716f6,60,M,Medicare,2026-09-16,39,5.4,2026-08-10,126,92,1,2,BP
+539,cfe90212,59,M,Medicaid,2026-09-18,37,6.9,2026-01-25,119,96,1,2,BP
+540,61f9a84d,74,M,Medicare,2026-09-19,36,6.1,2026-06-20,137,119,1,2,BP
+541,8acb9a39,59,M,Medicare,2026-10-03,22,5.4,2026-09-19,101,92,1,2,BP
+542,b5bfce07,66,M,Medicare,2026-10-03,22,6.9,2026-09-16,127,94,1,2,BP
+543,0d03da49,73,M,Dual Eligible,2026-10-05,20,4.5,2026-09-21,141,84,1,2,BP
+544,4e5b8965,58,F,Commercial,2026-10-06,19,6.8,2026-09-13,112,71,2,2,Eye exam; Statin
+545,7ab189f6,59,M,Commercial,2026-10-06,19,6.8,2026-06-12,143,93,1,2,BP
+546,340b8023,42,F,Medicare,2026-10-07,18,7.5,2026-09-09,116,73,2,2,Eye exam; Statin
+547,97405115,61,M,Commercial,2026-10-08,17,7,2026-09-28,123,93,1,2,BP
+548,2d66d182,59,F,Commercial,2026-10-13,12,4,2026-10-13,100,72,2,2,Eye exam; Statin
+549,f9ccb25d,39,M,Commercial,2026-10-13,12,4,2026-09-29,123,104,1,2,BP
+550,adc3fb83,48,M,Commercial,2026-10-14,11,7,2026-10-14,106,88,2,2,Eye exam; Statin
+551,c0adbb9c,57,F,Commercial,2026-10-14,11,5.5,2026-10-14,134,73,2,2,Eye exam; Statin
+552,b8c3ebb6,53,M,Dual Eligible,2026-10-15,10,6.1,2026-09-30,132,98,1,2,BP
+553,2c81417a,47,F,Commercial,2026-10-16,9,7.1,2026-01-02,108,86,2,2,Eye exam; Statin
+554,b0683f95,72,F,Medicare,2026-10-16,9,6.1,2026-10-16,109,81,2,2,Eye exam; Statin
+555,a79285f5,45,F,Commercial,2026-10-17,8,6.2,2026-10-17,127,74,2,2,Eye exam; Statin
+556,838791fe,60,M,Commercial,2026-10-18,7,6,2026-01-10,122,91,1,2,BP
+557,08f00c16,66,F,Medicare,2026-10-19,6,4.6,2026-10-19,120,90,1,2,BP
+558,22769466,42,M,Medicaid,2026-10-19,6,4.5,2026-10-17,107,84,2,2,Eye exam; Statin
+559,cb688cca,75,F,Medicare,2026-10-19,6,4.1,2026-10-19,117,91,1,2,BP
+560,c1109e5b,66,F,Medicare,2026-10-21,4,5.5,2026-07-10,125,92,1,2,BP
+561,e7b2a86f,41,F,Commercial,2026-10-21,4,4.5,2026-10-14,131,75,2,2,Eye exam; Statin
+562,db2bed39,75,F,Medicare,2026-10-22,3,5.4,2026-10-22,127,89,2,2,Eye exam; Statin
+563,17f82316,64,F,Commercial,2026-10-23,2,8.8,2026-05-23,118,57,1,2,A1c >=8%
+564,8d6e379e,63,M,Commercial,2026-10-23,2,5.4,2026-10-16,144,87,1,2,BP
+565,d56b41e9,60,M,Commercial,2026-10-24,1,4,2026-10-24,109,89,2,2,Eye exam; Kidney eval
+566,8e25fad3,57,M,Medicaid,2026-10-25,0,6.3,2026-04-26,129,87,2,2,Eye exam; Kidney eval
+567,bb7b661d,62,M,Commercial,2026-01-12,286,6.9,2026-01-11,113,86,1,1,Eye exam
+568,bf14c953,67,M,Medicare,2026-01-12,286,5.8,2026-01-12,134,85,1,1,Eye exam
+569,b5c0c27f,58,M,Commercial,2026-01-30,268,7,2026-01-02,106,76,1,1,Statin
+570,b015dee3,47,F,Uninsured,2026-02-17,250,6.1,2026-02-03,116,72,1,1,Statin
+571,09183549,71,F,Medicare,2026-02-21,246,6.1,2026-01-31,98,69,1,1,Eye exam
+572,e75207ce,66,F,Medicare,2026-02-23,244,7.4,2026-02-09,84,48,1,1,Eye exam
+573,08101bb1,65,M,Commercial,2026-03-01,238,6,2026-02-20,120,68,1,1,Eye exam
+574,a7088769,37,M,Commercial,2026-03-19,220,6.1,2026-03-19,131,70,1,1,Eye exam
+575,b4a81c7a,49,M,Medicare,2026-03-19,220,6,2026-02-24,119,81,1,1,Statin
+576,e67f95dd,60,F,Commercial,2026-03-25,214,6.9,2026-03-11,108,82,1,1,Statin
+577,abbd6b7d,57,M,Commercial,2026-04-21,187,6.9,2026-04-07,104,57,1,1,Eye exam
+578,35f79162,55,M,Medicare,2026-04-29,179,7.1,2026-04-26,118,66,1,1,Eye exam
+579,d1ec5adc,70,M,Medicare,2026-05-05,173,6.9,2026-05-04,99,74,1,1,Eye exam
+580,00b2521e,58,F,Medicare,2026-05-06,172,5.6,2026-02-11,101,79,1,1,Statin
+581,8d158c04,41,F,Commercial,2026-05-13,165,6,2026-04-29,98,69,1,1,Statin
+582,5bd4aa9f,68,M,Medicare,2026-05-14,164,5.3,2026-04-30,108,68,1,1,Eye exam
+583,f77470a1,59,M,Dual Eligible,2026-05-14,164,5.6,2026-04-30,117,70,1,1,Statin
+584,0847d673,71,F,Medicare,2026-05-16,162,5.6,2026-02-12,132,87,1,1,Statin
+585,6803ae2b,48,M,Commercial,2026-05-16,162,6.9,2026-04-25,119,83,1,1,Statin
+586,efc342cd,61,F,Medicaid,2026-05-17,161,5.6,2026-05-17,125,84,1,1,Eye exam
+587,c661c472,48,M,Medicare,2026-05-18,160,7,2026-02-14,123,84,1,1,Statin
+588,a0f90ed6,48,M,Medicare,2026-05-27,151,5.9,2026-04-03,127,73,1,1,Statin
+589,728cec82,56,F,Commercial,2026-05-28,150,6.9,2026-05-08,121,80,1,1,Statin
+590,964e60dd,63,M,Commercial,2026-05-31,147,6.8,2026-05-24,121,80,1,1,Eye exam
+591,a37a012f,62,M,Commercial,2026-05-31,147,6.8,2026-05-17,111,54,1,1,Eye exam
+592,62555861,66,M,Medicare,2026-06-05,142,4.4,2026-06-05,123,71,1,1,Eye exam
+593,816bedad,53,F,Commercial,2026-06-14,133,5.9,2026-05-31,131,84,1,1,Statin
+594,2695161d,43,M,Medicare,2026-06-17,130,6,2026-06-10,100,87,1,1,Statin
+595,b762d84d,42,M,Medicaid,2026-06-21,126,7.6,2026-04-12,130,78,1,1,Statin
+596,0bb33e93,58,M,Commercial,2026-07-09,108,5.7,2026-07-09,119,74,1,1,Statin
+597,715ab6fe,50,F,Commercial,2026-07-16,101,7,2026-07-16,117,81,1,1,Statin
+598,a9cd64c2,50,F,Medicare,2026-07-20,97,7,2026-04-25,111,71,1,1,Statin
+599,edb60b87,58,F,Commercial,2026-07-21,96,7.3,2026-06-30,138,82,1,1,Statin
+600,5d55695c,55,M,Commercial,2026-07-24,93,6.9,2026-02-14,111,89,1,1,Statin
+601,4afff48f,59,M,Commercial,2026-08-04,82,7,2026-08-04,108,84,1,1,Statin
+602,ce5b055e,56,F,Commercial,2026-08-06,80,5.8,2026-07-16,109,75,1,1,Eye exam
+603,20f71431,64,F,Medicare,2026-08-07,79,7.9,2026-07-24,102,85,1,1,Statin
+604,d3dc5457,55,F,Medicare,2026-08-21,65,6.8,2026-08-07,95,75,1,1,Statin
+605,823e159e,50,M,Commercial,2026-08-22,64,6,2026-04-29,89,80,1,1,Statin
+606,b969f680,65,M,Commercial,2026-08-23,63,6.8,2026-02-09,128,84,1,1,Statin
+607,07066b89,49,F,Commercial,2026-08-24,62,7,2026-06-16,125,89,1,1,Statin
+608,407e8af1,65,F,Medicaid,2026-08-25,61,6,2026-08-25,99,68,1,1,Eye exam
+609,0f827f27,65,M,Medicare,2026-08-27,59,5.6,2026-02-05,110,66,1,1,Statin
+610,5566ae46,68,M,Medicare,2026-08-29,57,4,2026-04-15,126,77,1,1,Eye exam
+611,fd90ff1c,58,M,Medicaid,2026-09-03,52,6,2026-03-18,129,87,1,1,Statin
+612,6e988769,54,M,Uninsured,2026-09-04,51,6.9,2026-04-02,114,78,1,1,Statin
+613,8cbb1074,67,F,Medicare,2026-09-05,50,7.1,2026-08-22,131,82,1,1,Statin
+614,75da225f,55,F,Commercial,2026-09-06,49,6.1,2026-09-06,124,65,1,1,Statin
+615,3312ceb5,74,F,Medicare,2026-09-10,45,7,2026-05-10,114,79,1,1,Statin
+616,078d2bdd,46,M,Commercial,2026-09-11,44,6.1,2026-03-30,128,76,1,1,Statin
+617,0f711d83,64,F,Commercial,2026-09-12,43,6.2,2026-08-29,92,50,1,1,Eye exam
+618,97855462,71,F,Medicare,2026-09-14,41,4.2,2026-08-31,121,85,1,1,Eye exam
+619,f224b595,59,M,Commercial,2026-09-14,41,6.8,2026-08-31,126,84,1,1,Statin
+620,ba388f0c,56,F,Medicaid,2026-09-18,37,4.5,2026-09-04,131,88,1,1,Eye exam
+621,3a2922ed,46,F,Commercial,2026-09-19,36,5.5,2026-08-22,99,74,1,1,Statin
+622,4e08d248,53,F,Commercial,2026-09-19,36,6.1,2026-06-02,99,86,1,1,Statin
+623,991207bf,51,M,Medicaid,2026-09-19,36,6.8,2026-09-05,120,89,1,1,Statin
+624,7e3cc7b6,49,F,Commercial,2026-09-20,35,6.3,2026-04-03,133,76,1,1,Statin
+625,182e84e9,67,F,Medicare,2026-09-21,34,6.1,2026-09-07,127,74,1,1,Eye exam
+626,bc033047,61,F,Commercial,2026-09-21,34,5.5,2026-09-07,108,80,1,1,Statin
+627,33c6a9be,75,M,Dual Eligible,2026-09-22,33,5.5,2026-09-22,103,86,1,1,Eye exam
+628,391b1d7b,69,F,Medicare,2026-09-23,32,6.8,2026-09-09,89,67,1,1,Eye exam
+629,9c7fa3eb,55,F,Dual Eligible,2026-09-23,32,5.9,2026-09-23,100,56,1,1,Statin
+630,1f4cac50,71,F,Medicare,2026-09-25,30,5.5,2026-09-18,119,77,1,1,Eye exam
+631,5ff9fc8b,63,M,Commercial,2026-09-26,29,7,2026-09-06,111,86,1,1,Eye exam
+632,f8d6cc3a,56,M,Commercial,2026-09-26,29,6.6,2026-05-06,101,70,1,1,Statin
+633,7463eea8,72,F,Medicare,2026-09-27,28,7.3,2026-08-11,115,75,1,1,Statin
+634,a9449a49,62,F,Commercial,2026-09-28,27,5.5,2026-09-14,90,63,1,1,Eye exam
+635,2452c937,56,F,Commercial,2026-09-29,26,6,2026-01-17,135,71,1,1,Statin
+636,e6f21e1b,42,M,Commercial,2026-09-29,26,4.5,2026-09-29,120,80,1,1,Statin
+637,0b80861e,64,M,Medicare,2026-09-30,25,6.1,2026-07-15,113,66,1,1,Eye exam
+638,8518faea,72,M,Medicare,2026-09-30,25,6.9,2026-02-26,110,71,1,1,Eye exam
+639,df6c1de7,48,M,Medicaid,2026-09-30,25,7.6,2026-06-12,111,73,1,1,Statin
+640,0f30ef77,34,M,Medicaid,2026-10-06,19,6.6,2026-09-22,111,81,1,1,Eye exam
+641,22a248b6,73,F,Medicare,2026-10-07,18,5.4,2026-10-07,100,67,1,1,Statin
+642,75b21a36,59,M,Medicare,2026-10-07,18,4,2026-09-23,124,75,1,1,Eye exam
+643,1d8121e8,51,M,Dual Eligible,2026-10-08,17,6.2,2026-08-31,113,89,1,1,Statin
+644,73961a3e,49,M,Commercial,2026-10-09,16,6.1,2026-07-17,110,78,1,1,Eye exam
+645,d103ff9a,60,M,Medicare,2026-10-09,16,5.8,2026-08-12,115,65,1,1,Statin
+646,dd456dd6,64,F,Commercial,2026-10-09,16,7,2026-09-08,109,71,1,1,Statin
+647,802c42d1,50,M,Commercial,2026-10-11,14,6.1,2026-08-30,105,72,1,1,Statin
+648,3f8046c3,70,F,Medicare,2026-10-12,13,6.5,2026-01-22,111,64,1,1,Statin
+649,774b6b98,35,F,Commercial,2026-10-12,13,7.6,2026-10-12,133,75,1,1,Eye exam
+650,81338f2c,59,F,Commercial,2026-10-12,13,7.1,2026-10-12,135,85,1,1,Statin
+651,6cf1f637,59,F,Commercial,2026-10-13,12,6.8,2026-10-13,121,72,1,1,Eye exam
+652,852a50e7,42,M,Medicaid,2026-10-13,12,7.3,2026-09-22,123,78,1,1,Statin
+653,80e9ba41,60,M,Commercial,2026-10-14,11,6.1,2026-05-08,120,81,1,1,Statin
+654,550d7a58,55,M,Commercial,2026-10-15,10,6,2026-10-15,103,58,1,1,Statin
+655,502fa2b4,63,M,Commercial,2026-10-17,8,6.9,2026-08-25,129,68,1,1,Statin
+656,6c745790,53,F,Commercial,2026-10-18,7,5.5,2026-03-19,116,64,1,1,Statin
+657,6d4d7075,72,M,Medicare,2026-10-18,7,7,2026-07-04,118,71,1,1,Statin
+658,dd6030fe,55,F,Commercial,2026-10-18,7,5.5,2026-01-05,115,87,1,1,Statin
+659,ed20bb4b,63,F,Commercial,2026-10-18,7,7.4,2026-10-18,130,87,1,1,Statin
+660,ec1a6e1a,70,M,Medicare,2026-10-19,6,6.9,2026-09-28,105,71,1,1,Statin
+661,32f59ffa,75,M,Medicare,2026-10-20,5,4,2026-10-20,118,79,1,1,Eye exam
+662,654550de,65,F,Medicare,2026-10-20,5,6.9,2026-01-06,112,87,1,1,Statin
+663,707045c9,63,F,Uninsured,2026-10-20,5,5.5,2026-10-20,122,76,1,1,Eye exam
+664,d76ea233,58,M,Commercial,2026-10-20,5,7,2026-10-06,125,89,1,1,Eye exam
+665,e4f914f0,66,M,Medicare,2026-10-22,3,4,2026-10-22,107,88,1,1,Statin
+666,e9b14457,65,F,Medicare,2026-10-22,3,4.1,2026-10-22,128,77,1,1,Eye exam
+667,0f8977b5,47,M,Medicaid,2026-10-23,2,6.9,2026-10-03,118,62,1,1,Statin
+668,38ae2f1e,65,F,Commercial,2026-10-23,2,4,2026-10-10,135,82,1,1,Eye exam
+669,8e33437a,66,M,Dual Eligible,2026-10-23,2,5.4,2026-10-23,113,55,1,1,Eye exam
+670,830bf871,61,F,Commercial,2026-10-25,0,5.6,2026-10-25,101,73,1,1,Statin
+671,e096c42e,65,F,Medicare,2026-10-25,0,5.5,2026-10-25,116,77,1,1,Eye exam
+672,f0f94cab,57,F,Medicare,2026-10-25,0,5.8,2026-10-25,127,73,1,1,Statin

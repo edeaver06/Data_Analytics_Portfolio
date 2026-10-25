@@ -1,0 +1,7 @@
+# Raw Synthea output, the generator jar and the rebuilt database are never committed.
+code/data/raw/
+*.jar
+*.sqlite
+*.sqlite3
+*.db
+data/raw/

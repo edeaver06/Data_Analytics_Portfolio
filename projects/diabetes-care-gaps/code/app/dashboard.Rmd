@@ -1,0 +1,109 @@
+---
+title: "Which diabetic patients are missing recommended care? Diabetes Care-Gap Tracker"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r load}
+source("src/00_config.R"); library(ggplot2); library(flexdashboard); library(gt)
+con <- dbConnect(SQLite(), DB_PATH)
+kpi <- dbReadTable(con, "kpi"); wl <- dbGetQuery(con, "select * from v_worklist_top50")
+n_wl <- dbGetQuery(con, "select count(*) n from worklist_2026")$n
+data_end <- dbGetQuery(con, "select value from meta where key='data_end'")$value
+dbDisconnect(con)
+pct <- function(x) sprintf("%.1f%%", 100 * x)
+k25 <- kpi |> filter(breakdown == "overall", my == 2025) |> left_join(TARGETS, by = "measure")
+tile <- function(m) { r <- k25[k25$measure == m, ]
+  ok <- if (r$direction == "higher") r$rate >= r$target else r$rate <= r$target
+  valueBox(pct(r$rate), caption = sprintf("%s<br>target %s %s · %s · n=%d", MEASURE_LABELS[[m]],
+           ifelse(r$direction == "higher", "≥", "≤"), pct(r$target), ifelse(ok, "MEETS", "MISSES"), r$denominator),
+           color = ifelse(ok, "#0072B2", "#E69F00")) }
+```
+
+<div style="font-size:17px;padding:8px 4px 4px 4px"><b>What this is:</b> Which diabetic patients are missing recommended care, and how is the clinic doing on the quality measures health plans pay for? This tracker follows 7 HEDIS-style diabetes measures against targets and produces a prioritized outreach worklist for care coordinators.</div>
+
+**Synthetic data only.** Synthea-generated patients (seed 20261025); no real people. Measures are HEDIS-*style* approximations, **not certified NCQA HEDIS**. Targets are illustrative. Measurement year 2025 shown in tiles; data through `r data_end`.
+
+Row {data-height=150}
+-----------------------------------------------------------------------
+### 
+```{r} 
+tile("a1c_tested")
+```
+### 
+```{r}
+tile("a1c_lt8")
+```
+### 
+```{r}
+tile("a1c_gt9")
+```
+### 
+```{r}
+tile("bp_lt140_90")
+```
+
+Row {data-height=150}
+-----------------------------------------------------------------------
+### 
+```{r}
+tile("eye_exam")
+```
+### 
+```{r}
+tile("kidney_eval")
+```
+### 
+```{r}
+tile("statin_40_75")
+```
+### 
+```{r}
+valueBox(format(n_wl, big.mark = ","), caption = sprintf("patients with ≥1 open gap in MY2026 (year to date, of %d)", kpi$denominator[kpi$breakdown=="overall" & kpi$my==2026 & kpi$measure=="a1c_tested"]), color = "#555555")
+```
+
+Row {data-height=45}
+-----------------------------------------------------------------------
+### How to read this {.no-title}
+<div style="font-size:14px"><b>How to read this:</b> <span style="color:#0072B2"><b>blue</b></span> = meets target, <span style="color:#E69F00"><b>orange</b></span> = misses target (MY2025, full year). The gray tile is the size of the 2026 outreach worklist. For "A1c &gt; 9%", lower is better.</div>
+
+Row {data-height=430}
+-----------------------------------------------------------------------
+### Trend, MY2017-2025 (dashed = target)
+```{r, fig.width=9, fig.height=4}
+tr <- kpi |> filter(breakdown == "overall", my %in% MEASURE_YEARS) |> left_join(TARGETS, by = "measure") |>
+  mutate(label = MEASURE_LABELS[measure])
+ggplot(tr, aes(my, rate)) + geom_hline(aes(yintercept = target), linetype = "dashed", color = "gray40") +
+  geom_line(color = "#0072B2", linewidth = 1) + geom_point(color = "#0072B2", size = 1) +
+  facet_wrap(~ label, ncol = 4, labeller = label_wrap_gen(24)) +
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) + scale_x_continuous(breaks = c(2017, 2021, 2025)) +
+  labs(x = NULL, y = NULL) + theme_minimal(base_size = 10) + theme(panel.grid.minor = element_blank())
+```
+
+### Breakdowns, MY2025 (rate %, n)
+```{r}
+kpi |> filter(my == 2025, breakdown != "overall") |>
+  mutate(cell = sprintf("%.1f (%d)", 100 * rate, denominator), measure = MEASURE_LABELS[measure],
+         breakdown = recode(breakdown, age_band = "Age band", sex = "Sex", payer_group = "Payer")) |>
+  select(breakdown, group, measure, cell) |> tidyr::pivot_wider(names_from = measure, values_from = cell) |>
+  gt(groupname_col = "breakdown") |> tab_options(table.font.size = px(11), data_row.padding = px(2)) |>
+  tab_source_note("Groups with n < 60 (Uninsured, Dual Eligible, ages 40-44 for statins) are small: treat differences as noise.")
+```
+
+Row {data-height=1400}
+-----------------------------------------------------------------------
+### Outreach worklist: top 50 of `r n_wl` patients with open gaps (MY2026 year to date, synthetic IDs)
+```{r}
+wl |> mutate(last_a1c = ifelse(is.na(last_a1c), "none valid", sprintf("%.1f", last_a1c)), bp = ifelse(is.na(sbp), "none", sprintf("%.0f/%.0f", sbp, dbp))) |>
+  select(Rank = rank, `Patient ID` = patient_id, Age = age, Sex = sex, Payer = payer_group, `Last A1c %` = last_a1c, `Last BP` = bp, `Last visit` = last_visit, `Days since` = days_since_visit,
+         `Open gaps` = open_gaps, Priority = priority, Gaps = gaps) |>
+  gt() |> tab_options(table.font.size = px(11), data_row.padding = px(1)) |>
+  tab_source_note("Priority = 3 if no valid A1c or A1c > 9; +2 if A1c 8-9; +2 BP not controlled; +1 each for eye, kidney, statin gaps. Ties broken by longest time since last visit, then ID. IDs are the first 8 characters of a synthetic Synthea ID.")
+```
