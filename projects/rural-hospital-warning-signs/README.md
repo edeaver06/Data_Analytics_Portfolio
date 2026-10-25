@@ -1,4 +1,6 @@
 # Rural Hospital Financial Warning Signs (Upper Midwest)
+
+Which rural hospitals show signs of financial strain? For state rural-health offices and hospital finance teams: in Medicare cost reports (CMS, FY2023), 6.6% of the 485 hospitals in SD, ND, MN, NE, MT, WY and IA show many warning signs vs 14.0% elsewhere, with Wyoming the outlier (46% lost money).
 Screens 4,284 US short-term and critical access hospitals using CMS FY2023 cost reports, with a focus on SD, ND, MN, NE, MT, WY and IA (485 hospitals).
 A Python + SQLite pipeline computes margins, days cash, current ratio and payer mix, then counts six financial warning signs (0-6). A [Google Sheets dashboard](https://docs.google.com/spreadsheets/d/1QoG2l-5s70JOvz15ZmdtHULTPSygrQUXWIPyah5qBbo/edit) filters by state and lists hospitals by name.
 

@@ -1,5 +1,7 @@
 # Steam Pulse: What keeps a video game alive?
 
+Which Steam games keep their players after launch? For a game publisher planning updates and sales: a few games hold most players (the top 10 had 40.1% of 6.22M players on Oct 12, 2026), and a game has about 44% fewer players one month after its launch month.
+
 ### ▶️ [Try the live app](https://steam-pulse-e.streamlit.app/)
 Pick categories in the Game Finder and get the top game. No install needed; if the app has been idle it shows a short wake-up screen first.
 

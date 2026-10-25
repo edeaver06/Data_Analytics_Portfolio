@@ -1,5 +1,7 @@
 # Markets vs Polls: Who Called the 2024 Election Better?
 
+Did betting markets predict the 2024 election better than polls? For forecasters and newsrooms deciding which signal to trust: one day out, markets were slightly more accurate (Brier score, lower is better: 0.042 Polymarket and 0.043 Kalshi vs 0.053 for polls), but this is one election.
+
 ### ▶️ [Try the live app](https://markets-polls-e.streamlit.app/)
 No install needed; if the app has been idle it shows a short wake-up screen first.
 

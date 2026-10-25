@@ -3,6 +3,8 @@
 ### ▶️ [Try the live app](https://olist-e.streamlit.app/)
 No install needed; if the app has been idle it shows a short wake-up screen first.
 
+For an online marketplace's operations team: how much does a late delivery cost in reviews? Late orders average 3.78★ vs 4.29★ on time.
+
 **How much do late deliveries hurt a marketplace's reviews?** Reviewed after delivery, a late order scores 3.78★ vs 4.29★ on time, and most late-order anger arrives before the parcel does.
 
 **[▶️ Live app](https://olist-e.streamlit.app/) | [📊 Tableau](https://public.tableau.com/app/profile/evan.deaver/viz/OlistLateDeliveries/OlistLateDeliveries) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**

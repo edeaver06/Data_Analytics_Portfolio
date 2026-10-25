@@ -1,5 +1,7 @@
 # Google Fiber: Why Do Customers Call Back?
 
+For a support operations manager: why do customers have to call back? Two problem types (Wi-Fi & Internet, Technical Troubleshooting) drive 80.2% of repeat calls, and Billing in market 3 averages ~1.97 repeat calls per first call. This measures FCR (first-contact resolution, meaning the problem is fixed on the first call).
+
 ### ▶️ [Try the live app](https://fiber-e.streamlit.app/)
 No install needed; if the app has been idle it shows a short wake-up screen first.
 

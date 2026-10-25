@@ -1,5 +1,7 @@
 # Aircraft Readiness: What Grounds Airplanes, and How Fast Is It Reported?
 
+For airline maintenance planners: which aircraft systems actually disrupt flights? Of 34,350 FAA reports, 2,521 disrupted a flight, mostly air conditioning, landing gear and engines, and 7.1% of in-flight problems came back within 30 days.
+
 ### ▶️ [Try the live app](https://aircraft-ready-e.streamlit.app/)
 No install needed; if the app has been idle it shows a short wake-up screen first.
 

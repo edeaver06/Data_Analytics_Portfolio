@@ -1,5 +1,7 @@
 # Is the Market's Closing Price an Accurate Forecast? (NFL, 1999–2026)
 
+Can anyone beat the betting market's final forecast of NFL games? For anyone judging how efficient a market's prices are: across 7,354 games (1999–2026), no common strategy beat it once the bookmaker's cut is counted (you need to win 52.38% of bets to break even).
+
 ### ▶️ [Try the live app](https://nfl-line-e.streamlit.app/)
 No install needed; if the app has been idle it shows a short wake-up screen first.
 
