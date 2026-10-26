@@ -1,10 +1,8 @@
 # US Electricity Prices by State, 2001-2026
 
-Where have home power bills risen most? For households, energy analysts and policy staff: the US average rose from 8.58 to 18.02 cents per kWh since 2001 (+110%, about +13% after inflation), from 12.32¢ in North Dakota to 43.51¢ in Hawaii.
+How much have home electricity prices gone up, and where? Across all 50 states and DC, the average US residential price rose from 8.58 to 18.02 c/kWh between 2001 and the latest 12 months (Aug 2025-Jul 2026): +110%, or about +13% after inflation. Hawaii is highest at 43.51 c/kWh and North Dakota lowest at 12.32.
 
-**How much have home electricity prices gone up, and where?** Across all 50 states and DC, the average US residential price rose from 8.58 to 18.02 c/kWh between 2001 and the latest 12 months (Aug 2025-Jul 2026): +110%, or about +13% after inflation. Hawaii is highest at 43.51 c/kWh and North Dakota lowest at 12.32.
-
-**[📊 Google Sheets dashboard](https://docs.google.com/spreadsheets/d/1bRhtVTY08znmxWk9Amkb7G1pA-VjqgMjEWuWZTzX9so/edit) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
+[Google Sheets dashboard](https://docs.google.com/spreadsheets/d/1bRhtVTY08znmxWk9Amkb7G1pA-VjqgMjEWuWZTzX9so/edit) | [Story](STORY.md) | [Code](code/README.md)
 
 ![US residential electricity price trend](images/01_national_res_price_trend.png)
 

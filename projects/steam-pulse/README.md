@@ -1,24 +1,22 @@
 # Steam Pulse: What keeps a video game alive?
 
-Which Steam games keep their players after launch? For a game publisher planning updates and sales: a few games hold most players (the top 10 had 40.1% of 6.22M players on Oct 12, 2026), and a game has about 44% fewer players one month after its launch month.
+[Try the live app](https://steam-pulse-e.streamlit.app/)
+Pick categories in the Game Finder and it returns the top game. Nothing to install. If the app has been idle, it shows a short wake-up screen first.
 
-### ▶️ [Try the live app](https://steam-pulse-e.streamlit.app/)
-Pick categories in the Game Finder and get the top game. No install needed; if the app has been idle it shows a short wake-up screen first.
+I wanted to know which Steam games people play and what keeps them playing. A few games hold most of the players: on Oct 12, 2026 the top 10 had 40.1% of 6.22M players. A game has about 44% fewer players one month after its launch month. Games with online co-op keep the biggest crowds.
 
-**Which Steam games do people actually play, and why?** A handful of games hold most of the players, and social, well-supported games keep the biggest crowds.
-
-**[▶️ Live app](https://steam-pulse-e.streamlit.app/) | [📖 Story](STORY.md) | [💻 Code](code/README.md)**
+[Live app](https://steam-pulse-e.streamlit.app/) | [Story](STORY.md) | [Code](code/README.md)
 
 ![Top 15 games by concurrent players](images/hero_concentration.png)
 
 ## The problem
-Steam lists tens of thousands of games, but players' time is limited. A studio, publisher or store team needs to know where attention actually goes, what the busiest games have in common, and how quickly a launch fades, so it can decide what to build and when to discount.
+Steam lists tens of thousands of games, but players' time is limited. A studio or publisher deciding what to build and when to discount needs to know where players spend their time, what the busiest games have in common, and how fast a launch fades.
 
 ## Key findings
-- **Winner takes most:** In a snapshot on Oct 12, 2026, 6.22M people were playing 1,029 tracked games, and the **top 10 held 40.1%**. The typical game had just 417 players.
-- **Playing with friends matters:** games with online co-op have a typical crowd of about 1,090 players, almost 4× the 278 for games without it.
-- **The first month is make-or-break:** a month after their launch month, games have about **44%** fewer players, then level off for years.
-- **Sales work:** in the first week of a sale, games had about **39% more** daily players than similar games not on sale (10,756 sales, 2019–20).
+- In a snapshot on Oct 12, 2026, 6.22M people were playing 1,029 tracked games, and the **top 10 held 40.1%**. The typical game had just 417 players.
+- Games with online co-op have a typical crowd of about 1,090 players, almost 4× the 278 for games without it.
+- A month after their launch month, games have about **44%** fewer players, then the numbers level off for years.
+- In the first week of a sale, games had about **39% more** daily players than similar games not on sale (10,756 sales, 2019–20).
 
 ## What I built
 - A Python pipeline, built to run on a schedule, that collects live player counts, prices, reviews and features for about 1,000 games from public Steam APIs. A 6-hourly snapshot job runs on a private machine; the public app uses a fixed snapshot.
