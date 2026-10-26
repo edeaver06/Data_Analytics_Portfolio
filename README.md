@@ -51,6 +51,6 @@ To run a project: `cd projects/<name>/code && pip install -r requirements.txt &&
 
 ## Contact
 - **Email:** edeaver06@gmail.com
-- **LinkedIn:** [linkedin.com/in/evan-deaver-276152a5](https://www.linkedin.com/in/evan-deaver-276152a5/)
+- **LinkedIn:** [linkedin.com/in/evan-d-276152a5](https://www.linkedin.com/in/evan-d-276152a5/)
 - **Tableau Public:** [evan.deaver](https://public.tableau.com/app/profile/evan.deaver/vizzes)
 - **Kaggle:** [evandeaver](https://www.kaggle.com/evandeaver)
