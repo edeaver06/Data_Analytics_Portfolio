@@ -2,7 +2,7 @@
 
 **▶️ [Try the live app](https://nfl-line-e.streamlit.app/)** · [Back to the project page](README.md) · [The code and how it's built](code/README.md)
 
-**The setting:** before every NFL game, sportsbooks publish a *line*, their prediction of the result. The final line just before kickoff is the *closing line*.
+**The setting:** before every NFL game, the betting market sets a *line*, a prediction of the result. The final line just before kickoff is the *closing line*.
 
 **The question:** is the closing line an accurate forecast, and does any popular strategy forecast games better than it does?
 
@@ -10,7 +10,7 @@
 
 > **Three terms:**
 > - *Spread* = the predicted winning margin. "Home −3" means the home team is expected to win by 3. A team "covers" if it beats the spread.
-> - *-110 odds* = you risk $110 to win $100. Because of that fee (the *vig*), a strategy must be right **52.38%** of the time just to match the market.
+> - *The 52.38% bar* = the market's price has a small margin built in, so a strategy has to be right **52.38%** of the time just to match the market's own forecast.
 > - *Moneyline* = the price on who wins outright; its odds can be turned into a win probability.
 
 ## 1. Is the closing line accurate?
@@ -23,7 +23,7 @@ On average, yes. The actual home margin minus the spread averages +0.08 points: 
 
 ## 2. Do the odds give honest win chances?
 
-After removing the bookmaker's margin (about 2.7%), the odds' win chances match what actually happened. In the chart, every group of games sits close to the diagonal "perfect" line. Over 5,358 games the accuracy score (Brier score) is 0.211, better than a coin flip's 0.250 (lower is better).
+After removing the small margin built into the odds (about 2.7%), the odds' win chances match what actually happened. In the chart, every group of games sits close to the diagonal "perfect" line. Over 5,358 games the accuracy score (Brier score) is 0.211, better than a coin flip's 0.250 (lower is better).
 
 ![Odds-implied win chance vs how often teams actually won](images/01_moneyline_calibration.png)
 
@@ -60,7 +60,7 @@ Picking every favorite was right 48.7% of the time over 7,122 decided games (95%
 4. Wind unders look good but aren't proven to beat the market once multiple testing is accounted for.
 
 ## Limitations (in plain words)
-- **These are consensus closing lines.** Real prices vary by sportsbook, and the exact close isn't always available.
+- **These are consensus closing lines.** Real prices differ a little from one source to another, and the exact close isn't always available.
 - **Opening lines and line movement aren't in the data**, so "beating the close" itself can't be measured.
 - **Weather is only available for some games**, and it's measured at kickoff.
 - **The strategy list was chosen in advance.** Searching through hundreds of angles would turn up "winners" by pure chance.
