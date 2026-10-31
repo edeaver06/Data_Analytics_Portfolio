@@ -16,7 +16,7 @@ Steam lists tens of thousands of games, but players' time is limited. A studio o
 - In a snapshot on Oct 12, 2026, 6.22M people were playing 1,029 tracked games (the ~1,000 most-owned games plus recent releases), and the **top 10 held 40.1%**. The typical game had just 417 players.
 - Games with online co-op have bigger crowds (median 1,090 vs 278 players for games without it).
 - A month after their launch month, games have about **44%** fewer players, then the numbers level off for years.
-- In the first week of a sale, games had about **39% more** daily players than non-discounted games in the same window (10,756 sales, 2019–20). This is an association, not proof that the sale caused the lift.
+- In the first week of a sale, games had about **39% more** daily players than non-discounted games in the same window (10,756 sales, 2019 to 2020). This is an association, not proof that the sale caused the lift.
 
 ## What I built
 - A Python pipeline, built to run on a schedule, that collects live player counts, prices, reviews and features for about 1,000 games from public Steam APIs. A 6-hourly snapshot job runs on a private machine; the public app uses a fixed snapshot.
