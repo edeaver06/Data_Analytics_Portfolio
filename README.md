@@ -48,7 +48,7 @@ CI runs unit tests on small fixtures; checks against the full data run locally.
 - **Bachelor of General Studies** (emphases: Business, Social Science, Education), Black Hills State University (2015)
 
 ## Certificates
-- **Google Professional Certificates:** [Data Analytics](https://www.coursera.org/account/accomplishments/specialization/3JJSOM5SNM00) (2025), [Business Intelligence](https://www.coursera.org/account/accomplishments/specialization/PT4S2HLLUU44) (2026)
+- **Google Professional Certificates:** [Data Analytics](https://www.coursera.org/account/accomplishments/specialization/3JJSOM5SNM00) (2025), [Business Intelligence](https://www.coursera.org/account/accomplishments/specialization/PT4S2HLLUU44) (2026), AI (2026)
 
 ## Contact
 - **Email:** edeaver06@gmail.com
