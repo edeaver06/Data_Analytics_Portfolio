@@ -2,7 +2,8 @@
 CREATE OR REPLACE TABLE mart_delivery_vs_reviews AS
 WITH delivered AS (
     SELECT *,
-           CASE WHEN days_late <= -1 THEN '1. early'
+           CASE WHEN days_late IS NULL THEN '0. unknown'   -- no estimate date; 0 rows in the Olist data
+                WHEN days_late <= -1 THEN '1. early'
                 WHEN days_late =  0  THEN '2. on estimate day (on time)'
                 WHEN days_late <= 3  THEN '3. 1-3 days late'
                 WHEN days_late <= 7  THEN '4. 4-7 days late'
