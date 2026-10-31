@@ -1,6 +1,6 @@
 # US Electricity Prices by State, 2001-2026
 
-How much have home electricity prices gone up, and where? Across all 50 states and DC, the average US residential price rose from 8.58 to 18.02 c/kWh between 2001 and the latest 12 months (Aug 2025-Jul 2026): +110%, or about +13% after inflation. Hawaii is highest at 43.51 c/kWh and North Dakota lowest at 12.32.
+How much have home electricity prices gone up, and where? Across all 50 states and DC, the average US residential price rose from 8.58 to 18.02 c/kWh between 2001 and the latest 12 months (Aug 2025-Jul 2026): +110%, or about +13% after inflation (CPI-U, FRED series CPIAUCSL; 2001 average vs the Aug 2025-Jul 2026 average). Hawaii is highest at 43.51 c/kWh and North Dakota lowest at 12.32.
 
 [Google Sheets dashboard](https://docs.google.com/spreadsheets/d/1bRhtVTY08znmxWk9Amkb7G1pA-VjqgMjEWuWZTzX9so/edit) | [Story](STORY.md) | [Code](code/README.md)
 
