@@ -31,7 +31,9 @@ There are nine projects in [`projects/`](projects). Each folder has a one-page s
 - [Certificates](#certificates)
 - [Contact](#contact)
 
-To run a project: `cd projects/<name>/code && pip install -r requirements.txt && pytest -q` (or `make test` from the root). Each `code/README.md` has the full steps.
+To run a project: `cd projects/<name>/code && pip install -r requirements.txt && pytest -q` (or `make test` from the root, which runs all eight Python projects and the Diabetes R tests). Each `code/README.md` has the full steps.
+
+CI runs unit tests on small fixtures; checks against the full data run locally.
 
 ## Skills
 - Languages and querying: SQL (DuckDB, SQLite), Python (pandas), R (tidyverse, ggplot2, testthat), dbt, Excel (pivot tables, formulas)
