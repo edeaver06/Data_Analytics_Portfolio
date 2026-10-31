@@ -93,7 +93,7 @@ This uses daily prices and player counts from 2019 to 2020: **10,756 sales acros
 
 In the first week of a sale, games had about **39% more daily players** than the comparison games. Bigger discounts meant bigger bumps: +22% for 10 to 33% off, up to +53% for 76% off or more.
 
-**What this means:** sales really do bring players back, and deeper discounts work better. Studios choose when to run sales, so treat this as a strong link rather than a guarantee.
+**What this means:** sales go with more players, and deeper discounts with bigger bumps. This is an association, not proof of cause: studios choose when to run sales, often alongside updates or events.
 
 ## 9. So which games are the "best"?
 
@@ -111,7 +111,7 @@ In the first week of a sale, games had about **39% more daily players** than the
 2. **Free isn't a magic ticket.** Free and paid games draw similar crowds; paid games review better.
 3. **Social games are busier.** Online co-op games have almost 4× the typical crowd.
 4. **The first month is make-or-break.** A month after their launch month, games have about 44% fewer players, then level off.
-5. **Sales work.** About +39% players in sale week, more for deeper discounts.
+5. **Sales go with more players.** About +39% in sale week vs non-discounted games in the same window, more for deeper discounts (an association, not proof of cause).
 6. **The best games are cheap, old favourites**, led by Terraria and Stardew Valley.
 
 ## Limitations (in plain words)
