@@ -1,6 +1,9 @@
 # Data-quality checks on the built database.
 library(testthat); library(DBI)
-con <- dbConnect(RSQLite::SQLite(), file.path(ROOT, "data/clean/care_gaps.sqlite"))
+db <- file.path(ROOT, "data/clean/care_gaps.sqlite")
+# The built database is gitignored; these checks run locally after run_all.sh.
+if (file.exists(db)) {
+con <- dbConnect(RSQLite::SQLite(), db)
 q <- function(s) dbGetQuery(con, s)
 test_that("one member row per patient per year", expect_equal(q("select count(*) n from (select my, patient from member_measures group by 1,2 having count(*)>1)")$n, 0))
 test_that("rates are in [0,1] and numerators <= denominators",
@@ -16,6 +19,9 @@ test_that("no direct identifiers in staging", {
   expect_false(any(grepl("ADDRESS|SSN|FIRST|LAST|PHONE|LAT|LON", toupper(dbListFields(con, "stg_patients")))))
 })
 dbDisconnect(con)
+} else {
+  test_that("database checks", skip("care_gaps.sqlite not built; run run_all.sh first"))
+}
 
 test_that("public outputs carry only 8-char IDs, never full Synthea UUIDs", {
   uuid <- "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
