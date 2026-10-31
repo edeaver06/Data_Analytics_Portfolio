@@ -1,9 +1,15 @@
 import sqlite3, sys
 from pathlib import Path
 import pandas as pd
+import pytest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 import pipeline as p
+
+DB = ROOT / "data/hospitals.db"
+CSV = ROOT / "data/clean/hospitals_fy2023.csv"
+needs_data = pytest.mark.skipif(not (DB.exists() and CSV.exists()),
+                                reason="built data is gitignored; run src/pipeline.py first")
 
 def toy():
     base = dict(ccn="1", name="A", city="X", state="SD", county="C", rural_urban="R", facility_type="CAH",
@@ -29,15 +35,17 @@ def test_score_points():
     # neg total margin, low cash, current ratio<1, neg equity, top-quartile Medicaid (only row) ; deep loss no (-10% not < -10%)
     assert r.warning_score == 5 and r.warning_tier == "Many warning signs"
 
+@needs_data
 def test_db_matches_csv():
-    with sqlite3.connect(ROOT / "data/hospitals.db") as con:
+    with sqlite3.connect(DB) as con:
         n = con.execute("select count(*) from hospitals where analysis_ok=1").fetchone()[0]
         dup = con.execute("select count(*)-count(distinct ccn) from hospitals").fetchone()[0]
-    csv = pd.read_csv(ROOT / "data/clean/hospitals_fy2023.csv")
+    csv = pd.read_csv(CSV)
     assert n == int(csv.analysis_ok.sum()) and dup == 0
 
+@needs_data
 def test_scored_ranges():
-    d = pd.read_csv(ROOT / "data/clean/hospitals_fy2023.csv").query("analysis_ok")
+    d = pd.read_csv(CSV).query("analysis_ok")
     assert d.warning_score.between(0, 6).all()
     assert d.medicaid_share.between(0, 1).all()
     assert d.total_margin.between(-1, 1).all()
