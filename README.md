@@ -34,7 +34,7 @@ There are nine projects in [`projects/`](projects). Each folder has a one-page s
 To run a project: `cd projects/<name>/code && pip install -r requirements.txt && pytest -q` (or `make test` from the root). Each `code/README.md` has the full steps.
 
 ## Skills
-- Languages and querying: SQL (DuckDB, Google BigQuery, PostgreSQL, SQLite), Python (pandas), R (tidyverse, ggplot2, caret, testthat), dbt, Excel (pivot tables, formulas)
+- Languages and querying: SQL (DuckDB, SQLite), Python (pandas), R (tidyverse, ggplot2, testthat), dbt, Excel (pivot tables, formulas)
 - BI and visualization: Tableau (Tableau Public), Google Sheets dashboards, Streamlit apps, metric reporting
 - Data quality: data validation and reconciliation, anomaly detection, automated testing
 
