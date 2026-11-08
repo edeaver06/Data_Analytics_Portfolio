@@ -76,8 +76,24 @@ def load_bridge():
     return b
 
 def enrich(dim, fct):
-    latest = fct.sort_values("snapshot_date_utc").groupby("appid").tail(1)[["appid", "last_players", "snapshot_date_utc"]]
-    g = dim.merge(latest, on="appid", how="left")
+    fct_sorted = fct.sort_values("snapshot_date_utc")
+    latest = fct_sorted.groupby("appid").tail(1)[["appid", "last_players", "snapshot_date_utc"]]
+    latest = latest.rename(columns={"last_players": "latest_players", "snapshot_date_utc": "latest_date"})
+
+    fct_merged = fct_sorted.merge(latest, on="appid")
+    fct_merged["days_ago"] = (fct_merged["latest_date"] - fct_merged["snapshot_date_utc"]).dt.days
+
+    d7 = fct_merged[fct_merged["days_ago"] == 7][["appid", "last_players"]].rename(columns={"last_players": "players_7d_ago"})
+    d14 = fct_merged[fct_merged["days_ago"] == 14][["appid", "last_players"]].rename(columns={"last_players": "players_14d_ago"})
+
+    mom = latest.merge(d7, on="appid", how="left").merge(d14, on="appid", how="left")
+    mom["momentum_7d"] = (mom["latest_players"] - mom["players_7d_ago"]) / mom["players_7d_ago"]
+    mom["momentum_14d"] = (mom["latest_players"] - mom["players_14d_ago"]) / mom["players_14d_ago"]
+
+    # Restore 'last_players' and 'snapshot_date_utc' for merge
+    mom = mom.rename(columns={"latest_players": "last_players", "latest_date": "snapshot_date_utc"})
+
+    g = dim.merge(mom[["appid", "last_players", "snapshot_date_utc", "momentum_7d", "momentum_14d"]], on="appid", how="left")
     g["positive_review_share"] = g["steamspy_positive_share"]
     g["discount_pct"] = g["store_discount_pct"]            # store details only (449 games); NULL elsewhere
     g["initial_price_usd"] = g["store_list_price_usd"]
