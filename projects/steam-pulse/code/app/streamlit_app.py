@@ -92,6 +92,31 @@ def decay():
     st.caption(("Free-to-play holds better than paid. " if f[6] > pd_[6] else "Free-to-play does not hold better than paid. ") + f"{H['retention_n']} of today's tracked games with an observed launch "
                f"(SteamCharts monthly players), so survivors only. " + HIST_NOTE)
     g, fct, *_ = data()
+
+    st.subheader("Current players by months since launch")
+    d = g.copy()
+    d["launch_date"] = pd.to_datetime(d["launch_month_observed"].fillna(pd.to_datetime(d["release_date"])))
+    d = d.dropna(subset=["launch_date", "last_players", "snapshot_date_utc"])
+
+    d["snapshot_date"] = pd.to_datetime(d["snapshot_date_utc"])
+    d["months_since_launch"] = (d["snapshot_date"].dt.year - d["launch_date"].dt.year) * 12 + (d["snapshot_date"].dt.month - d["launch_date"].dt.month)
+    d = d[d["months_since_launch"] >= 0]
+
+    if not d.empty:
+        agg = d.groupby(["months_since_launch", "pricing"])["last_players"].sum().reset_index()
+        # Ensure gap months are empty, not invented
+        max_m = int(agg["months_since_launch"].max())
+        idx = pd.MultiIndex.from_product([range(max_m + 1), agg["pricing"].unique()], names=["months_since_launch", "pricing"])
+        agg = agg.set_index(["months_since_launch", "pricing"]).reindex(idx).reset_index()
+
+        fig2 = px.bar(agg, x="months_since_launch", y="last_players", color="pricing",
+                      color_discrete_map=PRICE_COLORS,
+                      labels={"months_since_launch": "Months since launch", "last_players": "Concurrent players", "pricing": "Pricing"})
+        fig2.update_xaxes(dtick=12) # optional, keep labels clean if many months
+        st.plotly_chart(style(fig2, 480), width="stretch")
+        st.caption(f"Showing concurrent players across {len(d):,} tracked games by months since launch (current snapshot only). "
+                   f"{len(g) - len(d):,} games excluded due to missing launch date or player counts.")
+
     with st.expander("Today's cross-section (players per 1,000 owners by game age)"):
         d = g.dropna(subset=["years_since_release", "players_per_1k_owners"]); d = d[d.players_per_1k_owners > 0]
         st.plotly_chart(style(px.scatter(d, x="years_since_release", y="players_per_1k_owners", color="pricing", log_y=True,
