@@ -32,6 +32,9 @@ def style(fig, h=420):
 def fmt(n):
     return "n/a" if pd.isna(n) else f"{n/1e6:.2f}M" if n >= 1e6 else f"{n/1e3:.0f}K" if n >= 1e3 else f"{n:,.0f}"
 
+def fmt_momentum(val, days):
+    return f"needs {days} days of data" if pd.isna(val) else f"{val:+.1%}"
+
 def short(n):
     """Compact count for narrow metric tiles: 100M, 1.5M, 20K."""
     for div, suf in ((1e6, "M"), (1e3, "K")):
@@ -57,6 +60,18 @@ def overview():
                         + f" hold {top3.last_players.sum()/total:.0%} of players across {g.last_players.notna().sum():,} tracked games"),
                  labels={"last_players": "Concurrent players", "game_name": ""}, hover_data=["appid"])
     st.plotly_chart(style(fig, 520), width="stretch")
+
+    st.subheader("Top Games by Concurrent Players")
+    top_table = top.sort_values("last_players", ascending=False).copy()
+    top_table["7-day change"] = top_table["momentum_7d"].apply(lambda v: fmt_momentum(v, 7))
+    top_table["14-day change"] = top_table["momentum_14d"].apply(lambda v: fmt_momentum(v, 14))
+    st.dataframe(top_table[["game_name", "last_players", "7-day change", "14-day change", "momentum_7d", "momentum_14d"]], hide_index=True, column_config={
+        "game_name": "Game",
+        "last_players": st.column_config.NumberColumn("Concurrent players", format="%d"),
+        "momentum_7d": None,
+        "momentum_14d": None,
+    })
+
     if len(snaps) < 2:
         st.info("Only one snapshot has been collected so far. This public app uses a fixed snapshot, so time-series views are limited.")
     source_note()
@@ -214,7 +229,8 @@ def details_table(r):
 
 # ------------------------------------------------------------------ Game Finder
 # Ranking options: the analysis layer's composite score (default) or one single metric.
-RANKS = {"score": "Composite score", "positive_review_share": "Positive reviews", "last_players": "Concurrent players"}
+RANKS = {"score": "Composite score", "positive_review_share": "Positive reviews", "last_players": "Concurrent players",
+         "momentum_7d": "7-day momentum", "momentum_14d": "14-day momentum"}
 PARTS = {"review_bayes_part": "Reviews (Bayes-adjusted) x0.45", "player_strength_part": "Players (log CCU) x0.35",
          "value_per_dollar_part": "Value per dollar x0.20"}
 SOFTWARE_NOTE = ("Software (e.g. Wallpaper Engine, Blender, Soundpad) is excluded from the score by the analysis layer's rule "
@@ -253,6 +269,7 @@ def apply_app_type(det, key):
 
 def fmt_rank(m, v):
     if pd.isna(v): return "n/a"
+    if m in ("momentum_7d", "momentum_14d"): return f"{v:+.1%}"
     return f"{v:.3f}" if m == "score" else f"{v:.0%}" if m == "positive_review_share" else fmt(v)
 
 def finder():
@@ -309,13 +326,17 @@ def finder():
         if rank_by != "score":
             st.caption(f"Ranked by {RANKS[rank_by]}: {fmt_rank(rank_by, top[rank_by])}")
     tbl = f.assign(rank=range(1, len(f) + 1), store=f.appid.map(lambda a: STORE.format(int(a))))
-    show = ["rank", "game_name", "store", "score", *PARTS, "positive_review_share", "last_players", "score_price_usd"]
+    tbl["7-day change"] = tbl["momentum_7d"].apply(lambda v: fmt_momentum(v, 7))
+    tbl["14-day change"] = tbl["momentum_14d"].apply(lambda v: fmt_momentum(v, 14))
+    show = ["rank", "game_name", "store", "score", *PARTS, "positive_review_share", "last_players", "7-day change", "14-day change", "score_price_usd", "momentum_7d", "momentum_14d"]
     st.dataframe(tbl[show], hide_index=True, column_config={
         "store": st.column_config.LinkColumn("Steam store", display_text="Open"),
         "score": st.column_config.NumberColumn("Score", format="%.3f"),
         "positive_review_share": st.column_config.NumberColumn("Positive reviews", format="percent"),
         "last_players": st.column_config.NumberColumn("Concurrent players", format="%d"),
         "score_price_usd": st.column_config.NumberColumn("Price", format="$%.2f"),
+        "momentum_7d": None,
+        "momentum_14d": None,
         **{k: st.column_config.ProgressColumn(v, min_value=0, max_value=0.45, format="%.3f") for k, v in PARTS.items()}})
     comp = st.multiselect("Compare games side by side", list(f.game_name), default=list(f.game_name[:min(3, len(f))]), max_selections=5)
     if comp:
