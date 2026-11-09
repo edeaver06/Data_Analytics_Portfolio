@@ -16,7 +16,7 @@ streamlit run app/streamlit_app.py
 ```
 Then open http://localhost:8501. Pages: Overview, Launch decay curves, Free-to-play vs paid, Sales impact, Game lookup, Game Finder, Category leaderboards.
 
-**What it is:** a data pipeline (Python → DuckDB → dbt), built to run on a schedule, that snapshots concurrent players, prices, reviews, tags and Steam Deck status, with a Streamlit dashboard on top. A 6-hourly snapshot job runs on a private machine; that history is not in this repo, and the public app uses a fixed snapshot.
+**What it is:** a data pipeline (Python → DuckDB → dbt), built to run on a schedule, that snapshots concurrent players, prices, reviews, tags and Steam Deck status, with a Streamlit dashboard on top. Live snapshot updates stopped on Nov 5, 2026; that history is not in this repo, and the public app uses the fixed Oct 12, 2026 snapshot.
 
 > **Status: in progress.** Live snapshots began 2026-10-12 (4 so far). A historical backfill (SteamCharts monthly since 2012, Mendeley daily 2017–2020) powers the retention, discount and sentiment findings in [`analysis/`](analysis/README.md). Metrics based on live history fill in as days accumulate.
 
@@ -148,6 +148,6 @@ Not used: SteamDB (its terms forbid scraping), IsThereAnyDeal (needs an API key;
 ### Known limits
 - The universe is the top ~1,000 most-owned games, so brand-new releases enter only if they reach that list. `first_seen` is measured within this universe.
 - Concurrent players are point samples, not true daily peaks.
-- Snapshot history lives only on the private machine that runs the job; publishing durable history (e.g. MotherDuck or a data branch) is Phase 2.
+- Live snapshot updates stopped on Nov 5, 2026. The collected history is not in this repo; publishing durable history (e.g. MotherDuck or a data branch) is Phase 2.
 
 Data: Valve Steam Web API and store endpoints; SteamSpy (steamspy.com). This project is not affiliated with Valve.

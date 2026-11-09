@@ -1,5 +1,9 @@
 # Changelog: Steam Pulse
 
+## Nov 5, 2026: stopped live snapshot updates
+- I stopped the scheduled snapshot job. The public app and the findings use the fixed Oct 12, 2026 snapshot.
+- The pipeline still runs on demand with `./scripts/snapshot.sh`.
+
 ## Oct 23, 2026: stopped review redirects from stalling snapshots
 - Steam's review-summary endpoint began answering with a 302 redirect to the store homepage. The pipeline retried each app up to 5 times with long backoff, so a snapshot run could hang for hours.
 - I changed `code/steam_pulse/http.py` and `code/steam_pulse/ingest.py`:

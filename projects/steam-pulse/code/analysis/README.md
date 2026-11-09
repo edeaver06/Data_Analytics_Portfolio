@@ -65,7 +65,7 @@ Each component is a percentile rank, and the score is the weighted mean. Games w
 ## Data coverage
 | source | apps | span | grain |
 |---|---|---|---|
-| Steam Pulse marts | 1,030 | 2026-10-12 (6-hourly from now on) | snapshot |
+| Steam Pulse marts | 1,030 | 2026-10-12 | snapshot |
 | SteamCharts monthly | **938** parsed (crawl finished: 1,000 requested; the rest returned HTTP 500 or no table); 923 have ≥24 months | 2012-07 → 2026-09 | monthly avg + peak |
 | Steam review histogram | 991 (984 monthly-rollup, 16 weekly-rollup responses) | 2010-10 → 2026-10 | monthly up/down (English); weekly buckets summed to months |
 | Mendeley CC BY 4.0 | 1,512 prices / 2,000 players (a 2019–20 popular set, *not* today's top 1,000) | prices 2019-04 → 2020-08; players 2017-12 → 2020-08 | daily |
