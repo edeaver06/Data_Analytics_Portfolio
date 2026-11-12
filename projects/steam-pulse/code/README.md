@@ -18,7 +18,7 @@ Then open http://localhost:8501. Pages: Overview, Launch decay curves, Free-to-p
 
 **What it is:** a data pipeline (Python → DuckDB → dbt), built to run on a schedule, that snapshots concurrent players, prices, reviews, tags and Steam Deck status, with a Streamlit dashboard on top. Live snapshot updates stopped on Nov 5, 2026; that history is not in this repo, and the public app uses the fixed Oct 12, 2026 snapshot.
 
-> **Status: in progress.** Live snapshots began 2026-10-12 (4 so far). A historical backfill (SteamCharts monthly since 2012, Mendeley daily 2017–2020) powers the retention, discount and sentiment findings in [`analysis/`](analysis/README.md). Metrics based on live history fill in as days accumulate.
+> **Status: frozen.** Live snapshots ran from 2026-10-12 until updates stopped on Nov 5, 2026. A historical backfill (SteamCharts monthly since 2012, Mendeley daily 2017–2020) powers the retention, discount and sentiment findings in [`analysis/`](analysis/README.md).
 
 ## Architecture
 ```
